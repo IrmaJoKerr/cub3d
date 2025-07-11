@@ -6,14 +6,14 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:04:40 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/05 15:38:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/11 09:34:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 #include <time.h>
 
-void	find_hero_position(t_game *game);
+void	find_player_pos(t_game *game);
 int		final_map_checks(t_game *game);
 int		handle_error(t_game *game, char *line, int fd);
 int		initialize_map(const char *file, t_game *game, int *fd,
@@ -23,7 +23,7 @@ int		read_and_validate_lines(int fd, t_game *game);
 /*
 Looks for and stores coordinates of player/hero sprite.
 */
-void	find_hero_position(t_game *game)
+void	find_player_pos(t_game *game)
 {
 	int	y;
 	int	x;
@@ -34,10 +34,11 @@ void	find_hero_position(t_game *game)
 		x = 1;
 		while (x < game->map.max_cols)
 		{
-			if (game->map.map[y][x] == 'P')
+			if (game->map.map[y][x] == 'N' || game->map.map[y][x] == 'S'
+				|| game->map.map[y][x] == 'E' || game->map.map[y][x] == 'W')
 			{
-				game->map.hero_x = x;
-				game->map.hero_y = y;
+				game->map.player_x = x;
+				game->map.player_y = y;
 				game->curr_x = x;
 				game->curr_y = y;
 				return ;
