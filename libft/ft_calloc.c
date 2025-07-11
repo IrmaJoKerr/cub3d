@@ -1,55 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjun-kea <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 13:40:31 by wjun-kea          #+#    #+#             */
-/*   Updated: 2024/12/25 13:40:36 by wjun-kea         ###   ########.fr       */
+/*   Created: 2024/11/08 11:44:22 by wjun-kea          #+#    #+#             */
+/*   Updated: 2024/11/15 09:47:43 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*dst;
-	size_t	len_1;
-	size_t	len_2;
-	size_t	i;
-
-	if (!s1 || !s2)
-		return (NULL);
-	len_1 = ft_strlen(s1);
-	len_2 = ft_strlen(s2);
-	dst = ft_calloc(len_1 + len_2 + 1, sizeof(char));
-	if (!dst)
-		return (NULL);
-	i = 0;
-	while (i < len_1)
-	{
-		dst[i] = s1[i];
-		i++;
-	}
-	while (*s2)
-		dst[i++] = *(s2++);
-	dst[i] = '\0';
-	return (dst);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == '\0')
-		return ((char *)s);
-	return (NULL);
-}
+#include "libft.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
@@ -69,17 +30,4 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	while (i < total_size)
 		tmp[i++] = 0;
 	return (tmp);
-}
-
-size_t	ft_strlen(const char *c)
-{
-	int	i;
-
-	i = 0;
-	while (*c != '\0')
-	{
-		i++;
-		c++;
-	}
-	return (i);
 }
