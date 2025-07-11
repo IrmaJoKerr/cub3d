@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 12:47:28 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/01/12 19:29:38 by wjun-kea         ###   ########.fr       */
+/*   Created: 2024/12/25 13:42:02 by wjun-kea          #+#    #+#             */
+/*   Updated: 2025/01/03 13:06:12 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_remainder(char *buffer)
 {
@@ -19,7 +19,6 @@ char	*ft_remainder(char *buffer)
 	char	*remain;
 
 	i = 0;
-	j = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
@@ -34,6 +33,7 @@ char	*ft_remainder(char *buffer)
 		return (NULL);
 	}
 	i++;
+	j = 0;
 	while (buffer[i])
 		remain[j++] = buffer[i++];
 	free(buffer);
@@ -94,21 +94,23 @@ char	*read_file(int fd, char *res)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffers[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= FOPEN_MAX)
 		return (NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	if (!buffers[fd])
+		buffers[fd] = ft_calloc(1, sizeof(char));
+	buffers[fd] = read_file(fd, buffers[fd]);
+	if (!buffers[fd])
 		return (NULL);
-	line = ft_line(buffer);
+	line = ft_line(buffers[fd]);
 	if (!line)
 	{
-		free(buffer);
-		buffer = NULL;
+		free(buffers[fd]);
+		buffers[fd] = NULL;
 		return (NULL);
 	}
-	buffer = ft_remainder(buffer);
+	buffers[fd] = ft_remainder(buffers[fd]);
 	return (line);
 }
