@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:05:51 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/05 15:38:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/11 08:45:41 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	check_map_validity(t_game *game)
 {
 	if (!check_counts(game))
 		return (0);
-	if (!is_valid_path(game, game->map.hero_y, game->map.hero_x))
+	if (!is_valid_path(game, game->map.player_y, game->map.player_x))
 	{
 		ft_printf("Error: \n");
 		ft_printf("Player has no valid path to empty spaces.\n");

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:57:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/05 15:34:18 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/10 23:16:51 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,6 @@ valid characters inside.
 */
 int	validate_line(char *line, int line_num, t_game *game)
 {
-	int	len;
-
-	len = ft_strlen(line);
-	if (len > game->map.max_cols)
-		game->map.max_cols = len;
 	if (line_num == 0)
 	{
 		if (!chk_first_and_last_line(line))
@@ -63,7 +58,7 @@ int	validate_line(char *line, int line_num, t_game *game)
 	}
 	if (!chk_inside_lines(line, game))
 		return (0);
-	return (len == game->map.max_cols);
+	return (1);
 }
 
 /*

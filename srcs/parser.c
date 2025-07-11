@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/05 15:20:59 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/11 09:34:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@ Validates each line and copies it to the main map array.
 */
 int	validate_and_store_line(char *line, int line_num, t_game *game)
 {
-	if (line_num == 0)
-	{
-		game->map.max_cols = ft_strlen(line);
-	}
+	int	len;
+
+	len = ft_strlen(line);
+	if (len > game->map.max_cols)
+		game->map.max_cols = len;
 	if (!validate_line(line, line_num, game))
 	{
 		ft_printf("Invalid map structure.\n");
@@ -101,7 +102,7 @@ int	parse_map(const char *file, t_game *game)
 		return (-1);
 	if (read_and_validate_lines(fd, game) < 0)
 		return (-1);
-	find_hero_position(game);
+	find_player_pos(game);
 	if (final_map_checks(game) < 0)
 		return (handle_error(game, NULL, -1));
 	fprintf(stderr, "DEBUG: Map validation completed successfully.\n");
