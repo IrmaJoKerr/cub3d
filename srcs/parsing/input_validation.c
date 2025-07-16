@@ -6,11 +6,11 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:57:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/10 23:16:51 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/16 06:50:20 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
+#include "../../includes/cub3D.h"
 #include <fcntl.h>
 
 int	validate_line(char *line, int line_num, t_game *game);
@@ -31,7 +31,8 @@ int	validate_chars(char *line, t_game *game, int len)
 	{
 		if (!ft_strchr(VALID_CHARS, line[i]))
 			return (0);
-		if (line[i] == 'P')
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
 			game->map.herocount++;
 		i++;
 	}
@@ -110,12 +111,13 @@ int	count_lines(const char *filename)
 		return (-1);
 	}
 	line_count = 0;
+	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		line = get_next_line(fd);
 		line_count++;
 		free(line);
+		line = get_next_line(fd);
 	}
 	close(fd);
-	return (line_count - 1);
+	return (line_count);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 11:41:48 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/07/04 02:12:35 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/16 06:32:25 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,13 @@ char		*ft_strcat(char *dest, const char *src);
 char		*ft_strstr(const char *haystack, const char *needle);
 char		*ft_strcpy(char *dest, const char *src);
 long long	ft_atoll(const char *nptr);
+size_t		ft_arrlen(char **array);
+size_t		ft_intarrlen(int *arr);
+int			*ft_atoiarr_cln(char **temparr, int len);
+int			*ft_atoiarr_errcln(char **temparr, int len);
+long long	ft_atoierr(const char *str);
+void		ft_free_2d(char **arr, size_t count);
+void		ft_free_int_2d(int **arr, size_t count);
+void		ft_safefree(void **ptr);
 
 #endif

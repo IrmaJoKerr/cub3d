@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/11 22:21:50 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/16 10:12:10 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3D.h"
-#include <wchar.h>
+#include "../../includes/cub3D.h"
 
 char	*get_map_path(const char *map_file);
 void	init_game(t_game *game, const char *map_file);
@@ -26,7 +25,6 @@ char	*get_map_path(const char *map_file)
 	char	*full_path;
 
 	full_path = NULL;
-
 	if (ft_strncmp(map_file, "maps/", 5) == 0)
 		full_path = ft_strdup(map_file);
 	else
@@ -37,7 +35,7 @@ char	*get_map_path(const char *map_file)
 		ft_fprintf(2, "Failed to allocate memory for map path.\n");
 		return (NULL);
 	}
-	if (!chk_valid_path(full_path))
+	if (!check_valid_file_path(full_path))
 	{
 		free(full_path);
 		return (NULL);
@@ -45,17 +43,15 @@ char	*get_map_path(const char *map_file)
 	return (full_path);
 }
 
-int	chk_valid_path(const char *full_path)
+int	check_valid_file_path(const char *path)
 {
 	int		fd;
 
-	fd = open(full_path, O_RDONLY);
-	if (fd < 0)
-	{
-		ft_fprintf(2, "Error: \n");
-		ft_fprintf(2, "Map file '%s' does not exist.\n", full_path);
+	if (!path || ft_strlen(path) == 0)
 		return (0);
-	}
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (0);
 	close(fd);
 	return (1);
 }
@@ -72,7 +68,7 @@ int	main(int argc, char **argv)
 	alloc_and_init_all(&game);
 	init_game(game, map_path);
 	free(map_path);
-	mlx_hook(game->win_ptr, 17, 0, close_window, game);
+	setup_event_hooks(game);
 	mlx_loop(game->mlx_ptr);
 	cleanup(game);
 	return (0);
@@ -80,17 +76,38 @@ int	main(int argc, char **argv)
 
 /*
 Initialises the game window. Mark for refactoring.
-Needs to free all memory allocated if the map init and validate fails
+Fixed critical logic error: parse_map returns -1 on failure, 1 on success.
 */
 void	init_game(t_game *game, const char *map_file)
 {
-	if (!parse_map(map_file, game))
+	if (parse_map(map_file, game) < 0)
 	{
 		ft_fprintf(2, "Error: \n");
 		ft_fprintf(2, "Failed to parse and validate the map.\n");
 		cleanup_early(game);
 		exit(EXIT_FAILURE);
 	}
+	
+	/*
+	** ================================================================
+	** TEMPORARY EXIT - REMOVE WHEN IMPLEMENTING RAYCASTER ENGINE
+	** ================================================================
+	** 
+	** This exit is placed here to allow clean termination after 
+	** successful map validation, without entering the MLX game loop.
+	** 
+	** Once the raycaster engine is implemented, remove this entire
+	** TEMPORARY EXIT REMOVED - PROGRAM NOW CONTINUES TO RAYCASTER
+	** ================================================================
+	*/
+	ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
+	ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
+	
+	/*
+	** ================================================================
+	** MLX INITIALIZATION CODE - NOW EXECUTING NORMALLY
+	** ================================================================
+	*/
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{

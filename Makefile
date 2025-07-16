@@ -3,30 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+         #
+#    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 12:29:47 by bleow             #+#    #+#              #
-#    Updated: 2025/07/11 22:40:56 by wjun-kea         ###   ########.fr        #
+#    Updated: 2025/07/16 19:13:23 by bleow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-SRC_DIR = srcs/parsing
+SRC_DIR = srcs
 OBJ_DIR = objs
 
-SRCS = $(SRC_DIR)/cleanup.c \
-	   $(SRC_DIR)/cub3D.c \
-	   $(SRC_DIR)/initstructs.c \
-	   $(SRC_DIR)/input_validation.c \
-	   $(SRC_DIR)/map_validation.c \
-	   $(SRC_DIR)/movehero.c \
-	   $(SRC_DIR)/parse_path.c \
-	   $(SRC_DIR)/parser.c \
-	   $(SRC_DIR)/parserutil_a.c \
-	   $(SRC_DIR)/parserutil_b.c
+PARSING_SRCS = $(wildcard $(SRC_DIR)/parsing/*.c)
+HOOKS_SRCS = $(wildcard $(SRC_DIR)/hooks/*.c)
+COLLISIONS_SRCS = $(wildcard $(SRC_DIR)/collisions/*.c)
 
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRCS = $(PARSING_SRCS) $(HOOKS_SRCS) $(COLLISIONS_SRCS)
+
+PARSING_OBJS = $(PARSING_SRCS:$(SRC_DIR)/parsing/%.c=$(OBJ_DIR)/parsing/%.o)
+HOOKS_OBJS = $(HOOKS_SRCS:$(SRC_DIR)/hooks/%.c=$(OBJ_DIR)/hooks/%.o)
+COLLISIONS_OBJS = $(COLLISIONS_SRCS:$(SRC_DIR)/collisions/%.c=$(OBJ_DIR)/collisions/%.o)
+
+OBJS = $(PARSING_OBJS) $(HOOKS_OBJS) $(COLLISIONS_OBJS)
 
 CC = gcc
 RM = rm -f
@@ -44,11 +43,19 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBX)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) \
-		-L$(LIBX_DIR) -l:libmlx_Linux.a -lXext -lX11 -o $(NAME)
+		-L$(LIBX_DIR) -l:libmlx_Linux.a -lXext -lX11 -lm -o $(NAME)
 	@echo "$(NAME) has been created."
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(@D)
+$(OBJ_DIR)/parsing/%.o: $(SRC_DIR)/parsing/%.c
+	@mkdir -p $(OBJ_DIR)/parsing
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/hooks/%.o: $(SRC_DIR)/hooks/%.c
+	@mkdir -p $(OBJ_DIR)/hooks
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/collisions/%.o: $(SRC_DIR)/collisions/%.c
+	@mkdir -p $(OBJ_DIR)/collisions
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT): $(LIBFT_DIR)/*.c $(LIBFT_DIR)/*.h
@@ -60,8 +67,8 @@ $(LIBX):
 clean:
 	@make clean -C $(LIBFT_DIR)
 	@make clean -C $(LIBX_DIR)
-	$(RM) $(OBJS)
-	@echo "Object files removed."
+	$(RM) -r $(OBJ_DIR)
+	@echo "Object files and directories removed."
 
 fclean: clean
 	@make fclean -C $(LIBFT_DIR)

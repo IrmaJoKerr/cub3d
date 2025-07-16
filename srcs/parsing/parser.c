@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/11 22:22:45 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/16 08:39:07 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,27 @@ int	validate_and_store_line(char *line, int line_num, t_game *game)
 }
 
 /*
-Main parsing and validation function. Controls 10 other
-subfunctions in parserutil_a.c and parserutil_b.c to do this.
+Main parsing and validation function implementing proper two-pass architecture:
+Pass 1: Parse configuration settingss (textures, colors, resolution) until map starts
+Pass 2: Calculate map dimensions, allocate memory, and populate map
 */
 int	parse_map(const char *file, t_game *game)
 {
-	int		fd;
-	int		line_count;
+	int	map_start_line;
 
-	if (initialize_map(file, game, &fd, &line_count) < 0)
+	ft_fprintf(2, "Starting two-pass parsing for file: %s\n", file);
+	map_start_line = parse_configuration_section(file, game);
+	if (map_start_line < 0)
+	{
+		ft_fprintf(2, "Error: Failed to parse configuration section\n");
 		return (-1);
-	if (read_and_validate_lines(fd, game) < 0)
+	}
+	ft_fprintf(2, "Configuration parsed successfully. Map starts at line %d\n", map_start_line);
+	if (parse_map_section(file, game, map_start_line) < 0)
+	{
+		ft_fprintf(2, "Error: Failed to parse map section\n");
 		return (-1);
-	find_player_pos(game);
-	if (final_map_checks(game) < 0)
-		return (handle_error(game, NULL, -1));
-	fprintf(stderr, "DEBUG: Map validation completed successfully.\n");
-	ft_fprintf(2, "Map is valid and ready to load into memory.\n");
+	}
+	ft_fprintf(2, "Two-pass parsing completed successfully\n");
 	return (1);
 }
