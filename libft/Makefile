@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+         #
+#    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/10 16:34:11 by wjun-kea          #+#    #+#              #
-#    Updated: 2025/07/04 02:13:20 by wjun-kea         ###   ########.fr        #
+#    Updated: 2025/07/16 05:39:55 by bleow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ FILES = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_strncpy.c get_next_line/get_next_line.c ft_strtol.c ft_realloc.c ft_strtok.c \
 	ft_strcmp.c ft_fprintf/ft_fprintf.c ft_fprintf/ft_fprintf_utils.c ft_fprintf/ft_fprintf_utils_sub.c \
 	ft_fprintf/ft_fprint_numbers.c ft_fprintf/ft_fprint_misc.c ft_fprintf/ft_fprint_hex.c \
-	ft_isxdigit.c ft_strndup.c ft_isspace.c ft_strcat.c ft_strstr.c ft_strcpy.c ft_atoll.c
+	ft_isxdigit.c ft_strndup.c ft_isspace.c ft_strcat.c ft_strstr.c ft_strcpy.c ft_atoll.c \
+	ft_arrlen.c ft_atoiarr_cln.c ft_atoiarr_errcln.c ft_atoierr.c ft_free_2d.c \
+	ft_free_int_2d.c ft_intarrlen.c ft_safefree.c
 
 OBJS = $(FILES:.c=.o)
 

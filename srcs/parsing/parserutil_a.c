@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 08:04:40 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/11 09:34:56 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/16 09:01:21 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int	read_and_validate_lines(int fd, t_game *game)
 {
 	char	*line;
 	int		line_num;
+	char	*last_line;
 
 	line = NULL;
 	line_num = 0;
@@ -113,7 +114,7 @@ int	read_and_validate_lines(int fd, t_game *game)
 	game->map.map[line_num] = NULL;
 	if (line_num > 0)
 	{
-		char *last_line = game->map.map[line_num - 1];
+		last_line = game->map.map[line_num - 1];
 		if (chk_first_and_last_line(last_line))
 			game->map.map_last_wall = 1;
 		else

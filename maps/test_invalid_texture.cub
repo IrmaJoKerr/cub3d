@@ -1,0 +1,12 @@
+NO textures/nonexistent/north.xpm
+SO textures/test/south.xpm  
+WE textures/test/west.xpm
+EA textures/test/east.xpm
+
+F 220,100,0
+C 225,30,0
+
+1111
+1001
+10S1
+1111
