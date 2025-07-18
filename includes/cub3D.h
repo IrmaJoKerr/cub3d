@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 19:21:49 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/19 03:05:05 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,169 +25,8 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
-
-/*
-Map tile character constants for the raycaster engine.
-- TILE_WALL: Solid wall character ('1')
-- TILE_FLOOR: Empty floor space character ('0')
-- HORIZ_DOOR: Horizontal door character ('H')
-- VERTI_DOOR: Vertical door character ('V')
-- TILE_PLAYER: Valid player starting direction characters ("NSEW")
-- VALID_CHARS: All valid map characters for validation ("01HVNSEW")
-*/
-# define TILE_WALL '1'
-# define TILE_FLOOR '0'
-# define HORIZ_DOOR 'H'
-# define VERTI_DOOR 'V'
-# define TILE_PLAYER "NSEW"
-# define VALID_CHARS "01HVNSEW"
-
-/*
-Display and color validation constants for the graphics system.
-- MAX_WIDTH: Maximum allowed screen width (1920 pixels)
-- MAX_HEIGHT: Maximum allowed screen height (1080 pixels)
-- MAX_RGB: Maximum RGB color value (255)
-- MIN_RGB: Minimum RGB color value (0)
-*/
-# define MAX_WIDTH 1920
-# define MAX_HEIGHT 1080
-# define MAX_RGB 255
-# define MIN_RGB 0
-
-/*
-Player movement and camera rotation speed constants.
-- MOVE_SPEED: Linear movement speed per frame (0.1 units)
-- ROTATE_SPEED: Angular rotation speed per frame (0.05 radians)
-*/
-# define MOVE_SPEED 0.1
-# define ROTATE_SPEED 0.05 
-
-/*
-Tile-based coordinate system constants for 64x64 pixel tiles.
-- TILE_SIZE: Size of each map tile in pixels (64.0)
-- PLAYER_SIZE: Player sprite size in pixels (32.0)
-- PLAYER_RADIUS: Player collision radius in pixels (16.0)
-*/
-# define TILE_SIZE 64.0
-# define PLAYER_SIZE 32.0
-# define PLAYER_RADIUS 16.0
-
-/*
-Door animation system constants for animated door frames.
-- MAX_DOOR_FRAMES: Maximum number of animation frames per door (8)
-- DOOR_ANIM_SPEED: Animation frame timing speed (0.1 seconds per frame)
-*/
-# define MAX_DOOR_FRAMES 8
-# define DOOR_ANIM_SPEED 0.1
-
-/*
-Cardinal direction enumeration for player orientation and movement.
-- N: North direction (0 degrees)
-- E: East direction (90 degrees)
-- S: South direction (180 degrees)
-- W: West direction (270 degrees)
-*/
-typedef enum e_direction
-{
-	N = 0,
-	E = 90,
-	S = 180,
-	W = 270
-}	t_direction;
-
-/*
-Structure to hold the map data and configuration settings.
-- map: 2D array containing the parsed map layout
-- test_map: Copy of map used for flood fill validation
-- map_path: File path to the .cub map file
-- north_texture_path: Path to north wall texture file
-- south_texture_path: Path to south wall texture file
-- east_texture_path: Path to east wall texture file
-- west_texture_path: Path to west wall texture file
-- sky_texture_path: Path to ceiling/sky texture file
-- floor_texture_path: Path to floor texture file
-- hdoor_texture_path: Path to horizontal door texture file
-- vdoor_texture_path: Path to vertical door texture file
-- resolution: Screen resolution array [width, height]
-- sky_color: RGB color values for ceiling [r, g, b]
-- floor_color: RGB color values for floor [r, g, b]
-- max_cols: Maximum number of columns in the map
-- max_rows: Maximum number of rows in the map
-- map_first_wall: Boolean flag for first wall validation
-- map_last_wall: Boolean flag for last wall validation
-- herocount: Number of player spawn points found
-- player_x: Player starting X coordinate in world space
-- player_y: Player starting Y coordinate in world space
-- start_direction: Player initial facing direction (N/S/E/W)
-*/
-typedef struct s_map
-{
-	char		**map;
-	char		**test_map;
-	char		*map_path;
-	char		*north_texture_path;
-	char		*south_texture_path;
-	char		*east_texture_path;
-	char		*west_texture_path;
-	char		*sky_texture_path;
-	char		*floor_texture_path;
-	char		*hdoor_texture_path;
-	char		*vdoor_texture_path;
-	int			resolution[2];
-	int			sky_color[3];
-	int			floor_color[3];
-	int			max_cols;
-	int			max_rows;
-	bool		map_first_wall;
-	bool		map_last_wall;
-	int			herocount;
-	double		player_x;
-	double		player_y;
-	t_direction	start_direction;
-}	t_map;
-
-/*
-Structure to hold the textures for the game.
-- north_wall: Texture for north-facing walls
-- south_wall: Texture for south-facing walls
-- east_wall: Texture for east-facing walls
-- west_wall: Texture for west-facing walls
-- sky: Texture for ceiling/sky rendering
-- floor: Texture for floor rendering
-- hdoor_frames: Array of horizontal door animation frames
-- vdoor_frames: Array of vertical door animation frames
-- hdoor_frame_count: Number of horizontal door frames loaded
-- vdoor_frame_count: Number of vertical door frames loaded
-*/
-typedef struct s_texture
-{
-	void	*north_wall;
-	void	*south_wall;
-	void	*east_wall;
-	void	*west_wall;
-	void	*sky;
-	void	*floor;
-	void	**hdoor_frames;
-	void	**vdoor_frames;
-	int		hdoor_frame_count;
-	int		vdoor_frame_count;
-}	t_texture;
-
-/*
-Master structure to hold the game data.
-*/
-typedef struct s_game
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_texture	textures;
-	t_map		map;
-	int			doorcount;
-	double		curr_x;
-	double		curr_y;
-	double		view_elevation;
-	double		view_direction;
-}	t_game;
+# include "struct.h"
+# include "raycasting.h"
 
 /*
 Main functions. In cub3D.c
@@ -371,6 +210,6 @@ int		handle_keyrelease(int keycode, t_game *game);
 int		handle_window_close(t_game *game);
 int		handle_movement_keys(int keycode, t_game *game);
 int		handle_rotation_keys(int keycode, t_game *game);
-void	setup_event_hooks(t_game *game);
+int		setup_event_hooks(t_game *game);
 
 #endif

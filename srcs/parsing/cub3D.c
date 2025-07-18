@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 10:12:10 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/19 02:54:57 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ int	check_valid_file_path(const char *path)
 	return (1);
 }
 
+void	load_texture(t_game *game, t_image *tex, char *path)
+{
+	int width, height;
+
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
+	if (!tex->img_ptr)
+	{
+		ft_fprintf(2, "Texture load failed: %s\n", path);
+		exit(1);
+	}
+	if (width != TEX_WIDTH || height != TEX_HEIGHT)
+	{
+		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
+		exit(1);
+	}
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -69,6 +87,7 @@ int	main(int argc, char **argv)
 	init_game(game, map_path);
 	free(map_path);
 	setup_event_hooks(game);
+	mlx_loop_hook(game->mlx_ptr, render_img, game);
 	mlx_loop(game->mlx_ptr);
 	cleanup(game);
 	return (0);
@@ -124,4 +143,8 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_later(game);
 		exit(EXIT_FAILURE);
 	}
+	load_texture(game, game->textures.north_wall, game->map.north_texture_path);
+	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
+	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
+	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
 }

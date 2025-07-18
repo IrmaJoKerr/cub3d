@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyhooks_a.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 17:43:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/19 02:06:01 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,14 +114,14 @@ int	handle_rotation_keys(int keycode, t_game *game)
 {
 	if (keycode == XK_Left || keycode == 0xff51)
 	{
-		game->view_direction -= ROTATE_SPEED;
+		game->view_direction += ROTATE_SPEED;
 		game->view_direction = normalize_angle(game->view_direction);
 		fprintf(stdout, "Left Arrow: Looking left (angle: %.3f radians)\n", game->view_direction);
 		return (1);
 	}
 	else if (keycode == XK_Right || keycode == 0xff53)
 	{
-		game->view_direction += ROTATE_SPEED;
+		game->view_direction -= ROTATE_SPEED;
 		game->view_direction = normalize_angle(game->view_direction);
 		fprintf(stdout, "Right Arrow: Looking right (angle: %.3f radians)\n", game->view_direction);
 		return (1);
@@ -189,10 +189,11 @@ int	handle_window_close(t_game *game)
 Initialize all event hooks for the game window
 Sets up WASD movement, arrow key rotation, ESC exit, and window close handlers
 */
-void	setup_event_hooks(t_game *game)
+int	setup_event_hooks(t_game *game)
 {
 	mlx_hook(game->win_ptr, 2, 1L<<0, handle_keypress, game);
 	mlx_hook(game->win_ptr, 3, 1L<<1, handle_keyrelease, game);
 	mlx_hook(game->win_ptr, 17, 1L<<17, handle_window_close, game);
+	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initstructs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 18:59:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/19 01:56:34 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,19 @@ void	init_game_st(t_game *game)
 	game->curr_y = 0;
 	game->view_direction = 0;
 	game->view_elevation = 0;
+	game->img.img_ptr = NULL;
+	game->img.addr = NULL;
+	game->img.bpp = 0;
+	game->img.line_len = 0;
+	game->img.endian = 0;
 }
 
 void	init_texture_st(t_texture *texture)
 {
-	texture->north_wall = NULL;
-	texture->south_wall = NULL;
-	texture->east_wall = NULL;
-	texture->west_wall = NULL;
+	texture->north_wall = malloc(sizeof(t_image));
+	texture->south_wall = malloc(sizeof(t_image));
+	texture->east_wall = malloc(sizeof(t_image));
+	texture->west_wall = malloc(sizeof(t_image));
 	texture->sky = NULL;
 	texture->floor = NULL;
 	texture->hdoor_frames = NULL;

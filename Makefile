@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
+#    By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 12:29:47 by bleow             #+#    #+#              #
-#    Updated: 2025/07/16 19:13:23 by bleow            ###   ########.fr        #
+#    Updated: 2025/07/19 00:51:26 by wjun-kea         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,14 +18,16 @@ OBJ_DIR = objs
 PARSING_SRCS = $(wildcard $(SRC_DIR)/parsing/*.c)
 HOOKS_SRCS = $(wildcard $(SRC_DIR)/hooks/*.c)
 COLLISIONS_SRCS = $(wildcard $(SRC_DIR)/collisions/*.c)
+EXECUTION_SRCS = $(wildcard $(SRC_DIR)/execution/*.c)
 
-SRCS = $(PARSING_SRCS) $(HOOKS_SRCS) $(COLLISIONS_SRCS)
+SRCS = $(PARSING_SRCS) $(HOOKS_SRCS) $(COLLISIONS_SRCS) $(EXECUTION_SRCS)
 
 PARSING_OBJS = $(PARSING_SRCS:$(SRC_DIR)/parsing/%.c=$(OBJ_DIR)/parsing/%.o)
 HOOKS_OBJS = $(HOOKS_SRCS:$(SRC_DIR)/hooks/%.c=$(OBJ_DIR)/hooks/%.o)
 COLLISIONS_OBJS = $(COLLISIONS_SRCS:$(SRC_DIR)/collisions/%.c=$(OBJ_DIR)/collisions/%.o)
+EXECUTION_OBJS = $(EXECUTION_SRCS:$(SRC_DIR)/execution/%.c=$(OBJ_DIR)/execution/%.o)
 
-OBJS = $(PARSING_OBJS) $(HOOKS_OBJS) $(COLLISIONS_OBJS)
+OBJS = $(PARSING_OBJS) $(HOOKS_OBJS) $(COLLISIONS_OBJS) $(EXECUTION_OBJS)
 
 CC = gcc
 RM = rm -f
@@ -56,6 +58,10 @@ $(OBJ_DIR)/hooks/%.o: $(SRC_DIR)/hooks/%.c
 
 $(OBJ_DIR)/collisions/%.o: $(SRC_DIR)/collisions/%.c
 	@mkdir -p $(OBJ_DIR)/collisions
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(OBJ_DIR)/execution/%.o: $(SRC_DIR)/execution/%.c
+	@mkdir -p $(OBJ_DIR)/execution
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT): $(LIBFT_DIR)/*.c $(LIBFT_DIR)/*.h
