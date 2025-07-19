@@ -32,8 +32,8 @@ static void	compute_projection(t_ray *ray, t_game *game)
 	else
 		ray->perp_dist = (ray->map_y - game->curr_y + (1 - ray->step_y) / 2.0) / ray->dir_y;
 	ray->line_height = (int)(MAX_HEIGHT / (ray->perp_dist + 1e-6));
-	ray->draw_start = fmax(0, -ray->line_height / 2 + MAX_HEIGHT / 2);
-	ray->draw_end = fmin(MAX_HEIGHT - 1, ray->line_height / 2 + MAX_HEIGHT / 2);
+	ray->draw_start = fmax(0, -ray->line_height / 2 + MAX_HEIGHT / 2 + game->view_elevation);
+	ray->draw_end = fmin(MAX_HEIGHT - 1, ray->line_height / 2 + MAX_HEIGHT / 2 + game->view_elevation);
 }
 
 // Function to compute the texture coordinates based on the ray's side and direction
@@ -64,7 +64,7 @@ static void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 	int		color;
 
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
-	tex_pos	= (ray->draw_start - MAX_HEIGHT / 2 + ray->line_height / 2) * step;
+	tex_pos = (ray->draw_start - (MAX_HEIGHT / 2 + game->view_elevation) + ray->line_height / 2) * step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{

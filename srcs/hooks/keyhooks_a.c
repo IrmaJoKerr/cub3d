@@ -128,15 +128,15 @@ int	handle_rotation_keys(int keycode, t_game *game)
 	}
 	else if (keycode == XK_Up || keycode == 0xff52)
 	{
-		game->view_elevation += ROTATE_SPEED;
-		game->view_elevation = clamp_elevation(game->view_elevation);
+		game->view_elevation += 10;
+		// game->view_elevation = clamp_elevation(game->view_elevation);
 		fprintf(stdout, "Up Arrow: Looking up (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}
 	else if (keycode == XK_Down || keycode == 0xff54)
 	{
-		game->view_elevation -= ROTATE_SPEED;
-		game->view_elevation = clamp_elevation(game->view_elevation);
+		game->view_elevation -= 10;
+		// game->view_elevation = clamp_elevation(game->view_elevation);
 		fprintf(stdout, "Down Arrow: Looking down (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}

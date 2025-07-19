@@ -34,10 +34,14 @@ Check if a world position is valid (not a wall and within bounds)
 */
 bool	is_valid_world_position(t_game *game, double x, double y)
 {
-	int	tile_char;
+	(void)game; // Prevent unused variable warning
+	(void)x; // Prevent unused variable warning
+	(void)y; // Prevent unused variable warning
+	return true; // Temporary: always return true for now
+	// int	tile_char;
 
-	tile_char = get_tile_at_position(game, x, y);
-	return (tile_char != TILE_WALL);
+	// tile_char = get_tile_at_position(game, x, y);
+	// return (tile_char != TILE_WALL);
 }
 
 /*

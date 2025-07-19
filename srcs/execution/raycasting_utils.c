@@ -36,26 +36,31 @@ void	put_pixel(t_image *img, int x, int y, int color)
 void	fill_sky_and_floor(t_game *game)
 {
 	int	sky_color;
-	int floor_color;
+	int	floor_color;
 	int	y;
 	int	x;
+	int	midline;
 
+	y = 0;
 	sky_color = (game->map.sky_color[0] << 16) | (game->map.sky_color[1] << 8) | game->map.sky_color[2];
 	floor_color = (game->map.floor_color[0] << 16) | (game->map.floor_color[1] << 8) | game->map.floor_color[2];
-	y = 0;
-	x = 0;
+	midline = MAX_HEIGHT / 2 + game->view_elevation;
+	if (midline < 0)
+		midline = 0;
+	if (midline > MAX_HEIGHT)
+		midline = MAX_HEIGHT;
 	while (y < MAX_HEIGHT)
 	{
+		x = 0;
 		while (x < MAX_WIDTH)
 		{
-			if (y < MAX_HEIGHT / 2)
+			if (y < midline)
 				put_pixel(&game->img, x, y, sky_color);
 			else
 				put_pixel(&game->img, x, y, floor_color);
-			x++;
+			++x;
 		}
-		x = 0;
-		y++;
+		++y;
 	}
 }
 

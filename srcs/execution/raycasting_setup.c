@@ -4,6 +4,7 @@ void	render_raycast(t_game *game)
 {
 	int x;
 
+	x = 0;
 	if (game->img.img_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
