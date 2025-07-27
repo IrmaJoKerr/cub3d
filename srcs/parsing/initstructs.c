@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initstructs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/19 01:56:34 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	init_game_st(t_game *game)
 	game->mlx_ptr = NULL;
 	game->win_ptr = NULL;
 	init_texture_st(&game->textures);
+	game->doors = NULL;
+	game->doorcount = 0;
 	game->curr_x = 0;
 	game->curr_y = 0;
 	game->view_direction = 0;
@@ -43,10 +45,8 @@ void	init_texture_st(t_texture *texture)
 	texture->west_wall = malloc(sizeof(t_image));
 	texture->sky = NULL;
 	texture->floor = NULL;
-	texture->hdoor_frames = NULL;
-	texture->vdoor_frames = NULL;
-	texture->hdoor_frame_count = 0;
-	texture->vdoor_frame_count = 0;
+	texture->door_frames = malloc(sizeof(t_image*) * MAX_DOOR_FRAMES);
+	texture->door_frame_count = 0;
 }
 
 /*

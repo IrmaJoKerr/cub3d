@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/19 02:54:57 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,52 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 		exit(1);
 	}
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+}
+
+int	count_door_textures(void)
+{
+	int count = 0;
+	char path[256];
+	
+	while (count < MAX_DOOR_FRAMES)
+	{
+		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", count);
+		if (!check_valid_file_path(path))
+			break;
+		count++;
+	}
+	return (count);
+}
+
+void	load_all_door_textures(t_game *game)
+{
+	int i;
+	char path[256];
+	int door_count;
+	
+	door_count = count_door_textures();
+	if (door_count == 0)
+	{
+		ft_fprintf(2, "Error: No door textures found in textures/doors/\n");
+		exit(1);
+	}
+	
+	ft_fprintf(1, "Loading %d door textures...\n", door_count);
+	
+	for (i = 0; i < door_count; i++)
+	{
+		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", i);
+		game->textures.door_frames[i] = malloc(sizeof(t_image));
+		if (!game->textures.door_frames[i])
+		{
+			ft_fprintf(2, "Error: Failed to allocate door frame %d\n", i);
+			exit(1);
+		}
+		load_texture(game, game->textures.door_frames[i], path);
+	}
+	
+	game->textures.door_frame_count = door_count;
+	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
 }
 
 int	main(int argc, char **argv)
@@ -147,4 +193,10 @@ void	init_game(t_game *game, const char *map_file)
 	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
+	
+	// Load door textures by default
+	load_all_door_textures(game);
+	
+	// Initialize doors from map
+	init_doors_from_map(game);
 }

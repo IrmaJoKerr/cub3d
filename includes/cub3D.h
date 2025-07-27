@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/19 03:05:05 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/07/27 16:32:12 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ Main functions. In cub3D.c
 void	init_game(t_game *game, const char *map_file);
 char	*get_map_path(const char *map_file);
 int		check_valid_file_path(const char *path);
+void	load_texture(t_game *game, t_image *tex, char *path);
+void	load_all_door_textures(t_game *game);
+int		count_door_textures(void);
 
 /*
 Cleanup functions a. In cleanup_a.c
@@ -82,6 +85,14 @@ Map validation functions. In map_validation.c
 int		is_valid_path(t_game *game, int y, int x);
 int		flood_fill_validate(t_game *game, int y, int x);
 int		is_reachable_space(char c);
+
+/*
+Door utility functions. In execution/door_utils.c
+*/
+void	init_doors_from_map(t_game *game);
+int		get_door_id(t_game *game, int x, int y);
+t_image	*get_door_texture(t_game *game, int door_id, int frame);
+t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ray_dir_x, double ray_dir_y);
 
 /*
 Movement and collision functions. In collisions/movehero.c
@@ -155,23 +166,6 @@ int		check_counts(t_game *game);
 int		check_map_validity(t_game *game);
 
 /*
-Parser utility functions c. In parserutil_c.c
-*/
-int		parse_configuration(const char *file, t_game *game);
-int		parse_settings(char *line, t_game *game);
-char	*extract_texture_path(const char *line, const char *identifier);
-
-int		skip_whitespace(const char *str, int start);
-int		identify_settings_type(const char *line);
-char	*extract_color_values(const char *line, const char *identifier);
-char	*extract_resolution_values(const char *line, const char *identifier);
-int		parse_color_settings(char *line, t_game *game, char settings);
-int		parse_resolution_settings(char *line, t_game *game);
-int		validate_color_values(const char *values, int color[3]);
-int		validate_resolution_values(const char *values, int resolution[2]);
-int		is_valid_number_string(const char *str);
-
-/*
 Configuration parser functions. In config_parser.c
 */
 int		parse_configuration_section(const char *file, t_game *game);
@@ -183,6 +177,18 @@ int		handle_color_settings(char *line, t_game *game, int settings_type);
 int		handle_resolution_settings(char *line, t_game *game);
 int		validate_required_config(t_game *game);
 int		cleanup_and_return(int fd, char *line, int ret_val);
+
+/*
+Parser helper functions. In parser_helpers.c
+*/
+int		identify_settings_type(const char *line);
+char	*extract_texture_path(const char *line, const char *identifier);
+int		parse_color_settings(char *line, t_game *game, char settings);
+char	*extract_color_values(const char *line, const char *identifier);
+int		validate_color_values(const char *values, int color[3]);
+int		parse_resolution_settings(char *line, t_game *game);
+char	*extract_resolution_values(const char *line, const char *identifier);
+int		validate_resolution_values(const char *values, int resolution[2]);
 
 /*
 Map parser functions. In map_parser.c

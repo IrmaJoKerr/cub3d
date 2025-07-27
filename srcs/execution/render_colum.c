@@ -18,8 +18,13 @@ static void perform_dda(t_ray *ray, t_game *game)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (game->map.map[ray->map_y][ray->map_x] == TILE_WALL)
+		
+		char tile = game->map.map[ray->map_y][ray->map_x];
+		if (tile == TILE_WALL || tile == HORIZ_DOOR || tile == VERTI_DOOR)
+		{
 			ray->hit = 1;
+			ray->hit_tile = tile;
+		}
 	}
 }
 
@@ -42,7 +47,7 @@ static void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 {
 	double wall_x;
 
-	*tex = get_wall_texture(game, ray->side, ray->dir_x, ray->dir_y);
+	*tex = get_surface_texture(game, ray, ray->hit_tile);
 	if (ray->side == 0)
 		wall_x = game->curr_y + ray->perp_dist * ray->dir_y;
 	else
