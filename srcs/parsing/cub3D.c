@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:08:04 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 09:28:38 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,4 +199,6 @@ void	init_game(t_game *game, const char *map_file)
 	
 	// Initialize doors from map
 	init_doors_from_map(game);
+	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
+	set_player_to_tile_center(game, game->curr_x, game->curr_y);
 }

@@ -15,8 +15,25 @@ void	render_raycast(t_game *game)
 		render_column(game, x++);
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
 }
+
+void draw_crosshair(t_game *game)
+{
+	int cx = MAX_WIDTH / 2;
+	int cy = MAX_HEIGHT / 2;
+	int size = 10;
+
+	// Horizontal line
+	for (int dx = -size; dx <= size; dx++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx + dx, cy, 0xFFFFFF);
+
+	// Vertical line
+	for (int dy = -size; dy <= size; dy++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx, cy + dy, 0xFFFFFF);
+}
+
 int	render_img(t_game *game)
 {
 	render_raycast(game);
+	draw_crosshair(game);
 	return (0);
 }

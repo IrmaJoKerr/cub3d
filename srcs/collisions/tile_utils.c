@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tile_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 08:39:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 09:30:41 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ Set player position to the center of a specific tile
 */
 void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y)
 {
-	game->curr_x = tile_center_x(tile_x);
-	game->curr_y = tile_center_y(tile_y);
+	game->curr_x = tile_x + 0.5;
+	game->curr_y = tile_y + 0.5;
 	game->map.player_x = game->curr_x;
 	game->map.player_y = game->curr_y;
 }

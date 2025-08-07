@@ -6,7 +6,7 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/19 02:06:01 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/07 10:37:33 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,10 +189,48 @@ int	handle_window_close(t_game *game)
 Initialize all event hooks for the game window
 Sets up WASD movement, arrow key rotation, ESC exit, and window close handlers
 */
+
+int handle_mouse_move(int x, int y, t_game *game)
+{
+	static int prev_x = -1;
+	static int prev_y = -1;
+	int center_x = MAX_WIDTH / 2;
+	int center_y = MAX_HEIGHT / 2;
+
+	// Ignore first call
+	if (prev_x == -1 || prev_y == -1)
+	{
+		prev_x = x;
+		prev_y = y;
+		mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
+		return (0);
+	}
+
+	int delta_x = x - center_x;
+	int delta_y = y - center_y;
+	if (delta_x != 0 || delta_y != 0)
+	{
+		game->view_direction -= delta_x * MOUSE_SENSITIVITY;
+		game->view_direction = normalize_angle(game->view_direction);
+		game->view_elevation -= delta_y * MOUSE_SENSITIVITY * 160;
+
+		fprintf(stdout, "Mouse moved: dx=%d dy=%d -> angle=%.3f, elevation=%.3f\n",
+			delta_x, delta_y, game->view_direction, game->view_elevation);
+		
+		// Reset mouse to center
+		mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
+	}
+	mlx_mouse_hide(game->mlx_ptr, game->win_ptr);
+	prev_x = x;
+	prev_y = y;
+	return (0);
+}
+
 int	setup_event_hooks(t_game *game)
 {
 	mlx_hook(game->win_ptr, 2, 1L<<0, handle_keypress, game);
 	mlx_hook(game->win_ptr, 3, 1L<<1, handle_keyrelease, game);
+	mlx_hook(game->win_ptr, 6, 1L << 6, handle_mouse_move, game);
 	mlx_hook(game->win_ptr, 17, 1L<<17, handle_window_close, game);
 	return (0);
 }

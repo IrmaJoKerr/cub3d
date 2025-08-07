@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/05 01:13:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 09:36:44 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define FOV 1.5533
+# define MOUSE_SENSITIVITY 0.002
 /* 89 degrees in radians. For Norm compliance */
 
 typedef enum e_direction
