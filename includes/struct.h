@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/05 01:13:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 09:56:05 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # define TILE_SIZE 64.0
 # define PLAYER_SIZE 16.0
 # define PLAYER_RADIUS 24.0
-# define MAX_DOOR_FRAMES 21
-# define DOOR_ANIM_SPEED 0.1
+# define MAX_DOOR_FRAMES 8
+# define DOOR_ANIM_SPEED 0.2
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define FOV 1.5533
