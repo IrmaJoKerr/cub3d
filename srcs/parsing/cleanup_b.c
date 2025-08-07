@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	cleanup_texture_paths(t_game *game)
 }
 
 /*
-Helper function to cleanup map arrays (both main and test maps).
-Direct approach for cleaning up both game->map.map and game->map.test_map.
+Helper function to cleanup map arrays.
+Direct approach for cleaning up game->map.map.
 Prevents double-free by explicitly setting pointers to NULL.
 */
 void	cleanup_map_array(t_game *game)
@@ -54,14 +54,6 @@ void	cleanup_map_array(t_game *game)
 		map_len = ft_arrlen(game->map.map);
 		ft_free_2d(game->map.map, map_len);
 		game->map.map = NULL;
-	}
-	
-	// Cleanup test map
-	if (game->map.test_map)
-	{
-		map_len = ft_arrlen(game->map.test_map);
-		ft_free_2d(game->map.test_map, map_len);
-		game->map.test_map = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 16:23:19 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,33 +40,6 @@ char	**copy_map_array(char **source_map, int rows)
 	}
 	copy[i] = NULL;
 	return (copy);
-}
-
-/*
-Create test_map as a copy of the main map.
-Safe function that handles allocation failures gracefully.
-*/
-int	create_test_map(t_game *game)
-{
-	if (!game->map.map)
-	{
-		ft_fprintf(2, "Error: Cannot create test_map - main map is NULL\n");
-		return (-1);
-	}
-	if (game->map.test_map)
-	{
-		fprintf(stderr, "DEBUG: test_map already exists, skipping creation\n");
-		return (0);
-	}
-	game->map.test_map = copy_map_array(game->map.map, game->map.max_rows);
-	if (!game->map.test_map)
-	{
-		ft_fprintf(2, "Warning: Failed to create test_map copy\n");
-		return (-1);
-	}
-	fprintf(stderr, "DEBUG: Successfully created test_map copy (%dx%d)\n", 
-		game->map.max_cols, game->map.max_rows);
-	return (0);
 }
 
 /*

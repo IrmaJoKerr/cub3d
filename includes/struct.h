@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/07/27 16:10:57 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/05 01:13:16 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@
 # define DOOR_ANIM_SPEED 0.1
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
-# define FOV (M_PI / 2)
+# define FOV 1.5533
+/* 89 degrees in radians. For Norm compliance */
 
 typedef enum e_direction
 {
@@ -52,17 +53,17 @@ typedef enum e_door_state
 
 typedef struct s_door
 {
-	int			x, y;
-	char		type;
-	t_door_state state;
-	double		openness;
-	int			animation_frame;
+	int				x;
+	int				y;
+	char			type;
+	t_door_state	state;
+	double			openness;
+	int				animation_frame;
 }	t_door;
 
 typedef struct s_map
 {
 	char		**map;
-	char		**test_map;
 	char		*map_path;
 	char		*north_texture_path;
 	char		*south_texture_path;
@@ -70,7 +71,6 @@ typedef struct s_map
 	char		*west_texture_path;
 	char		*sky_texture_path;
 	char		*floor_texture_path;
-	int			resolution[2];
 	int			sky_color[3];
 	int			floor_color[3];
 	int			max_cols;

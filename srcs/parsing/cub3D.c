@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/03 10:08:04 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ int	count_door_textures(void)
 {
 	int count = 0;
 	char path[256];
-	
+
 	while (count < MAX_DOOR_FRAMES)
 	{
 		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", count);
 		if (!check_valid_file_path(path))
-			break;
+			break ;
 		count++;
 	}
 	return (count);

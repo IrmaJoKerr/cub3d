@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/03 10:20:48 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ void	init_map_st(t_map *map)
 	int	i;
 
 	ft_bzero(map, sizeof(*map));
-	i = 0;
-	while (i < 2)
-	{
-		map->resolution[i] = -1;
-		i++;
-	}
 	i = 0;
 	while (i < 3)
 	{
