@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 16:24:21 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/03 10:36:37 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,6 @@ int	parse_configuration_section(const char *file, t_game *game)
 		line_num++;
 	}
 	close(fd);
-	if (game->map.resolution[0] == -1)
-	{
-		game->map.resolution[0] = MAX_WIDTH;
-		game->map.resolution[1] = MAX_HEIGHT;
-		ft_fprintf(2, "Info: No R settings found, using default res %dx%d\n",
-			MAX_WIDTH, MAX_HEIGHT);
-	}
 	if (validate_required_config(game) < 0)
 		return (-1);
 	return (map_start_line);
@@ -125,8 +118,6 @@ int	parse_config_settings(char *line, t_game *game)
 		return (handle_texture_settings(line, game, settings_type));
 	else if (settings_type == 5 || settings_type == 6)
 		return (handle_color_settings(line, game, settings_type));
-	else if (settings_type == 7)
-		return (handle_resolution_settings(line, game));
 	return (-1);
 }
 
@@ -206,20 +197,7 @@ int	handle_color_settings(char *line, t_game *game, int settings_type)
 }
 
 /**
- * Handle resolution settings with duplicate checking
- */
-int	handle_resolution_settings(char *line, t_game *game)
-{
-	if (game->map.resolution[0] != -1)
-	{
-		ft_fprintf(2, "Error: Duplicate R settings\n");
-		return (-1);
-	}
-	return (parse_resolution_settings(line, game));
-}
-
-/**
- * Validate all required configuration settingss are present
+ * Validate all required configuration settings are present
  */
 int	validate_required_config(t_game *game)
 {

@@ -6,14 +6,14 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 17:43:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 int		is_valid_path(t_game *game, int y, int x);
-int		flood_fill_validate(t_game *game, int y, int x);
+int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
@@ -24,21 +24,26 @@ Uses test_map for marking visited tiles - much more efficient than separate allo
 */
 int	is_valid_path(t_game *game, int y, int x)
 {
+	char	**test_map;
 	int		result;
 
 	fprintf(stderr, "DEBUG: Starting enhanced path validation from (%d,%d)\n", y, x);
 	fprintf(stderr, "DEBUG: Map dimensions: %dx%d\n", game->map.max_cols, game->map.max_rows);
-	fprintf(stderr, "DEBUG: Using test_map for flood fill marking\n");
+	fprintf(stderr, "DEBUG: Using local test_map for flood fill marking\n");
 	
-	// Ensure test_map exists as a copy of the main map
-	if (create_test_map(game) != 0)
+	// Allocate test_map locally
+	test_map = copy_map_array(game->map.map, game->map.max_rows);
+	if (!test_map)
 	{
-		ft_fprintf(2, "ERROR: Failed to create test_map for flood fill validation\n");
+		ft_fprintf(2, "ERROR: Failed to allocate local test_map for flood fill validation\n");
 		return (0);
 	}
 	
-	result = flood_fill_validate(game, y, x);
+	result = flood_fill_validate(game, test_map, y, x);
 	fprintf(stderr, "DEBUG: Flood fill validation result: %d\n", result);
+	
+	// Clean up local test_map
+	ft_free_2d(test_map, game->map.max_rows);
 	
 	if (result)
 	{
@@ -58,7 +63,7 @@ Flood fill algorithm with boundary validation using test_map for marking.
 Recursively marks reachable spaces and validates enclosure.
 Uses 'X' character in test_map to mark visited tiles.
 */
-int	flood_fill_validate(t_game *game, int y, int x)
+int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 {
 	char	map_char;
 
@@ -74,7 +79,7 @@ int	flood_fill_validate(t_game *game, int y, int x)
 		return (0);
 	}
 	
-	if (game->map.test_map[y][x] == 'X')
+	if (test_map[y][x] == 'X')
 	{
 		fprintf(stderr, "DEBUG: Already visited (%d,%d)\n", y, x);
 		return (1);
@@ -92,7 +97,7 @@ int	flood_fill_validate(t_game *game, int y, int x)
 		return (0);
 	}
 	
-	game->map.test_map[y][x] = 'X';
+	test_map[y][x] = 'X';
 	fprintf(stderr, "DEBUG: Marked (%d,%d) as visited in test_map\n", y, x);
 	
 	if (y == 0 || y == game->map.max_rows - 1
@@ -102,10 +107,10 @@ int	flood_fill_validate(t_game *game, int y, int x)
 		return (0);
 	}
 	
-	if (!flood_fill_validate(game, y - 1, x)
-		|| !flood_fill_validate(game, y + 1, x)
-		|| !flood_fill_validate(game, y, x - 1)
-		|| !flood_fill_validate(game, y, x + 1))
+	if (!flood_fill_validate(game, test_map, y - 1, x)
+		|| !flood_fill_validate(game, test_map, y + 1, x)
+		|| !flood_fill_validate(game, test_map, y, x - 1)
+		|| !flood_fill_validate(game, test_map, y, x + 1))
 	{
 		fprintf(stderr, "DEBUG: Validation failed from (%d,%d)\n", y, x);
 		return (0);

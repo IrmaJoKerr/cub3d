@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/19 03:07:13 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,13 @@ void	cleanup_texture_paths(t_game *game)
 		ft_safefree((void **)&game->map.sky_texture_path);
 	if (game->map.floor_texture_path)
 		ft_safefree((void **)&game->map.floor_texture_path);
-	if (game->map.hdoor_texture_path)
-		ft_safefree((void **)&game->map.hdoor_texture_path);
-	if (game->map.vdoor_texture_path)
-		ft_safefree((void **)&game->map.vdoor_texture_path);
 	if (game->map.map_path)
 		ft_safefree((void **)&game->map.map_path);
 }
 
 /*
-Helper function to cleanup map arrays (both main and test maps).
-Direct approach for cleaning up both game->map.map and game->map.test_map.
+Helper function to cleanup map arrays.
+Direct approach for cleaning up game->map.map.
 Prevents double-free by explicitly setting pointers to NULL.
 */
 void	cleanup_map_array(t_game *game)
@@ -59,14 +55,6 @@ void	cleanup_map_array(t_game *game)
 		ft_free_2d(game->map.map, map_len);
 		game->map.map = NULL;
 	}
-	
-	// Cleanup test map
-	if (game->map.test_map)
-	{
-		map_len = ft_arrlen(game->map.test_map);
-		ft_free_2d(game->map.test_map, map_len);
-		game->map.test_map = NULL;
-	}
 }
 
 /*
@@ -74,28 +62,30 @@ Helper function to cleanup MLX textures.
 */
 void	cleanup_mlx_textures(t_game *game)
 {
-	int	i;
-
 	if (game->mlx_ptr)
 	{
-		if (game->textures.north_wall)
+		if (game->textures.north_wall && game->textures.north_wall->img_ptr)
 		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.north_wall);
+			mlx_destroy_image(game->mlx_ptr, game->textures.north_wall->img_ptr);
+			free(game->textures.north_wall);
 			game->textures.north_wall = NULL;
 		}
-		if (game->textures.south_wall)
+		if (game->textures.south_wall && game->textures.south_wall->img_ptr)
 		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.south_wall);
+			mlx_destroy_image(game->mlx_ptr, game->textures.south_wall->img_ptr);
+			free(game->textures.south_wall);
 			game->textures.south_wall = NULL;
 		}
-		if (game->textures.east_wall)
+		if (game->textures.east_wall && game->textures.east_wall->img_ptr)
 		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.east_wall);
+			mlx_destroy_image(game->mlx_ptr, game->textures.east_wall->img_ptr);
+			free(game->textures.east_wall);
 			game->textures.east_wall = NULL;
 		}
-		if (game->textures.west_wall)
+		if (game->textures.west_wall && game->textures.west_wall->img_ptr)
 		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.west_wall);
+			mlx_destroy_image(game->mlx_ptr, game->textures.west_wall->img_ptr);
+			free(game->textures.west_wall);
 			game->textures.west_wall = NULL;
 		}
 		if (game->textures.sky)
@@ -108,32 +98,9 @@ void	cleanup_mlx_textures(t_game *game)
 			mlx_destroy_image(game->mlx_ptr, game->textures.floor);
 			game->textures.floor = NULL;
 		}
-		if (game->textures.hdoor_frames)
-		{
-			i = 0;
-			while (i < game->textures.hdoor_frame_count)
-			{
-				if (game->textures.hdoor_frames[i])
-					mlx_destroy_image(game->mlx_ptr, game->textures.hdoor_frames[i]);
-				i++;
-			}
-			free(game->textures.hdoor_frames);
-			game->textures.hdoor_frames = NULL;
-			game->textures.hdoor_frame_count = 0;
-		}
-		if (game->textures.vdoor_frames)
-		{
-			i = 0;
-			while (i < game->textures.vdoor_frame_count)
-			{
-				if (game->textures.vdoor_frames[i])
-					mlx_destroy_image(game->mlx_ptr, game->textures.vdoor_frames[i]);
-				i++;
-			}
-			free(game->textures.vdoor_frames);
-			game->textures.vdoor_frames = NULL;
-			game->textures.vdoor_frame_count = 0;
-		}
+		
+		// Clean up unified door frames
+		cleanup_door_frames(game);
 	}
 }
 
