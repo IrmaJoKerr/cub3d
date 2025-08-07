@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 15:40:36 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 13:04:27 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,21 @@ Calculate movement delta X for forward/backward movement
 */
 double	calc_move_dx(double view_direction, double speed, int forward)
 {
+	double result;
+	
 	if (forward)
-		return (cos(view_direction) * speed);
+		result = cos(view_direction) * speed;
 	else
-		return (-cos(view_direction) * speed);
+		result = -cos(view_direction) * speed;
+		
+	static int debug_counter = 0;
+	if (debug_counter % 20 == 0) { // Debug every 20th call to avoid spam
+		// printf("DEBUG calc_move_dx: angle=%.3f, speed=%.3f, forward=%d -> result=%.6f\n", 
+		//	view_direction, speed, forward, result);
+	}
+	debug_counter++;
+	
+	return result;
 }
 
 /*

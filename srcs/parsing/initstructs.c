@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:20:48 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 13:16:06 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	init_game_st(t_game *game)
 	game->curr_y = 0;
 	game->view_direction = 0;
 	game->view_elevation = 0;
+	game->needs_render = true;
+	game->last_frame_time = 0;
 	game->img.img_ptr = NULL;
 	game->img.addr = NULL;
 	game->img.bpp = 0;

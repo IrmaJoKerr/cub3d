@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 15:41:55 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,18 @@ void	init_doors_from_map(t_game *game)
 		{
 			if (game->map.map[y][x] == HORIZ_DOOR || game->map.map[y][x] == VERTI_DOOR)
 			{
+				printf("🔍 FOUND DOOR: '%c' at tile (%d, %d)\n", game->map.map[y][x], x, y);
 				game->doors[door_index].x = x;
 				game->doors[door_index].y = y;
 				game->doors[door_index].type = game->map.map[y][x];
 				game->doors[door_index].state = DOOR_CLOSED;
 				game->doors[door_index].openness = 0.0;
 				game->doors[door_index].animation_frame = 0;
+				game->doors[door_index].last_attempt_time = 0;
+				game->doors[door_index].last_attempt_x = -1000.0;
+				game->doors[door_index].last_attempt_y = -1000.0;
+				game->doors[door_index].last_attempt_from_x = -1000.0;
+				game->doors[door_index].last_attempt_from_y = -1000.0;
 				door_index++;
 			}
 			x++;
@@ -66,6 +72,10 @@ void	init_doors_from_map(t_game *game)
 	}
 	
 	ft_fprintf(1, "✅ Initialized %d doors from map\n", game->doorcount);
+	
+	// Debug: Print map again after door initialization to check if doors are still there
+	fprintf(stderr, "\n🚪 MAP AFTER DOOR INITIALIZATION:\n");
+	debug_print_map(game);
 }
 
 int	get_door_id(t_game *game, int x, int y)

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/07 09:56:05 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 16:42:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,29 @@
 # define MAX_HEIGHT 1080
 # define MAX_RGB 255
 # define MIN_RGB 0
-# define MOVE_SPEED 0.1
+# define MOVE_SPEED 5.0
 # define ROTATE_SPEED 0.05
 # define TILE_SIZE 64.0
-# define PLAYER_SIZE 16.0
-# define PLAYER_RADIUS 24.0
+// # define PLAYER_SIZE 16.0  // ORPHANED - NEVER USED - COMMENTED OUT FOR TESTING
+# define PLAYER_RADIUS 8.0
+# define COLL_MARGIN 0.125
 # define MAX_DOOR_FRAMES 8
-# define DOOR_ANIM_SPEED 0.2
+# define DOOR_ANIM_SPEED 0.021
+# define DOOR_PROXIMITY_TILES 2.0
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define FOV 1.5533
 /* 89 degrees in radians. For Norm compliance */
+# define MAX_ELEVATION 0.8727
+/* 50 degrees in radians. Maximum up/down look angle */
+# define ELEVATION_SPEED 0.05
+/* Elevation change per keypress in radians */
+
+# define APPROACH_NORTH 1
+# define APPROACH_SOUTH 2
+# define APPROACH_EAST 3
+# define APPROACH_WEST 4
+# define APPROACH_INVALID 0
 
 typedef enum e_direction
 {
@@ -59,6 +71,12 @@ typedef struct s_door
 	t_door_state	state;
 	double			openness;
 	int				animation_frame;
+	long			last_attempt_time;
+	double			last_attempt_x;
+	double			last_attempt_y;
+	double			last_attempt_from_x;
+	double			last_attempt_from_y;
+	int				approach_direction;
 }	t_door;
 
 typedef struct s_map
@@ -117,6 +135,8 @@ typedef struct s_game
 	double		curr_y;
 	double		view_elevation;
 	double		view_direction;
+	bool		needs_render;
+	long		last_frame_time;
 }	t_game;
 
 typedef struct s_ray

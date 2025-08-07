@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:08:04 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 15:50:24 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	count_door_textures(void)
 
 	while (count < MAX_DOOR_FRAMES)
 	{
-		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", count);
+		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", count);
 		if (!check_valid_file_path(path))
 			break ;
 		count++;
@@ -91,22 +91,20 @@ int	count_door_textures(void)
 
 void	load_all_door_textures(t_game *game)
 {
-	int i;
-	char path[256];
-	int door_count;
-	
+	int		i;
+	char	path[256];
+	int		door_count;
+
 	door_count = count_door_textures();
 	if (door_count == 0)
 	{
 		ft_fprintf(2, "Error: No door textures found in textures/doors/\n");
 		exit(1);
 	}
-	
 	ft_fprintf(1, "Loading %d door textures...\n", door_count);
-	
 	for (i = 0; i < door_count; i++)
 	{
-		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", i);
+		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", i);
 		game->textures.door_frames[i] = malloc(sizeof(t_image));
 		if (!game->textures.door_frames[i])
 		{
@@ -115,7 +113,6 @@ void	load_all_door_textures(t_game *game)
 		}
 		load_texture(game, game->textures.door_frames[i], path);
 	}
-	
 	game->textures.door_frame_count = door_count;
 	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
 }
@@ -152,27 +149,12 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_early(game);
 		exit(EXIT_FAILURE);
 	}
-	
-	/*
-	** ================================================================
-	** TEMPORARY EXIT - REMOVE WHEN IMPLEMENTING RAYCASTER ENGINE
-	** ================================================================
-	** 
-	** This exit is placed here to allow clean termination after 
-	** successful map validation, without entering the MLX game loop.
-	** 
-	** Once the raycaster engine is implemented, remove this entire
-	** TEMPORARY EXIT REMOVED - PROGRAM NOW CONTINUES TO RAYCASTER
-	** ================================================================
-	*/
-	ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
-	ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
-	
-	/*
-	** ================================================================
-	** MLX INITIALIZATION CODE - NOW EXECUTING NORMALLY
-	** ================================================================
-	*/
+	game->view_direction = game->map.start_direction * M_PI / 180.0;
+	// fprintf(2, "Player initial direction: %d degrees (%.3f radians)\n", 
+	//	game->map.start_direction, game->view_direction);
+
+	// ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
+	// ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{
@@ -189,14 +171,16 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_later(game);
 		exit(EXIT_FAILURE);
 	}
+	ft_fprintf(1, "Loading wall textures...\n");
+	ft_fprintf(1, "  NO: %s\n", game->map.north_texture_path);
 	load_texture(game, game->textures.north_wall, game->map.north_texture_path);
+	ft_fprintf(1, "  SO: %s\n", game->map.south_texture_path);
 	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
+	ft_fprintf(1, "  EA: %s\n", game->map.east_texture_path);
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
+	ft_fprintf(1, "  WE: %s\n", game->map.west_texture_path);
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
-	
-	// Load door textures by default
+	ft_fprintf(1, "✅ Wall textures loaded successfully\n");
 	load_all_door_textures(game);
-	
-	// Initialize doors from map
 	init_doors_from_map(game);
 }
