@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 15:50:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 16:51:44 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,4 +183,6 @@ void	init_game(t_game *game, const char *map_file)
 	ft_fprintf(1, "✅ Wall textures loaded successfully\n");
 	load_all_door_textures(game);
 	init_doors_from_map(game);
+	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
+	set_player_to_tile_center(game, game->curr_x, game->curr_y);
 }

@@ -55,10 +55,10 @@ void	render_raycast(t_game *game)
 	game->needs_render = false;
 	game->last_frame_time = current_time;
 }
-
 int	render_img(t_game *game)
 {
 	render_map(game);
 	render_raycast(game);
+	draw_crosshair(game);
 	return (0);
 }

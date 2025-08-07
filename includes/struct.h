@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/07 16:42:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/07 16:49:48 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define FOV 1.5533
+# define MOUSE_SENSITIVITY 0.002
 /* 89 degrees in radians. For Norm compliance */
 # define MAX_ELEVATION 0.8727
 /* 50 degrees in radians. Maximum up/down look angle */
