@@ -1,36 +1,49 @@
 #include "../includes/raycasting.h"
 
-// Function to perform the DDA (Digital Differential Analyzer) algorithm to find the first wall hit
-
-static void perform_dda(t_ray *ray, t_game *game)
+// DDA: 记录门和墙
+static void perform_dda_with_door(t_ray *wall_ray, t_ray *door_ray, t_game *game)
 {
-	while (!ray->hit)
+	bool door_found = false;
+
+	while (1)
 	{
-		if (ray->side_x < ray->side_y)
+		if (wall_ray->side_x < wall_ray->side_y)
 		{
-			ray->side_x += ray->delta_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
+			wall_ray->side_x += wall_ray->delta_x;
+			wall_ray->map_x += wall_ray->step_x;
+			wall_ray->side = 0;
 		}
 		else
 		{
-			ray->side_y += ray->delta_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
+			wall_ray->side_y += wall_ray->delta_y;
+			wall_ray->map_y += wall_ray->step_y;
+			wall_ray->side = 1;
 		}
-		
-		char tile = game->map.map[ray->map_y][ray->map_x];
-		if (tile == TILE_WALL || tile == HORIZ_DOOR || tile == VERTI_DOOR)
+
+		char tile = game->map.map[wall_ray->map_y][wall_ray->map_x];
+
+		// 第一次遇到门就记录
+		if (!door_found && (tile == HORIZ_DOOR || tile == VERTI_DOOR))
 		{
-			ray->hit = 1;
-			ray->hit_tile = tile;
+			*door_ray = *wall_ray; // 复制当前射线状态
+			door_ray->hit = 1;
+			door_ray->hit_tile = tile;
+			door_found = true;
+			// 不 break，继续找墙
+		}
+
+		// 碰到墙就结束
+		if (tile == TILE_WALL)
+		{
+			wall_ray->hit = 1;
+			wall_ray->hit_tile = tile;
+			break;
 		}
 	}
 }
 
-// Function to compute the projection of the ray onto the screen
-
-static void	compute_projection(t_ray *ray, t_game *game)
+// 计算投影
+static void compute_projection(t_ray *ray, t_game *game)
 {
 	if (ray->side == 0)
 		ray->perp_dist = (ray->map_x - game->curr_x + (1 - ray->step_x) / 2.0) / ray->dir_x;
@@ -41,9 +54,8 @@ static void	compute_projection(t_ray *ray, t_game *game)
 	ray->draw_end = fmin(MAX_HEIGHT - 1, ray->line_height / 2 + MAX_HEIGHT / 2 + game->view_elevation);
 }
 
-// Function to compute the texture coordinates based on the ray's side and direction
-
-static void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
+// 计算纹理坐标
+static void compute_texture(t_ray *ray, t_game *game, t_image **tex)
 {
 	double wall_x;
 
@@ -58,15 +70,14 @@ static void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 }
 
-// Function to draw a textured column based on the ray's projection and texture
-
-static void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
+// 绘制纹理列
+static void draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 {
 	double	step;
 	double	tex_pos;
 	int		y;
 	char	*pixel;
-	int		color;
+	unsigned int	color;
 
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
 	tex_pos = (ray->draw_start - (MAX_HEIGHT / 2 + game->view_elevation) + ray->line_height / 2) * step;
@@ -74,21 +85,32 @@ static void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 	while (y < ray->draw_end)
 	{
 		tex_pos += step;
-		pixel = tex->addr + ((((int)tex_pos) & (TEX_HEIGHT - 1)) * tex->line_len + ray->tex_x * (tex->bpp / 8));
+		pixel = tex->addr
+			+ ((((int)tex_pos) & (TEX_HEIGHT - 1)) * tex->line_len
+			+ ray->tex_x * (tex->bpp / 8));
 		color = *(unsigned int *)pixel;
-		put_pixel(&game->img, x, y, color);
+		if (color != tex->transparent_color)
+			put_pixel(&game->img, x, y, color);
 		y++;
 	}
 }
 
 void render_column(t_game *game, int x)
 {
-	t_ray	ray;
+	t_ray	wall_ray;
+	t_ray	door_ray;
 	t_image	*tex;
 
-	init_ray(&ray, game, x);
-	perform_dda(&ray, game);
-	compute_projection(&ray, game);
-	compute_texture(&ray, game, &tex);
-	draw_textured_column(game, &ray, tex, x);
+	init_ray(&wall_ray, game, x);
+	door_ray.hit = 0;
+	perform_dda_with_door(&wall_ray, &door_ray, game);
+	compute_projection(&wall_ray, game);
+	compute_texture(&wall_ray, game, &tex);
+	draw_textured_column(game, &wall_ray, tex, x);
+	if (door_ray.hit)
+	{
+		compute_projection(&door_ray, game);
+		compute_texture(&door_ray, game, &tex);
+		draw_textured_column(game, &door_ray, tex, x);
+	}
 }

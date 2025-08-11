@@ -6,7 +6,7 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/07 09:36:44 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/11 12:47:30 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define TILE_SIZE 64.0
 # define PLAYER_SIZE 16.0
 # define PLAYER_RADIUS 24.0
-# define MAX_DOOR_FRAMES 21
+# define MAX_DOOR_FRAMES 8
 # define DOOR_ANIM_SPEED 0.1
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
@@ -91,6 +91,7 @@ typedef struct s_image
 	int		bpp;
 	int		line_len;
 	int		endian;
+	unsigned int transparent_color;
 }	t_image;
 
 typedef struct s_texture
@@ -102,6 +103,7 @@ typedef struct s_texture
 	void	*sky;
 	void	*floor;
 	t_image	**door_frames;
+	t_image *current_door_frames;
 	int		door_frame_count;
 }	t_texture;
 

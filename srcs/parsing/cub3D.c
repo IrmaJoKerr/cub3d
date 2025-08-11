@@ -6,7 +6,7 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 09:28:38 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:09:09 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,30 +58,33 @@ int	check_valid_file_path(const char *path)
 
 void	load_texture(t_game *game, t_image *tex, char *path)
 {
-	int width, height;
+    int width, height;
 
-	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
-	if (!tex->img_ptr)
-	{
-		ft_fprintf(2, "Texture load failed: %s\n", path);
-		exit(1);
-	}
-	if (width != TEX_WIDTH || height != TEX_HEIGHT)
-	{
-		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
-		exit(1);
-	}
-	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+    tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
+    if (!tex->img_ptr)
+    {
+        ft_fprintf(2, "Texture load failed: %s\n", path);
+        exit(1);
+    }
+    if (width != TEX_WIDTH || height != TEX_HEIGHT)
+    {
+        ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
+        exit(1);
+    }
+    tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+    tex->transparent_color = 0xFF000000;
 }
+
+
 
 int	count_door_textures(void)
 {
 	int count = 0;
 	char path[256];
-
+	
 	while (count < MAX_DOOR_FRAMES)
 	{
-		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", count);
+		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", count);
 		if (!check_valid_file_path(path))
 			break ;
 		count++;
@@ -106,7 +109,7 @@ void	load_all_door_textures(t_game *game)
 	
 	for (i = 0; i < door_count; i++)
 	{
-		snprintf(path, sizeof(path), "textures/doors/doors_%02d.xpm", i);
+		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", i);
 		game->textures.door_frames[i] = malloc(sizeof(t_image));
 		if (!game->textures.door_frames[i])
 		{
@@ -118,6 +121,12 @@ void	load_all_door_textures(t_game *game)
 	
 	game->textures.door_frame_count = door_count;
 	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
+}
+void	cleanup_framebuffer(t_game *game)
+{
+	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
+	game->img.img_ptr = NULL;
+	game->img.addr = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -201,4 +210,12 @@ void	init_game(t_game *game, const char *map_file)
 	init_doors_from_map(game);
 	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
 	set_player_to_tile_center(game, game->curr_x, game->curr_y);
+	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
+	if (!game->img.img_ptr)
+	{
+		fprintf(stderr, "Error: mlx_new_image failed\n");
+		exit(EXIT_FAILURE);
+	}
+	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
+									   &game->img.line_len, &game->img.endian);
 }

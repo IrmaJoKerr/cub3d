@@ -6,7 +6,7 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 10:37:33 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:30:52 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		if (is_valid_world_position(game, new_x, new_y))
-		{		game->curr_x = new_x;
-		game->curr_y = new_y;
-		fprintf(stdout, "W key: Moving forward to (%.2f, %.2f) "
-			"- tile (%d, %d)\n", new_x, new_y, world_to_tile_x(new_x),
-			world_to_tile_y(new_y));
+		{	
+			game->curr_x = new_x;
+			game->curr_y = new_y;
+			fprintf(stdout, "W key: Moving forward to (%.2f, %.2f) "
+				"- tile (%d, %d)\n", new_x, new_y, world_to_tile_x(new_x),
+				world_to_tile_y(new_y));
 		}
 		else
 			fprintf(stdout, "W key: Movement blocked by wall at tile (%d, %d)\n",
@@ -129,14 +130,14 @@ int	handle_rotation_keys(int keycode, t_game *game)
 	else if (keycode == XK_Up || keycode == 0xff52)
 	{
 		game->view_elevation += 10;
-		// game->view_elevation = clamp_elevation(game->view_elevation);
+		game->view_elevation = clamp_elevation(game->view_elevation);
 		fprintf(stdout, "Up Arrow: Looking up (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}
 	else if (keycode == XK_Down || keycode == 0xff54)
 	{
 		game->view_elevation -= 10;
-		// game->view_elevation = clamp_elevation(game->view_elevation);
+		game->view_elevation = clamp_elevation(game->view_elevation);
 		fprintf(stdout, "Down Arrow: Looking down (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}
@@ -212,12 +213,8 @@ int handle_mouse_move(int x, int y, t_game *game)
 	{
 		game->view_direction -= delta_x * MOUSE_SENSITIVITY;
 		game->view_direction = normalize_angle(game->view_direction);
-		game->view_elevation -= delta_y * MOUSE_SENSITIVITY * 160;
-
-		fprintf(stdout, "Mouse moved: dx=%d dy=%d -> angle=%.3f, elevation=%.3f\n",
-			delta_x, delta_y, game->view_direction, game->view_elevation);
-		
-		// Reset mouse to center
+		game->view_elevation -= delta_y * MOUSE_SENSITIVITY * 180;
+		game->view_elevation = clamp_elevation(game->view_elevation);
 		mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
 	}
 	mlx_mouse_hide(game->mlx_ptr, game->win_ptr);

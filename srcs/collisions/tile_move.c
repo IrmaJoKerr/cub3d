@@ -6,7 +6,7 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 09:29:52 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:44:34 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,6 @@ Convert world Y coordinate to tile row index
 int	world_to_tile_y(double y)
 {
 	return ((int)(y / TILE_SIZE));
-}
-
-/*
-Convert tile column index to world X coordinate (left edge of tile)
-*/
-double	tile_to_world_x(int tile_x)
-{
-	return ((double)tile_x * TILE_SIZE);
-}
-
-/*
-Convert tile row index to world Y coordinate (top edge of tile)
-*/
-double	tile_to_world_y(int tile_y)
-{
-	return ((double)tile_y * TILE_SIZE);
 }
 
 /*
@@ -152,9 +136,9 @@ Clamp elevation angle to reasonable range (-π/2 to π/2)
 */
 double	clamp_elevation(double elevation)
 {
-	if (elevation > M_PI / 2)
-		return (M_PI / 2);
-	if (elevation < -M_PI / 2)
-		return (-M_PI / 2);
+	if (elevation > 289)
+		return (289);
+	if (elevation < -289)
+		return (-289);
 	return (elevation);
 }

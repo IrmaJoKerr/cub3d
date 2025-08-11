@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/26 14:36:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/11 07:17:30 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,18 @@ t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ra
 	return (game->textures.north_wall); // fallback
 }
 
-t_image	*get_door_texture(t_game *game, int door_id, int animation_frame)
+t_image	*get_door_texture(t_game *game, int door_id)
 {
 	if (door_id < 0 || door_id >= game->doorcount)
 		return (game->textures.door_frames[0]); // fallback
-		
-	if (animation_frame < 0 || animation_frame >= game->textures.door_frame_count)
-		animation_frame = 0;
-		
-	return (game->textures.door_frames[animation_frame]);
+
+	t_door *door = &game->doors[door_id];
+	int frame = door->animation_frame;
+
+	if (frame < 0 || frame >= game->textures.door_frame_count)
+		frame = 0;
+
+	return (game->textures.door_frames[frame]);
 }
 
 void	cleanup_door_frames(t_game *game)
@@ -142,16 +145,6 @@ void	cleanup_door_frames(t_game *game)
 		free(game->doors);
 		game->doors = NULL;
 	}
-}
-
-// Legacy compatibility functions
-int	load_door_animation_frames(t_game *game, const char *hdoor_path, const char *vdoor_path)
-{
-	(void)game;
-	(void)hdoor_path;
-	(void)vdoor_path;
-	// Door textures are now loaded by default in load_all_door_textures()
-	return (1);
 }
 
 void	*get_door_frame(t_game *game, char door_type, int frame_index)

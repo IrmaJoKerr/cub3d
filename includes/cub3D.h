@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/11 14:00:50 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,6 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Door utility functions. In execution/door_utils.c
-*/
-void	init_doors_from_map(t_game *game);
-int		get_door_id(t_game *game, int x, int y);
-t_image	*get_door_texture(t_game *game, int door_id, int frame);
-t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ray_dir_x, double ray_dir_y);
-
-/*
 Movement and collision functions. In collisions/movehero.c
 */
 int		is_collision(double player_x, double player_y, double obj_x,
@@ -104,8 +96,6 @@ Tile movement calculation functions. In collisions/tile_move.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
-double	tile_to_world_x(int tile_x);
-double	tile_to_world_y(int tile_y);
 double	tile_center_x(int tile_x);
 double	tile_center_y(int tile_y);
 double	calc_move_dx(double view_direction, double speed, int forward);

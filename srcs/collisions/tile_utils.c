@@ -6,42 +6,20 @@
 /*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 09:30:41 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:05:41 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
 /*
-Get the tile character at a world position
-Returns the character at the tile position, or '1' (wall) if out of bounds
-*/
-int	get_tile_at_position(t_game *game, double x, double y)
-{
-	int	tile_x;
-	int	tile_y;
-
-	tile_x = world_to_tile_x(x);
-	tile_y = world_to_tile_y(y);
-	if (tile_x < 0 || tile_x >= game->map.max_cols || 
-		tile_y < 0 || tile_y >= game->map.max_rows)
-		return (TILE_WALL);
-	return (game->map.map[tile_y][tile_x]);
-}
-
-/*
 Check if a world position is valid (not a wall and within bounds)
 */
 bool	is_valid_world_position(t_game *game, double x, double y)
 {
-	(void)game; // Prevent unused variable warning
-	(void)x; // Prevent unused variable warning
-	(void)y; // Prevent unused variable warning
-	return true; // Temporary: always return true for now
-	// int	tile_char;
-
-	// tile_char = get_tile_at_position(game, x, y);
-	// return (tile_char != TILE_WALL);
+	if (game->map.map[(int)y][(int)x] == TILE_WALL)
+		return (false);
+	return (true);
 }
 
 /*
