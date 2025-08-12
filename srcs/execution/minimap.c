@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:34:20 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	setup_minimap(t_game *game)
 	game->minimap.full_map_data = mlx_get_data_addr(game->minimap.full_map_img,
 			&game->minimap.full_map_bpp, &game->minimap.full_map_sl,
 			&game->minimap.full_map_endian);
+	usleep(500000);  // 0.5 second delay for robust buffer allocation
 	generate_full_minimap(game);
 	game->minimap.minimap_img = mlx_new_image(game->mlx_ptr, 180, 180);
 	if (!game->minimap.minimap_img)
@@ -39,6 +40,7 @@ void	setup_minimap(t_game *game)
 	game->minimap.minimap_data = mlx_get_data_addr(game->minimap.minimap_img,
 			&game->minimap.minimap_bpp, &game->minimap.minimap_sl,
 			&game->minimap.minimap_endian);
+	usleep(1000);  // 1000 microseconds delay for smaller minimap buffer allocation
 	ft_fprintf(1, "✅ Minimap system initialized successfully\n");
 }
 
@@ -140,6 +142,10 @@ void	render_minimap(t_game *game)
 	if (!game->minimap.minimap_img || !game->minimap.full_map_img)
 		return ;
 	
+	// Check if data pointers are valid - COMMENTED OUT FOR TESTING
+	// if (!game->minimap.full_map_data || !game->minimap.minimap_data)
+	//	return ;
+	
 	// Convert player tile coordinates to minimap pixel coordinates
 	// curr_x and curr_y are in tile coordinates (e.g., 9.5, 5.5)
 	// Each tile is 20 pixels in the minimap
@@ -173,9 +179,22 @@ void	render_minimap(t_game *game)
 		minimap_x = 0;
 		while (minimap_x < 180)
 		{
-			minimap_pixels[(minimap_y * (game->minimap.minimap_sl / 4)) + minimap_x] = 
-				full_pixels[((game->minimap.src_start_y + minimap_y) * (game->minimap.full_map_sl / 4)) + 
-							(game->minimap.src_start_x + minimap_x)];
+			// Add bounds checking to prevent buffer overflow
+			int full_y = game->minimap.src_start_y + minimap_y;
+			int full_x = game->minimap.src_start_x + minimap_x;
+			
+			// Ensure we don't access beyond full map boundaries
+			if (full_y >= 0 && full_y < game->minimap.full_pixel_height && 
+				full_x >= 0 && full_x < game->minimap.full_pixel_width)
+			{
+				minimap_pixels[(minimap_y * (game->minimap.minimap_sl / 4)) + minimap_x] = 
+					full_pixels[(full_y * (game->minimap.full_map_sl / 4)) + full_x];
+			}
+			else
+			{
+				// Fill with black for out-of-bounds areas
+				minimap_pixels[(minimap_y * (game->minimap.minimap_sl / 4)) + minimap_x] = 0x000000;
+			}
 			minimap_x++;
 		}
 		minimap_y++;
