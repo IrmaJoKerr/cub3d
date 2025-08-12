@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 13:48:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,27 +58,30 @@ int	check_valid_file_path(const char *path)
 
 void	load_texture(t_game *game, t_image *tex, char *path)
 {
-	int width, height;
+    int width, height;
 
-	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
-	if (!tex->img_ptr)
-	{
-		ft_fprintf(2, "Texture load failed: %s\n", path);
-		exit(1);
-	}
-	if (width != TEX_WIDTH || height != TEX_HEIGHT)
-	{
-		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
-		exit(1);
-	}
-	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+    tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
+    if (!tex->img_ptr)
+    {
+        ft_fprintf(2, "Texture load failed: %s\n", path);
+        exit(1);
+    }
+    if (width != TEX_WIDTH || height != TEX_HEIGHT)
+    {
+        ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
+        exit(1);
+    }
+    tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+    tex->transparent_color = 0xFF000000;
 }
+
+
 
 int	count_door_textures(void)
 {
 	int count = 0;
 	char path[256];
-
+	
 	while (count < MAX_DOOR_FRAMES)
 	{
 		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", count);
@@ -91,17 +94,19 @@ int	count_door_textures(void)
 
 void	load_all_door_textures(t_game *game)
 {
-	int		i;
-	char	path[256];
-	int		door_count;
-
+	int i;
+	char path[256];
+	int door_count;
+	
 	door_count = count_door_textures();
 	if (door_count == 0)
 	{
 		ft_fprintf(2, "Error: No door textures found in textures/doors/\n");
 		exit(1);
 	}
+	
 	ft_fprintf(1, "Loading %d door textures...\n", door_count);
+	
 	for (i = 0; i < door_count; i++)
 	{
 		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", i);
@@ -113,8 +118,15 @@ void	load_all_door_textures(t_game *game)
 		}
 		load_texture(game, game->textures.door_frames[i], path);
 	}
+	
 	game->textures.door_frame_count = door_count;
 	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
+}
+void	cleanup_framebuffer(t_game *game)
+{
+	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
+	game->img.img_ptr = NULL;
+	game->img.addr = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -149,12 +161,27 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_early(game);
 		exit(EXIT_FAILURE);
 	}
-	game->view_direction = game->map.start_direction * M_PI / 180.0;
-	// fprintf(2, "Player initial direction: %d degrees (%.3f radians)\n", 
-	//	game->map.start_direction, game->view_direction);
-
-	// ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
-	// ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
+	
+	/*
+	** ================================================================
+	** TEMPORARY EXIT - REMOVE WHEN IMPLEMENTING RAYCASTER ENGINE
+	** ================================================================
+	** 
+	** This exit is placed here to allow clean termination after 
+	** successful map validation, without entering the MLX game loop.
+	** 
+	** Once the raycaster engine is implemented, remove this entire
+	** TEMPORARY EXIT REMOVED - PROGRAM NOW CONTINUES TO RAYCASTER
+	** ================================================================
+	*/
+	ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
+	ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
+	
+	/*
+	** ================================================================
+	** MLX INITIALIZATION CODE - NOW EXECUTING NORMALLY
+	** ================================================================
+	*/
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{
@@ -171,19 +198,28 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_later(game);
 		exit(EXIT_FAILURE);
 	}
-	ft_fprintf(1, "Loading wall textures...\n");
-	ft_fprintf(1, "  NO: %s\n", game->map.north_texture_path);
 	load_texture(game, game->textures.north_wall, game->map.north_texture_path);
-	ft_fprintf(1, "  SO: %s\n", game->map.south_texture_path);
 	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
-	ft_fprintf(1, "  EA: %s\n", game->map.east_texture_path);
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
-	ft_fprintf(1, "  WE: %s\n", game->map.west_texture_path);
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
-	ft_fprintf(1, "✅ Wall textures loaded successfully\n");
+	
+	// Load door textures by default
 	load_all_door_textures(game);
+	
+	// Initialize doors from map
 	init_doors_from_map(game);
+	
+	// Initialize minimap system
 	setup_minimap(game);
+	
 	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
 	set_player_to_tile_center(game, game->curr_x, game->curr_y);
+	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
+	if (!game->img.img_ptr)
+	{
+		fprintf(stderr, "Error: mlx_new_image failed\n");
+		exit(EXIT_FAILURE);
+	}
+	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
+									   &game->img.line_len, &game->img.endian);
 }

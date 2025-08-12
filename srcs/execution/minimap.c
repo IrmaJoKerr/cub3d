@@ -140,9 +140,11 @@ void	render_minimap(t_game *game)
 	if (!game->minimap.minimap_img || !game->minimap.full_map_img)
 		return ;
 	
-	// Convert EXACT player position to minimap pixel coordinates (continuous)
-	player_pixel_x = (game->curr_x / TILE_SIZE) * 20.0;  // Exact position
-	player_pixel_y = (game->curr_y / TILE_SIZE) * 20.0;  // Exact position
+	// Convert player tile coordinates to minimap pixel coordinates
+	// curr_x and curr_y are in tile coordinates (e.g., 9.5, 5.5)
+	// Each tile is 20 pixels in the minimap
+	player_pixel_x = game->curr_x * 20.0;
+	player_pixel_y = game->curr_y * 20.0;
 	
 	// Calculate viewport extraction area (center 180x180 on player - continuous)
 	game->minimap.src_start_x = (int)(player_pixel_x - 90.0);

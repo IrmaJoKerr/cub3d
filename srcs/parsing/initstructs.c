@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initstructs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 13:16:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/11 13:16:58 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	init_game_st(t_game *game)
 	game->curr_y = 0;
 	game->view_direction = 0;
 	game->view_elevation = 0;
-	game->needs_render = true;
-	game->last_frame_time = 0;
 	game->img.img_ptr = NULL;
 	game->img.addr = NULL;
 	game->img.bpp = 0;

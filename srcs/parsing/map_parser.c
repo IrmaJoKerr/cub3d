@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 10:43:58 by bleow            ###   ########.fr       */
+/*   Updated: 2025/07/16 16:11:03 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,8 +302,8 @@ void	find_player_position(t_game *game)
 			{
 				game->map.player_x = x;
 				game->map.player_y = y;
-				game->curr_x = tile_center_x(x);
-				game->curr_y = tile_center_y(y);
+				game->curr_x = x;
+				game->curr_y = y;
 				if (game->map.map[y][x] == 'N')
 					game->map.start_direction = N;
 				else if (game->map.map[y][x] == 'E')

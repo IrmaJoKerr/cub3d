@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:34:42 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 09:34:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/11 14:09:31 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Cleanup function to free memory and exit the program.
 */
 void	cleanup(t_game *game)
 {
-	usleep(1000000);
+	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
 	cleanup_mlx_textures(game);
 	cleanup_mlx_system(game);
 	cleanup_texture_paths(game);

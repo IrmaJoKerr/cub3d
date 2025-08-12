@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 15:41:55 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/11 07:17:30 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,12 @@ void	init_doors_from_map(t_game *game)
 		{
 			if (game->map.map[y][x] == HORIZ_DOOR || game->map.map[y][x] == VERTI_DOOR)
 			{
-				printf("🔍 FOUND DOOR: '%c' at tile (%d, %d)\n", game->map.map[y][x], x, y);
 				game->doors[door_index].x = x;
 				game->doors[door_index].y = y;
 				game->doors[door_index].type = game->map.map[y][x];
 				game->doors[door_index].state = DOOR_CLOSED;
 				game->doors[door_index].openness = 0.0;
 				game->doors[door_index].animation_frame = 0;
-				game->doors[door_index].last_attempt_time = 0;
-				game->doors[door_index].last_attempt_x = -1000.0;
-				game->doors[door_index].last_attempt_y = -1000.0;
-				game->doors[door_index].last_attempt_from_x = -1000.0;
-				game->doors[door_index].last_attempt_from_y = -1000.0;
 				door_index++;
 			}
 			x++;
@@ -72,10 +66,6 @@ void	init_doors_from_map(t_game *game)
 	}
 	
 	ft_fprintf(1, "✅ Initialized %d doors from map\n", game->doorcount);
-	
-	// Debug: Print map again after door initialization to check if doors are still there
-	fprintf(stderr, "\n🚪 MAP AFTER DOOR INITIALIZATION:\n");
-	debug_print_map(game);
 }
 
 int	get_door_id(t_game *game, int x, int y)
@@ -115,15 +105,18 @@ t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ra
 	return (game->textures.north_wall); // fallback
 }
 
-t_image	*get_door_texture(t_game *game, int door_id, int animation_frame)
+t_image	*get_door_texture(t_game *game, int door_id)
 {
 	if (door_id < 0 || door_id >= game->doorcount)
 		return (game->textures.door_frames[0]); // fallback
-		
-	if (animation_frame < 0 || animation_frame >= game->textures.door_frame_count)
-		animation_frame = 0;
-		
-	return (game->textures.door_frames[animation_frame]);
+
+	t_door *door = &game->doors[door_id];
+	int frame = door->animation_frame;
+
+	if (frame < 0 || frame >= game->textures.door_frame_count)
+		frame = 0;
+
+	return (game->textures.door_frames[frame]);
 }
 
 void	cleanup_door_frames(t_game *game)
@@ -152,16 +145,6 @@ void	cleanup_door_frames(t_game *game)
 		free(game->doors);
 		game->doors = NULL;
 	}
-}
-
-// Legacy compatibility functions
-int	load_door_animation_frames(t_game *game, const char *hdoor_path, const char *vdoor_path)
-{
-	(void)game;
-	(void)hdoor_path;
-	(void)vdoor_path;
-	// Door textures are now loaded by default in load_all_door_textures()
-	return (1);
 }
 
 void	*get_door_frame(t_game *game, char door_type, int frame_index)

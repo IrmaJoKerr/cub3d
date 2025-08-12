@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 14:15:15 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,12 @@ void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
 void	cleanup_single_map(char ***map_ptr);
-void	cleanup_minimap(t_game *game);
 
 /*
 Map utility functions. In map_utils.c
 */
 char	**copy_map_array(char **source_map, int rows);
-// void	cleanup_single_map(char ***map_ptr);  // DUPLICATE - COMMENTED OUT FOR TESTING
+void	cleanup_single_map(char ***map_ptr);
 
 /*
 Initialization functions. In initstructs.c
@@ -78,46 +77,35 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Door utility functions. In execution/door_utils.c
-*/
-void	init_doors_from_map(t_game *game);
-int		get_door_id(t_game *game, int x, int y);
-t_image	*get_door_texture(t_game *game, int door_id, int frame);
-t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ray_dir_x, double ray_dir_y);
-
-/*
 Movement and collision functions. In collisions/movehero.c
 */
-// int		is_collision(double player_x, double player_y, double obj_x,
-//			double obj_y);  // ORPHANED - NEVER CALLED - COMMENTED OUT FOR TESTING
+int		is_collision(double player_x, double player_y, double obj_x,
+			double obj_y);
 
 /*
 Tile coordinate utility functions. In tile_utils.c
 */
 int		get_tile_at_position(t_game *game, double x, double y);
-/*
-Tile/collision utility functions. In collisions/tile_utils.c
-*/
 bool	is_valid_world_position(t_game *game, double x, double y);
 void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
+double	get_tile_center_x(int tile_x);
+double	get_tile_center_y(int tile_y);
 
 /*
 Tile movement calculation functions. In collisions/tile_move.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
-double	tile_to_world_x(int tile_x);
-double	tile_to_world_y(int tile_y);
 double	tile_center_x(int tile_x);
 double	tile_center_y(int tile_y);
 double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
-// bool	is_within_map_bounds(t_game *game, double x, double y);  // ORPHANED - NEVER CALLED - COMMENTED OUT FOR TESTING
+bool	is_within_map_bounds(t_game *game, double x, double y);
 double	calc_distance(double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
-// double	clamp_elevation(double elevation);  // ORPHANED - ONLY COMMENTED OUT CALLS - COMMENTED OUT FOR TESTING
+double	clamp_elevation(double elevation);
 
 /*
 Door animation utility functions. In door_utils.c
@@ -126,36 +114,6 @@ int		load_door_animation_frames(t_game *game, const char *hdoor_path,
 			const char *vdoor_path);
 void	*get_door_frame(t_game *game, char door_type, int frame_index);
 void	cleanup_door_frames(t_game *game);
-
-/*
-Door animation functions. In execution/door_animation.c
-*/
-void	update_door_animations(t_game *game);
-void	update_single_door(t_game *game, t_door *door);
-int		is_player_attempting_entry(t_game *game, t_door *door);
-void	store_door_attempt(t_game *game, double x, double y);
-void	open_door(t_door *door);
-void	close_door(t_door *door);
-
-/*
-Timing functions. In execution/raycasting_setup.c
-*/
-long	get_current_time_ms(void);
-
-/*
-Minimap functions. In execution/minimap.c
-*/
-void	render_minimap(t_game *game);
-void	setup_minimap(t_game *game);
-void	load_minimap_tiles(t_game *game);
-void	generate_full_minimap(t_game *game);
-void	draw_minimap_border(t_game *game);
-void	draw_triangle_player_indicator(t_game *game, int center_x, int center_y);
-
-/*
-Enhanced collision detection. In collisions/tile_utils.c
-*/
-bool	is_door_closed(t_game *game, int tile_x, int tile_y);
 
 /*
 Path parsing functions. In parse_path.c
@@ -215,5 +173,16 @@ int		handle_window_close(t_game *game);
 int		handle_movement_keys(int keycode, t_game *game);
 int		handle_rotation_keys(int keycode, t_game *game);
 int		setup_event_hooks(t_game *game);
+
+/*
+Minimap functions. In minimap.c
+*/
+void	setup_minimap(t_game *game);
+void	load_minimap_tiles(t_game *game);
+void	generate_full_minimap(t_game *game);
+void	render_minimap(t_game *game);
+void	draw_minimap_border(t_game *game);
+void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
+void	cleanup_minimap(t_game *game);
 
 #endif

@@ -1,65 +1,73 @@
 #include "../includes/raycasting.h"
-#include "../includes/cub3D.h"
-#include <sys/time.h>
-
-// Get current time in milliseconds
-long get_current_time_ms(void)
-{
-	struct timeval tv;
-	gettimeofday(&tv, NULL);
-	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
+#include "../../includes/cub3D.h"
 
 void	render_raycast(t_game *game)
 {
 	int x;
-	static int frame_count = 0;
-
-	// Only render if something actually changed
-	if (!game->needs_render)
-		return;
-		
-	// Check frame rate limit AFTER deciding to render
-	long current_time = get_current_time_ms();
-	if (current_time - game->last_frame_time < 16) // 60 FPS limit
-		return;
 
 	x = 0;
-	// Create image buffer only once, reuse for all subsequent frames
-	if (!game->img.img_ptr)
-	{
-		game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
-		game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
-										   &game->img.line_len, &game->img.endian);
-	}
-									   
-	// Debug: Print render info every 60 frames to avoid spam
-	if (frame_count % 60 == 0) {
-		// printf("DEBUG RENDER[frame %d]: Rendering from player pos (%.2f, %.2f), view_angle %.3f\n", 
-		//	frame_count, game->curr_x, game->curr_y, game->view_direction);
-	}
-	frame_count++;
-	
-	// Update door animations
-	update_door_animations(game);
-	
-	// Render complete frame to buffer BEFORE displaying
 	fill_sky_and_floor(game);
 	while (x < MAX_WIDTH)
 		render_column(game, x++);
-		
-	// Only display after complete frame is rendered
 	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
-	
-	// Mark frame as rendered
-	game->needs_render = false;
-	game->last_frame_time = current_time;
+	render_minimap(game);
 }
+
+void draw_crosshair(t_game *game)
+{
+	int cx = MAX_WIDTH / 2;
+	int cy = MAX_HEIGHT / 2;
+	int size = 10;
+
+	// Horizontal line
+	for (int dx = -size; dx <= size; dx++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx + dx, cy, 0xFFFFFF);
+
+	// Vertical line
+	for (int dy = -size; dy <= size; dy++)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx, cy + dy, 0xFFFFFF);
+}
+
+void update_doors(t_game *game)
+{
+    for (int i = 0; i < game->doorcount; i++)
+    {
+        t_door *door = &game->doors[i];
+
+        double dx = door->x - game->curr_x;
+        double dy = door->y - game->curr_y;
+        double dist_sq = dx * dx + dy * dy;
+        bool near_enough = dist_sq < 7;
+        if (door->state == DOOR_CLOSED && near_enough)
+            door->state = DOOR_OPENING;
+        else if (door->state == DOOR_OPEN && !near_enough)
+            door->state = DOOR_CLOSING;
+        if (door->state == DOOR_OPENING)
+        {
+            door->openness += DOOR_ANIM_SPEED;
+            if (door->openness >= 1.0)
+            {
+                door->openness = 1.0;
+                door->state = DOOR_OPEN;
+            }
+        }
+        else if (door->state == DOOR_CLOSING)
+        {
+            door->openness -= DOOR_ANIM_SPEED;
+            if (door->openness <= 0.0)
+            {
+                door->openness = 0.0;
+                door->state = DOOR_CLOSED;
+            }
+        }
+        door->animation_frame = (int)(door->openness * (game->textures.door_frame_count - 1));
+    }
+}
+
 int	render_img(t_game *game)
 {
-	// render_map(game);
 	render_raycast(game);
-	render_minimap(game);  // Add minimap rendering
-	// draw_crosshair(game);
+	update_doors(game);
+	draw_crosshair(game);
 	return (0);
 }
