@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_a.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:34:42 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/11 14:09:31 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		close_window(t_game *game);
 void	cleanup_early(t_game *game);
 void	cleanup_later(t_game *game);
 void	cleanup(t_game *game);
+void	cleanup_texture_structures(t_game *game);
 
 /*
 Cleanup function to free memory and exit the program.
@@ -47,11 +48,13 @@ int	close_window(t_game *game)
 /*
 Cleanup if error before mlx initialization.
 Enhanced to handle map array cleanup for validation failures.
+Fixed: Now properly frees texture structures allocated in init_texture_st().
 */
 void	cleanup_early(t_game *game)
 {
 	cleanup_texture_paths(game);
 	cleanup_map_array(game);
+	cleanup_texture_structures(game);
 	ft_safefree((void **)&game);
 	exit(1);
 }

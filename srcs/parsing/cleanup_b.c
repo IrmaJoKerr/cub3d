@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 23:51:28 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,40 @@ void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
 void	clean_wall_textures(t_game *game);
+
+/*
+Helper function to cleanup texture structures allocated during initialization.
+This function handles the memory allocated in init_texture_st() that is not
+dependent on MLX system initialization.
+*/
+void	cleanup_texture_structures(t_game *game)
+{
+	if (game->textures.north_wall)
+	{
+		free(game->textures.north_wall);
+		game->textures.north_wall = NULL;
+	}
+	if (game->textures.south_wall)
+	{
+		free(game->textures.south_wall);
+		game->textures.south_wall = NULL;
+	}
+	if (game->textures.east_wall)
+	{
+		free(game->textures.east_wall);
+		game->textures.east_wall = NULL;
+	}
+	if (game->textures.west_wall)
+	{
+		free(game->textures.west_wall);
+		game->textures.west_wall = NULL;
+	}
+	if (game->textures.door_frames)
+	{
+		free(game->textures.door_frames);
+		game->textures.door_frames = NULL;
+	}
+}
 
 /*
 Helper function to cleanup all texture paths.
