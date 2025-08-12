@@ -47,7 +47,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 		if (len == 0)
 		{
 			free(line);
-			break ;
+			continue ;
 		}
 		if (!validate_map_line_chars(line))
 		{
@@ -159,11 +159,25 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			free(line);
 		line_num++;
 	}
-	while (map_row < game->map.max_rows && (line = get_next_line(fd)) != NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
+		
+		// Skip empty lines and whitespace-only lines but continue reading
+		if (ft_strlen(line) == 0 || is_only_whitespace(line))
+		{
+			free(line);
+			continue;
+		}
+		
+		// Stop when we have enough rows
+		if (map_row >= game->map.max_rows)
+		{
+			free(line);
+			break;
+		}
 		// Allocate memory for the row using max_cols for uniform sizing
 		game->map.map[map_row] = (char *)malloc(game->map.max_cols + 1);
 		if (!game->map.map[map_row])
