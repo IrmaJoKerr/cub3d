@@ -95,10 +95,10 @@ void	generate_full_minimap(t_game *game)
 
 	full_pixels = (unsigned int *)game->minimap.full_map_data;
 	map_y = 0;
-	while (map_y < game->map.max_rows)
+	while (map_y < game->map.max_rows && game->map.map[map_y])
 	{
 		map_x = 0;
-		while (map_x < game->map.max_cols)
+		while (map_x < game->map.max_cols && game->map.map[map_y])
 		{
 			tile_type = game->map.map[map_y][map_x];
 			if (tile_type == TILE_WALL)

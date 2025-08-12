@@ -19,10 +19,10 @@ void	init_doors_from_map(t_game *game)
 	// Count doors in map
 	game->doorcount = 0;
 	y = 0;
-	while (y < game->map.max_rows)
+	while (y < game->map.max_rows && game->map.map[y])
 	{
 		x = 0;
-		while (x < game->map.max_cols)
+		while (x < game->map.max_cols && game->map.map[y])
 		{
 			if (game->map.map[y][x] == DOOR)
 				game->doorcount++;
@@ -45,10 +45,10 @@ void	init_doors_from_map(t_game *game)
 	// Initialize doors
 	door_index = 0;
 	y = 0;
-	while (y < game->map.max_rows)
+	while (y < game->map.max_rows && game->map.map[y])
 	{
 		x = 0;
-		while (x < game->map.max_cols)
+		while (x < game->map.max_cols && game->map.map[y])
 		{
 			if (game->map.map[y][x] == DOOR)
 			{
