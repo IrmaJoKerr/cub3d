@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 15:27:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 14:15:15 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
 void	cleanup_single_map(char ***map_ptr);
+void	cleanup_minimap(t_game *game);
 
 /*
 Map utility functions. In map_utils.c
@@ -140,6 +141,16 @@ void	close_door(t_door *door);
 Timing functions. In execution/raycasting_setup.c
 */
 long	get_current_time_ms(void);
+
+/*
+Minimap functions. In execution/minimap.c
+*/
+void	render_minimap(t_game *game);
+void	setup_minimap(t_game *game);
+void	load_minimap_tiles(t_game *game);
+void	generate_full_minimap(t_game *game);
+void	draw_minimap_border(t_game *game);
+void	draw_triangle_player_indicator(t_game *game, int center_x, int center_y);
 
 /*
 Enhanced collision detection. In collisions/tile_utils.c

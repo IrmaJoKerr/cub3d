@@ -57,8 +57,9 @@ void	render_raycast(t_game *game)
 }
 int	render_img(t_game *game)
 {
-	render_map(game);
+	// render_map(game);
 	render_raycast(game);
-	draw_crosshair(game);
+	render_minimap(game);  // Add minimap rendering
+	// draw_crosshair(game);
 	return (0);
 }

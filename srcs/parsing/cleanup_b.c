@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 13:53:09 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,9 +111,49 @@ void	cleanup_mlx_system(t_game *game)
 {
 	if (game->mlx_ptr)
 	{
+		cleanup_minimap(game);
 		if (game->win_ptr)
 			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		mlx_destroy_display(game->mlx_ptr);
 		ft_safefree((void **)&game->mlx_ptr);
 	}
+}
+
+/*
+Helper function to cleanup minimap system resources.
+*/
+void	cleanup_minimap(t_game *game)
+{
+	if (!game || !game->mlx_ptr)
+		return ;
+	if (game->minimap.wall.img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->minimap.wall.img_ptr);
+		game->minimap.wall.img_ptr = NULL;
+	}
+	if (game->minimap.floor.img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->minimap.floor.img_ptr);
+		game->minimap.floor.img_ptr = NULL;
+	}
+	if (game->minimap.door.img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->minimap.door.img_ptr);
+		game->minimap.door.img_ptr = NULL;
+	}
+	if (game->minimap.full_map_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
+		game->minimap.full_map_img = NULL;
+	}
+	if (game->minimap.minimap_img)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->minimap.minimap_img);
+		game->minimap.minimap_img = NULL;
+	}
+	game->minimap.full_map_data = NULL;
+	game->minimap.minimap_data = NULL;
+	game->minimap.full_pixel_width = 0;
+	game->minimap.full_pixel_height = 0;
+	ft_fprintf(1, "✅ Minimap system cleaned up\n");
 }

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/07 16:49:48 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 13:53:09 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,27 @@ typedef struct s_texture
 	int		door_frame_count;
 }	t_texture;
 
+typedef struct s_mini
+{
+	void	*full_map_img;
+	char	*full_map_data;
+	int		full_map_bpp;
+	int		full_map_sl;
+	int		full_map_endian;
+	void	*minimap_img;
+	char	*minimap_data;
+	int		minimap_bpp;
+	int		minimap_sl;
+	int		minimap_endian;
+	t_image	wall;
+	t_image	floor;
+	t_image	door;
+	int		full_pixel_width;
+	int		full_pixel_height;
+	int		src_start_x;
+	int		src_start_y;
+}	t_mini;
+
 typedef struct s_game
 {
 	void		*mlx_ptr;
@@ -138,6 +159,7 @@ typedef struct s_game
 	double		view_direction;
 	bool		needs_render;
 	long		last_frame_time;
+	t_mini		minimap;
 }	t_game;
 
 typedef struct s_ray
