@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:02:21 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	fill_sky_and_floor(t_game *game);
 t_image	*get_wall_texture(t_game *game, int side, double ray_dir_x, double ray_dir_y);
 t_image	*get_surface_texture(t_game *game, t_ray *ray, char hit_tile);
 void	initialize_deltas_and_steps(t_ray *ray, t_game *game);
-void	init_framebuffer(t_game *game);
 
 /* Door utility functions */
 void	init_doors_from_map(t_game *game);

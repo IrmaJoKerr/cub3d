@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tile_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/11 14:05:41 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,4 @@ void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y)
 	game->curr_y = tile_y + 0.5;
 	game->map.player_x = game->curr_x;
 	game->map.player_y = game->curr_y;
-}
-
-/*
-Get the world X coordinate of the center of a tile
-*/
-double	get_tile_center_x(int tile_x)
-{
-	return (tile_center_x(tile_x));
-}
-
-/*
-Get the world Y coordinate of the center of a tile
-*/
-double	get_tile_center_y(int tile_y)
-{
-	return (tile_center_y(tile_y));
 }

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,4 @@ void	cleanup_door_frames(t_game *game)
 		free(game->doors);
 		game->doors = NULL;
 	}
-}
-
-void	*get_door_frame(t_game *game, int frame_index)
-{
-	if (frame_index >= 0 && frame_index < game->textures.door_frame_count)
-		return (game->textures.door_frames[frame_index]);
-	return (game->textures.door_frames[0]);
 }

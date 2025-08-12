@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	cleanup_single_map(char ***map_ptr);
 Map utility functions. In map_utils.c
 */
 char	**copy_map_array(char **source_map, int rows);
-void	cleanup_single_map(char ***map_ptr);
 
 /*
 Initialization functions. In initstructs.c
@@ -79,8 +78,7 @@ int		is_reachable_space(char c);
 /*
 Movement and collision functions. In collisions/movehero.c
 */
-int		is_collision(double player_x, double player_y, double obj_x,
-			double obj_y);
+// File removed - contained only unused functions
 
 /*
 Tile coordinate utility functions. In tile_utils.c
@@ -88,8 +86,6 @@ Tile coordinate utility functions. In tile_utils.c
 int		get_tile_at_position(t_game *game, double x, double y);
 bool	is_valid_world_position(t_game *game, double x, double y);
 void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
-double	get_tile_center_x(int tile_x);
-double	get_tile_center_y(int tile_y);
 
 /*
 Tile movement calculation functions. In collisions/tile_move.c
@@ -102,7 +98,6 @@ double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
-bool	is_within_map_bounds(t_game *game, double x, double y);
 double	calc_distance(double x1, double y1, double x2, double y2);
 double	normalize_angle(double angle);
 double	clamp_elevation(double elevation);
@@ -110,9 +105,6 @@ double	clamp_elevation(double elevation);
 /*
 Door animation utility functions. In door_utils.c
 */
-int		load_door_animation_frames(t_game *game, const char *hdoor_path, 
-			const char *vdoor_path);
-void	*get_door_frame(t_game *game, int frame_index);
 void	cleanup_door_frames(t_game *game);
 
 /*

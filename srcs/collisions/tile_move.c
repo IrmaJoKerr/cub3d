@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tile_move.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/07 17:44:34 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,6 @@ double	calc_strafe_dy(double view_direction, double speed, int right)
 		return (-cos(view_direction) * speed);
 	else
 		return (cos(view_direction) * speed);
-}
-
-/*
-Check if a world position is within map bounds
-*/
-bool	is_within_map_bounds(t_game *game, double x, double y)
-{
-	int	tile_x;
-	int	tile_y;
-
-	tile_x = world_to_tile_x(x);
-	tile_y = world_to_tile_y(y);
-	
-	if (tile_x < 0 || tile_x >= game->map.max_cols || 
-		tile_y < 0 || tile_y >= game->map.max_rows)
-		return (false);
-	
-	return (true);
 }
 
 /*
