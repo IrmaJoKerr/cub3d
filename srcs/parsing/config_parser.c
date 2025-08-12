@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:36:37 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	handle_texture_settings(char *line, t_game *game, int settings_type)
 		return (-1);
 	}
 	path = extract_texture_path(line, identifier);
-	if (!path || !check_valid_file_path(path))
+	if (!path || !check_valid_texture_path(path))
 	{
 		ft_fprintf(2, "Error: Invalid texture path for %s: %s\n", identifier, path ? path : "NULL");
 		if (path)

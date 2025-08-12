@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 23:51:28 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void	cleanup_door_frames(t_game *game);
 Path parsing functions. In parse_path.c
 */
 void	chk_args(int argc, char **argv);
+int		validate_xmp_extension(const char *path);
+int		check_valid_texture_path(const char *path);
 
 /*
 Parser functions. In parser.c
