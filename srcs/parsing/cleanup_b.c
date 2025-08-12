@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 23:51:28 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
+void	clean_wall_textures(t_game *game);
 
 /*
 Helper function to cleanup all texture paths.
@@ -48,12 +49,42 @@ void	cleanup_map_array(t_game *game)
 {
 	size_t	map_len;
 
-	// Cleanup main map
 	if (game->map.map)
 	{
 		map_len = ft_arrlen(game->map.map);
 		ft_free_2d(game->map.map, map_len);
 		game->map.map = NULL;
+	}
+}
+
+/*
+Helper function to cleanup wall textures.
+*/
+void	clean_wall_textures(t_game *game)
+{
+	if (game->textures.north_wall && game->textures.north_wall->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.north_wall->img_ptr);
+		free(game->textures.north_wall);
+		game->textures.north_wall = NULL;
+	}
+	if (game->textures.south_wall && game->textures.south_wall->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.south_wall->img_ptr);
+		free(game->textures.south_wall);
+		game->textures.south_wall = NULL;
+	}
+	if (game->textures.east_wall && game->textures.east_wall->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.east_wall->img_ptr);
+		free(game->textures.east_wall);
+		game->textures.east_wall = NULL;
+	}
+	if (game->textures.west_wall && game->textures.west_wall->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.west_wall->img_ptr);
+		free(game->textures.west_wall);
+		game->textures.west_wall = NULL;
 	}
 }
 
@@ -64,30 +95,7 @@ void	cleanup_mlx_textures(t_game *game)
 {
 	if (game->mlx_ptr)
 	{
-		if (game->textures.north_wall && game->textures.north_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.north_wall->img_ptr);
-			free(game->textures.north_wall);
-			game->textures.north_wall = NULL;
-		}
-		if (game->textures.south_wall && game->textures.south_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.south_wall->img_ptr);
-			free(game->textures.south_wall);
-			game->textures.south_wall = NULL;
-		}
-		if (game->textures.east_wall && game->textures.east_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.east_wall->img_ptr);
-			free(game->textures.east_wall);
-			game->textures.east_wall = NULL;
-		}
-		if (game->textures.west_wall && game->textures.west_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.west_wall->img_ptr);
-			free(game->textures.west_wall);
-			game->textures.west_wall = NULL;
-		}
+		clean_wall_textures(game);
 		if (game->textures.sky)
 		{
 			mlx_destroy_image(game->mlx_ptr, game->textures.sky);
@@ -98,8 +106,6 @@ void	cleanup_mlx_textures(t_game *game)
 			mlx_destroy_image(game->mlx_ptr, game->textures.floor);
 			game->textures.floor = NULL;
 		}
-		
-		// Clean up unified door frames
 		cleanup_door_frames(game);
 	}
 }
@@ -127,30 +133,20 @@ void	cleanup_minimap(t_game *game)
 	if (!game || !game->mlx_ptr)
 		return ;
 	if (game->minimap.wall.img_ptr)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.wall.img_ptr);
-		game->minimap.wall.img_ptr = NULL;
-	}
 	if (game->minimap.floor.img_ptr)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.floor.img_ptr);
-		game->minimap.floor.img_ptr = NULL;
-	}
 	if (game->minimap.door.img_ptr)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.door.img_ptr);
-		game->minimap.door.img_ptr = NULL;
-	}
 	if (game->minimap.full_map_img)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
-		game->minimap.full_map_img = NULL;
-	}
 	if (game->minimap.minimap_img)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.minimap_img);
-		game->minimap.minimap_img = NULL;
-	}
+	game->minimap.wall.img_ptr = NULL;
+	game->minimap.floor.img_ptr = NULL;
+	game->minimap.door.img_ptr = NULL;
+	game->minimap.full_map_img = NULL;
+	game->minimap.minimap_img = NULL;
 	game->minimap.full_map_data = NULL;
 	game->minimap.minimap_data = NULL;
 	game->minimap.full_pixel_width = 0;
