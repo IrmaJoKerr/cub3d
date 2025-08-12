@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:02:21 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/11 14:00:55 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void	init_framebuffer(t_game *game);
 void	init_doors_from_map(t_game *game);
 int		get_door_id(t_game *game, int x, int y);
 t_image	*get_door_texture(t_game *game, int door_id);
-t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ray_dir_x, double ray_dir_y);
+// get_door_side_texture function removed - was never called due to broken logic
 
 #endif

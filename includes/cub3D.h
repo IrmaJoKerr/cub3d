@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ Door animation utility functions. In door_utils.c
 */
 int		load_door_animation_frames(t_game *game, const char *hdoor_path, 
 			const char *vdoor_path);
-void	*get_door_frame(t_game *game, char door_type, int frame_index);
+void	*get_door_frame(t_game *game, int frame_index);
 void	cleanup_door_frames(t_game *game);
 
 /*

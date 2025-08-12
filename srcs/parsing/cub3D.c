@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 19:34:20 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,13 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 
 int	count_door_textures(void)
 {
-	int count = 0;
-	char path[256];
-	
+	int		count;
+	char	path[256];
+
+	count = 0;
 	while (count < MAX_DOOR_FRAMES)
 	{
-		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", count);
+		sprintf(path, "textures/doors/door_%d.xpm", count);
 		if (!check_valid_file_path(path))
 			break ;
 		count++;
@@ -94,20 +95,20 @@ int	count_door_textures(void)
 
 void	load_all_door_textures(t_game *game)
 {
-	int i;
-	char path[256];
-	int door_count;
-	
+	int		i;
+	char	path[256];
+	int		door_count;
+
 	door_count = count_door_textures();
 	if (door_count == 0)
 	{
 		ft_fprintf(2, "Error: No door textures found in textures/doors/\n");
 		exit(1);
 	}
-	
 	ft_fprintf(1, "Loading %d door textures...\n", door_count);
-	
-	for (i = 0; i < door_count; i++)
+
+	i = 0;
+	while (i < door_count)
 	{
 		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", i);
 		game->textures.door_frames[i] = malloc(sizeof(t_image));
@@ -117,11 +118,12 @@ void	load_all_door_textures(t_game *game)
 			exit(1);
 		}
 		load_texture(game, game->textures.door_frames[i], path);
+		i++;
 	}
-	
 	game->textures.door_frame_count = door_count;
 	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
 }
+
 void	cleanup_framebuffer(t_game *game)
 {
 	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);

@@ -71,12 +71,15 @@ t_image	*get_surface_texture(t_game *game, t_ray *ray, char hit_tile)
 	
 	if (hit_tile == TILE_WALL)
 		return get_wall_texture(game, ray->side, ray->dir_x, ray->dir_y);
-	else if (hit_tile == HORIZ_DOOR || hit_tile == VERTI_DOOR)
+	else if (hit_tile == DOOR)
 	{
 		door_id = get_door_id(game, ray->map_x, ray->map_y);
 		if (door_id >= 0)
+		{
 			return get_door_texture(game, door_id);
-		return get_door_side_texture(game, hit_tile, ray->side, ray->dir_x, ray->dir_y);
+		}
+		// Fallback to wall texture if door not found
+		return get_wall_texture(game, ray->side, ray->dir_x, ray->dir_y);
 	}
 	return game->textures.north_wall;
 }

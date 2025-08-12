@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/05 01:09:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,6 @@ Check if character represents a reachable space.
 */
 int	is_reachable_space(char c)
 {
-	return (c == '0' || c == 'H' || c == 'V' || c == 'N' || c == 'S' || c == 'E'
+	return (c == '0' || c == 'D' || c == 'N' || c == 'S' || c == 'E'
 		|| c == 'W');
 }

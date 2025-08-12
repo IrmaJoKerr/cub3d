@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/11 07:17:30 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_doors_from_map(t_game *game)
 		x = 0;
 		while (x < game->map.max_cols)
 		{
-			if (game->map.map[y][x] == HORIZ_DOOR || game->map.map[y][x] == VERTI_DOOR)
+			if (game->map.map[y][x] == DOOR)
 				game->doorcount++;
 			x++;
 		}
@@ -50,11 +50,10 @@ void	init_doors_from_map(t_game *game)
 		x = 0;
 		while (x < game->map.max_cols)
 		{
-			if (game->map.map[y][x] == HORIZ_DOOR || game->map.map[y][x] == VERTI_DOOR)
+			if (game->map.map[y][x] == DOOR)
 			{
 				game->doors[door_index].x = x;
 				game->doors[door_index].y = y;
-				game->doors[door_index].type = game->map.map[y][x];
 				game->doors[door_index].state = DOOR_CLOSED;
 				game->doors[door_index].openness = 0.0;
 				game->doors[door_index].animation_frame = 0;
@@ -80,29 +79,6 @@ int	get_door_id(t_game *game, int x, int y)
 		i++;
 	}
 	return (-1);
-}
-
-t_image	*get_door_side_texture(t_game *game, char door_type, int side, double ray_dir_x, double ray_dir_y)
-{
-	(void)side; // Parameter needed for interface compatibility
-	
-	if (door_type == VERTI_DOOR)
-	{
-		// Vertical door: north/south walls on sides
-		if (ray_dir_y < 0)
-			return (game->textures.north_wall);
-		else
-			return (game->textures.south_wall);
-	}
-	else if (door_type == HORIZ_DOOR)
-	{
-		// Horizontal door: east/west walls on sides
-		if (ray_dir_x < 0)
-			return (game->textures.west_wall);
-		else
-			return (game->textures.east_wall);
-	}
-	return (game->textures.north_wall); // fallback
 }
 
 t_image	*get_door_texture(t_game *game, int door_id)
@@ -147,9 +123,8 @@ void	cleanup_door_frames(t_game *game)
 	}
 }
 
-void	*get_door_frame(t_game *game, char door_type, int frame_index)
+void	*get_door_frame(t_game *game, int frame_index)
 {
-	(void)door_type;
 	if (frame_index >= 0 && frame_index < game->textures.door_frame_count)
 		return (game->textures.door_frames[frame_index]);
 	return (game->textures.door_frames[0]);

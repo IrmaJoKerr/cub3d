@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/12 18:13:22 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 19:46:16 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # define TILE_WALL '1'
 # define TILE_FLOOR '0'
-# define HORIZ_DOOR 'H'
-# define VERTI_DOOR 'V'
+# define DOOR 'D'
 # define TILE_PLAYER "NSEW"
-# define VALID_CHARS "01HVNSEW"
+# define VALID_CHARS "01DNSEW"
 # define MAX_WIDTH 1920
 # define MAX_HEIGHT 1080
 # define MAX_RGB 255
@@ -56,7 +55,6 @@ typedef struct s_door
 {
 	int				x;
 	int				y;
-	char			type;
 	t_door_state	state;
 	double			openness;
 	int				animation_frame;

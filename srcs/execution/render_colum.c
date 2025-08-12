@@ -23,7 +23,7 @@ static void perform_dda_with_door(t_ray *wall_ray, t_ray *door_ray, t_game *game
 		char tile = game->map.map[wall_ray->map_y][wall_ray->map_x];
 
 		// 第一次遇到门就记录
-		if (!door_found && (tile == HORIZ_DOOR || tile == VERTI_DOOR))
+		if (!door_found && (tile == DOOR))
 		{
 			*door_ray = *wall_ray; // 复制当前射线状态
 			door_ray->hit = 1;

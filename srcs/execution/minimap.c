@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 15:37:57 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/12 19:34:20 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	generate_full_minimap(t_game *game)
 				source_tile = &game->minimap.wall;
 			else if (tile_type == TILE_FLOOR)
 				source_tile = &game->minimap.floor;
-			else if (tile_type == HORIZ_DOOR || tile_type == VERTI_DOOR)
+			else if (tile_type == DOOR)
 				source_tile = &game->minimap.door;
 			else
 				source_tile = &game->minimap.floor;
@@ -251,7 +251,8 @@ void	draw_triangle_player_indicator(t_game *game, int center_x, int center_y)
 	if (max_y >= 180) max_y = 179;
 
 	// Scanline fill - optimized triangle rasterization
-	for (y = min_y; y <= max_y; y++)
+	y = min_y;
+	while (y <= max_y)
 	{
 		// Find intersection points with triangle edges for this scanline
 		x_start = 180;  // Start with impossible values
@@ -293,12 +294,19 @@ void	draw_triangle_player_indicator(t_game *game, int center_x, int center_y)
 		// Fill horizontal line between intersection points
 		if (x_start <= x_end && x_start < 180 && x_end >= 0)
 		{
+			int x;
+			
 			if (x_start < 0) x_start = 0;
 			if (x_end >= 180) x_end = 179;
 			
 			// Fast horizontal line fill using pre-calculated stride
-			for (int x = x_start; x <= x_end; x++)
+			x = x_start;
+			while (x <= x_end)
+			{
 				pixels[y * stride + x] = 0xFF4500; // Orange arrowhead
+				x++;
+			}
 		}
+		y++;
 	}
 }
