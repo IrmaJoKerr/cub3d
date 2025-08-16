@@ -120,6 +120,12 @@ void	clean_wall_textures(t_game *game)
 		free(game->textures.west_wall);
 		game->textures.west_wall = NULL;
 	}
+	if (game->textures.space && game->textures.space->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.space->img_ptr);
+		free(game->textures.space);
+		game->textures.space = NULL;
+	}
 }
 
 /*
@@ -172,6 +178,8 @@ void	cleanup_minimap(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.floor.img_ptr);
 	if (game->minimap.door.img_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.door.img_ptr);
+	if (game->minimap.space.img_ptr)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.space.img_ptr);
 	if (game->minimap.full_map_img)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
 	if (game->minimap.minimap_img)
@@ -179,6 +187,7 @@ void	cleanup_minimap(t_game *game)
 	game->minimap.wall.img_ptr = NULL;
 	game->minimap.floor.img_ptr = NULL;
 	game->minimap.door.img_ptr = NULL;
+	game->minimap.space.img_ptr = NULL;
 	game->minimap.full_map_img = NULL;
 	game->minimap.minimap_img = NULL;
 	game->minimap.full_map_data = NULL;

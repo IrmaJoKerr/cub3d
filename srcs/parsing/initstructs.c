@@ -43,6 +43,7 @@ void	init_texture_st(t_texture *texture)
 	texture->south_wall = malloc(sizeof(t_image));
 	texture->east_wall = malloc(sizeof(t_image));
 	texture->west_wall = malloc(sizeof(t_image));
+	texture->space = malloc(sizeof(t_image));
 	texture->sky = NULL;
 	texture->floor = NULL;
 	texture->door_frames = malloc(sizeof(t_image*) * MAX_DOOR_FRAMES);

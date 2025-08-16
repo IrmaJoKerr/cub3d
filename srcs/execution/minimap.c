@@ -63,6 +63,13 @@ void	load_minimap_tiles(t_game *game)
 	game->minimap.door.addr = mlx_get_data_addr(game->minimap.door.img_ptr,
 			&game->minimap.door.bpp, &game->minimap.door.line_len,
 			&game->minimap.door.endian);
+	game->minimap.space.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
+			"textures/minimap/space.xpm", &tile_width, &tile_height);
+	if (!game->minimap.space.img_ptr)
+		return ;
+	game->minimap.space.addr = mlx_get_data_addr(game->minimap.space.img_ptr,
+			&game->minimap.space.bpp, &game->minimap.space.line_len,
+			&game->minimap.space.endian);
 }
 
 void	generate_full_minimap(t_game *game)
@@ -90,6 +97,8 @@ void	generate_full_minimap(t_game *game)
 				source_tile = &game->minimap.floor;
 			else if (tile_type == DOOR)
 				source_tile = &game->minimap.door;
+			else if (tile_type == ' ')
+				source_tile = &game->minimap.space;
 			else
 				source_tile = &game->minimap.floor;
 			tile_pixels = (unsigned int *)source_tile->addr;

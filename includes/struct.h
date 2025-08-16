@@ -98,6 +98,7 @@ typedef struct s_texture
 	t_image	*south_wall;
 	t_image	*east_wall;
 	t_image	*west_wall;
+	t_image	*space;
 	void	*sky;
 	void	*floor;
 	t_image	**door_frames;
@@ -120,6 +121,7 @@ typedef struct s_mini
 	t_image	wall;
 	t_image	floor;
 	t_image	door;
+	t_image	space;
 	int		full_pixel_width;
 	int		full_pixel_height;
 	int		src_start_x;

@@ -205,6 +205,9 @@ void	init_game(t_game *game, const char *map_file)
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
 	
+	// Load space texture (always loaded like walls)
+	load_texture(game, game->textures.space, "textures/space/space.xpm");
+	
 	// Load door textures by default
 	load_all_door_textures(game);
 	
