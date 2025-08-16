@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 00:53:53 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,19 @@ void	setup_minimap(t_game *game)
 	game->minimap.full_map_img = mlx_new_image(game->mlx_ptr,
 			game->minimap.full_pixel_width, game->minimap.full_pixel_height);
 	if (!game->minimap.full_map_img)
-	{
-		ft_fprintf(2, "Error: Failed to create minimap full image\n");
 		return ;
-	}
 	game->minimap.full_map_data = mlx_get_data_addr(game->minimap.full_map_img,
 			&game->minimap.full_map_bpp, &game->minimap.full_map_sl,
 			&game->minimap.full_map_endian);
-	usleep(500000);  // 0.5 second delay for robust buffer allocation
+	usleep(500000);
 	generate_full_minimap(game);
 	game->minimap.minimap_img = mlx_new_image(game->mlx_ptr, 180, 180);
 	if (!game->minimap.minimap_img)
-	{
-		ft_fprintf(2, "Error: Failed to create minimap viewport\n");
 		return ;
-	}
 	game->minimap.minimap_data = mlx_get_data_addr(game->minimap.minimap_img,
 			&game->minimap.minimap_bpp, &game->minimap.minimap_sl,
 			&game->minimap.minimap_endian);
-	usleep(1000);  // 1000 microseconds delay for smaller minimap buffer allocation
-	ft_fprintf(1, "✅ Minimap system initialized successfully\n");
+	usleep(1000);
 }
 
 void	load_minimap_tiles(t_game *game)
@@ -52,34 +45,24 @@ void	load_minimap_tiles(t_game *game)
 	game->minimap.wall.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/wall.xpm", &tile_width, &tile_height);
 	if (!game->minimap.wall.img_ptr)
-	{
-		ft_fprintf(2, "Error: Failed to load minimap wall tile\n");
-		exit(1);
-	}
+		return ;
 	game->minimap.wall.addr = mlx_get_data_addr(game->minimap.wall.img_ptr,
 			&game->minimap.wall.bpp, &game->minimap.wall.line_len,
 			&game->minimap.wall.endian);
 	game->minimap.floor.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/floor.xpm", &tile_width, &tile_height);
 	if (!game->minimap.floor.img_ptr)
-	{
-		ft_fprintf(2, "Error: Failed to load minimap floor tile\n");
-		exit(1);
-	}
+		return ;
 	game->minimap.floor.addr = mlx_get_data_addr(game->minimap.floor.img_ptr,
 			&game->minimap.floor.bpp, &game->minimap.floor.line_len,
 			&game->minimap.floor.endian);
 	game->minimap.door.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/door.xpm", &tile_width, &tile_height);
 	if (!game->minimap.door.img_ptr)
-	{
-		ft_fprintf(2, "Error: Failed to load minimap door tile\n");
-		exit(1);
-	}
+		return ;
 	game->minimap.door.addr = mlx_get_data_addr(game->minimap.door.img_ptr,
 			&game->minimap.door.bpp, &game->minimap.door.line_len,
 			&game->minimap.door.endian);
-	ft_fprintf(1, "✅ Minimap tiles loaded successfully\n");
 }
 
 void	generate_full_minimap(t_game *game)
