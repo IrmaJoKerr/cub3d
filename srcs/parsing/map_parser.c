@@ -188,8 +188,8 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			return (-1);
 		}
 		
-		// Initialize entire row with '9' characters for debugging
-		ft_memset(game->map.map[map_row], '9', game->map.max_cols);
+		// Initialize entire row with space characters for void areas
+		ft_memset(game->map.map[map_row], ' ', game->map.max_cols);
 		
 		// Set uniform null terminator at the end of allocated space
 		game->map.map[map_row][game->map.max_cols] = '\0';
@@ -207,7 +207,7 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			game->map.map[map_row][i] = line[i];
 			i++;
 		}
-		// Remaining positions keep their '9' values from memset (padding)
+		// Remaining positions keep their space values from memset (void padding)
 		count_player_chars(line, game);
 		if (map_row > 0 && map_row < game->map.max_rows - 1)
 		{

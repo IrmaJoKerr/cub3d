@@ -13,13 +13,31 @@
 #include "../includes/cub3D.h"
 
 /*
-Check if a world position is valid (not a wall and within bounds)
+Check if a world position is valid (not a wall, void, or out of bounds)
 */
 bool	is_valid_world_position(t_game *game, double x, double y)
 {
-	if (game->map.map[(int)y][(int)x] == TILE_WALL)
+	int		tile_x;
+	int		tile_y;
+	char	tile;
+
+	tile_x = (int)x;
+	tile_y = (int)y;
+	
+	// Bounds checking for safety
+	if (tile_x < 0 || tile_x >= game->map.max_cols || 
+		tile_y < 0 || tile_y >= game->map.max_rows)
 		return (false);
-	return (true);
+		
+	tile = game->map.map[tile_y][tile_x];
+	
+	// Block walls and void areas (spaces)
+	if (tile == TILE_WALL || tile == ' ')
+		return (false);
+		
+	// Allow floors, doors, and player positions
+	return (tile == TILE_FLOOR || tile == DOOR || 
+		tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W');
 }
 
 /*

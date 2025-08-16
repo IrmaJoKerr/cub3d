@@ -85,7 +85,7 @@ int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 		return (1);
 	}
 	
-	if (game->map.map[y][x] == '1' || game->map.map[y][x] == ' ' || game->map.map[y][x] == '9')
+	if (game->map.map[y][x] == '1' || game->map.map[y][x] == ' ')
 	{
 		fprintf(stderr, "DEBUG: Found wall/void at (%d,%d), char='%c'\n", y, x, game->map.map[y][x]);
 		return (1);
