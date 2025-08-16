@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 16:11:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 05:59:36 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,13 +203,11 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 		
 		while (i < line_len && i < game->map.max_cols)
 		{
-			// Only copy non-space characters, leave spaces as '9' debug markers
-			if (line[i] != ' ')
-				game->map.map[map_row][i] = line[i];
-			// If line[i] is a space, keep the '9' debug marker from memset
+			// Copy all characters including spaces
+			game->map.map[map_row][i] = line[i];
 			i++;
 		}
-		// Remaining positions keep their '9' values from memset
+		// Remaining positions keep their '9' values from memset (padding)
 		count_player_chars(line, game);
 		if (map_row > 0 && map_row < game->map.max_rows - 1)
 		{

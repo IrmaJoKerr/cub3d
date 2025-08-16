@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 05:59:36 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 		return (1);
 	}
 	
-	if (game->map.map[y][x] == '1')
+	if (game->map.map[y][x] == '1' || game->map.map[y][x] == ' ' || game->map.map[y][x] == '9')
 	{
-		fprintf(stderr, "DEBUG: Found wall at (%d,%d)\n", y, x);
+		fprintf(stderr, "DEBUG: Found wall/void at (%d,%d), char='%c'\n", y, x, game->map.map[y][x]);
 		return (1);
 	}
 	
