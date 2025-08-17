@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:06:35 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ void	init_game(t_game *game, const char *map_file)
 	setup_minimap(game);
 	
 	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
-	set_player_to_tile_center(game, game->curr_x, game->curr_y);
+	set_player_start_position(game, game->curr_x, game->curr_y);
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
 	if (!game->img.img_ptr)
 	{

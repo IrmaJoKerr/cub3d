@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_helpers.c                                   :+:      :+:    :+:   */
+/*   parse_settings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,11 +18,6 @@ Function prototypes
 int		identify_settings_type(const char *line);
 char	*extract_texture_path(const char *line, const char *identifier);
 int		parse_color_settings(char *line, t_game *game, char settings);
-int		parse_floor_color(char *line, t_game *game);
-int		parse_ceiling_color(char *line, t_game *game);
-char	*extract_color_values(const char *line, const char *identifier);
-int		validate_color_values(const char *values, int color[3]);
-int		chk_color_range(int *converted_colors, int color[3]);
 
 /*
  * Helper functions for config parser
@@ -116,50 +111,6 @@ int	parse_color_settings(char *line, t_game *game, char settings)
 */
 
 /*
-Parse floor color settings from configuration line
-*/
-int	parse_floor_color(char *line, t_game *game)
-{
-	char	*values;
-	int		color[3];
-	int		result;
-
-	values = extract_color_values(line, "F");
-	result = validate_color_values(values, color);
-	if (result == 0)
-	{
-		game->map.floor_color[0] = color[0];
-		game->map.floor_color[1] = color[1];
-		game->map.floor_color[2] = color[2];
-	}
-	if (values)
-		free(values);
-	return (result);
-}
-
-/*
-Parse ceiling color settings from configuration line
-*/
-int	parse_ceiling_color(char *line, t_game *game)
-{
-	char	*values;
-	int		color[3];
-	int		result;
-
-	values = extract_color_values(line, "C");
-	result = validate_color_values(values, color);
-	if (result == 0)
-	{
-		game->map.sky_color[0] = color[0];
-		game->map.sky_color[1] = color[1];
-		game->map.sky_color[2] = color[2];
-	}
-	if (values)
-		free(values);
-	return (result);
-}
-
-/*
 NEW VERSION - Delegates to specific subfunctions for better modularity
 */
 int	parse_color_settings(char *line, t_game *game, char settings)
@@ -170,111 +121,4 @@ int	parse_color_settings(char *line, t_game *game, char settings)
 		return (parse_ceiling_color(line, game));
 	else
 		return (-1);
-}
-
-char	*extract_color_values(const char *line, const char *identifier)
-{
-	int		i;
-	int		start;
-	char	*values;
-
-	i = ft_strlen(identifier);
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	start = i;
-	while (line[i] && line[i] != '\n')
-		i++;
-	values = malloc(sizeof(char) * (i - start + 1));
-	if (!values)
-		return (NULL);
-	ft_strncpy(values, line + start, i - start);
-	values[i - start] = '\0';
-	return (values);
-}
-
-/*
-Check if RGB values are within valid range (0-255) and copy to output array
-*/
-int	chk_color_range(int *converted_colors, int color[3])
-{
-	int	i;
-
-	i = 0;
-	while (i < 3)
-	{
-		if (converted_colors[i] < 0 || converted_colors[i] > 255)
-			return (-1);
-		color[i] = converted_colors[i];
-		i++;
-	}
-	return (0);
-}
-
-/*
-OLD VERSION - BACKUP (using ft_atoi with manual validation)
-int	validate_color_values(const char *values, int color[3])
-{
-	int		i;
-	int		num_count;
-	char	**numbers;
-
-	if (!values)
-		return (-1);
-	numbers = ft_split(values, ',');
-	if (!numbers)
-		return (-1);
-	num_count = 0;
-	while (numbers[num_count])
-		num_count++;
-	if (num_count != 3)
-	{
-		ft_free_2d(numbers, num_count);
-		return (-1);
-	}
-	i = 0;
-	while (i < 3)
-	{
-		color[i] = ft_atoi(numbers[i]);
-		if (color[i] < 0 || color[i] > 255)
-		{
-			ft_free_2d(numbers, num_count);
-			return (-1);
-		}
-		i++;
-	}
-	ft_free_2d(numbers, num_count);
-	return (0);
-}
-*/
-
-/*
-NEW VERSION - Using ft_atoiarr_errcln for better error handling
-*/
-int	validate_color_values(const char *values, int color[3])
-{
-	char	**numbers;
-	int		*converted_colors;
-	int		num_count;
-
-	if (!values)
-		return (-1);
-	numbers = ft_split(values, ',');
-	if (!numbers)
-		return (-1);
-	num_count = ft_arrlen(numbers);
-	if (num_count != 3)
-	{
-		ft_free_2d(numbers, num_count);
-		return (-1);
-	}
-	converted_colors = ft_atoiarr_errcln(numbers, num_count);
-	if (!converted_colors)
-		return (-1);
-	if (chk_color_range(converted_colors, color) != 0)
-	{
-		free(converted_colors);
-		return (-1);
-	}
-	free(converted_colors);
-	return (0);
 }

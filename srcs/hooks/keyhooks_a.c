@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:05:19 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		dy = calc_move_dy(game->view_direction, MOVE_SPEED, 1);
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{	
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -62,7 +62,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -82,7 +82,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -102,7 +102,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;

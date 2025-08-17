@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:09:42 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,29 @@ int		is_reachable_space(char c);
 /*
 Tile coordinate utility functions. In collisions/tile_utils.c
 */
-bool	is_valid_world_position(t_game *game, double x, double y);
-void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
+bool	is_valid_move(t_game *game, double x, double y);
+void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
-Tile movement calculation functions. In collisions/tile_move.c
+Tile position calculation functions. In collisions/calculate_tile_position.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
 double	tile_center_x(int tile_x);
 double	tile_center_y(int tile_y);
+
+/*
+Tile movement calculation functions. In collisions/tile_move.c
+*/
 double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
 double	calc_distance(double x1, double y1, double x2, double y2);
+
+/*
+View calculation functions. In collisions/calculate_view.c
+*/
 double	normalize_angle(double angle);
 double	clamp_elevation(double elevation);
 
@@ -134,14 +142,22 @@ int		handle_color_settings(char *line, t_game *game, int settings_type);
 int		validate_required_config(t_game *game);
 int		cleanup_and_return(int fd, char *line, int ret_val);
 
+
 /*
-Parser helper functions. In parser_helpers.c
+Parser helper functions. In parse_settings.c
 */
 int		identify_settings_type(const char *line);
 char	*extract_texture_path(const char *line, const char *identifier);
 int		parse_color_settings(char *line, t_game *game, char settings);
+
+/*
+Color parsing functions. In parse_colors.c
+*/
+int		parse_floor_color(char *line, t_game *game);
+int		parse_ceiling_color(char *line, t_game *game);
 char	*extract_color_values(const char *line, const char *identifier);
 int		validate_color_values(const char *values, int color[3]);
+int		chk_color_range(int *converted_colors, int color[3]);
 
 /*
 Map parser functions. In map_parser.c

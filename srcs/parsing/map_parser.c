@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:20:04 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,9 +274,9 @@ void	count_player_chars(const char *line, t_game *game)
 	}
 }
 
-/**
- * Validate interior line starts and ends with walls
- */
+/*
+Validate interior line starts and ends with walls
+*/
 int	validate_interior_line(const char *line)
 {
 	int	len;
