@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void	load_all_door_textures(t_game *game)
 			exit(1);
 		}
 		load_texture(game, game->textures.door_frames[i], path);
+		usleep(2000); // Small delay between door texture loads
 		i++;
 	}
 	game->textures.door_frame_count = door_count;
@@ -207,6 +208,7 @@ void	init_game(t_game *game, const char *map_file)
 	
 	// Load space texture (always loaded like walls)
 	load_texture(game, game->textures.space, "textures/space/space.xpm");
+	usleep(5000); // Allow space texture to fully initialize
 	
 	// Load door textures by default
 	load_all_door_textures(game);

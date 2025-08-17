@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initstructs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/11 13:16:58 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ void	init_texture_st(t_texture *texture)
 	texture->east_wall = malloc(sizeof(t_image));
 	texture->west_wall = malloc(sizeof(t_image));
 	texture->space = malloc(sizeof(t_image));
+	
+	// Zero ALL fields in each texture structure to prevent garbage values
+	if (texture->north_wall)
+		ft_bzero(texture->north_wall, sizeof(t_image));
+	if (texture->south_wall)
+		ft_bzero(texture->south_wall, sizeof(t_image));
+	if (texture->east_wall)
+		ft_bzero(texture->east_wall, sizeof(t_image));
+	if (texture->west_wall)
+		ft_bzero(texture->west_wall, sizeof(t_image));
+	if (texture->space)
+		ft_bzero(texture->space, sizeof(t_image));
+	
 	texture->sky = NULL;
 	texture->floor = NULL;
 	texture->door_frames = malloc(sizeof(t_image*) * MAX_DOOR_FRAMES);

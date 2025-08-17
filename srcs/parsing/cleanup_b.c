@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	cleanup_texture_structures(t_game *game)
 	{
 		free(game->textures.west_wall);
 		game->textures.west_wall = NULL;
+	}
+	if (game->textures.space)
+	{
+		free(game->textures.space);
+		game->textures.space = NULL;
 	}
 	if (game->textures.door_frames)
 	{

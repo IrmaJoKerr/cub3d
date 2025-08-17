@@ -3,15 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_setup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 00:50:58 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 #include "../../includes/cub3D.h"
+
+static unsigned int	sample_texture(t_image *texture, int tex_x, int tex_y)
+{
+	char	*pixel;
+
+	// Safety check - return black if texture invalid
+	if (!texture || !texture->addr)
+		return (0x000000);
+
+	// Clamp texture coordinates to valid range
+	if (tex_x < 0) tex_x = 0;
+	if (tex_x >= TEX_WIDTH) tex_x = TEX_WIDTH - 1;
+	if (tex_y < 0) tex_y = 0;
+	if (tex_y >= TEX_HEIGHT) tex_y = TEX_HEIGHT - 1;
+	
+	pixel = texture->addr + (tex_y * texture->line_len + tex_x * (texture->bpp / 8));
+	return (*(unsigned int *)pixel);
+}
+
+static void	render_floor_textures(t_game *game, int midline)
+{
+	int		x, y;
+	double	cam_x, ray_dir_x, ray_dir_y;
+	double	floor_distance, world_x, world_y;
+	int		map_x, map_y, tex_x, tex_y;
+	char	tile;
+	unsigned int	color;
+
+	// Early exit if space texture not available
+	if (!game->textures.space || !game->textures.space->addr)
+		return;
+
+	x = 0;
+	while (x < MAX_WIDTH)
+	{
+		cam_x = 2.0 * x / MAX_WIDTH - 1.0;
+		ray_dir_x = cos(game->view_direction) + (sin(game->view_direction) * tan(FOV / 2)) * cam_x;
+		ray_dir_y = sin(game->view_direction) - (cos(game->view_direction) * tan(FOV / 2)) * cam_x;
+		
+		y = midline;
+		while (y < MAX_HEIGHT)
+		{
+			floor_distance = (MAX_HEIGHT / 2.0) / (y - midline + 1);
+			world_x = game->curr_x + floor_distance * ray_dir_x;
+			world_y = game->curr_y + floor_distance * ray_dir_y;
+			
+			map_x = (int)world_x;
+			map_y = (int)world_y;
+			
+			// Simplified bounds check with early continue
+			if (map_x < 0 || map_x >= game->map.max_cols || 
+				map_y < 0 || map_y >= game->map.max_rows ||
+				!game->map.map || !game->map.map[map_y])
+			{
+				y++;
+				continue;
+			}
+			
+			tile = game->map.map[map_y][map_x];
+			if (tile == ' ')
+			{
+				tex_x = (int)(world_x * TEX_WIDTH) % TEX_WIDTH;
+				tex_y = (int)(world_y * TEX_HEIGHT) % TEX_HEIGHT;
+				color = sample_texture(game->textures.space, tex_x, tex_y);
+				put_pixel(&game->img, x, y, color);
+			}
+			y++;
+		}
+		x++;
+	}
+}
 
 static void	draw_sky_and_floor(t_game *game, int sky_color,
 	int floor_color, int midline)
@@ -50,7 +121,12 @@ static void	fill_sky_and_floor(t_game *game)
 		midline = 0;
 	if (midline > MAX_HEIGHT)
 		midline = MAX_HEIGHT;
+	
+	// First fill background colors
 	draw_sky_and_floor(game, sky_color, floor_color, midline);
+	
+	// Then overlay floor textures for space tiles
+	render_floor_textures(game, midline);
 }
 
 void	render_raycast(t_game *game)
