@@ -6,11 +6,24 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:56 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int		calculate_map_dimensions(const char *file, t_game *game, int map_start_line);
+int		validate_map_line_chars(const char *line);
+int		validate_border_line(const char *line);
+int		populate_map_array(const char *file, t_game *game, int map_start_line);
+void	count_player_chars(const char *line, t_game *game);
+int		validate_interior_line(const char *line);
+int		parse_map_section(const char *file, t_game *game, int map_start_line);
+void	find_player_position(t_game *game);
+int		final_map_validation(t_game *game);
 
 /**
  * Calculate map dimensions and validate map characters

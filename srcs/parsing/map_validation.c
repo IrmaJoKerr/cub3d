@@ -6,15 +6,18 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:21:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-int		is_valid_path(t_game *game, int y, int x);
-int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
-int		is_reachable_space(char c);
+/*
+Function prototypes
+*/
+int	is_valid_path(t_game *game, int y, int x);
+int	flood_fill_validate(t_game *game, char **test_map, int y, int x);
+int	is_reachable_space(char c);
 
 /*
 Path validation using flood fill algorithm.

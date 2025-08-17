@@ -6,18 +6,22 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:39 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// Function prototypes
+/*
+Function prototypes
+*/
+void	cleanup_texture_structures(t_game *game);
 void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
+void	clean_wall_textures(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
-void	clean_wall_textures(t_game *game);
+void	cleanup_minimap(t_game *game);
 
 /*
 Helper function to cleanup texture structures allocated during initialization.

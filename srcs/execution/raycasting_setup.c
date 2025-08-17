@@ -6,14 +6,25 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 #include "../../includes/cub3D.h"
 
-static unsigned int	sample_texture(t_image *texture, int tex_x, int tex_y)
+/*
+Function prototypes
+*/
+unsigned int	sample_texture(t_image *texture, int tex_x, int tex_y);
+void			render_floor_textures(t_game *game, int midline);
+void			draw_sky_and_floor(t_game *game, int sky_color, int floor_color, int midline);
+void			fill_sky_and_floor(t_game *game);
+void			render_raycast(t_game *game);
+void			draw_crosshair(t_game *game);
+int				render_img(t_game *game);
+
+unsigned int	sample_texture(t_image *texture, int tex_x, int tex_y)
 {
 	char	*pixel;
 
@@ -31,7 +42,7 @@ static unsigned int	sample_texture(t_image *texture, int tex_x, int tex_y)
 	return (*(unsigned int *)pixel);
 }
 
-static void	render_floor_textures(t_game *game, int midline)
+void	render_floor_textures(t_game *game, int midline)
 {
 	int		x, y;
 	double	cam_x, ray_dir_x, ray_dir_y;
@@ -84,7 +95,7 @@ static void	render_floor_textures(t_game *game, int midline)
 	}
 }
 
-static void	draw_sky_and_floor(t_game *game, int sky_color,
+void	draw_sky_and_floor(t_game *game, int sky_color,
 	int floor_color, int midline)
 {
 	int	y;
@@ -106,7 +117,7 @@ static void	draw_sky_and_floor(t_game *game, int sky_color,
 	}
 }
 
-static void	fill_sky_and_floor(t_game *game)
+void	fill_sky_and_floor(t_game *game)
 {
 	int	sky_color;
 	int	floor_color;

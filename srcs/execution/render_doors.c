@@ -6,13 +6,22 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:17:40 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:22 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
-static void	update_door_state(t_game *game, t_door *door)
+/*
+Function prototypes
+*/
+void	update_door_state(t_game *game, t_door *door);
+void	update_door_animation(t_game *game, t_door *door);
+void	update_doors(t_game *game);
+bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray, t_game *game, bool *door_found);
+void	perform_dda_with_door(t_ray *wall_ray, t_ray *door_ray, t_game *game);
+
+void	update_door_state(t_game *game, t_door *door)
 {
 	double	dx;
 	double	dy;
@@ -29,7 +38,7 @@ static void	update_door_state(t_game *game, t_door *door)
 		door->state = DOOR_CLOSING;
 }
 
-static void	update_door_animation(t_game *game, t_door *door)
+void	update_door_animation(t_game *game, t_door *door)
 {
 	if (door->state == DOOR_OPENING)
 	{
@@ -68,7 +77,7 @@ void	update_doors(t_game *game)
 	}
 }
 
-static bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
+bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
 	t_game *game, bool *door_found)
 {
 	char	tile;

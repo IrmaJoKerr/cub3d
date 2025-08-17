@@ -6,11 +6,20 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:21:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int		identify_settings_type(const char *line);
+char	*extract_texture_path(const char *line, const char *identifier);
+int		parse_color_settings(char *line, t_game *game, char settings);
+char	*extract_color_values(const char *line, const char *identifier);
+int		validate_color_values(const char *values, int color[3]);
 
 /*
  * Helper functions for config parser

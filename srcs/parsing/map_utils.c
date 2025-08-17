@@ -6,11 +6,17 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 16:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:21:00 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+char	**copy_map_array(char **source_map, int rows);
+void	cleanup_single_map(char ***map_ptr);
 
 /*
 Create a deep copy of a 2D map array.

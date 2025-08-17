@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:11:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,22 @@
 /*
 Main functions. In cub3D.c
 */
-void	init_game(t_game *game, const char *map_file);
 char	*get_map_path(const char *map_file);
 int		check_valid_file_path(const char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
-void	load_all_door_textures(t_game *game);
 int		count_door_textures(void);
+void	load_all_door_textures(t_game *game);
+void	cleanup_framebuffer(t_game *game);
+void	init_game(t_game *game, const char *map_file);
 
 /*
 Cleanup functions a. In cleanup_a.c
 */
-void	cleanup(t_game *game);
 int		close_window(t_game *game);
 void	cleanup_early(t_game *game);
 void	cleanup_later(t_game *game);
+void	cleanup(t_game *game);
+void	cleanup_texture_structures(t_game *game);
 
 /*
 Cleanup functions b. In cleanup_b.c
@@ -53,13 +55,15 @@ void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
-// void	cleanup_single_map(char ***map_ptr);     // OBSOLETE - Defined but never called
 void	clean_wall_textures(t_game *game);
+void	cleanup_minimap(t_game *game);
+// void	cleanup_single_map(char ***map_ptr);     // OBSOLETE - Defined but never called
 
 /*
 Map utility functions. In map_utils.c
 */
 char	**copy_map_array(char **source_map, int rows);
+void	cleanup_single_map(char ***map_ptr);
 
 /*
 Initialization functions. In initstructs.c
@@ -100,7 +104,11 @@ double	clamp_elevation(double elevation);
 /*
 Door animation utility functions. In door_utils.c
 */
-void	cleanup_door_frames(t_game *game);
+bool		count_doors_in_map(t_game *game, int *door_index);
+void		init_doors_from_map(t_game *game);
+int			get_door_id(t_game *game, int x, int y);
+t_image		*get_door_texture(t_game *game, int door_id);
+void		cleanup_door_frames(t_game *game);
 
 /*
 Path parsing functions. In parse_path.c
@@ -156,11 +164,12 @@ void	debug_print_map(t_game *game);
 /*
 Key hook functions. In keyhooks_a.c
 */
+int		handle_movement_keys(int keycode, t_game *game);
+int		handle_rotation_keys(int keycode, t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
 int		handle_window_close(t_game *game);
-int		handle_movement_keys(int keycode, t_game *game);
-int		handle_rotation_keys(int keycode, t_game *game);
+int		handle_mouse_move(int x, int y, t_game *game);
 int		setup_event_hooks(t_game *game);
 
 /*
@@ -172,6 +181,5 @@ void	generate_full_minimap(t_game *game);
 void	render_minimap(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
-void	cleanup_minimap(t_game *game);
 
 #endif

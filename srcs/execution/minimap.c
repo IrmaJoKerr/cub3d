@@ -6,11 +6,21 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:07 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+void	setup_minimap(t_game *game);
+void	load_minimap_tiles(t_game *game);
+void	generate_full_minimap(t_game *game);
+void	render_minimap(t_game *game);
+void	draw_minimap_border(t_game *game);
+void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
 
 void	setup_minimap(t_game *game)
 {

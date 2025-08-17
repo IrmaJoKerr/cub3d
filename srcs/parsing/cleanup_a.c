@@ -6,13 +6,15 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:34:42 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:36 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:25:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// Function prototypes
+/*
+Function prototypes
+*/
 int		close_window(t_game *game);
 void	cleanup_early(t_game *game);
 void	cleanup_later(t_game *game);

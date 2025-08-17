@@ -6,11 +6,20 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:22:14 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:14 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
+
+/*
+Function prototypes
+*/
+void		init_ray(t_ray *ray, t_game *game, int x);
+void		put_pixel(t_image *img, int x, int y, int color);
+t_image		*get_surface_texture(t_game *game, t_ray *ray, char hit_tile);
+t_image		*get_wall_texture(t_game *game, int side, double ray_dir_x, double ray_dir_y);
+void		initialize_deltas_and_steps(t_ray *ray, t_game *game);
 
 void	init_ray(t_ray *ray, t_game *game, int x)
 {

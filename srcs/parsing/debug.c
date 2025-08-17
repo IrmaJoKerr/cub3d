@@ -6,11 +6,16 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:33:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:49 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+void	debug_print_map(t_game *game);
 
 /**
  * Debug function to print the entire 2D map array

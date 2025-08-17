@@ -6,13 +6,22 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static bool	count_doors_in_map(t_game *game, int *door_index)
+/*
+Function prototypes
+*/
+bool		count_doors_in_map(t_game *game, int *door_index);
+void		init_doors_from_map(t_game *game);
+int			get_door_id(t_game *game, int x, int y);
+t_image		*get_door_texture(t_game *game, int door_id);
+void		cleanup_door_frames(t_game *game);
+
+bool	count_doors_in_map(t_game *game, int *door_index)
 {
 	int	x;
 	int	y;

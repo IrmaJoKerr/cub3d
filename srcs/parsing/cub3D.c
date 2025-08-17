@@ -6,13 +6,21 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:46 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
 char	*get_map_path(const char *map_file);
+int		check_valid_file_path(const char *path);
+void	load_texture(t_game *game, t_image *tex, char *path);
+int		count_door_textures(void);
+void	load_all_door_textures(t_game *game);
+void	cleanup_framebuffer(t_game *game);
 void	init_game(t_game *game, const char *map_file);
 
 /*

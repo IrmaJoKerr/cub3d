@@ -6,12 +6,23 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:46:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 #include <X11/keysym.h>
+
+/*
+Function prototypes
+*/
+int	handle_movement_keys(int keycode, t_game *game);
+int	handle_rotation_keys(int keycode, t_game *game);
+int	handle_keypress(int keycode, t_game *game);
+int	handle_keyrelease(int keycode, t_game *game);
+int	handle_window_close(t_game *game);
+int	handle_mouse_move(int x, int y, t_game *game);
+int	setup_event_hooks(t_game *game);
 
 /*
 Handle WASD movement keys

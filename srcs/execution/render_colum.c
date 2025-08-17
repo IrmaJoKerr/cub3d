@@ -6,13 +6,21 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:47:01 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 10:22:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
-static void	compute_projection(t_ray *ray, t_game *game)
+/*
+Function prototypes
+*/
+void	compute_projection(t_ray *ray, t_game *game);
+void	compute_texture(t_ray *ray, t_game *game, t_image **tex);
+void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x);
+void	render_column(t_game *game, int x);
+
+void	compute_projection(t_ray *ray, t_game *game)
 {
 	if (ray->side == 0)
 		ray->perp_dist = (ray->map_x - game->curr_x
@@ -27,7 +35,7 @@ static void	compute_projection(t_ray *ray, t_game *game)
 			+ MAX_HEIGHT / 2 + game->view_elevation);
 }
 
-static void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
+void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 {
 	double	wall_x;
 
@@ -43,7 +51,7 @@ static void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 }
 
-static void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
+void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 {
 	double			step;
 	double			tex_pos;

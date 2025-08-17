@@ -6,11 +6,26 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:21:55 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int		world_to_tile_x(double x);
+int		world_to_tile_y(double y);
+double	tile_center_x(int tile_x);
+double	tile_center_y(int tile_y);
+double	calc_move_dx(double view_direction, double speed, int forward);
+double	calc_move_dy(double view_direction, double speed, int forward);
+double	calc_strafe_dx(double view_direction, double speed, int right);
+double	calc_strafe_dy(double view_direction, double speed, int right);
+double	calc_distance(double x1, double y1, double x2, double y2);
+double	normalize_angle(double angle);
+double	clamp_elevation(double elevation);
 
 /*
 Convert world X coordinate to tile column index

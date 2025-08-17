@@ -6,11 +6,23 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:20:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int	parse_configuration_section(const char *file, t_game *game);
+int	is_only_whitespace(const char *line);
+int	is_map_start_line(const char *line);
+int	parse_config_settings(char *line, t_game *game);
+int	handle_texture_settings(char *line, t_game *game, int settings_type);
+int	handle_color_settings(char *line, t_game *game, int settings_type);
+int	validate_required_config(t_game *game);
+int	cleanup_and_return(int fd, char *line, int ret_val);
 
 /*
 Parse configuration section (before map starts)
