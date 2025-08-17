@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:09:42 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 14:02:11 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void	cleanup_single_map(char ***map_ptr);
 /*
 Initialization functions. In initstructs.c
 */
-void	init_game_st(t_game *game);
-void	init_texture_st(t_texture *texture);
-void	init_map_st(t_map *map);
+// void	init_game_st(t_game *game); // OBSOLETE: unified initialisation
+// void	init_texture_st(t_texture *texture); // OBSOLETE: unified initialisation
+// void	init_map_st(t_map *map); // OBSOLETE: unified initialisation
 void	alloc_and_init_all(t_game **game);
 
 /*

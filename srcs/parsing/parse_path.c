@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:37:30 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:18:32 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 16:19:27 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int	check_valid_texture_path(const char *path)
 	}
 	if (!validate_xmp_extension(path))
 	{
-		ft_fprintf(2, "Error: Texture file must have .xpm extension: 
-			%s\n", path);
+		ft_fprintf(2, "Error: Texture file must have .xpm extension: %s\n",
+			path);
 		return (0);
 	}
 	fd = open(path, O_RDONLY);

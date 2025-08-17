@@ -6,13 +6,15 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 09:59:57 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 14:52:59 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define SPACE_TEXTURE "textures/space/space.xpm"
+# define DOORS_TEXTURE "textures/doors/"
 # define TILE_WALL '1'
 # define TILE_FLOOR '0'
 # define DOOR 'D'

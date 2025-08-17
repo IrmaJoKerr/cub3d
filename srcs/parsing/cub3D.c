@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:29:13 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 16:18:38 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,83 @@ Build the full path to the map file.
 If the map_file contains a '/', use it as-is.
 Otherwise, prepend "maps/" to look in the maps subfolder.
 */
-char	*get_map_path(const char *map_file)
-{
-	char	*full_path;
+/*
+Old get_map_path logic commented out below for reference.
+// char	*get_map_path(const char *map_file)
+// {
+//     char	*full_path;
+//     full_path = NULL;
+//     if (ft_strncmp(map_file, "maps/", 5) == 0)
+//         full_path = ft_strdup(map_file);
+//     else
+//         full_path = ft_strjoin("maps/", map_file);
+//     if (!full_path)
+//     {
+//         ft_fprintf(2, "Error: \n");
+//         ft_fprintf(2, "Failed to allocate memory for map path.\n");
+//         return (NULL);
+//     }
+//     if (!check_valid_file_path(full_path))
+//     {
+//         free(full_path);
+//         return (NULL);
+//     }
+//     return (full_path);
+// }
+*/
 
-	full_path = NULL;
-	if (ft_strncmp(map_file, "maps/", 5) == 0)
-		full_path = ft_strdup(map_file);
+int	check_builtin_textures(void)
+{
+	int		i;
+	char	path[256];
+	char	*num;
+
+	if (!check_valid_file_path(SPACE_TEXTURE))
+		return (0);
+	i = 0;
+	while (i <= 7)
+	{
+		ft_strcpy(path, DOORS_TEXTURE);
+		ft_strcat(path, "door_");
+		num = ft_itoa(i);
+		ft_strcat(path, num);
+		free(num);
+		ft_strcat(path, ".xpm");
+		if (!check_valid_file_path(path))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+/*
+Unified map path resolution supporting valid/invalid subfolders.
+If input starts with maps/valid/ or maps/invalid/, use as-is if exists.
+Otherwise, try maps/invalid/ then maps/valid/. Returns first found or error.
+*/
+char	*get_map_path(const char *input)
+{
+	char	*test_path;
+
+	if (ft_strncmp(input, "maps/valid/", 11) == 0
+		|| ft_strncmp(input, "maps/invalid/", 13) == 0)
+	{
+		if (check_valid_file_path(input))
+			return (ft_strdup(input));
+	}
 	else
-		full_path = ft_strjoin("maps/", map_file);
-	if (!full_path)
 	{
-		ft_fprintf(2, "Error: \n");
-		ft_fprintf(2, "Failed to allocate memory for map path.\n");
-		return (NULL);
+		test_path = ft_strjoin("maps/invalid/", input);
+		if (check_valid_file_path(test_path))
+			return (test_path);
+		free(test_path);
+		test_path = ft_strjoin("maps/valid/", input);
+		if (check_valid_file_path(test_path))
+			return (test_path);
+		free(test_path);
 	}
-	if (!check_valid_file_path(full_path))
-	{
-		free(full_path);
-		return (NULL);
-	}
-	return (full_path);
+	ft_fprintf(2, "Error: Map file not found: %s\n", input);
+	return (NULL);
 }
 
 int	check_valid_file_path(const char *path)
@@ -66,7 +122,8 @@ int	check_valid_file_path(const char *path)
 
 void	load_texture(t_game *game, t_image *tex, char *path)
 {
-	int width, height;
+	int	width;
+	int	height;
 
 	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
 	if (!tex->img_ptr)
@@ -76,14 +133,14 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 	}
 	if (width != TEX_WIDTH || height != TEX_HEIGHT)
 	{
-		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
+		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height,
+			path);
 		exit(1);
 	}
-	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
+			&tex->endian);
 	tex->transparent_color = 0xFF000000;
 }
-
-
 
 int	count_door_textures(void)
 {
@@ -163,17 +220,10 @@ int	main(int argc, char **argv)
 Initialises the game window. Mark for refactoring.
 Fixed critical logic error: parse_map returns -1 on failure, 1 on success.
 */
-void	init_game(t_game *game, const char *map_file)
+void	init_mlx_sys(t_game *game)
 {
-	if (parse_map(map_file, game) < 0)
-	{
-		ft_fprintf(2, "Error: \n");
-		ft_fprintf(2, "Failed to parse and validate the map.\n");
-		cleanup_early(game);
-		exit(EXIT_FAILURE);
-	}
-	ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
-	ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
+	ft_fprintf(1, "\nMAP VALIDATION COMPLETE\n");
+	ft_fprintf(1, "Starting MLX initialization\n");
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{
@@ -190,6 +240,16 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_later(game);
 		exit(EXIT_FAILURE);
 	}
+}
+
+void	init_game(t_game *game, const char *map_file)
+{
+	if (parse_map(map_file, game) < 0)
+	{
+		cleanup_early(game);
+		exit(EXIT_FAILURE);
+	}
+	init_mlx_sys(game);
 	load_texture(game, game->textures.north_wall, game->map.north_texture_path);
 	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
