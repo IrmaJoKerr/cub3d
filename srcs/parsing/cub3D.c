@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:20:46 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,21 @@ int	check_valid_file_path(const char *path)
 
 void	load_texture(t_game *game, t_image *tex, char *path)
 {
-    int width, height;
+	int width, height;
 
-    tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
-    if (!tex->img_ptr)
-    {
-        ft_fprintf(2, "Texture load failed: %s\n", path);
-        exit(1);
-    }
-    if (width != TEX_WIDTH || height != TEX_HEIGHT)
-    {
-        ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
-        exit(1);
-    }
-    tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
-    tex->transparent_color = 0xFF000000;
+	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
+	if (!tex->img_ptr)
+	{
+		ft_fprintf(2, "Texture load failed: %s\n", path);
+		exit(1);
+	}
+	if (width != TEX_WIDTH || height != TEX_HEIGHT)
+	{
+		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height, path);
+		exit(1);
+	}
+	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
+	tex->transparent_color = 0xFF000000;
 }
 
 

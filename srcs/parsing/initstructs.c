@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 09:44:14 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:20:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,14 @@ void	init_game_st(t_game *game)
 
 void	init_texture_st(t_texture *texture)
 {
-	texture->north_wall = malloc(sizeof(t_image));
-	texture->south_wall = malloc(sizeof(t_image));
-	texture->east_wall = malloc(sizeof(t_image));
-	texture->west_wall = malloc(sizeof(t_image));
-	texture->space = malloc(sizeof(t_image));
-	
-	// Zero ALL fields in each texture structure to prevent garbage values
-	if (texture->north_wall)
-		ft_bzero(texture->north_wall, sizeof(t_image));
-	if (texture->south_wall)
-		ft_bzero(texture->south_wall, sizeof(t_image));
-	if (texture->east_wall)
-		ft_bzero(texture->east_wall, sizeof(t_image));
-	if (texture->west_wall)
-		ft_bzero(texture->west_wall, sizeof(t_image));
-	if (texture->space)
-		ft_bzero(texture->space, sizeof(t_image));
-	
+	texture->north_wall = ft_calloc(1, sizeof(t_image));
+	texture->south_wall = ft_calloc(1, sizeof(t_image));
+	texture->east_wall = ft_calloc(1, sizeof(t_image));
+	texture->west_wall = ft_calloc(1, sizeof(t_image));
+	texture->space = ft_calloc(1, sizeof(t_image));
 	texture->sky = NULL;
 	texture->floor = NULL;
-	texture->door_frames = malloc(sizeof(t_image*) * MAX_DOOR_FRAMES);
+	texture->door_frames = ft_calloc(MAX_DOOR_FRAMES, sizeof(t_image*));
 	texture->door_frame_count = 0;
 }
 
@@ -86,7 +73,7 @@ Allocates memory for the game struct.
 */
 void	alloc_and_init_all(t_game **game)
 {
-	*game = (t_game *)malloc(sizeof(t_game));
+	*game = ft_calloc(1, sizeof(t_game));
 	if (!*game)
 	{
 		perror("Error: Failed to allocate memory for game struct.\n");

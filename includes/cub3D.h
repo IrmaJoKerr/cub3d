@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:11:34 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
-void	cleanup_single_map(char ***map_ptr);
+// void	cleanup_single_map(char ***map_ptr);     // OBSOLETE - Defined but never called
 void	clean_wall_textures(t_game *game);
 
 /*
@@ -77,14 +77,8 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Movement and collision functions. In collisions/movehero.c
+Tile coordinate utility functions. In collisions/tile_utils.c
 */
-// File removed - contained only unused functions
-
-/*
-Tile coordinate utility functions. In tile_utils.c
-*/
-int		get_tile_at_position(t_game *game, double x, double y);
 bool	is_valid_world_position(t_game *game, double x, double y);
 void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
 

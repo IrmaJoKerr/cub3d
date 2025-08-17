@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 06:43:12 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 10:20:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 				close(fd);
 				return (-1);
 			}
-			game->map.map_first_wall = true;
+			// game->map.map_first_wall = true;    // OBSOLETE FIELD
 		}
 		free(line);
 	}
@@ -228,14 +228,16 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 	{
 		last_line = game->map.map[map_row - 1];
 		if (validate_border_line(last_line))
-			game->map.map_last_wall = true;
+		{
+			// game->map.map_last_wall = true;      // OBSOLETE FIELD
+		}
 		else
 		{
 			// Temporarily disable for debugging irregular maps
 			// ft_fprintf(2, "Error: Last map line must contain only walls and spaces\n");
 			// close(fd);
 			// return (-1);
-			game->map.map_last_wall = false;
+			// game->map.map_last_wall = false;    // OBSOLETE FIELD
 		}
 	}
 	game->map.map[map_row] = NULL;
@@ -342,11 +344,11 @@ int	final_map_validation(t_game *game)
 		ft_fprintf(2, "Error: Map must have exactly one player (found %d)\n", game->map.herocount);
 		return (-1);
 	}
-	if (!game->map.map_first_wall)
-	{
-		ft_fprintf(2, "Error: First map line must be all walls\n");
-		return (-1);
-	}
+	// if (!game->map.map_first_wall)           // OBSOLETE FIELD - validation disabled
+	// {
+	//	ft_fprintf(2, "Error: First map line must be all walls\n");
+	//	return (-1);
+	// }
 	// Temporarily disable last wall validation for irregular maps
 	// if (!game->map.map_last_wall)
 	// {
