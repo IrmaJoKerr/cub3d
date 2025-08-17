@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 12:03:44 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:09:42 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:16:31 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		validate_color_values(const char *values, int color[3]);
 int		chk_color_range(int *converted_colors, int color[3]);
 
 /*
-Parse floor color settings from configuration line
+Parse and set the floor color from a config line (F).
 */
 int	parse_floor_color(char *line, t_game *game)
 {
@@ -44,7 +44,7 @@ int	parse_floor_color(char *line, t_game *game)
 }
 
 /*
-Parse ceiling color settings from configuration line
+Parse and set the ceiling color from a config line (C).
 */
 int	parse_ceiling_color(char *line, t_game *game)
 {
@@ -65,6 +65,9 @@ int	parse_ceiling_color(char *line, t_game *game)
 	return (result);
 }
 
+/*
+Extract the comma-separated RGB values from a config line.
+*/
 char	*extract_color_values(const char *line, const char *identifier)
 {
 	int		i;
@@ -86,7 +89,7 @@ char	*extract_color_values(const char *line, const char *identifier)
 }
 
 /*
-Check if RGB values are within valid range (0-255) and copy to output array
+Validate RGB values are in [0,255] and copy to output array.
 */
 int	chk_color_range(int *converted_colors, int color[3])
 {
@@ -104,7 +107,8 @@ int	chk_color_range(int *converted_colors, int color[3])
 }
 
 /*
-NEW VERSION - Using ft_atoiarr_errcln for better error handling
+Convert and validate RGB values from string, using ft_atoiarr_errcln
+for error handling.
 */
 int	validate_color_values(const char *values, int color[3])
 {

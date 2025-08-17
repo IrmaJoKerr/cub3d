@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:37:30 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:18:32 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ void	chk_args(int argc, char **argv)
 	return ;
 }
 
-/**
- * Validate XMP extension using "end-4" logic
- * Go to end of string, back up 4 places, and match .xpm
+/*
+Validate XMP extension. Go to end of string, back up 4 places, and match .xpm
  */
 int	validate_xmp_extension(const char *path)
 {
@@ -59,13 +58,12 @@ int	validate_xmp_extension(const char *path)
 	len = ft_strlen(path);
 	if (len < 4)
 		return (0);
-	// Go to end, back up 4 places, match ".xpm"
 	return (ft_strcmp(&path[len - 4], ".xpm") == 0);
 }
 
-/**
- * Enhanced texture path validation with XMP extension check
- */
+/*
+Enhanced texture path validation with XMP extension check
+*/
 int	check_valid_texture_path(const char *path)
 {
 	int		fd;
@@ -77,7 +75,8 @@ int	check_valid_texture_path(const char *path)
 	}
 	if (!validate_xmp_extension(path))
 	{
-		ft_fprintf(2, "Error: Texture file must have .xpm extension: %s\n", path);
+		ft_fprintf(2, "Error: Texture file must have .xpm extension: 
+			%s\n", path);
 		return (0);
 	}
 	fd = open(path, O_RDONLY);

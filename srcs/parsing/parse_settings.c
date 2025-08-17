@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:09:42 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:31:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ char	*extract_texture_path(const char *line, const char *identifier);
 int		parse_color_settings(char *line, t_game *game, char settings);
 
 /*
- * Helper functions for config parser
- */
+Helper functions for config parser
+*/
 
 int	identify_settings_type(const char *line)
 {

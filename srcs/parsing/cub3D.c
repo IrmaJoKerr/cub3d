@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 11:06:35 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:29:13 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,27 +172,8 @@ void	init_game(t_game *game, const char *map_file)
 		cleanup_early(game);
 		exit(EXIT_FAILURE);
 	}
-	
-	/*
-	** ================================================================
-	** TEMPORARY EXIT - REMOVE WHEN IMPLEMENTING RAYCASTER ENGINE
-	** ================================================================
-	** 
-	** This exit is placed here to allow clean termination after 
-	** successful map validation, without entering the MLX game loop.
-	** 
-	** Once the raycaster engine is implemented, remove this entire
-	** TEMPORARY EXIT REMOVED - PROGRAM NOW CONTINUES TO RAYCASTER
-	** ================================================================
-	*/
 	ft_fprintf(1, "\n🎉 MAP VALIDATION COMPLETE - INITIALIZING GRAPHICS ENGINE 🎉\n");
 	ft_fprintf(1, "All systems validated. Starting MLX initialization...\n");
-	
-	/*
-	** ================================================================
-	** MLX INITIALIZATION CODE - NOW EXECUTING NORMALLY
-	** ================================================================
-	*/
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{
@@ -213,20 +194,11 @@ void	init_game(t_game *game, const char *map_file)
 	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
 	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
-	
-	// Load space texture (always loaded like walls)
 	load_texture(game, game->textures.space, "textures/space/space.xpm");
-	usleep(5000); // Allow space texture to fully initialize
-	
-	// Load door textures by default
+	usleep(5000);
 	load_all_door_textures(game);
-	
-	// Initialize doors from map
 	init_doors_from_map(game);
-	
-	// Initialize minimap system
 	setup_minimap(game);
-	
 	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
 	set_player_start_position(game, game->curr_x, game->curr_y);
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
