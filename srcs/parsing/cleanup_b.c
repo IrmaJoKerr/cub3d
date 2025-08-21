@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 00:24:34 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 18:11:23 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,7 @@ void	cleanup_minimap(t_game *game)
 	game->minimap.minimap_img = NULL;
 	game->minimap.full_map_data = NULL;
 	game->minimap.minimap_data = NULL;
-	game->minimap.full_pixel_width = 0;
-	game->minimap.full_pixel_height = 0;
+	game->minimap.full_width = 0;
+	game->minimap.full_height = 0;
 	ft_fprintf(1, "✅ Minimap system cleaned up\n");
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 23:51:28 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/21 13:57:03 by wjun-kea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,5 +177,7 @@ void	render_minimap(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
 void	cleanup_minimap(t_game *game);
+void	calculate_triangle_vertices(t_triangle *tri, t_point center, double angle);
+void	rasterize_triangle(t_draw_info info, t_triangle tri);
 
 #endif
