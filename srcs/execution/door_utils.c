@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/16 23:59:36 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static bool	count_doors_in_map(t_game *game, int *door_index)
+void	init_doors_from_map(t_game *game)
 {
-	int	x;
-	int	y;
-
-	*door_index = 0;
+	int x, y, door_index;
+	
+	// Count doors in map
+	game->doorcount = 0;
 	y = 0;
 	while (y < game->map.max_rows)
 	{
@@ -25,27 +25,25 @@ static bool	count_doors_in_map(t_game *game, int *door_index)
 		while (x < game->map.max_cols)
 		{
 			if (game->map.map[y][x] == DOOR)
-				(*door_index)++;
+				game->doorcount++;
 			x++;
 		}
 		y++;
 	}
-	game->doorcount = *door_index;
+	
+	if (game->doorcount == 0)
+		return;
+	
+	// Allocate doors array
 	game->doors = malloc(sizeof(t_door) * game->doorcount);
-	*door_index = 0;
-	if (!game)
-		return (false);
-	return (true);
-}
-
-void	init_doors_from_map(t_game *game)
-{
-	int	x;
-	int	y;
-	int	door_index;
-
-	if (!count_doors_in_map(game, &door_index))
-		return ;
+	if (!game->doors)
+	{
+		ft_fprintf(2, "Error: Failed to allocate doors array\n");
+		exit(1);
+	}
+	
+	// Initialize doors
+	door_index = 0;
 	y = 0;
 	while (y < game->map.max_rows)
 	{
@@ -65,12 +63,14 @@ void	init_doors_from_map(t_game *game)
 		}
 		y++;
 	}
+	
+	ft_fprintf(1, "✅ Initialized %d doors from map\n", game->doorcount);
 }
 
 int	get_door_id(t_game *game, int x, int y)
 {
-	int	i;
-
+	int i;
+	
 	i = 0;
 	while (i < game->doorcount)
 	{
@@ -83,22 +83,22 @@ int	get_door_id(t_game *game, int x, int y)
 
 t_image	*get_door_texture(t_game *game, int door_id)
 {
-	t_door	*door;
-	int		frame;
-
 	if (door_id < 0 || door_id >= game->doorcount)
-		return (game->textures.door_frames[0]);
-	door = &game->doors[door_id];
-	frame = door->animation_frame;
+		return (game->textures.door_frames[0]); // fallback
+
+	t_door *door = &game->doors[door_id];
+	int frame = door->animation_frame;
+
 	if (frame < 0 || frame >= game->textures.door_frame_count)
 		frame = 0;
+
 	return (game->textures.door_frames[frame]);
 }
 
 void	cleanup_door_frames(t_game *game)
 {
-	int	i;
-
+	int i;
+	
 	if (game->textures.door_frames)
 	{
 		i = 0;
@@ -107,8 +107,7 @@ void	cleanup_door_frames(t_game *game)
 			if (game->textures.door_frames[i])
 			{
 				if (game->textures.door_frames[i]->img_ptr)
-					mlx_destroy_image(game->mlx_ptr,
-						game->textures.door_frames[i]->img_ptr);
+					mlx_destroy_image(game->mlx_ptr, game->textures.door_frames[i]->img_ptr);
 				free(game->textures.door_frames[i]);
 			}
 			i++;
@@ -116,6 +115,7 @@ void	cleanup_door_frames(t_game *game)
 		free(game->textures.door_frames);
 		game->textures.door_frames = NULL;
 	}
+	
 	if (game->doors)
 	{
 		free(game->doors);

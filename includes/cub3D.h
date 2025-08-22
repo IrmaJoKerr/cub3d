@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 01:29:05 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int		check_valid_file_path(const char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
 void	load_all_door_textures(t_game *game);
 int		count_door_textures(void);
+void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
 Cleanup functions a. In cleanup_a.c
@@ -77,33 +78,32 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Tile coordinate utility functions. In tile_utils.c
+Movement and collision functions. In collisions/movehero.c
 */
-bool	is_valid_move(t_game *game, double x, double y);
-void	set_player_start_position(t_game *game, int tile_x, int tile_y);
+// File removed - contained only unused functions
 
 /*
-Tile position calculation functions. In calculate_tile_position.c
+Tile coordinate utility functions. In tile_utils.c
+*/
+int		get_tile_at_position(t_game *game, double x, double y);
+bool	is_valid_world_position(t_game *game, double x, double y);
+void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
+bool	is_valid_move(t_game *game, double x, double y);
+
+/*
+Tile movement calculation functions. In collisions/tile_move.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
 double	tile_center_x(int tile_x);
 double	tile_center_y(int tile_y);
-
-/*
-View calculation functions. In calculate_view.c
-*/
-double	normalize_angle(double angle);
-double	clamp_elevation(double elevation);
-
-/*
-Tile movement calculation functions. In tile_move.c
-*/
 double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
 double	calc_distance(double x1, double y1, double x2, double y2);
+double	normalize_angle(double angle);
+double	clamp_elevation(double elevation);
 
 /*
 Door animation utility functions. In door_utils.c
@@ -114,11 +114,15 @@ void	cleanup_door_frames(t_game *game);
 Path parsing functions. In parse_path.c
 */
 void	chk_args(int argc, char **argv);
+int		validate_xmp_extension(const char *path);
+int		check_valid_texture_path(const char *path);
 
 /*
 Parser functions. In parser.c
 */
 int		parse_map(const char *file, t_game *game);
+int	parse_floor_color(char *line, t_game *game);
+int	parse_ceiling_color(char *line, t_game *game);
 
 /*
 Configuration parser functions. In config_parser.c
@@ -179,7 +183,5 @@ void	render_minimap(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
 void	cleanup_minimap(t_game *game);
-void	calculate_triangle_vertices(t_triangle *tri, t_point center, double angle);
-void	rasterize_triangle(t_draw_info info, t_triangle tri);
 
 #endif

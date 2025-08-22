@@ -6,11 +6,24 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/16 16:11:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:20:04 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int		calculate_map_dimensions(const char *file, t_game *game, int map_start_line);
+int		validate_map_line_chars(const char *line);
+int		validate_border_line(const char *line);
+int		populate_map_array(const char *file, t_game *game, int map_start_line);
+void	count_player_chars(const char *line, t_game *game);
+int		validate_interior_line(const char *line);
+int		parse_map_section(const char *file, t_game *game, int map_start_line);
+void	find_player_position(t_game *game);
+int		final_map_validation(t_game *game);
 
 /**
  * Calculate map dimensions and validate map characters
@@ -47,7 +60,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 		if (len == 0)
 		{
 			free(line);
-			break ;
+			continue ;
 		}
 		if (!validate_map_line_chars(line))
 		{
@@ -69,7 +82,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 				close(fd);
 				return (-1);
 			}
-			game->map.map_first_wall = true;
+			// game->map.map_first_wall = true;    // OBSOLETE FIELD
 		}
 		free(line);
 	}
@@ -159,11 +172,25 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			free(line);
 		line_num++;
 	}
-	while (map_row < game->map.max_rows && (line = get_next_line(fd)) != NULL)
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
+		
+		// Skip empty lines and whitespace-only lines but continue reading
+		if (ft_strlen(line) == 0 || is_only_whitespace(line))
+		{
+			free(line);
+			continue;
+		}
+		
+		// Stop when we have enough rows
+		if (map_row >= game->map.max_rows)
+		{
+			free(line);
+			break;
+		}
 		// Allocate memory for the row using max_cols for uniform sizing
 		game->map.map[map_row] = (char *)malloc(game->map.max_cols + 1);
 		if (!game->map.map[map_row])
@@ -174,8 +201,8 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			return (-1);
 		}
 		
-		// Initialize entire row with '9' characters for debugging
-		ft_memset(game->map.map[map_row], '9', game->map.max_cols);
+		// Initialize entire row with space characters for void areas
+		ft_memset(game->map.map[map_row], ' ', game->map.max_cols);
 		
 		// Set uniform null terminator at the end of allocated space
 		game->map.map[map_row][game->map.max_cols] = '\0';
@@ -189,13 +216,11 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 		
 		while (i < line_len && i < game->map.max_cols)
 		{
-			// Only copy non-space characters, leave spaces as '9' debug markers
-			if (line[i] != ' ')
-				game->map.map[map_row][i] = line[i];
-			// If line[i] is a space, keep the '9' debug marker from memset
+			// Copy all characters including spaces
+			game->map.map[map_row][i] = line[i];
 			i++;
 		}
-		// Remaining positions keep their '9' values from memset
+		// Remaining positions keep their space values from memset (void padding)
 		count_player_chars(line, game);
 		if (map_row > 0 && map_row < game->map.max_rows - 1)
 		{
@@ -216,14 +241,16 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 	{
 		last_line = game->map.map[map_row - 1];
 		if (validate_border_line(last_line))
-			game->map.map_last_wall = true;
+		{
+			// game->map.map_last_wall = true;      // OBSOLETE FIELD
+		}
 		else
 		{
 			// Temporarily disable for debugging irregular maps
 			// ft_fprintf(2, "Error: Last map line must contain only walls and spaces\n");
 			// close(fd);
 			// return (-1);
-			game->map.map_last_wall = false;
+			// game->map.map_last_wall = false;    // OBSOLETE FIELD
 		}
 	}
 	game->map.map[map_row] = NULL;
@@ -247,9 +274,9 @@ void	count_player_chars(const char *line, t_game *game)
 	}
 }
 
-/**
- * Validate interior line starts and ends with walls
- */
+/*
+Validate interior line starts and ends with walls
+*/
 int	validate_interior_line(const char *line)
 {
 	int	len;
@@ -330,11 +357,11 @@ int	final_map_validation(t_game *game)
 		ft_fprintf(2, "Error: Map must have exactly one player (found %d)\n", game->map.herocount);
 		return (-1);
 	}
-	if (!game->map.map_first_wall)
-	{
-		ft_fprintf(2, "Error: First map line must be all walls\n");
-		return (-1);
-	}
+	// if (!game->map.map_first_wall)           // OBSOLETE FIELD - validation disabled
+	// {
+	//	ft_fprintf(2, "Error: First map line must be all walls\n");
+	//	return (-1);
+	// }
 	// Temporarily disable last wall validation for irregular maps
 	// if (!game->map.map_last_wall)
 	// {

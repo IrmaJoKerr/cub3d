@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/19 11:46:34 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 03:27:42 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define SPACE_TEXTURE "textures/space/space.xpm"
+# define DOORS_TEXTURE "textures/doors/"
 # define TILE_WALL '1'
 # define TILE_FLOOR '0'
 # define DOOR 'D'
@@ -98,6 +100,7 @@ typedef struct s_texture
 	t_image	*south_wall;
 	t_image	*east_wall;
 	t_image	*west_wall;
+	t_image	*space;
 	void	*sky;
 	void	*floor;
 	t_image	**door_frames;
@@ -120,10 +123,11 @@ typedef struct s_mini
 	t_image	wall;
 	t_image	floor;
 	t_image	door;
-	int		full_width;
-	int		full_height;
-	int		x;
-	int		y;
+	t_image	space;
+	int		full_pixel_width;
+	int		full_pixel_height;
+	int		src_start_x;
+	int		src_start_y;
 }	t_mini;
 
 typedef struct s_game
@@ -164,27 +168,5 @@ typedef struct s_ray
 	int			tex_x;
 	double		cam_x;
 }	t_ray;
-
-// Represents a 2D point.
-typedef struct s_point
-{
-	int	x;
-	int	y;
-}	t_point;
-
-// Represents the three vertices of our triangle.
-typedef struct s_triangle
-{
-	t_point	tip;
-	t_point	base_l;
-	t_point	base_r;
-}	t_triangle;
-
-// Holds information needed for drawing pixels.
-typedef struct s_draw_info
-{
-	unsigned int	*pixels;
-	int				stride;
-}	t_draw_info;
 
 #endif

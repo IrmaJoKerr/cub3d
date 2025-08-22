@@ -6,12 +6,23 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:46:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:05:19 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 #include <X11/keysym.h>
+
+/*
+Function prototypes
+*/
+int	handle_movement_keys(int keycode, t_game *game);
+int	handle_rotation_keys(int keycode, t_game *game);
+int	handle_keypress(int keycode, t_game *game);
+int	handle_keyrelease(int keycode, t_game *game);
+int	handle_window_close(t_game *game);
+int	handle_mouse_move(int x, int y, t_game *game);
+int	setup_event_hooks(t_game *game);
 
 /*
 Handle WASD movement keys
@@ -30,7 +41,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		dy = calc_move_dy(game->view_direction, MOVE_SPEED, 1);
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{	
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -51,7 +62,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -71,7 +82,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;
@@ -91,7 +102,7 @@ int	handle_movement_keys(int keycode, t_game *game)
 		new_x = game->curr_x + dx;
 		new_y = game->curr_y + dy;
 		
-		if (is_valid_world_position(game, new_x, new_y))
+		if (is_valid_move(game, new_x, new_y))
 		{
 			game->curr_x = new_x;
 			game->curr_y = new_y;

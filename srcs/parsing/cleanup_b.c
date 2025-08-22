@@ -3,21 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_b.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 18:11:23 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 03:30:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// Function prototypes
+/*
+Function prototypes
+*/
+void	cleanup_texture_structures(t_game *game);
 void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
+void	clean_wall_textures(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
-void	clean_wall_textures(t_game *game);
+void	cleanup_minimap(t_game *game);
 
 /*
 Helper function to cleanup texture structures allocated during initialization.
@@ -46,6 +50,11 @@ void	cleanup_texture_structures(t_game *game)
 		free(game->textures.west_wall);
 		game->textures.west_wall = NULL;
 	}
+	if (game->textures.space)
+	{
+		free(game->textures.space);
+		game->textures.space = NULL;
+	}
 	if (game->textures.door_frames)
 	{
 		free(game->textures.door_frames);
@@ -66,10 +75,10 @@ void	cleanup_texture_paths(t_game *game)
 		ft_safefree((void **)&game->map.east_texture_path);
 	if (game->map.west_texture_path)
 		ft_safefree((void **)&game->map.west_texture_path);
-	if (game->map.sky_texture_path)
-		ft_safefree((void **)&game->map.sky_texture_path);
-	if (game->map.floor_texture_path)
-		ft_safefree((void **)&game->map.floor_texture_path);
+	// if (game->map.sky_texture_path)          // OBSOLETE FIELD
+	//	ft_safefree((void **)&game->map.sky_texture_path);
+	// if (game->map.floor_texture_path)        // OBSOLETE FIELD
+	//	ft_safefree((void **)&game->map.floor_texture_path);
 	if (game->map.map_path)
 		ft_safefree((void **)&game->map.map_path);
 }
@@ -119,6 +128,12 @@ void	clean_wall_textures(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->textures.west_wall->img_ptr);
 		free(game->textures.west_wall);
 		game->textures.west_wall = NULL;
+	}
+	if (game->textures.space && game->textures.space->img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->textures.space->img_ptr);
+		free(game->textures.space);
+		game->textures.space = NULL;
 	}
 }
 
@@ -172,6 +187,8 @@ void	cleanup_minimap(t_game *game)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.floor.img_ptr);
 	if (game->minimap.door.img_ptr)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.door.img_ptr);
+	if (game->minimap.space.img_ptr)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.space.img_ptr);
 	if (game->minimap.full_map_img)
 		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
 	if (game->minimap.minimap_img)
@@ -179,11 +196,12 @@ void	cleanup_minimap(t_game *game)
 	game->minimap.wall.img_ptr = NULL;
 	game->minimap.floor.img_ptr = NULL;
 	game->minimap.door.img_ptr = NULL;
+	game->minimap.space.img_ptr = NULL;
 	game->minimap.full_map_img = NULL;
 	game->minimap.minimap_img = NULL;
 	game->minimap.full_map_data = NULL;
 	game->minimap.minimap_data = NULL;
-	game->minimap.full_width = 0;
-	game->minimap.full_height = 0;
+	game->minimap.full_pixel_width = 0;
+	game->minimap.full_pixel_height = 0;
 	ft_fprintf(1, "✅ Minimap system cleaned up\n");
 }

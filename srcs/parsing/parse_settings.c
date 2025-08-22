@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_helpers.c                                   :+:      :+:    :+:   */
+/*   parse_settings.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:20:48 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 12:31:43 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 /*
- * Helper functions for config parser
- */
+Function prototypes
+*/
+int		identify_settings_type(const char *line);
+char	*extract_texture_path(const char *line, const char *identifier);
+int		parse_color_settings(char *line, t_game *game, char settings);
+
+/*
+Helper functions for config parser
+*/
 
 int	identify_settings_type(const char *line)
 {
@@ -65,6 +72,8 @@ char	*extract_texture_path(const char *line, const char *identifier)
 	return (path);
 }
 
+/*
+OLD VERSION - BACKUP (monolithic color parsing function)
 int	parse_color_settings(char *line, t_game *game, char settings)
 {
 	char	*values;
@@ -99,57 +108,17 @@ int	parse_color_settings(char *line, t_game *game, char settings)
 		free(values);
 	return (result);
 }
+*/
 
-char	*extract_color_values(const char *line, const char *identifier)
+/*
+NEW VERSION - Delegates to specific subfunctions for better modularity
+*/
+int	parse_color_settings(char *line, t_game *game, char settings)
 {
-	int		i;
-	int		start;
-	char	*values;
-
-	i = ft_strlen(identifier);
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	start = i;
-	while (line[i] && line[i] != '\n')
-		i++;
-	values = malloc(sizeof(char) * (i - start + 1));
-	if (!values)
-		return (NULL);
-	ft_strncpy(values, line + start, i - start);
-	values[i - start] = '\0';
-	return (values);
-}
-
-int	validate_color_values(const char *values, int color[3])
-{
-	int		i;
-	int		num_count;
-	char	**numbers;
-
-	if (!values)
+	if (settings == 'F')
+		return (parse_floor_color(line, game));
+	else if (settings == 'C')
+		return (parse_ceiling_color(line, game));
+	else
 		return (-1);
-	numbers = ft_split(values, ',');
-	if (!numbers)
-		return (-1);
-	num_count = 0;
-	while (numbers[num_count])
-		num_count++;
-	if (num_count != 3)
-	{
-		ft_free_2d(numbers, num_count);
-		return (-1);
-	}
-	i = 0;
-	while (i < 3)
-	{
-		color[i] = ft_atoi(numbers[i]);
-		if (color[i] < 0 || color[i] > 255)
-		{
-			ft_free_2d(numbers, num_count);
-			return (-1);
-		}
-		i++;
-	}
-	ft_free_2d(numbers, num_count);
-	return (0);
 }

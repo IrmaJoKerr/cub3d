@@ -6,11 +6,23 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/03 10:36:37 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 16:15:54 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+int	parse_configuration_section(const char *file, t_game *game);
+int	is_only_whitespace(const char *line);
+int	is_map_start_line(const char *line);
+int	parse_config_settings(char *line, t_game *game);
+int	handle_texture_settings(char *line, t_game *game, int settings_type);
+int	handle_color_settings(char *line, t_game *game, int settings_type);
+int	validate_required_config(t_game *game);
+int	cleanup_and_return(int fd, char *line, int ret_val);
 
 /*
 Parse configuration section (before map starts)
@@ -158,7 +170,7 @@ int	handle_texture_settings(char *line, t_game *game, int settings_type)
 		return (-1);
 	}
 	path = extract_texture_path(line, identifier);
-	if (!path || !check_valid_file_path(path))
+	if (!path || !check_valid_texture_path(path))
 	{
 		ft_fprintf(2, "Error: Invalid texture path for %s: %s\n", identifier, path ? path : "NULL");
 		if (path)

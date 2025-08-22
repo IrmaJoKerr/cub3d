@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 09:37:30 by bleow             #+#    #+#             */
-/*   Updated: 2025/07/11 22:22:20 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/17 16:19:27 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+/*
+Function prototypes
+*/
+void	chk_args(int argc, char **argv);
+int		validate_xmp_extension(const char *path);
+int		check_valid_texture_path(const char *path);
 
 void	chk_args(int argc, char **argv)
 {
@@ -37,4 +44,47 @@ void	chk_args(int argc, char **argv)
 		exit(1);
 	}
 	return ;
+}
+
+/*
+Validate XMP extension. Go to end of string, back up 4 places, and match .xpm
+ */
+int	validate_xmp_extension(const char *path)
+{
+	int	len;
+
+	if (!path)
+		return (0);
+	len = ft_strlen(path);
+	if (len < 4)
+		return (0);
+	return (ft_strcmp(&path[len - 4], ".xpm") == 0);
+}
+
+/*
+Enhanced texture path validation with XMP extension check
+*/
+int	check_valid_texture_path(const char *path)
+{
+	int		fd;
+
+	if (!path || ft_strlen(path) == 0)
+	{
+		ft_fprintf(2, "Error: Empty texture path\n");
+		return (0);
+	}
+	if (!validate_xmp_extension(path))
+	{
+		ft_fprintf(2, "Error: Texture file must have .xpm extension: %s\n",
+			path);
+		return (0);
+	}
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_fprintf(2, "Error: Cannot access texture file: %s\n", path);
+		return (0);
+	}
+	close(fd);
+	return (1);
 }
