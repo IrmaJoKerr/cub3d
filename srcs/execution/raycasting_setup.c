@@ -1,81 +1,94 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting_setup.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
+/*   Updated: 2025/08/17 00:50:58 by wjun-kea         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/raycasting.h"
 #include "../../includes/cub3D.h"
 
+static void	draw_sky_and_floor(t_game *game, int sky_color,
+	int floor_color, int midline)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < MAX_HEIGHT)
+	{
+		x = 0;
+		while (x < MAX_WIDTH)
+		{
+			if (y < midline)
+				put_pixel(&game->img, x, y, sky_color);
+			else
+				put_pixel(&game->img, x, y, floor_color);
+			++x;
+		}
+		++y;
+	}
+}
+
+static void	fill_sky_and_floor(t_game *game)
+{
+	int	sky_color;
+	int	floor_color;
+	int	midline;
+
+	sky_color = (game->map.sky_color[0] << 16)
+		| (game->map.sky_color[1] << 8) | game->map.sky_color[2];
+	floor_color = (game->map.floor_color[0] << 16)
+		| (game->map.floor_color[1] << 8) | game->map.floor_color[2];
+	midline = MAX_HEIGHT / 2 + game->view_elevation;
+	if (midline < 0)
+		midline = 0;
+	if (midline > MAX_HEIGHT)
+		midline = MAX_HEIGHT;
+	draw_sky_and_floor(game, sky_color, floor_color, midline);
+}
+
 void	render_raycast(t_game *game)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	fill_sky_and_floor(game);
 	while (x < MAX_WIDTH)
 		render_column(game, x++);
-	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr, game->img.img_ptr, 0, 0);
+	mlx_put_image_to_window(game->mlx_ptr, game->win_ptr,
+		game->img.img_ptr, 0, 0);
 	render_minimap(game);
 }
 
-void draw_crosshair(t_game *game)
+void	draw_crosshair(t_game *game)
 {
-	int cx = MAX_WIDTH / 2;
-	int cy = MAX_HEIGHT / 2;
-	int size = 10;
-	int dx;
-	int dy;
+	int	cx;
+	int	cy;
+	int	size;
+	int	dx;
+	int	dy;
 
-	// Horizontal line
+	cx = MAX_WIDTH / 2;
+	cy = MAX_HEIGHT / 2;
+	size = 10;
 	dx = -size;
 	while (dx <= size)
 	{
 		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx + dx, cy, 0xFFFFFF);
 		dx++;
 	}
-
-	// Vertical line
 	dy = -size;
 	while (dy <= size)
 	{
 		mlx_pixel_put(game->mlx_ptr, game->win_ptr, cx, cy + dy, 0xFFFFFF);
 		dy++;
 	}
-}
-
-void update_doors(t_game *game)
-{
-    int i;
-    
-    i = 0;
-    while (i < game->doorcount)
-    {
-        t_door *door = &game->doors[i];
-
-        double dx = door->x - game->curr_x;
-        double dy = door->y - game->curr_y;
-        double dist_sq = dx * dx + dy * dy;
-        bool near_enough = dist_sq < 7;
-        if (door->state == DOOR_CLOSED && near_enough)
-            door->state = DOOR_OPENING;
-        else if (door->state == DOOR_OPEN && !near_enough)
-            door->state = DOOR_CLOSING;
-        if (door->state == DOOR_OPENING)
-        {
-            door->openness += DOOR_ANIM_SPEED;
-            if (door->openness >= 1.0)
-            {
-                door->openness = 1.0;
-                door->state = DOOR_OPEN;
-            }
-        }
-        else if (door->state == DOOR_CLOSING)
-        {
-            door->openness -= DOOR_ANIM_SPEED;
-            if (door->openness <= 0.0)
-            {
-                door->openness = 0.0;
-                door->state = DOOR_CLOSED;
-            }
-        }
-        door->animation_frame = (int)(door->openness * (game->textures.door_frame_count - 1));
-        i++;
-    }
 }
 
 int	render_img(t_game *game)

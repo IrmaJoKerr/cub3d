@@ -183,5 +183,7 @@ void	render_minimap(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
 void	cleanup_minimap(t_game *game);
+void	calculate_triangle_vertices(t_triangle *tri, t_point center, double direction);
+void	rasterize_triangle(t_draw_info info, t_triangle tri);
 
 #endif
