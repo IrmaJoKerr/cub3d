@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_setup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 00:50:58 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 #include "../../includes/cub3D.h"
 
-static void	draw_sky_and_floor(t_game *game, int sky_color,
+void	draw_sky_and_floor(t_game *game, int sky_color,
 	int floor_color, int midline)
 {
 	int	y;
@@ -35,7 +35,7 @@ static void	draw_sky_and_floor(t_game *game, int sky_color,
 	}
 }
 
-static void	fill_sky_and_floor(t_game *game)
+void	fill_sky_and_floor(t_game *game)
 {
 	int	sky_color;
 	int	floor_color;

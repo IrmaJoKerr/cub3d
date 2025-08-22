@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/13 02:17:56 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,5 +185,8 @@ void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y
 void	cleanup_minimap(t_game *game);
 void	calculate_triangle_vertices(t_triangle *tri, t_point center, double direction);
 void	rasterize_triangle(t_draw_info info, t_triangle tri);
+void	copy_tile_to_minimap(t_game *game, t_image *source_tile, int map_x, int map_y);
+void	calc_minimap_viewport(t_game *game, int *triangle_x, int *triangle_y);
+void	copy_minimap_pixels(t_game *game);
 
 #endif

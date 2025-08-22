@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   render_doors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:17:40 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 00:45:32 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
-static void	update_door_state(t_game *game, t_door *door)
+void	update_door_state(t_game *game, t_door *door)
 {
 	double	dx;
 	double	dy;
@@ -29,7 +29,7 @@ static void	update_door_state(t_game *game, t_door *door)
 		door->state = DOOR_CLOSING;
 }
 
-static void	update_door_animation(t_game *game, t_door *door)
+void	update_door_animation(t_game *game, t_door *door)
 {
 	if (door->state == DOOR_OPENING)
 	{
@@ -68,7 +68,7 @@ void	update_doors(t_game *game)
 	}
 }
 
-static bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
+bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
 	t_game *game, bool *door_found)
 {
 	char	tile;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/16 23:59:36 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static bool	count_doors_in_map(t_game *game, int *door_index)
+bool	count_doors_in_map(t_game *game, int *door_index)
 {
 	int	x;
 	int	y;

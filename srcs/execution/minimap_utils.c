@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 20:38:02 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-static void	copy_tile_to_minimap(t_game *game, t_image *source_tile,
+void	copy_tile_to_minimap(t_game *game, t_image *source_tile,
 	int map_x, int map_y)
 {
 	unsigned int	*full_pixels;
@@ -66,7 +66,7 @@ void	generate_full_minimap(t_game *game)
 	}
 }
 
-static void	calc_minimap_viewport(t_game *game,
+void	calc_minimap_viewport(t_game *game,
 	int *triangle_x, int *triangle_y)
 {
 	double	player_pixel_x;
@@ -88,7 +88,7 @@ static void	calc_minimap_viewport(t_game *game,
 	*triangle_y = (int)(player_pixel_y - game->minimap.y);
 }
 
-static void	copy_minimap_pixels(t_game *game)
+void	copy_minimap_pixels(t_game *game)
 {
 	unsigned int	*f;
 	unsigned int	*m;
