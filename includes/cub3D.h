@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 04:41:07 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,6 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Movement and collision functions. In collisions/movehero.c
-*/
-// File removed - contained only unused functions
-
-/*
 Tile coordinate utility functions. In tile_utils.c
 */
 int		get_tile_at_position(t_game *game, double x, double y);
@@ -108,7 +103,7 @@ double	clamp_elevation(double elevation);
 /*
 Door animation utility functions. In door_utils.c
 */
-void	cleanup_door_frames(t_game *game);
+// ...existing code...
 
 /*
 Path parsing functions. In parse_path.c
@@ -176,17 +171,5 @@ int		setup_event_hooks(t_game *game);
 /*
 Minimap functions. In minimap.c
 */
-void	setup_minimap(t_game *game);
-void	load_minimap_tiles(t_game *game);
-void	generate_full_minimap(t_game *game);
-void	render_minimap(t_game *game);
-void	draw_minimap_border(t_game *game);
-void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
-void	cleanup_minimap(t_game *game);
-void	calculate_triangle_vertices(t_triangle *tri, t_point center, double direction);
-void	rasterize_triangle(t_draw_info info, t_triangle tri);
-void	copy_tile_to_minimap(t_game *game, t_image *source_tile, int map_x, int map_y);
-void	calc_minimap_viewport(t_game *game, int *triangle_x, int *triangle_y);
-void	copy_minimap_pixels(t_game *game);
 
 #endif

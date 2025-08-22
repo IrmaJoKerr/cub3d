@@ -1,47 +1,139 @@
-Starting two-pass parsing for file: maps/valid/sad_face.cub
+Starting two-pass parsing for file: maps/valid/dungeon.cub
 Configuration parsed successfully.
 Map starts at line 8
-Map dimensions: 15x13
-Row 0: line_len=15, max_cols=15
-Row 1: line_len=15, max_cols=15
-Row 2: line_len=15, max_cols=15
-Row 3: line_len=15, max_cols=15
-Row 4: line_len=15, max_cols=15
-Row 5: line_len=15, max_cols=15
-Row 6: line_len=15, max_cols=15
-Row 7: line_len=15, max_cols=15
-Row 8: line_len=15, max_cols=15
-Row 9: line_len=15, max_cols=15
-Row 10: line_len=15, max_cols=15
-Row 11: line_len=15, max_cols=15
-Row 12: line_len=15, max_cols=15
+Map dimensions: 19x10
+Row 0: line_len=19, max_cols=19
+Row 1: line_len=19, max_cols=19
+Row 2: line_len=19, max_cols=19
+Row 3: line_len=19, max_cols=19
+Row 4: line_len=19, max_cols=19
+Row 5: line_len=19, max_cols=19
+Row 6: line_len=19, max_cols=19
+Row 7: line_len=19, max_cols=19
+Row 8: line_len=19, max_cols=19
+Row 9: line_len=19, max_cols=19
 
 === DEBUG: MAP CONTENTS ===
-Map dimensions: 15x13
-Player position: (7.00, 3.00)
+Map dimensions: 19x10
+Player position: (2.00, 1.00)
 Player count: 1
-Start direction: 0
+Start direction: 270
 
 Map array contents:
-Row  0: [111111111111111]
-Row  1: [111111000111111]
-Row  2: [111110000011111]
-Row  3: [1111000N0001111]
-Row  4: [111000000000111]
-Row  5: [1100000D0000011]
-Row  6: [100001111100001]
-Row  7: [110000111000011]
-Row  8: [1110D0010000111]
-Row  9: [1111000D0001111]
-Row 10: [111110000011111]
-Row 11: [111111000111111]
-Row 12: [111111111111111]
+Row  0: [1111111111111111111]
+Row  1: [10W1001001001000001]
+Row  2: [1011000001000001001]
+Row  3: [1001001001111101111]
+Row  4: [1001111000001001001]
+Row  5: [1000000000000001001]
+Row  6: [1001111111111001001]
+Row  7: [1111000000000001011]
+Row  8: [1000000001000000001]
+Row  9: [1111111111111111111]
 === END DEBUG MAP ===
 
-DEBUG: Starting enhanced path validation from (3,7)
-DEBUG: Map dimensions: 15x13
+DEBUG: Starting enhanced path validation from (1,2)
+DEBUG: Map dimensions: 19x10
 DEBUG: Using local test_map for flood fill marking
-DEBUG: Checking position (3,7), char='N'
+DEBUG: Checking position (1,2), char='W'
+DEBUG: Marked (1,2) as visited in test_map
+DEBUG: Checking position (0,2), char='1'
+DEBUG: Found wall/void at (0,2), char='1'
+DEBUG: Checking position (2,2), char='1'
+DEBUG: Found wall/void at (2,2), char='1'
+DEBUG: Checking position (1,1), char='0'
+DEBUG: Marked (1,1) as visited in test_map
+DEBUG: Checking position (0,1), char='1'
+DEBUG: Found wall/void at (0,1), char='1'
+DEBUG: Checking position (2,1), char='0'
+DEBUG: Marked (2,1) as visited in test_map
+DEBUG: Checking position (1,1), char='0'
+DEBUG: Already visited (1,1)
+DEBUG: Checking position (3,1), char='0'
+DEBUG: Marked (3,1) as visited in test_map
+DEBUG: Checking position (2,1), char='0'
+DEBUG: Already visited (2,1)
+DEBUG: Checking position (4,1), char='0'
+DEBUG: Marked (4,1) as visited in test_map
+DEBUG: Checking position (3,1), char='0'
+DEBUG: Already visited (3,1)
+DEBUG: Checking position (5,1), char='0'
+DEBUG: Marked (5,1) as visited in test_map
+DEBUG: Checking position (4,1), char='0'
+DEBUG: Already visited (4,1)
+DEBUG: Checking position (6,1), char='0'
+DEBUG: Marked (6,1) as visited in test_map
+DEBUG: Checking position (5,1), char='0'
+DEBUG: Already visited (5,1)
+DEBUG: Checking position (7,1), char='1'
+DEBUG: Found wall/void at (7,1), char='1'
+DEBUG: Checking position (6,0), char='1'
+DEBUG: Found wall/void at (6,0), char='1'
+DEBUG: Checking position (6,2), char='0'
+DEBUG: Marked (6,2) as visited in test_map
+DEBUG: Checking position (5,2), char='0'
+DEBUG: Marked (5,2) as visited in test_map
+DEBUG: Checking position (4,2), char='0'
+DEBUG: Marked (4,2) as visited in test_map
+DEBUG: Checking position (3,2), char='0'
+DEBUG: Marked (3,2) as visited in test_map
+DEBUG: Checking position (2,2), char='1'
+DEBUG: Found wall/void at (2,2), char='1'
+DEBUG: Checking position (4,2), char='0'
+DEBUG: Already visited (4,2)
+DEBUG: Checking position (3,1), char='0'
+DEBUG: Already visited (3,1)
+DEBUG: Checking position (3,3), char='1'
+DEBUG: Found wall/void at (3,3), char='1'
+DEBUG: Successfully validated (3,2)
+DEBUG: Checking position (5,2), char='0'
+DEBUG: Already visited (5,2)
+DEBUG: Checking position (4,1), char='0'
+DEBUG: Already visited (4,1)
+DEBUG: Checking position (4,3), char='1'
+DEBUG: Found wall/void at (4,3), char='1'
+DEBUG: Successfully validated (4,2)
+DEBUG: Checking position (6,2), char='0'
+DEBUG: Already visited (6,2)
+DEBUG: Checking position (5,1), char='0'
+DEBUG: Already visited (5,1)
+DEBUG: Checking position (5,3), char='0'
+DEBUG: Marked (5,3) as visited in test_map
+DEBUG: Checking position (4,3), char='1'
+DEBUG: Found wall/void at (4,3), char='1'
+DEBUG: Checking position (6,3), char='1'
+DEBUG: Found wall/void at (6,3), char='1'
+DEBUG: Checking position (5,2), char='0'
+DEBUG: Already visited (5,2)
+DEBUG: Checking position (5,4), char='0'
+DEBUG: Marked (5,4) as visited in test_map
+DEBUG: Checking position (4,4), char='1'
+DEBUG: Found wall/void at (4,4), char='1'
+DEBUG: Checking position (6,4), char='1'
+DEBUG: Found wall/void at (6,4), char='1'
+DEBUG: Checking position (5,3), char='0'
+DEBUG: Already visited (5,3)
+DEBUG: Checking position (5,5), char='0'
+DEBUG: Marked (5,5) as visited in test_map
+DEBUG: Checking position (4,5), char='1'
+DEBUG: Found wall/void at (4,5), char='1'
+DEBUG: Checking position (6,5), char='1'
+DEBUG: Found wall/void at (6,5), char='1'
+DEBUG: Checking position (5,4), char='0'
+DEBUG: Already visited (5,4)
+DEBUG: Checking position (5,6), char='0'
+DEBUG: Marked (5,6) as visited in test_map
+DEBUG: Checking position (4,6), char='1'
+DEBUG: Found wall/void at (4,6), char='1'
+DEBUG: Checking position (6,6), char='1'
+DEBUG: Found wall/void at (6,6), char='1'
+DEBUG: Checking position (5,5), char='0'
+DEBUG: Already visited (5,5)
+DEBUG: Checking position (5,7), char='0'
+DEBUG: Marked (5,7) as visited in test_map
+DEBUG: Checking position (4,7), char='0'
+DEBUG: Marked (4,7) as visited in test_map
+DEBUG: Checking position (3,7), char='0'
 DEBUG: Marked (3,7) as visited in test_map
 DEBUG: Checking position (2,7), char='0'
 DEBUG: Marked (2,7) as visited in test_map
@@ -51,185 +143,16 @@ DEBUG: Checking position (0,7), char='1'
 DEBUG: Found wall/void at (0,7), char='1'
 DEBUG: Checking position (2,7), char='0'
 DEBUG: Already visited (2,7)
-DEBUG: Checking position (1,6), char='0'
-DEBUG: Marked (1,6) as visited in test_map
-DEBUG: Checking position (0,6), char='1'
-DEBUG: Found wall/void at (0,6), char='1'
-DEBUG: Checking position (2,6), char='0'
-DEBUG: Marked (2,6) as visited in test_map
-DEBUG: Checking position (1,6), char='0'
-DEBUG: Already visited (1,6)
-DEBUG: Checking position (3,6), char='0'
-DEBUG: Marked (3,6) as visited in test_map
-DEBUG: Checking position (2,6), char='0'
-DEBUG: Already visited (2,6)
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Marked (4,6) as visited in test_map
-DEBUG: Checking position (3,6), char='0'
-DEBUG: Already visited (3,6)
-DEBUG: Checking position (5,6), char='0'
-DEBUG: Marked (5,6) as visited in test_map
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Already visited (4,6)
-DEBUG: Checking position (6,6), char='1'
-DEBUG: Found wall/void at (6,6), char='1'
-DEBUG: Checking position (5,5), char='0'
-DEBUG: Marked (5,5) as visited in test_map
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Marked (4,5) as visited in test_map
-DEBUG: Checking position (3,5), char='0'
-DEBUG: Marked (3,5) as visited in test_map
-DEBUG: Checking position (2,5), char='0'
-DEBUG: Marked (2,5) as visited in test_map
-DEBUG: Checking position (1,5), char='1'
-DEBUG: Found wall/void at (1,5), char='1'
-DEBUG: Checking position (3,5), char='0'
-DEBUG: Already visited (3,5)
-DEBUG: Checking position (2,4), char='1'
-DEBUG: Found wall/void at (2,4), char='1'
-DEBUG: Checking position (2,6), char='0'
-DEBUG: Already visited (2,6)
-DEBUG: Successfully validated (2,5)
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Already visited (4,5)
-DEBUG: Checking position (3,4), char='0'
-DEBUG: Marked (3,4) as visited in test_map
-DEBUG: Checking position (2,4), char='1'
-DEBUG: Found wall/void at (2,4), char='1'
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Marked (4,4) as visited in test_map
-DEBUG: Checking position (3,4), char='0'
-DEBUG: Already visited (3,4)
-DEBUG: Checking position (5,4), char='0'
-DEBUG: Marked (5,4) as visited in test_map
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Already visited (4,4)
-DEBUG: Checking position (6,4), char='0'
-DEBUG: Marked (6,4) as visited in test_map
-DEBUG: Checking position (5,4), char='0'
-DEBUG: Already visited (5,4)
-DEBUG: Checking position (7,4), char='0'
-DEBUG: Marked (7,4) as visited in test_map
-DEBUG: Checking position (6,4), char='0'
-DEBUG: Already visited (6,4)
-DEBUG: Checking position (8,4), char='D'
-DEBUG: Marked (8,4) as visited in test_map
-DEBUG: Checking position (7,4), char='0'
-DEBUG: Already visited (7,4)
-DEBUG: Checking position (9,4), char='0'
-DEBUG: Marked (9,4) as visited in test_map
-DEBUG: Checking position (8,4), char='D'
-DEBUG: Already visited (8,4)
-DEBUG: Checking position (10,4), char='1'
-DEBUG: Found wall/void at (10,4), char='1'
-DEBUG: Checking position (9,3), char='1'
-DEBUG: Found wall/void at (9,3), char='1'
-DEBUG: Checking position (9,5), char='0'
-DEBUG: Marked (9,5) as visited in test_map
-DEBUG: Checking position (8,5), char='0'
-DEBUG: Marked (8,5) as visited in test_map
-DEBUG: Checking position (7,5), char='0'
-DEBUG: Marked (7,5) as visited in test_map
-DEBUG: Checking position (6,5), char='1'
-DEBUG: Found wall/void at (6,5), char='1'
-DEBUG: Checking position (8,5), char='0'
-DEBUG: Already visited (8,5)
-DEBUG: Checking position (7,4), char='0'
-DEBUG: Already visited (7,4)
-DEBUG: Checking position (7,6), char='1'
-DEBUG: Found wall/void at (7,6), char='1'
-DEBUG: Successfully validated (7,5)
-DEBUG: Checking position (9,5), char='0'
-DEBUG: Already visited (9,5)
-DEBUG: Checking position (8,4), char='D'
-DEBUG: Already visited (8,4)
-DEBUG: Checking position (8,6), char='0'
-DEBUG: Marked (8,6) as visited in test_map
-DEBUG: Checking position (7,6), char='1'
-DEBUG: Found wall/void at (7,6), char='1'
-DEBUG: Checking position (9,6), char='0'
-DEBUG: Marked (9,6) as visited in test_map
-DEBUG: Checking position (8,6), char='0'
-DEBUG: Already visited (8,6)
-DEBUG: Checking position (10,6), char='0'
-DEBUG: Marked (10,6) as visited in test_map
-DEBUG: Checking position (9,6), char='0'
-DEBUG: Already visited (9,6)
-DEBUG: Checking position (11,6), char='0'
-DEBUG: Marked (11,6) as visited in test_map
-DEBUG: Checking position (10,6), char='0'
-DEBUG: Already visited (10,6)
-DEBUG: Checking position (12,6), char='1'
-DEBUG: Found wall/void at (12,6), char='1'
-DEBUG: Checking position (11,5), char='1'
-DEBUG: Found wall/void at (11,5), char='1'
-DEBUG: Checking position (11,7), char='0'
-DEBUG: Marked (11,7) as visited in test_map
-DEBUG: Checking position (10,7), char='0'
-DEBUG: Marked (10,7) as visited in test_map
-DEBUG: Checking position (9,7), char='D'
-DEBUG: Marked (9,7) as visited in test_map
-DEBUG: Checking position (8,7), char='1'
-DEBUG: Found wall/void at (8,7), char='1'
-DEBUG: Checking position (10,7), char='0'
-DEBUG: Already visited (10,7)
-DEBUG: Checking position (9,6), char='0'
-DEBUG: Already visited (9,6)
-DEBUG: Checking position (9,8), char='0'
-DEBUG: Marked (9,8) as visited in test_map
-DEBUG: Checking position (8,8), char='0'
-DEBUG: Marked (8,8) as visited in test_map
-DEBUG: Checking position (7,8), char='1'
-DEBUG: Found wall/void at (7,8), char='1'
-DEBUG: Checking position (9,8), char='0'
-DEBUG: Already visited (9,8)
-DEBUG: Checking position (8,7), char='1'
-DEBUG: Found wall/void at (8,7), char='1'
-DEBUG: Checking position (8,9), char='0'
-DEBUG: Marked (8,9) as visited in test_map
-DEBUG: Checking position (7,9), char='0'
-DEBUG: Marked (7,9) as visited in test_map
-DEBUG: Checking position (6,9), char='1'
-DEBUG: Found wall/void at (6,9), char='1'
-DEBUG: Checking position (8,9), char='0'
-DEBUG: Already visited (8,9)
-DEBUG: Checking position (7,8), char='1'
-DEBUG: Found wall/void at (7,8), char='1'
-DEBUG: Checking position (7,10), char='0'
-DEBUG: Marked (7,10) as visited in test_map
-DEBUG: Checking position (6,10), char='0'
-DEBUG: Marked (6,10) as visited in test_map
-DEBUG: Checking position (5,10), char='0'
-DEBUG: Marked (5,10) as visited in test_map
-DEBUG: Checking position (4,10), char='0'
-DEBUG: Marked (4,10) as visited in test_map
-DEBUG: Checking position (3,10), char='0'
-DEBUG: Marked (3,10) as visited in test_map
-DEBUG: Checking position (2,10), char='1'
-DEBUG: Found wall/void at (2,10), char='1'
-DEBUG: Checking position (4,10), char='0'
-DEBUG: Already visited (4,10)
-DEBUG: Checking position (3,9), char='0'
-DEBUG: Marked (3,9) as visited in test_map
-DEBUG: Checking position (2,9), char='0'
-DEBUG: Marked (2,9) as visited in test_map
-DEBUG: Checking position (1,9), char='1'
-DEBUG: Found wall/void at (1,9), char='1'
-DEBUG: Checking position (3,9), char='0'
-DEBUG: Already visited (3,9)
-DEBUG: Checking position (2,8), char='0'
-DEBUG: Marked (2,8) as visited in test_map
+DEBUG: Checking position (1,6), char='1'
+DEBUG: Found wall/void at (1,6), char='1'
 DEBUG: Checking position (1,8), char='0'
 DEBUG: Marked (1,8) as visited in test_map
 DEBUG: Checking position (0,8), char='1'
 DEBUG: Found wall/void at (0,8), char='1'
 DEBUG: Checking position (2,8), char='0'
-DEBUG: Already visited (2,8)
-DEBUG: Checking position (1,7), char='0'
-DEBUG: Already visited (1,7)
-DEBUG: Checking position (1,9), char='1'
-DEBUG: Found wall/void at (1,9), char='1'
-DEBUG: Successfully validated (1,8)
+DEBUG: Marked (2,8) as visited in test_map
+DEBUG: Checking position (1,8), char='0'
+DEBUG: Already visited (1,8)
 DEBUG: Checking position (3,8), char='0'
 DEBUG: Marked (3,8) as visited in test_map
 DEBUG: Checking position (2,8), char='0'
@@ -244,38 +167,560 @@ DEBUG: Checking position (4,8), char='0'
 DEBUG: Already visited (4,8)
 DEBUG: Checking position (6,8), char='1'
 DEBUG: Found wall/void at (6,8), char='1'
-DEBUG: Checking position (5,7), char='D'
-DEBUG: Marked (5,7) as visited in test_map
-DEBUG: Checking position (4,7), char='0'
-DEBUG: Marked (4,7) as visited in test_map
-DEBUG: Checking position (3,7), char='N'
-DEBUG: Already visited (3,7)
-DEBUG: Checking position (5,7), char='D'
+DEBUG: Checking position (5,7), char='0'
 DEBUG: Already visited (5,7)
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Already visited (4,6)
-DEBUG: Checking position (4,8), char='0'
-DEBUG: Already visited (4,8)
-DEBUG: Successfully validated (4,7)
-DEBUG: Checking position (6,7), char='1'
-DEBUG: Found wall/void at (6,7), char='1'
-DEBUG: Checking position (5,6), char='0'
-DEBUG: Already visited (5,6)
-DEBUG: Checking position (5,8), char='0'
-DEBUG: Already visited (5,8)
-DEBUG: Successfully validated (5,7)
 DEBUG: Checking position (5,9), char='0'
 DEBUG: Marked (5,9) as visited in test_map
 DEBUG: Checking position (4,9), char='0'
 DEBUG: Marked (4,9) as visited in test_map
-DEBUG: Checking position (3,9), char='0'
-DEBUG: Already visited (3,9)
+DEBUG: Checking position (3,9), char='1'
+DEBUG: Found wall/void at (3,9), char='1'
 DEBUG: Checking position (5,9), char='0'
 DEBUG: Already visited (5,9)
 DEBUG: Checking position (4,8), char='0'
 DEBUG: Already visited (4,8)
 DEBUG: Checking position (4,10), char='0'
+DEBUG: Marked (4,10) as visited in test_map
+DEBUG: Checking position (3,10), char='1'
+DEBUG: Found wall/void at (3,10), char='1'
+DEBUG: Checking position (5,10), char='0'
+DEBUG: Marked (5,10) as visited in test_map
+DEBUG: Checking position (4,10), char='0'
 DEBUG: Already visited (4,10)
+DEBUG: Checking position (6,10), char='1'
+DEBUG: Found wall/void at (6,10), char='1'
+DEBUG: Checking position (5,9), char='0'
+DEBUG: Already visited (5,9)
+DEBUG: Checking position (5,11), char='0'
+DEBUG: Marked (5,11) as visited in test_map
+DEBUG: Checking position (4,11), char='0'
+DEBUG: Marked (4,11) as visited in test_map
+DEBUG: Checking position (3,11), char='1'
+DEBUG: Found wall/void at (3,11), char='1'
+DEBUG: Checking position (5,11), char='0'
+DEBUG: Already visited (5,11)
+DEBUG: Checking position (4,10), char='0'
+DEBUG: Already visited (4,10)
+DEBUG: Checking position (4,12), char='1'
+DEBUG: Found wall/void at (4,12), char='1'
+DEBUG: Successfully validated (4,11)
+DEBUG: Checking position (6,11), char='1'
+DEBUG: Found wall/void at (6,11), char='1'
+DEBUG: Checking position (5,10), char='0'
+DEBUG: Already visited (5,10)
+DEBUG: Checking position (5,12), char='0'
+DEBUG: Marked (5,12) as visited in test_map
+DEBUG: Checking position (4,12), char='1'
+DEBUG: Found wall/void at (4,12), char='1'
+DEBUG: Checking position (6,12), char='1'
+DEBUG: Found wall/void at (6,12), char='1'
+DEBUG: Checking position (5,11), char='0'
+DEBUG: Already visited (5,11)
+DEBUG: Checking position (5,13), char='0'
+DEBUG: Marked (5,13) as visited in test_map
+DEBUG: Checking position (4,13), char='0'
+DEBUG: Marked (4,13) as visited in test_map
+DEBUG: Checking position (3,13), char='1'
+DEBUG: Found wall/void at (3,13), char='1'
+DEBUG: Checking position (5,13), char='0'
+DEBUG: Already visited (5,13)
+DEBUG: Checking position (4,12), char='1'
+DEBUG: Found wall/void at (4,12), char='1'
+DEBUG: Checking position (4,14), char='0'
+DEBUG: Marked (4,14) as visited in test_map
+DEBUG: Checking position (3,14), char='0'
+DEBUG: Marked (3,14) as visited in test_map
+DEBUG: Checking position (2,14), char='0'
+DEBUG: Marked (2,14) as visited in test_map
+DEBUG: Checking position (1,14), char='0'
+DEBUG: Marked (1,14) as visited in test_map
+DEBUG: Checking position (0,14), char='1'
+DEBUG: Found wall/void at (0,14), char='1'
+DEBUG: Checking position (2,14), char='0'
+DEBUG: Already visited (2,14)
+DEBUG: Checking position (1,13), char='0'
+DEBUG: Marked (1,13) as visited in test_map
+DEBUG: Checking position (0,13), char='1'
+DEBUG: Found wall/void at (0,13), char='1'
+DEBUG: Checking position (2,13), char='0'
+DEBUG: Marked (2,13) as visited in test_map
+DEBUG: Checking position (1,13), char='0'
+DEBUG: Already visited (1,13)
+DEBUG: Checking position (3,13), char='1'
+DEBUG: Found wall/void at (3,13), char='1'
+DEBUG: Checking position (2,12), char='0'
+DEBUG: Marked (2,12) as visited in test_map
+DEBUG: Checking position (1,12), char='1'
+DEBUG: Found wall/void at (1,12), char='1'
+DEBUG: Checking position (3,12), char='1'
+DEBUG: Found wall/void at (3,12), char='1'
+DEBUG: Checking position (2,11), char='0'
+DEBUG: Marked (2,11) as visited in test_map
+DEBUG: Checking position (1,11), char='0'
+DEBUG: Marked (1,11) as visited in test_map
+DEBUG: Checking position (0,11), char='1'
+DEBUG: Found wall/void at (0,11), char='1'
+DEBUG: Checking position (2,11), char='0'
+DEBUG: Already visited (2,11)
+DEBUG: Checking position (1,10), char='0'
+DEBUG: Marked (1,10) as visited in test_map
+DEBUG: Checking position (0,10), char='1'
+DEBUG: Found wall/void at (0,10), char='1'
+DEBUG: Checking position (2,10), char='0'
+DEBUG: Marked (2,10) as visited in test_map
+DEBUG: Checking position (1,10), char='0'
+DEBUG: Already visited (1,10)
+DEBUG: Checking position (3,10), char='1'
+DEBUG: Found wall/void at (3,10), char='1'
+DEBUG: Checking position (2,9), char='1'
+DEBUG: Found wall/void at (2,9), char='1'
+DEBUG: Checking position (2,11), char='0'
+DEBUG: Already visited (2,11)
+DEBUG: Successfully validated (2,10)
+DEBUG: Checking position (1,9), char='1'
+DEBUG: Found wall/void at (1,9), char='1'
+DEBUG: Checking position (1,11), char='0'
+DEBUG: Already visited (1,11)
+DEBUG: Successfully validated (1,10)
+DEBUG: Checking position (1,12), char='1'
+DEBUG: Found wall/void at (1,12), char='1'
+DEBUG: Successfully validated (1,11)
+DEBUG: Checking position (3,11), char='1'
+DEBUG: Found wall/void at (3,11), char='1'
+DEBUG: Checking position (2,10), char='0'
+DEBUG: Already visited (2,10)
+DEBUG: Checking position (2,12), char='0'
+DEBUG: Already visited (2,12)
+DEBUG: Successfully validated (2,11)
+DEBUG: Checking position (2,13), char='0'
+DEBUG: Already visited (2,13)
+DEBUG: Successfully validated (2,12)
+DEBUG: Checking position (2,14), char='0'
+DEBUG: Already visited (2,14)
+DEBUG: Successfully validated (2,13)
+DEBUG: Checking position (1,12), char='1'
+DEBUG: Found wall/void at (1,12), char='1'
+DEBUG: Checking position (1,14), char='0'
+DEBUG: Already visited (1,14)
+DEBUG: Successfully validated (1,13)
+DEBUG: Checking position (1,15), char='0'
+DEBUG: Marked (1,15) as visited in test_map
+DEBUG: Checking position (0,15), char='1'
+DEBUG: Found wall/void at (0,15), char='1'
+DEBUG: Checking position (2,15), char='1'
+DEBUG: Found wall/void at (2,15), char='1'
+DEBUG: Checking position (1,14), char='0'
+DEBUG: Already visited (1,14)
+DEBUG: Checking position (1,16), char='0'
+DEBUG: Marked (1,16) as visited in test_map
+DEBUG: Checking position (0,16), char='1'
+DEBUG: Found wall/void at (0,16), char='1'
+DEBUG: Checking position (2,16), char='0'
+DEBUG: Marked (2,16) as visited in test_map
+DEBUG: Checking position (1,16), char='0'
+DEBUG: Already visited (1,16)
+DEBUG: Checking position (3,16), char='1'
+DEBUG: Found wall/void at (3,16), char='1'
+DEBUG: Checking position (2,15), char='1'
+DEBUG: Found wall/void at (2,15), char='1'
+DEBUG: Checking position (2,17), char='0'
+DEBUG: Marked (2,17) as visited in test_map
+DEBUG: Checking position (1,17), char='0'
+DEBUG: Marked (1,17) as visited in test_map
+DEBUG: Checking position (0,17), char='1'
+DEBUG: Found wall/void at (0,17), char='1'
+DEBUG: Checking position (2,17), char='0'
+DEBUG: Already visited (2,17)
+DEBUG: Checking position (1,16), char='0'
+DEBUG: Already visited (1,16)
+DEBUG: Checking position (1,18), char='1'
+DEBUG: Found wall/void at (1,18), char='1'
+DEBUG: Successfully validated (1,17)
+DEBUG: Checking position (3,17), char='1'
+DEBUG: Found wall/void at (3,17), char='1'
+DEBUG: Checking position (2,16), char='0'
+DEBUG: Already visited (2,16)
+DEBUG: Checking position (2,18), char='1'
+DEBUG: Found wall/void at (2,18), char='1'
+DEBUG: Successfully validated (2,17)
+DEBUG: Successfully validated (2,16)
+DEBUG: Checking position (1,15), char='0'
+DEBUG: Already visited (1,15)
+DEBUG: Checking position (1,17), char='0'
+DEBUG: Already visited (1,17)
+DEBUG: Successfully validated (1,16)
+DEBUG: Successfully validated (1,15)
+DEBUG: Successfully validated (1,14)
+DEBUG: Checking position (3,14), char='0'
+DEBUG: Already visited (3,14)
+DEBUG: Checking position (2,13), char='0'
+DEBUG: Already visited (2,13)
+DEBUG: Checking position (2,15), char='1'
+DEBUG: Found wall/void at (2,15), char='1'
+DEBUG: Successfully validated (2,14)
+DEBUG: Checking position (4,14), char='0'
+DEBUG: Already visited (4,14)
+DEBUG: Checking position (3,13), char='1'
+DEBUG: Found wall/void at (3,13), char='1'
+DEBUG: Checking position (3,15), char='1'
+DEBUG: Found wall/void at (3,15), char='1'
+DEBUG: Successfully validated (3,14)
+DEBUG: Checking position (5,14), char='0'
+DEBUG: Marked (5,14) as visited in test_map
+DEBUG: Checking position (4,14), char='0'
+DEBUG: Already visited (4,14)
+DEBUG: Checking position (6,14), char='0'
+DEBUG: Marked (6,14) as visited in test_map
+DEBUG: Checking position (5,14), char='0'
+DEBUG: Already visited (5,14)
+DEBUG: Checking position (7,14), char='0'
+DEBUG: Marked (7,14) as visited in test_map
+DEBUG: Checking position (6,14), char='0'
+DEBUG: Already visited (6,14)
+DEBUG: Checking position (8,14), char='0'
+DEBUG: Marked (8,14) as visited in test_map
+DEBUG: Checking position (7,14), char='0'
+DEBUG: Already visited (7,14)
+DEBUG: Checking position (9,14), char='1'
+DEBUG: Found wall/void at (9,14), char='1'
+DEBUG: Checking position (8,13), char='0'
+DEBUG: Marked (8,13) as visited in test_map
+DEBUG: Checking position (7,13), char='0'
+DEBUG: Marked (7,13) as visited in test_map
+DEBUG: Checking position (6,13), char='0'
+DEBUG: Marked (6,13) as visited in test_map
+DEBUG: Checking position (5,13), char='0'
+DEBUG: Already visited (5,13)
+DEBUG: Checking position (7,13), char='0'
+DEBUG: Already visited (7,13)
+DEBUG: Checking position (6,12), char='1'
+DEBUG: Found wall/void at (6,12), char='1'
+DEBUG: Checking position (6,14), char='0'
+DEBUG: Already visited (6,14)
+DEBUG: Successfully validated (6,13)
+DEBUG: Checking position (8,13), char='0'
+DEBUG: Already visited (8,13)
+DEBUG: Checking position (7,12), char='0'
+DEBUG: Marked (7,12) as visited in test_map
+DEBUG: Checking position (6,12), char='1'
+DEBUG: Found wall/void at (6,12), char='1'
+DEBUG: Checking position (8,12), char='0'
+DEBUG: Marked (8,12) as visited in test_map
+DEBUG: Checking position (7,12), char='0'
+DEBUG: Already visited (7,12)
+DEBUG: Checking position (9,12), char='1'
+DEBUG: Found wall/void at (9,12), char='1'
+DEBUG: Checking position (8,11), char='0'
+DEBUG: Marked (8,11) as visited in test_map
+DEBUG: Checking position (7,11), char='0'
+DEBUG: Marked (7,11) as visited in test_map
+DEBUG: Checking position (6,11), char='1'
+DEBUG: Found wall/void at (6,11), char='1'
+DEBUG: Checking position (8,11), char='0'
+DEBUG: Already visited (8,11)
+DEBUG: Checking position (7,10), char='0'
+DEBUG: Marked (7,10) as visited in test_map
+DEBUG: Checking position (6,10), char='1'
+DEBUG: Found wall/void at (6,10), char='1'
+DEBUG: Checking position (8,10), char='0'
+DEBUG: Marked (8,10) as visited in test_map
+DEBUG: Checking position (7,10), char='0'
+DEBUG: Already visited (7,10)
+DEBUG: Checking position (9,10), char='1'
+DEBUG: Found wall/void at (9,10), char='1'
+DEBUG: Checking position (8,9), char='1'
+DEBUG: Found wall/void at (8,9), char='1'
+DEBUG: Checking position (8,11), char='0'
+DEBUG: Already visited (8,11)
+DEBUG: Successfully validated (8,10)
+DEBUG: Checking position (7,9), char='0'
+DEBUG: Marked (7,9) as visited in test_map
+DEBUG: Checking position (6,9), char='1'
+DEBUG: Found wall/void at (6,9), char='1'
+DEBUG: Checking position (8,9), char='1'
+DEBUG: Found wall/void at (8,9), char='1'
+DEBUG: Checking position (7,8), char='0'
+DEBUG: Marked (7,8) as visited in test_map
+DEBUG: Checking position (6,8), char='1'
+DEBUG: Found wall/void at (6,8), char='1'
+DEBUG: Checking position (8,8), char='0'
+DEBUG: Marked (8,8) as visited in test_map
+DEBUG: Checking position (7,8), char='0'
+DEBUG: Already visited (7,8)
+DEBUG: Checking position (9,8), char='1'
+DEBUG: Found wall/void at (9,8), char='1'
+DEBUG: Checking position (8,7), char='0'
+DEBUG: Marked (8,7) as visited in test_map
+DEBUG: Checking position (7,7), char='0'
+DEBUG: Marked (7,7) as visited in test_map
+DEBUG: Checking position (6,7), char='1'
+DEBUG: Found wall/void at (6,7), char='1'
+DEBUG: Checking position (8,7), char='0'
+DEBUG: Already visited (8,7)
+DEBUG: Checking position (7,6), char='0'
+DEBUG: Marked (7,6) as visited in test_map
+DEBUG: Checking position (6,6), char='1'
+DEBUG: Found wall/void at (6,6), char='1'
+DEBUG: Checking position (8,6), char='0'
+DEBUG: Marked (8,6) as visited in test_map
+DEBUG: Checking position (7,6), char='0'
+DEBUG: Already visited (7,6)
+DEBUG: Checking position (9,6), char='1'
+DEBUG: Found wall/void at (9,6), char='1'
+DEBUG: Checking position (8,5), char='0'
+DEBUG: Marked (8,5) as visited in test_map
+DEBUG: Checking position (7,5), char='0'
+DEBUG: Marked (7,5) as visited in test_map
+DEBUG: Checking position (6,5), char='1'
+DEBUG: Found wall/void at (6,5), char='1'
+DEBUG: Checking position (8,5), char='0'
+DEBUG: Already visited (8,5)
+DEBUG: Checking position (7,4), char='0'
+DEBUG: Marked (7,4) as visited in test_map
+DEBUG: Checking position (6,4), char='1'
+DEBUG: Found wall/void at (6,4), char='1'
+DEBUG: Checking position (8,4), char='0'
+DEBUG: Marked (8,4) as visited in test_map
+DEBUG: Checking position (7,4), char='0'
+DEBUG: Already visited (7,4)
+DEBUG: Checking position (9,4), char='1'
+DEBUG: Found wall/void at (9,4), char='1'
+DEBUG: Checking position (8,3), char='0'
+DEBUG: Marked (8,3) as visited in test_map
+DEBUG: Checking position (7,3), char='1'
+DEBUG: Found wall/void at (7,3), char='1'
+DEBUG: Checking position (9,3), char='1'
+DEBUG: Found wall/void at (9,3), char='1'
+DEBUG: Checking position (8,2), char='0'
+DEBUG: Marked (8,2) as visited in test_map
+DEBUG: Checking position (7,2), char='1'
+DEBUG: Found wall/void at (7,2), char='1'
+DEBUG: Checking position (9,2), char='1'
+DEBUG: Found wall/void at (9,2), char='1'
+DEBUG: Checking position (8,1), char='0'
+DEBUG: Marked (8,1) as visited in test_map
+DEBUG: Checking position (7,1), char='1'
+DEBUG: Found wall/void at (7,1), char='1'
+DEBUG: Checking position (9,1), char='1'
+DEBUG: Found wall/void at (9,1), char='1'
+DEBUG: Checking position (8,0), char='1'
+DEBUG: Found wall/void at (8,0), char='1'
+DEBUG: Checking position (8,2), char='0'
+DEBUG: Already visited (8,2)
+DEBUG: Successfully validated (8,1)
+DEBUG: Checking position (8,3), char='0'
+DEBUG: Already visited (8,3)
+DEBUG: Successfully validated (8,2)
+DEBUG: Checking position (8,4), char='0'
+DEBUG: Already visited (8,4)
+DEBUG: Successfully validated (8,3)
+DEBUG: Checking position (8,5), char='0'
+DEBUG: Already visited (8,5)
+DEBUG: Successfully validated (8,4)
+DEBUG: Checking position (7,3), char='1'
+DEBUG: Found wall/void at (7,3), char='1'
+DEBUG: Checking position (7,5), char='0'
+DEBUG: Already visited (7,5)
+DEBUG: Successfully validated (7,4)
+DEBUG: Checking position (7,6), char='0'
+DEBUG: Already visited (7,6)
+DEBUG: Successfully validated (7,5)
+DEBUG: Checking position (9,5), char='1'
+DEBUG: Found wall/void at (9,5), char='1'
+DEBUG: Checking position (8,4), char='0'
+DEBUG: Already visited (8,4)
+DEBUG: Checking position (8,6), char='0'
+DEBUG: Already visited (8,6)
+DEBUG: Successfully validated (8,5)
+DEBUG: Checking position (8,7), char='0'
+DEBUG: Already visited (8,7)
+DEBUG: Successfully validated (8,6)
+DEBUG: Checking position (7,5), char='0'
+DEBUG: Already visited (7,5)
+DEBUG: Checking position (7,7), char='0'
+DEBUG: Already visited (7,7)
+DEBUG: Successfully validated (7,6)
+DEBUG: Checking position (7,8), char='0'
+DEBUG: Already visited (7,8)
+DEBUG: Successfully validated (7,7)
+DEBUG: Checking position (9,7), char='1'
+DEBUG: Found wall/void at (9,7), char='1'
+DEBUG: Checking position (8,6), char='0'
+DEBUG: Already visited (8,6)
+DEBUG: Checking position (8,8), char='0'
+DEBUG: Already visited (8,8)
+DEBUG: Successfully validated (8,7)
+DEBUG: Checking position (8,9), char='1'
+DEBUG: Found wall/void at (8,9), char='1'
+DEBUG: Successfully validated (8,8)
+DEBUG: Checking position (7,7), char='0'
+DEBUG: Already visited (7,7)
+DEBUG: Checking position (7,9), char='0'
+DEBUG: Already visited (7,9)
+DEBUG: Successfully validated (7,8)
+DEBUG: Checking position (7,10), char='0'
+DEBUG: Already visited (7,10)
+DEBUG: Successfully validated (7,9)
+DEBUG: Checking position (7,11), char='0'
+DEBUG: Already visited (7,11)
+DEBUG: Successfully validated (7,10)
+DEBUG: Checking position (7,12), char='0'
+DEBUG: Already visited (7,12)
+DEBUG: Successfully validated (7,11)
+DEBUG: Checking position (9,11), char='1'
+DEBUG: Found wall/void at (9,11), char='1'
+DEBUG: Checking position (8,10), char='0'
+DEBUG: Already visited (8,10)
+DEBUG: Checking position (8,12), char='0'
+DEBUG: Already visited (8,12)
+DEBUG: Successfully validated (8,11)
+DEBUG: Checking position (8,13), char='0'
+DEBUG: Already visited (8,13)
+DEBUG: Successfully validated (8,12)
+DEBUG: Checking position (7,11), char='0'
+DEBUG: Already visited (7,11)
+DEBUG: Checking position (7,13), char='0'
+DEBUG: Already visited (7,13)
+DEBUG: Successfully validated (7,12)
+DEBUG: Checking position (7,14), char='0'
+DEBUG: Already visited (7,14)
+DEBUG: Successfully validated (7,13)
+DEBUG: Checking position (9,13), char='1'
+DEBUG: Found wall/void at (9,13), char='1'
+DEBUG: Checking position (8,12), char='0'
+DEBUG: Already visited (8,12)
+DEBUG: Checking position (8,14), char='0'
+DEBUG: Already visited (8,14)
+DEBUG: Successfully validated (8,13)
+DEBUG: Checking position (8,15), char='0'
+DEBUG: Marked (8,15) as visited in test_map
+DEBUG: Checking position (7,15), char='1'
+DEBUG: Found wall/void at (7,15), char='1'
+DEBUG: Checking position (9,15), char='1'
+DEBUG: Found wall/void at (9,15), char='1'
+DEBUG: Checking position (8,14), char='0'
+DEBUG: Already visited (8,14)
+DEBUG: Checking position (8,16), char='0'
+DEBUG: Marked (8,16) as visited in test_map
+DEBUG: Checking position (7,16), char='0'
+DEBUG: Marked (7,16) as visited in test_map
+DEBUG: Checking position (6,16), char='0'
+DEBUG: Marked (6,16) as visited in test_map
+DEBUG: Checking position (5,16), char='0'
+DEBUG: Marked (5,16) as visited in test_map
+DEBUG: Checking position (4,16), char='0'
+DEBUG: Marked (4,16) as visited in test_map
+DEBUG: Checking position (3,16), char='1'
+DEBUG: Found wall/void at (3,16), char='1'
+DEBUG: Checking position (5,16), char='0'
+DEBUG: Already visited (5,16)
+DEBUG: Checking position (4,15), char='1'
+DEBUG: Found wall/void at (4,15), char='1'
+DEBUG: Checking position (4,17), char='0'
+DEBUG: Marked (4,17) as visited in test_map
+DEBUG: Checking position (3,17), char='1'
+DEBUG: Found wall/void at (3,17), char='1'
+DEBUG: Checking position (5,17), char='0'
+DEBUG: Marked (5,17) as visited in test_map
+DEBUG: Checking position (4,17), char='0'
+DEBUG: Already visited (4,17)
+DEBUG: Checking position (6,17), char='0'
+DEBUG: Marked (6,17) as visited in test_map
+DEBUG: Checking position (5,17), char='0'
+DEBUG: Already visited (5,17)
+DEBUG: Checking position (7,17), char='1'
+DEBUG: Found wall/void at (7,17), char='1'
+DEBUG: Checking position (6,16), char='0'
+DEBUG: Already visited (6,16)
+DEBUG: Checking position (6,18), char='1'
+DEBUG: Found wall/void at (6,18), char='1'
+DEBUG: Successfully validated (6,17)
+DEBUG: Checking position (5,16), char='0'
+DEBUG: Already visited (5,16)
+DEBUG: Checking position (5,18), char='1'
+DEBUG: Found wall/void at (5,18), char='1'
+DEBUG: Successfully validated (5,17)
+DEBUG: Checking position (4,16), char='0'
+DEBUG: Already visited (4,16)
+DEBUG: Checking position (4,18), char='1'
+DEBUG: Found wall/void at (4,18), char='1'
+DEBUG: Successfully validated (4,17)
+DEBUG: Successfully validated (4,16)
+DEBUG: Checking position (6,16), char='0'
+DEBUG: Already visited (6,16)
+DEBUG: Checking position (5,15), char='1'
+DEBUG: Found wall/void at (5,15), char='1'
+DEBUG: Checking position (5,17), char='0'
+DEBUG: Already visited (5,17)
+DEBUG: Successfully validated (5,16)
+DEBUG: Checking position (7,16), char='0'
+DEBUG: Already visited (7,16)
+DEBUG: Checking position (6,15), char='1'
+DEBUG: Found wall/void at (6,15), char='1'
+DEBUG: Checking position (6,17), char='0'
+DEBUG: Already visited (6,17)
+DEBUG: Successfully validated (6,16)
+DEBUG: Checking position (8,16), char='0'
+DEBUG: Already visited (8,16)
+DEBUG: Checking position (7,15), char='1'
+DEBUG: Found wall/void at (7,15), char='1'
+DEBUG: Checking position (7,17), char='1'
+DEBUG: Found wall/void at (7,17), char='1'
+DEBUG: Successfully validated (7,16)
+DEBUG: Checking position (9,16), char='1'
+DEBUG: Found wall/void at (9,16), char='1'
+DEBUG: Checking position (8,15), char='0'
+DEBUG: Already visited (8,15)
+DEBUG: Checking position (8,17), char='0'
+DEBUG: Marked (8,17) as visited in test_map
+DEBUG: Checking position (7,17), char='1'
+DEBUG: Found wall/void at (7,17), char='1'
+DEBUG: Checking position (9,17), char='1'
+DEBUG: Found wall/void at (9,17), char='1'
+DEBUG: Checking position (8,16), char='0'
+DEBUG: Already visited (8,16)
+DEBUG: Checking position (8,18), char='1'
+DEBUG: Found wall/void at (8,18), char='1'
+DEBUG: Successfully validated (8,17)
+DEBUG: Successfully validated (8,16)
+DEBUG: Successfully validated (8,15)
+DEBUG: Successfully validated (8,14)
+DEBUG: Checking position (7,13), char='0'
+DEBUG: Already visited (7,13)
+DEBUG: Checking position (7,15), char='1'
+DEBUG: Found wall/void at (7,15), char='1'
+DEBUG: Successfully validated (7,14)
+DEBUG: Checking position (6,13), char='0'
+DEBUG: Already visited (6,13)
+DEBUG: Checking position (6,15), char='1'
+DEBUG: Found wall/void at (6,15), char='1'
+DEBUG: Successfully validated (6,14)
+DEBUG: Checking position (5,13), char='0'
+DEBUG: Already visited (5,13)
+DEBUG: Checking position (5,15), char='1'
+DEBUG: Found wall/void at (5,15), char='1'
+DEBUG: Successfully validated (5,14)
+DEBUG: Checking position (4,13), char='0'
+DEBUG: Already visited (4,13)
+DEBUG: Checking position (4,15), char='1'
+DEBUG: Found wall/void at (4,15), char='1'
+DEBUG: Successfully validated (4,14)
+DEBUG: Successfully validated (4,13)
+DEBUG: Checking position (6,13), char='0'
+DEBUG: Already visited (6,13)
+DEBUG: Checking position (5,12), char='0'
+DEBUG: Already visited (5,12)
+DEBUG: Checking position (5,14), char='0'
+DEBUG: Already visited (5,14)
+DEBUG: Successfully validated (5,13)
+DEBUG: Successfully validated (5,12)
+DEBUG: Successfully validated (5,11)
+DEBUG: Successfully validated (5,10)
+DEBUG: Checking position (4,9), char='0'
+DEBUG: Already visited (4,9)
+DEBUG: Checking position (4,11), char='0'
+DEBUG: Already visited (4,11)
+DEBUG: Successfully validated (4,10)
 DEBUG: Successfully validated (4,9)
 DEBUG: Checking position (6,9), char='1'
 DEBUG: Found wall/void at (6,9), char='1'
@@ -290,425 +735,154 @@ DEBUG: Already visited (4,7)
 DEBUG: Checking position (4,9), char='0'
 DEBUG: Already visited (4,9)
 DEBUG: Successfully validated (4,8)
-DEBUG: Checking position (3,7), char='N'
+DEBUG: Checking position (3,7), char='0'
 DEBUG: Already visited (3,7)
-DEBUG: Checking position (3,9), char='0'
-DEBUG: Already visited (3,9)
+DEBUG: Checking position (3,9), char='1'
+DEBUG: Found wall/void at (3,9), char='1'
 DEBUG: Successfully validated (3,8)
 DEBUG: Checking position (2,7), char='0'
 DEBUG: Already visited (2,7)
-DEBUG: Checking position (2,9), char='0'
-DEBUG: Already visited (2,9)
+DEBUG: Checking position (2,9), char='1'
+DEBUG: Found wall/void at (2,9), char='1'
 DEBUG: Successfully validated (2,8)
-DEBUG: Checking position (2,10), char='1'
-DEBUG: Found wall/void at (2,10), char='1'
-DEBUG: Successfully validated (2,9)
-DEBUG: Checking position (4,9), char='0'
-DEBUG: Already visited (4,9)
-DEBUG: Checking position (3,8), char='0'
-DEBUG: Already visited (3,8)
-DEBUG: Checking position (3,10), char='0'
-DEBUG: Already visited (3,10)
-DEBUG: Successfully validated (3,9)
-DEBUG: Checking position (3,11), char='1'
-DEBUG: Found wall/void at (3,11), char='1'
-DEBUG: Successfully validated (3,10)
-DEBUG: Checking position (5,10), char='0'
-DEBUG: Already visited (5,10)
-DEBUG: Checking position (4,9), char='0'
-DEBUG: Already visited (4,9)
-DEBUG: Checking position (4,11), char='0'
-DEBUG: Marked (4,11) as visited in test_map
-DEBUG: Checking position (3,11), char='1'
-DEBUG: Found wall/void at (3,11), char='1'
-DEBUG: Checking position (5,11), char='0'
-DEBUG: Marked (5,11) as visited in test_map
-DEBUG: Checking position (4,11), char='0'
-DEBUG: Already visited (4,11)
-DEBUG: Checking position (6,11), char='0'
-DEBUG: Marked (6,11) as visited in test_map
-DEBUG: Checking position (5,11), char='0'
-DEBUG: Already visited (5,11)
-DEBUG: Checking position (7,11), char='0'
-DEBUG: Marked (7,11) as visited in test_map
-DEBUG: Checking position (6,11), char='0'
-DEBUG: Already visited (6,11)
-DEBUG: Checking position (8,11), char='0'
-DEBUG: Marked (8,11) as visited in test_map
-DEBUG: Checking position (7,11), char='0'
-DEBUG: Already visited (7,11)
-DEBUG: Checking position (9,11), char='1'
-DEBUG: Found wall/void at (9,11), char='1'
-DEBUG: Checking position (8,10), char='0'
-DEBUG: Marked (8,10) as visited in test_map
-DEBUG: Checking position (7,10), char='0'
-DEBUG: Already visited (7,10)
-DEBUG: Checking position (9,10), char='0'
-DEBUG: Marked (9,10) as visited in test_map
-DEBUG: Checking position (8,10), char='0'
-DEBUG: Already visited (8,10)
-DEBUG: Checking position (10,10), char='1'
-DEBUG: Found wall/void at (10,10), char='1'
-DEBUG: Checking position (9,9), char='0'
-DEBUG: Marked (9,9) as visited in test_map
-DEBUG: Checking position (8,9), char='0'
-DEBUG: Already visited (8,9)
-DEBUG: Checking position (10,9), char='0'
-DEBUG: Marked (10,9) as visited in test_map
-DEBUG: Checking position (9,9), char='0'
-DEBUG: Already visited (9,9)
-DEBUG: Checking position (11,9), char='1'
-DEBUG: Found wall/void at (11,9), char='1'
-DEBUG: Checking position (10,8), char='0'
-DEBUG: Marked (10,8) as visited in test_map
-DEBUG: Checking position (9,8), char='0'
-DEBUG: Already visited (9,8)
-DEBUG: Checking position (11,8), char='0'
-DEBUG: Marked (11,8) as visited in test_map
-DEBUG: Checking position (10,8), char='0'
-DEBUG: Already visited (10,8)
-DEBUG: Checking position (12,8), char='1'
-DEBUG: Found wall/void at (12,8), char='1'
-DEBUG: Checking position (11,7), char='0'
-DEBUG: Already visited (11,7)
-DEBUG: Checking position (11,9), char='1'
-DEBUG: Found wall/void at (11,9), char='1'
-DEBUG: Successfully validated (11,8)
-DEBUG: Checking position (10,7), char='0'
-DEBUG: Already visited (10,7)
-DEBUG: Checking position (10,9), char='0'
-DEBUG: Already visited (10,9)
-DEBUG: Successfully validated (10,8)
-DEBUG: Checking position (10,10), char='1'
-DEBUG: Found wall/void at (10,10), char='1'
-DEBUG: Successfully validated (10,9)
-DEBUG: Checking position (9,8), char='0'
-DEBUG: Already visited (9,8)
-DEBUG: Checking position (9,10), char='0'
-DEBUG: Already visited (9,10)
-DEBUG: Successfully validated (9,9)
-DEBUG: Checking position (9,11), char='1'
-DEBUG: Found wall/void at (9,11), char='1'
-DEBUG: Successfully validated (9,10)
-DEBUG: Checking position (8,9), char='0'
-DEBUG: Already visited (8,9)
-DEBUG: Checking position (8,11), char='0'
-DEBUG: Already visited (8,11)
-DEBUG: Successfully validated (8,10)
-DEBUG: Checking position (8,12), char='1'
-DEBUG: Found wall/void at (8,12), char='1'
-DEBUG: Successfully validated (8,11)
-DEBUG: Checking position (7,10), char='0'
-DEBUG: Already visited (7,10)
-DEBUG: Checking position (7,12), char='0'
-DEBUG: Marked (7,12) as visited in test_map
-DEBUG: Checking position (6,12), char='0'
-DEBUG: Marked (6,12) as visited in test_map
-DEBUG: Checking position (5,12), char='0'
-DEBUG: Marked (5,12) as visited in test_map
-DEBUG: Checking position (4,12), char='1'
-DEBUG: Found wall/void at (4,12), char='1'
-DEBUG: Checking position (6,12), char='0'
-DEBUG: Already visited (6,12)
-DEBUG: Checking position (5,11), char='0'
-DEBUG: Already visited (5,11)
-DEBUG: Checking position (5,13), char='1'
-DEBUG: Found wall/void at (5,13), char='1'
-DEBUG: Successfully validated (5,12)
-DEBUG: Checking position (7,12), char='0'
-DEBUG: Already visited (7,12)
-DEBUG: Checking position (6,11), char='0'
-DEBUG: Already visited (6,11)
-DEBUG: Checking position (6,13), char='0'
-DEBUG: Marked (6,13) as visited in test_map
-DEBUG: Checking position (5,13), char='1'
-DEBUG: Found wall/void at (5,13), char='1'
-DEBUG: Checking position (7,13), char='1'
-DEBUG: Found wall/void at (7,13), char='1'
-DEBUG: Checking position (6,12), char='0'
-DEBUG: Already visited (6,12)
-DEBUG: Checking position (6,14), char='1'
-DEBUG: Found wall/void at (6,14), char='1'
-DEBUG: Successfully validated (6,13)
-DEBUG: Successfully validated (6,12)
-DEBUG: Checking position (8,12), char='1'
-DEBUG: Found wall/void at (8,12), char='1'
-DEBUG: Checking position (7,11), char='0'
-DEBUG: Already visited (7,11)
-DEBUG: Checking position (7,13), char='1'
-DEBUG: Found wall/void at (7,13), char='1'
-DEBUG: Successfully validated (7,12)
-DEBUG: Successfully validated (7,11)
-DEBUG: Checking position (6,10), char='0'
-DEBUG: Already visited (6,10)
-DEBUG: Checking position (6,12), char='0'
-DEBUG: Already visited (6,12)
-DEBUG: Successfully validated (6,11)
-DEBUG: Checking position (5,10), char='0'
-DEBUG: Already visited (5,10)
-DEBUG: Checking position (5,12), char='0'
-DEBUG: Already visited (5,12)
-DEBUG: Successfully validated (5,11)
-DEBUG: Checking position (4,10), char='0'
-DEBUG: Already visited (4,10)
-DEBUG: Checking position (4,12), char='1'
-DEBUG: Found wall/void at (4,12), char='1'
-DEBUG: Successfully validated (4,11)
-DEBUG: Successfully validated (4,10)
-DEBUG: Checking position (6,10), char='0'
-DEBUG: Already visited (6,10)
-DEBUG: Checking position (5,9), char='0'
-DEBUG: Already visited (5,9)
-DEBUG: Checking position (5,11), char='0'
-DEBUG: Already visited (5,11)
-DEBUG: Successfully validated (5,10)
-DEBUG: Checking position (7,10), char='0'
-DEBUG: Already visited (7,10)
-DEBUG: Checking position (6,9), char='1'
-DEBUG: Found wall/void at (6,9), char='1'
-DEBUG: Checking position (6,11), char='0'
-DEBUG: Already visited (6,11)
-DEBUG: Successfully validated (6,10)
-DEBUG: Checking position (8,10), char='0'
-DEBUG: Already visited (8,10)
-DEBUG: Checking position (7,9), char='0'
-DEBUG: Already visited (7,9)
-DEBUG: Checking position (7,11), char='0'
-DEBUG: Already visited (7,11)
-DEBUG: Successfully validated (7,10)
-DEBUG: Successfully validated (7,9)
-DEBUG: Checking position (9,9), char='0'
-DEBUG: Already visited (9,9)
-DEBUG: Checking position (8,8), char='0'
-DEBUG: Already visited (8,8)
-DEBUG: Checking position (8,10), char='0'
-DEBUG: Already visited (8,10)
-DEBUG: Successfully validated (8,9)
-DEBUG: Successfully validated (8,8)
-DEBUG: Checking position (10,8), char='0'
-DEBUG: Already visited (10,8)
-DEBUG: Checking position (9,7), char='D'
-DEBUG: Already visited (9,7)
-DEBUG: Checking position (9,9), char='0'
-DEBUG: Already visited (9,9)
-DEBUG: Successfully validated (9,8)
-DEBUG: Successfully validated (9,7)
-DEBUG: Checking position (11,7), char='0'
-DEBUG: Already visited (11,7)
-DEBUG: Checking position (10,6), char='0'
-DEBUG: Already visited (10,6)
-DEBUG: Checking position (10,8), char='0'
-DEBUG: Already visited (10,8)
-DEBUG: Successfully validated (10,7)
-DEBUG: Checking position (12,7), char='1'
-DEBUG: Found wall/void at (12,7), char='1'
-DEBUG: Checking position (11,6), char='0'
-DEBUG: Already visited (11,6)
-DEBUG: Checking position (11,8), char='0'
-DEBUG: Already visited (11,8)
-DEBUG: Successfully validated (11,7)
-DEBUG: Successfully validated (11,6)
-DEBUG: Checking position (10,5), char='0'
-DEBUG: Marked (10,5) as visited in test_map
-DEBUG: Checking position (9,5), char='0'
-DEBUG: Already visited (9,5)
-DEBUG: Checking position (11,5), char='1'
-DEBUG: Found wall/void at (11,5), char='1'
-DEBUG: Checking position (10,4), char='1'
-DEBUG: Found wall/void at (10,4), char='1'
-DEBUG: Checking position (10,6), char='0'
-DEBUG: Already visited (10,6)
-DEBUG: Successfully validated (10,5)
-DEBUG: Checking position (10,7), char='0'
-DEBUG: Already visited (10,7)
-DEBUG: Successfully validated (10,6)
-DEBUG: Checking position (9,5), char='0'
-DEBUG: Already visited (9,5)
-DEBUG: Checking position (9,7), char='D'
-DEBUG: Already visited (9,7)
-DEBUG: Successfully validated (9,6)
-DEBUG: Checking position (8,5), char='0'
-DEBUG: Already visited (8,5)
-DEBUG: Checking position (8,7), char='1'
-DEBUG: Found wall/void at (8,7), char='1'
-DEBUG: Successfully validated (8,6)
-DEBUG: Successfully validated (8,5)
-DEBUG: Checking position (10,5), char='0'
-DEBUG: Already visited (10,5)
-DEBUG: Checking position (9,4), char='0'
-DEBUG: Already visited (9,4)
-DEBUG: Checking position (9,6), char='0'
-DEBUG: Already visited (9,6)
-DEBUG: Successfully validated (9,5)
-DEBUG: Successfully validated (9,4)
-DEBUG: Checking position (8,3), char='0'
-DEBUG: Marked (8,3) as visited in test_map
-DEBUG: Checking position (7,3), char='0'
-DEBUG: Marked (7,3) as visited in test_map
-DEBUG: Checking position (6,3), char='0'
-DEBUG: Marked (6,3) as visited in test_map
-DEBUG: Checking position (5,3), char='0'
-DEBUG: Marked (5,3) as visited in test_map
-DEBUG: Checking position (4,3), char='0'
-DEBUG: Marked (4,3) as visited in test_map
-DEBUG: Checking position (3,3), char='1'
-DEBUG: Found wall/void at (3,3), char='1'
-DEBUG: Checking position (5,3), char='0'
-DEBUG: Already visited (5,3)
-DEBUG: Checking position (4,2), char='1'
-DEBUG: Found wall/void at (4,2), char='1'
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Already visited (4,4)
-DEBUG: Successfully validated (4,3)
-DEBUG: Checking position (6,3), char='0'
-DEBUG: Already visited (6,3)
-DEBUG: Checking position (5,2), char='0'
-DEBUG: Marked (5,2) as visited in test_map
-DEBUG: Checking position (4,2), char='1'
-DEBUG: Found wall/void at (4,2), char='1'
-DEBUG: Checking position (6,2), char='0'
-DEBUG: Marked (6,2) as visited in test_map
-DEBUG: Checking position (5,2), char='0'
-DEBUG: Already visited (5,2)
-DEBUG: Checking position (7,2), char='0'
-DEBUG: Marked (7,2) as visited in test_map
-DEBUG: Checking position (6,2), char='0'
-DEBUG: Already visited (6,2)
-DEBUG: Checking position (8,2), char='1'
-DEBUG: Found wall/void at (8,2), char='1'
-DEBUG: Checking position (7,1), char='1'
-DEBUG: Found wall/void at (7,1), char='1'
-DEBUG: Checking position (7,3), char='0'
-DEBUG: Already visited (7,3)
-DEBUG: Successfully validated (7,2)
-DEBUG: Checking position (6,1), char='0'
-DEBUG: Marked (6,1) as visited in test_map
-DEBUG: Checking position (5,1), char='1'
-DEBUG: Found wall/void at (5,1), char='1'
-DEBUG: Checking position (7,1), char='1'
-DEBUG: Found wall/void at (7,1), char='1'
-DEBUG: Checking position (6,0), char='1'
-DEBUG: Found wall/void at (6,0), char='1'
-DEBUG: Checking position (6,2), char='0'
-DEBUG: Already visited (6,2)
-DEBUG: Successfully validated (6,1)
-DEBUG: Checking position (6,3), char='0'
-DEBUG: Already visited (6,3)
-DEBUG: Successfully validated (6,2)
-DEBUG: Checking position (5,1), char='1'
-DEBUG: Found wall/void at (5,1), char='1'
-DEBUG: Checking position (5,3), char='0'
-DEBUG: Already visited (5,3)
-DEBUG: Successfully validated (5,2)
-DEBUG: Checking position (5,4), char='0'
-DEBUG: Already visited (5,4)
-DEBUG: Successfully validated (5,3)
-DEBUG: Checking position (7,3), char='0'
-DEBUG: Already visited (7,3)
-DEBUG: Checking position (6,2), char='0'
-DEBUG: Already visited (6,2)
-DEBUG: Checking position (6,4), char='0'
-DEBUG: Already visited (6,4)
-DEBUG: Successfully validated (6,3)
-DEBUG: Checking position (8,3), char='0'
-DEBUG: Already visited (8,3)
-DEBUG: Checking position (7,2), char='0'
-DEBUG: Already visited (7,2)
-DEBUG: Checking position (7,4), char='0'
-DEBUG: Already visited (7,4)
-DEBUG: Successfully validated (7,3)
-DEBUG: Checking position (9,3), char='1'
-DEBUG: Found wall/void at (9,3), char='1'
-DEBUG: Checking position (8,2), char='1'
-DEBUG: Found wall/void at (8,2), char='1'
-DEBUG: Checking position (8,4), char='D'
-DEBUG: Already visited (8,4)
-DEBUG: Successfully validated (8,3)
-DEBUG: Checking position (8,5), char='0'
-DEBUG: Already visited (8,5)
-DEBUG: Successfully validated (8,4)
-DEBUG: Checking position (7,3), char='0'
-DEBUG: Already visited (7,3)
-DEBUG: Checking position (7,5), char='0'
-DEBUG: Already visited (7,5)
-DEBUG: Successfully validated (7,4)
-DEBUG: Checking position (6,3), char='0'
-DEBUG: Already visited (6,3)
-DEBUG: Checking position (6,5), char='1'
-DEBUG: Found wall/void at (6,5), char='1'
-DEBUG: Successfully validated (6,4)
-DEBUG: Checking position (5,3), char='0'
-DEBUG: Already visited (5,3)
-DEBUG: Checking position (5,5), char='0'
-DEBUG: Already visited (5,5)
-DEBUG: Successfully validated (5,4)
-DEBUG: Checking position (4,3), char='0'
-DEBUG: Already visited (4,3)
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Already visited (4,5)
-DEBUG: Successfully validated (4,4)
-DEBUG: Checking position (3,3), char='1'
-DEBUG: Found wall/void at (3,3), char='1'
-DEBUG: Checking position (3,5), char='0'
-DEBUG: Already visited (3,5)
-DEBUG: Successfully validated (3,4)
-DEBUG: Checking position (3,6), char='0'
-DEBUG: Already visited (3,6)
-DEBUG: Successfully validated (3,5)
-DEBUG: Checking position (5,5), char='0'
-DEBUG: Already visited (5,5)
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Already visited (4,4)
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Already visited (4,6)
-DEBUG: Successfully validated (4,5)
-DEBUG: Checking position (6,5), char='1'
-DEBUG: Found wall/void at (6,5), char='1'
-DEBUG: Checking position (5,4), char='0'
-DEBUG: Already visited (5,4)
-DEBUG: Checking position (5,6), char='0'
-DEBUG: Already visited (5,6)
-DEBUG: Successfully validated (5,5)
-DEBUG: Checking position (5,7), char='D'
-DEBUG: Already visited (5,7)
-DEBUG: Successfully validated (5,6)
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Already visited (4,5)
-DEBUG: Checking position (4,7), char='0'
-DEBUG: Already visited (4,7)
-DEBUG: Successfully validated (4,6)
-DEBUG: Checking position (3,5), char='0'
-DEBUG: Already visited (3,5)
-DEBUG: Checking position (3,7), char='N'
+DEBUG: Checking position (1,7), char='0'
+DEBUG: Already visited (1,7)
+DEBUG: Checking position (1,9), char='1'
+DEBUG: Found wall/void at (1,9), char='1'
+DEBUG: Successfully validated (1,8)
+DEBUG: Successfully validated (1,7)
+DEBUG: Checking position (3,7), char='0'
 DEBUG: Already visited (3,7)
-DEBUG: Successfully validated (3,6)
+DEBUG: Checking position (2,6), char='0'
+DEBUG: Marked (2,6) as visited in test_map
+DEBUG: Checking position (1,6), char='1'
+DEBUG: Found wall/void at (1,6), char='1'
+DEBUG: Checking position (3,6), char='1'
+DEBUG: Found wall/void at (3,6), char='1'
+DEBUG: Checking position (2,5), char='0'
+DEBUG: Marked (2,5) as visited in test_map
+DEBUG: Checking position (1,5), char='0'
+DEBUG: Marked (1,5) as visited in test_map
+DEBUG: Checking position (0,5), char='1'
+DEBUG: Found wall/void at (0,5), char='1'
 DEBUG: Checking position (2,5), char='0'
 DEBUG: Already visited (2,5)
+DEBUG: Checking position (1,4), char='0'
+DEBUG: Marked (1,4) as visited in test_map
+DEBUG: Checking position (0,4), char='1'
+DEBUG: Found wall/void at (0,4), char='1'
+DEBUG: Checking position (2,4), char='0'
+DEBUG: Marked (2,4) as visited in test_map
+DEBUG: Checking position (1,4), char='0'
+DEBUG: Already visited (1,4)
+DEBUG: Checking position (3,4), char='0'
+DEBUG: Marked (3,4) as visited in test_map
+DEBUG: Checking position (2,4), char='0'
+DEBUG: Already visited (2,4)
+DEBUG: Checking position (4,4), char='1'
+DEBUG: Found wall/void at (4,4), char='1'
+DEBUG: Checking position (3,3), char='1'
+DEBUG: Found wall/void at (3,3), char='1'
+DEBUG: Checking position (3,5), char='0'
+DEBUG: Marked (3,5) as visited in test_map
+DEBUG: Checking position (2,5), char='0'
+DEBUG: Already visited (2,5)
+DEBUG: Checking position (4,5), char='1'
+DEBUG: Found wall/void at (4,5), char='1'
+DEBUG: Checking position (3,4), char='0'
+DEBUG: Already visited (3,4)
+DEBUG: Checking position (3,6), char='1'
+DEBUG: Found wall/void at (3,6), char='1'
+DEBUG: Successfully validated (3,5)
+DEBUG: Successfully validated (3,4)
+DEBUG: Checking position (2,3), char='1'
+DEBUG: Found wall/void at (2,3), char='1'
+DEBUG: Checking position (2,5), char='0'
+DEBUG: Already visited (2,5)
+DEBUG: Successfully validated (2,4)
+DEBUG: Checking position (1,3), char='1'
+DEBUG: Found wall/void at (1,3), char='1'
+DEBUG: Checking position (1,5), char='0'
+DEBUG: Already visited (1,5)
+DEBUG: Successfully validated (1,4)
+DEBUG: Checking position (1,6), char='1'
+DEBUG: Found wall/void at (1,6), char='1'
+DEBUG: Successfully validated (1,5)
+DEBUG: Checking position (3,5), char='0'
+DEBUG: Already visited (3,5)
+DEBUG: Checking position (2,4), char='0'
+DEBUG: Already visited (2,4)
+DEBUG: Checking position (2,6), char='0'
+DEBUG: Already visited (2,6)
+DEBUG: Successfully validated (2,5)
 DEBUG: Checking position (2,7), char='0'
 DEBUG: Already visited (2,7)
 DEBUG: Successfully validated (2,6)
-DEBUG: Checking position (1,5), char='1'
-DEBUG: Found wall/void at (1,5), char='1'
-DEBUG: Checking position (1,7), char='0'
-DEBUG: Already visited (1,7)
-DEBUG: Successfully validated (1,6)
-DEBUG: Checking position (1,8), char='0'
-DEBUG: Already visited (1,8)
-DEBUG: Successfully validated (1,7)
-DEBUG: Checking position (3,7), char='N'
-DEBUG: Already visited (3,7)
-DEBUG: Checking position (2,6), char='0'
-DEBUG: Already visited (2,6)
 DEBUG: Checking position (2,8), char='0'
 DEBUG: Already visited (2,8)
 DEBUG: Successfully validated (2,7)
 DEBUG: Checking position (4,7), char='0'
 DEBUG: Already visited (4,7)
-DEBUG: Checking position (3,6), char='0'
-DEBUG: Already visited (3,6)
+DEBUG: Checking position (3,6), char='1'
+DEBUG: Found wall/void at (3,6), char='1'
 DEBUG: Checking position (3,8), char='0'
 DEBUG: Already visited (3,8)
 DEBUG: Successfully validated (3,7)
+DEBUG: Checking position (5,7), char='0'
+DEBUG: Already visited (5,7)
+DEBUG: Checking position (4,6), char='1'
+DEBUG: Found wall/void at (4,6), char='1'
+DEBUG: Checking position (4,8), char='0'
+DEBUG: Already visited (4,8)
+DEBUG: Successfully validated (4,7)
+DEBUG: Checking position (6,7), char='1'
+DEBUG: Found wall/void at (6,7), char='1'
+DEBUG: Checking position (5,6), char='0'
+DEBUG: Already visited (5,6)
+DEBUG: Checking position (5,8), char='0'
+DEBUG: Already visited (5,8)
+DEBUG: Successfully validated (5,7)
+DEBUG: Successfully validated (5,6)
+DEBUG: Successfully validated (5,5)
+DEBUG: Successfully validated (5,4)
+DEBUG: Successfully validated (5,3)
+DEBUG: Successfully validated (5,2)
+DEBUG: Checking position (7,2), char='1'
+DEBUG: Found wall/void at (7,2), char='1'
+DEBUG: Checking position (6,1), char='0'
+DEBUG: Already visited (6,1)
+DEBUG: Checking position (6,3), char='1'
+DEBUG: Found wall/void at (6,3), char='1'
+DEBUG: Successfully validated (6,2)
+DEBUG: Successfully validated (6,1)
+DEBUG: Checking position (5,0), char='1'
+DEBUG: Found wall/void at (5,0), char='1'
+DEBUG: Checking position (5,2), char='0'
+DEBUG: Already visited (5,2)
+DEBUG: Successfully validated (5,1)
+DEBUG: Checking position (4,0), char='1'
+DEBUG: Found wall/void at (4,0), char='1'
+DEBUG: Checking position (4,2), char='0'
+DEBUG: Already visited (4,2)
+DEBUG: Successfully validated (4,1)
+DEBUG: Checking position (3,0), char='1'
+DEBUG: Found wall/void at (3,0), char='1'
+DEBUG: Checking position (3,2), char='0'
+DEBUG: Already visited (3,2)
+DEBUG: Successfully validated (3,1)
+DEBUG: Checking position (2,0), char='1'
+DEBUG: Found wall/void at (2,0), char='1'
+DEBUG: Checking position (2,2), char='1'
+DEBUG: Found wall/void at (2,2), char='1'
+DEBUG: Successfully validated (2,1)
+DEBUG: Checking position (1,0), char='1'
+DEBUG: Found wall/void at (1,0), char='1'
+DEBUG: Checking position (1,2), char='W'
+DEBUG: Already visited (1,2)
+DEBUG: Successfully validated (1,1)
+DEBUG: Checking position (1,3), char='1'
+DEBUG: Found wall/void at (1,3), char='1'
+DEBUG: Successfully validated (1,2)
 DEBUG: Flood fill validation result: 1
 SUCCESS: Map validation passed
 All reachable areas are properly enclosed by walls
