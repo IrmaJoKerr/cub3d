@@ -6,12 +6,23 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:47:01 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:20:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
+/*
+Function prototypes
+*/
+void	compute_projection(t_ray *ray, t_game *game);
+void	compute_texture(t_ray *ray, t_game *game, t_image **tex);
+void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x);
+void	render_column(t_game *game, int x);
+
+/*
+Compute the projection parameters for a ray (distance, line height, draw bounds).
+*/
 void	compute_projection(t_ray *ray, t_game *game)
 {
 	if (ray->side == 0)
@@ -27,6 +38,9 @@ void	compute_projection(t_ray *ray, t_game *game)
 			+ MAX_HEIGHT / 2 + game->view_elevation);
 }
 
+/*
+Compute the texture mapping for the projected wall or door.
+*/
 void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 {
 	double	wall_x;
@@ -43,6 +57,9 @@ void	compute_texture(t_ray *ray, t_game *game, t_image **tex)
 		ray->tex_x = TEX_WIDTH - ray->tex_x - 1;
 }
 
+/*
+Draw a vertical column of pixels with the mapped texture.
+*/
 void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 {
 	double			step;
@@ -68,6 +85,9 @@ void	draw_textured_column(t_game *game, t_ray *ray, t_image *tex, int x)
 	}
 }
 
+/*
+Render a single column of the screen, including wall and door if present.
+*/
 void	render_column(t_game *game, int x)
 {
 	t_ray	wall_ray;

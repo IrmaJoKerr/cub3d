@@ -6,12 +6,26 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:14:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
+void	copy_tile_to_minimap(t_game *game, t_image *source_tile, int map_x,
+			int map_y);
+void	generate_full_minimap(t_game *game);
+void	calc_minimap_viewport(t_game *game, int *triangle_x, int *triangle_y);
+void	copy_minimap_pixels(t_game *game);
+void	render_minimap(t_game *game);
+
+/*
+Copy a single tile's pixels into the full minimap image at the given
+map coordinates.
+*/
 void	copy_tile_to_minimap(t_game *game, t_image *source_tile,
 	int map_x, int map_y)
 {
@@ -37,12 +51,15 @@ void	copy_tile_to_minimap(t_game *game, t_image *source_tile,
 	}
 }
 
+/*
+Generate the full minimap image by copying all map tiles.
+*/
 void	generate_full_minimap(t_game *game)
 {
-	int			map_y;
-	int			map_x;
-	char		tile_type;
-	t_image		*source_tile;
+	int		map_y;
+	int		map_x;
+	char	tile_type;
+	t_image	*source_tile;
 
 	map_y = 0;
 	while (map_y < game->map.max_rows)
@@ -66,6 +83,10 @@ void	generate_full_minimap(t_game *game)
 	}
 }
 
+/*
+Calculate the minimap viewport and the position of the player
+indicator triangle.
+*/
 void	calc_minimap_viewport(t_game *game,
 	int *triangle_x, int *triangle_y)
 {
@@ -88,6 +109,10 @@ void	calc_minimap_viewport(t_game *game,
 	*triangle_y = (int)(player_pixel_y - game->minimap.y);
 }
 
+/*
+Copy the visible minimap pixels from the full minimap image to the
+minimap viewport.
+*/
 void	copy_minimap_pixels(t_game *game)
 {
 	unsigned int	*f;
@@ -117,6 +142,9 @@ void	copy_minimap_pixels(t_game *game)
 	}
 }
 
+/*
+Render the minimap, including border and player indicator, to the window.
+*/
 void	render_minimap(t_game *game)
 {
 	int	triangle_x;

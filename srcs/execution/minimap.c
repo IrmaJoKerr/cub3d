@@ -6,12 +6,24 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:15:28 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
+void	setup_minimap(t_game *game);
+void	load_minimap_tiles(t_game *game);
+void	draw_minimap_border(t_game *game);
+void	draw_triangle_player_indicator(t_game *game, int center_x,
+			int center_y);
+
+/*
+Set up the minimap images and data buffers.
+*/
 void	setup_minimap(t_game *game)
 {
 	if (!game || !game->mlx_ptr)
@@ -35,6 +47,9 @@ void	setup_minimap(t_game *game)
 			&game->minimap.minimap_endian);
 }
 
+/*
+Load minimap tile images for wall, floor, and door.
+*/
 void	load_minimap_tiles(t_game *game)
 {
 	int	tile_width;
@@ -63,6 +78,9 @@ void	load_minimap_tiles(t_game *game)
 			&game->minimap.door.endian);
 }
 
+/*
+Draw the border around the minimap viewport.
+*/
 void	draw_minimap_border(t_game *game)
 {
 	int				x;
@@ -90,6 +108,9 @@ void	draw_minimap_border(t_game *game)
 	}
 }
 
+/*
+Draw the player indicator triangle on the minimap.
+*/
 void	draw_triangle_player_indicator(t_game *game, int center_x, int center_y)
 {
 	t_triangle	tri;

@@ -6,12 +6,26 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:17:40 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:20:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
+/*
+Function prototypes
+*/
+void	update_door_state(t_game *game, t_door *door);
+void	update_door_animation(t_game *game, t_door *door);
+void	update_doors(t_game *game);
+bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray, t_game *game,
+			bool *door_found);
+void	perform_dda_with_door(t_ray *wall_ray, t_ray *door_ray, t_game *game);
+
+/*
+Update the state of a door (open, closed, opening, closing) based on
+player proximity.
+*/
 void	update_door_state(t_game *game, t_door *door)
 {
 	double	dx;
@@ -29,6 +43,9 @@ void	update_door_state(t_game *game, t_door *door)
 		door->state = DOOR_CLOSING;
 }
 
+/*
+Update the door's animation frame and openness based on its state.
+*/
 void	update_door_animation(t_game *game, t_door *door)
 {
 	if (door->state == DOOR_OPENING)
@@ -53,6 +70,9 @@ void	update_door_animation(t_game *game, t_door *door)
 			* (game->textures.door_frame_count - 1));
 }
 
+/*
+Update all doors in the game for state and animation.
+*/
 void	update_doors(t_game *game)
 {
 	int		i;
@@ -68,6 +88,9 @@ void	update_doors(t_game *game)
 	}
 }
 
+/*
+Check if the current tile hit by the ray is a wall or door.
+*/
 bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
 	t_game *game, bool *door_found)
 {
@@ -90,6 +113,9 @@ bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray,
 	return (false);
 }
 
+/*
+Perform DDA raycasting, tracking both wall and door hits.
+*/
 void	perform_dda_with_door(t_ray *wall_ray,
 	t_ray *door_ray, t_game *game)
 {

@@ -6,13 +6,26 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:16:26 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
+void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color,
+			int midline);
+void	fill_sky_and_floor(t_game *game);
+void	render_raycast(t_game *game);
+void	draw_crosshair(t_game *game);
+int		render_img(t_game *game);
+
+/*
+Draw the sky and floor colors for the entire screen.
+*/
 void	draw_sky_and_floor(t_game *game, int sky_color,
 	int floor_color, int midline)
 {
@@ -35,6 +48,9 @@ void	draw_sky_and_floor(t_game *game, int sky_color,
 	}
 }
 
+/*
+Fill the screen with sky and floor colors based on map settings.
+*/
 void	fill_sky_and_floor(t_game *game)
 {
 	int	sky_color;
@@ -53,6 +69,9 @@ void	fill_sky_and_floor(t_game *game)
 	draw_sky_and_floor(game, sky_color, floor_color, midline);
 }
 
+/*
+Render the main raycasting view and minimap.
+*/
 void	render_raycast(t_game *game)
 {
 	int	x;
@@ -66,6 +85,9 @@ void	render_raycast(t_game *game)
 	render_minimap(game);
 }
 
+/*
+Draw a crosshair at the center of the screen.
+*/
 void	draw_crosshair(t_game *game)
 {
 	int	cx;
@@ -91,8 +113,12 @@ void	draw_crosshair(t_game *game)
 	}
 }
 
+/*
+Render the full frame, including raycast, doors, and crosshair.
+*/
 int	render_img(t_game *game)
 {
+
 	render_raycast(game);
 	update_doors(game);
 	draw_crosshair(game);

@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_draw_player.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/21 13:57:14 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 05:11:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
+void	calculate_triangle_vertices(t_triangle *tri, t_point center,
+			double angle);
+void	get_y_bounds(t_triangle tri, int *min_y, int *max_y);
+bool	get_scanline_segment(t_triangle tri, int y, int *x_start, int *x_end);
+void	draw_scanline_segment(t_draw_info info, t_triangle tri, int y,
+			int color);
+void	rasterize_triangle(t_draw_info info, t_triangle tri);
+
+/*
+Calculate the vertices of the player indicator triangle on the minimap.
+*/
 void	calculate_triangle_vertices(t_triangle *tri,
 	t_point center, double angle)
 {
@@ -28,6 +42,9 @@ void	calculate_triangle_vertices(t_triangle *tri,
 	tri->base_r.y = center.y + (int)(sin(right_angle) * 6.0);
 }
 
+/*
+Get the minimum and maximum y-coordinates of the triangle.
+*/
 void	get_y_bounds(t_triangle tri, int *min_y, int *max_y)
 {
 	*min_y = tri.tip.y;
@@ -46,6 +63,9 @@ void	get_y_bounds(t_triangle tri, int *min_y, int *max_y)
 		*max_y = 179;
 }
 
+/*
+Find the x-coordinates of the scanline segment for a given y in the triangle.
+*/
 bool	get_scanline_segment(t_triangle tri, int y, int *x_start, int *x_end)
 {
 	t_point	vertices[3];
@@ -75,6 +95,9 @@ bool	get_scanline_segment(t_triangle tri, int y, int *x_start, int *x_end)
 	return (*x_start <= *x_end);
 }
 
+/*
+Draw a horizontal scanline segment for the triangle on the minimap.
+*/
 void	draw_scanline_segment(t_draw_info info,
 	t_triangle tri, int y, int color)
 {
@@ -98,6 +121,9 @@ void	draw_scanline_segment(t_draw_info info,
 	}
 }
 
+/*
+Rasterize the triangle by drawing scanline segments between its bounds.
+*/
 void	rasterize_triangle(t_draw_info info, t_triangle tri)
 {
 	int	min_y;

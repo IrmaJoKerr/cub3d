@@ -3,17 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:22:14 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/17 00:51:28 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 05:19:32 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/raycasting.h"
 
+/*
+Function prototypes
+*/
+void	init_ray(t_ray *ray, t_game *game, int x);
+void	put_pixel(t_image *img, int x, int y, int color);
+t_image	*get_surface_texture(t_game *game, t_ray *ray, char hit_tile);
+t_image	*get_wall_texture(t_game *game, int side, double ray_dir_x,
+			double ray_dir_y);
+void	initialize_deltas_and_steps(t_ray *ray, t_game *game);
+
+/*
+Initialize a ray for the given screen column.
+*/
 void	init_ray(t_ray *ray, t_game *game, int x)
 {
+
 	ray->cam_x = 2.0 * x / MAX_WIDTH - 1.0;
 	ray->dir_x = cos(game->view_direction)
 		+ (sin(game->view_direction) * tan(FOV / 2)) * ray->cam_x;
@@ -33,6 +47,9 @@ void	init_ray(t_ray *ray, t_game *game, int x)
 	ray->hit = 0;
 }
 
+/*
+Set a pixel in the image buffer to the given color.
+*/
 void	put_pixel(t_image *img, int x, int y, int color)
 {
 	char	*dst;
@@ -43,6 +60,9 @@ void	put_pixel(t_image *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+/*
+Get the texture for the surface hit by the ray (wall or door).
+*/
 t_image	*get_surface_texture(t_game *game, t_ray *ray, char hit_tile)
 {
 	int	door_id;
@@ -59,6 +79,9 @@ t_image	*get_surface_texture(t_game *game, t_ray *ray, char hit_tile)
 	return (game->textures.north_wall);
 }
 
+/*
+Get the wall texture based on the ray's side and direction.
+*/
 t_image	*get_wall_texture(t_game *game,
 	int side, double ray_dir_x, double ray_dir_y)
 {
@@ -78,6 +101,9 @@ t_image	*get_wall_texture(t_game *game,
 	}
 }
 
+/*
+Initialize DDA step and side distances for the ray.
+*/
 void	initialize_deltas_and_steps(t_ray *ray, t_game *game)
 {
 	if (ray->dir_x < 0)

@@ -6,12 +6,24 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 05:18:08 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
+bool	count_doors_in_map(t_game *game, int *door_index);
+void	init_doors_from_map(t_game *game);
+int		get_door_id(t_game *game, int x, int y);
+t_image	*get_door_texture(t_game *game, int door_id);
+void	cleanup_door_frames(t_game *game);
+
+/*
+Count the number of doors in the map and allocate memory for them.
+*/
 bool	count_doors_in_map(t_game *game, int *door_index)
 {
 	int	x;
@@ -38,6 +50,9 @@ bool	count_doors_in_map(t_game *game, int *door_index)
 	return (true);
 }
 
+/*
+Initialize the doors array from the map data.
+*/
 void	init_doors_from_map(t_game *game)
 {
 	int	x;
@@ -67,6 +82,9 @@ void	init_doors_from_map(t_game *game)
 	}
 }
 
+/*
+Get the door ID for the door at the given map coordinates.
+*/
 int	get_door_id(t_game *game, int x, int y)
 {
 	int	i;
@@ -81,6 +99,9 @@ int	get_door_id(t_game *game, int x, int y)
 	return (-1);
 }
 
+/*
+Get the texture for the door with the given ID.
+*/
 t_image	*get_door_texture(t_game *game, int door_id)
 {
 	t_door	*door;
@@ -95,6 +116,9 @@ t_image	*get_door_texture(t_game *game, int door_id)
 	return (game->textures.door_frames[frame]);
 }
 
+/*
+Clean up and free all door frame textures and door data.
+*/
 void	cleanup_door_frames(t_game *game)
 {
 	int	i;
