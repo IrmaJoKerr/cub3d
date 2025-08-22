@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wjun-kea <wjun-kea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/21 13:57:03 by wjun-kea         ###   ########.fr       */
+/*   Updated: 2025/08/23 01:29:05 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,31 +77,33 @@ int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 
 /*
-Movement and collision functions. In collisions/movehero.c
-*/
-// File removed - contained only unused functions
-
-/*
 Tile coordinate utility functions. In tile_utils.c
 */
-int		get_tile_at_position(t_game *game, double x, double y);
-bool	is_valid_world_position(t_game *game, double x, double y);
-void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
+bool	is_valid_move(t_game *game, double x, double y);
+void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
-Tile movement calculation functions. In collisions/tile_move.c
+Tile position calculation functions. In calculate_tile_position.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
 double	tile_center_x(int tile_x);
 double	tile_center_y(int tile_y);
+
+/*
+View calculation functions. In calculate_view.c
+*/
+double	normalize_angle(double angle);
+double	clamp_elevation(double elevation);
+
+/*
+Tile movement calculation functions. In tile_move.c
+*/
 double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
 double	calc_distance(double x1, double y1, double x2, double y2);
-double	normalize_angle(double angle);
-double	clamp_elevation(double elevation);
 
 /*
 Door animation utility functions. In door_utils.c

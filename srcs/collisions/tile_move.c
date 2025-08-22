@@ -6,43 +6,20 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 23:22:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 11:17:28 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 /*
-Convert world X coordinate to tile column index
+Function prototypes
 */
-int	world_to_tile_x(double x)
-{
-	return ((int)(x / TILE_SIZE));
-}
-
-/*
-Convert world Y coordinate to tile row index
-*/
-int	world_to_tile_y(double y)
-{
-	return ((int)(y / TILE_SIZE));
-}
-
-/*
-Get world X coordinate of the center of a tile
-*/
-double	tile_center_x(int tile_x)
-{
-	return ((double)tile_x * TILE_SIZE + TILE_SIZE / 2.0);
-}
-
-/*
-Get world Y coordinate of the center of a tile
-*/
-double	tile_center_y(int tile_y)
-{
-	return ((double)tile_y * TILE_SIZE + TILE_SIZE / 2.0);
-}
+double	calc_move_dx(double view_direction, double speed, int forward);
+double	calc_move_dy(double view_direction, double speed, int forward);
+double	calc_strafe_dx(double view_direction, double speed, int right);
+double	calc_strafe_dy(double view_direction, double speed, int right);
+double	calc_distance(double x1, double y1, double x2, double y2);
 
 /*
 Calculate movement delta X for forward/backward movement
@@ -99,28 +76,4 @@ double	calc_distance(double x1, double y1, double x2, double y2)
 	dx = x2 - x1;
 	dy = y2 - y1;
 	return (sqrt(dx * dx + dy * dy));
-}
-
-/*
-Normalize angle to 0-2π range
-*/
-double	normalize_angle(double angle)
-{
-	while (angle < 0)
-		angle += 2 * M_PI;
-	while (angle >= 2 * M_PI)
-		angle -= 2 * M_PI;
-	return (angle);
-}
-
-/*
-Clamp elevation angle to reasonable range (-π/2 to π/2)
-*/
-double	clamp_elevation(double elevation)
-{
-	if (elevation > 289)
-		return (289);
-	if (elevation < -289)
-		return (-289);
-	return (elevation);
 }
