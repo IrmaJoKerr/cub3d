@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 07:53:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 08:11:06 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
-
-
 
 /*
 Tile position calculation functions. In calculate_tile_position.c
@@ -58,20 +56,14 @@ double	clamp_elevation(double elevation);
 Main functions. In cub3D.c
 */
 void	init_game(t_game *game, const char *map_file);
-// Deprecated prototypes (replaced by cub3D_utils.c)
-// char	*get_map_path(const char *map_file);
-// int	check_valid_file_path(const char *path);
-// void	load_texture(t_game *game, t_image *tex, char *path);
-// void	load_all_door_textures(t_game *game);
-// int	count_door_textures(void);
 
-// New prototypes (implemented in cub3D_utils.c)
+/*
+New prototypes (implemented in cub3D_utils.c)
+*/
 void	init_mlx_sys(t_game *game);
 char	*get_map_path(char *input);
 int		check_valid_file_path(char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
-// DEPRECATION CANDIDATE: count_door_textures is replaced by load_door_texture
-// int	count_door_textures(void);
 int		load_door_texture(t_game *game, char *path, int i);
 void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 

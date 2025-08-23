@@ -6,15 +6,18 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 06:27:27 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 08:00:36 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 08:12:41 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../includes/cub3D.h"
 
 /*
 Function prototypes
 */
+char	*get_map_path(char *input);
+int		check_valid_file_path(char *path);
+void	load_texture(t_game *game, t_image *tex, char *path);
+int		load_door_texture(t_game *game, char *path, int i);
+void	init_mlx_sys(t_game *game);
 char	*get_map_path(char *input);
 int		check_valid_file_path(char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
@@ -84,39 +87,23 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 	tex->transparent_color = 0xFF000000;
 }
 
-// int	count_door_textures(void)
-// {
-// 	int	count;
-// 	char	path[256];
-
-// 	count = 0;
-// 	while (count < MAX_DOOR_FRAMES)
-// 	{
-// 		sprintf(path, "textures/doors/door_%d.xpm", count);
-// 		if (!check_valid_file_path(path))
-// 			break ;
-// 		count++;
-// 	}
-// 	return (count);
-// }
-
-int		load_door_texture(t_game *game, char *path, int i)
+int	load_door_texture(t_game *game, char *path, int i)
 {
-   if (i >= MAX_DOOR_FRAMES)
-   {
-	   ft_fprintf(2, "Error: Too many door textures loaded\n");
-	   return (0);
-   }
-   game->textures.door_frames[i] = malloc(sizeof(t_image));
-   if (!game->textures.door_frames[i])
-   {
-	   ft_fprintf(2, "Error: Failed to allocate door frame %d\n", i);
-	   return (0);
-   }
-   load_texture(game, game->textures.door_frames[i], path);
-   game->textures.door_frame_count = i + 1;
-   ft_fprintf(2, "Loaded door texture: %s\n", path);
-   return (1);
+	if (i >= MAX_DOOR_FRAMES)
+	{
+		ft_fprintf(2, "Error: Too many door textures loaded\n");
+		return (0);
+	}
+	game->textures.door_frames[i] = malloc(sizeof(t_image));
+	if (!game->textures.door_frames[i])
+	{
+		ft_fprintf(2, "Error: Failed to allocate door frame %d\n", i);
+		return (0);
+	}
+	load_texture(game, game->textures.door_frames[i], path);
+	game->textures.door_frame_count = i + 1;
+	ft_fprintf(2, "Loaded door texture: %s\n", path);
+	return (1);
 }
 
 /*
