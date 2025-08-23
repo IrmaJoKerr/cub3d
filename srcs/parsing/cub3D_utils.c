@@ -6,9 +6,11 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 06:27:27 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 08:12:41 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 09:21:20 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
 
 /*
 Function prototypes

@@ -6,16 +6,17 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 08:16:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 09:21:08 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../includes/cub3D.h"
 
 /*
 Function prototypes
 */
 int	check_builtin_textures(t_game *game);
 int	main(int argc, char **argv);
-
 
 /*
 Check and load builtin space and door textures.
