@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:02:21 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 17:44:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 05:13:04 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	cleanup_door_frames(t_game *game);
 /*
 Minimap functions. In minimap.c
 */
-void	setup_minimap(t_game *game);
-void	load_minimap_tiles(t_game *game);
+int		setup_minimap(t_game *game);
+int		load_minimap_tiles(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int center_x,
 			int center_y);

@@ -6,88 +6,25 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:37:14 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 01:13:05 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 /*
-Function prototypes
+Function prototypes (in order)
 */
-// int	parse_configuration_section(const char *file, t_game *game);
-int	is_only_whitespace(const char *line);
-int	is_map_start_line(const char *line, int *in_map);
-int	parse_config_settings(char *line, t_game *game);
-int	get_texture_path(char *line, t_game *game, int settings_type);
-int	handle_color_settings(char *line, t_game *game, int settings_type);
-int	validate_required_config(t_game *game);
-int	cleanup_and_return(int fd, char *line, int ret_val);
-int	check_duplicate_texture(char *path, t_game *game, int settings_type);
+int		is_only_whitespace(const char *line);
+int		is_map_start_line(const char *line, int *in_map);
+int		parse_config_settings(char *line, t_game *game);
+int		get_texture_path(char *line, t_game *game, int settings_type);
+int		handle_color_settings(char *line, t_game *game, int settings_type);
+int		validate_required_config(t_game *game);
+int		cleanup_and_return(int fd, char *line, int ret_val);
+int		check_duplicate_texture(char *path, t_game *game, int settings_type);
 void	set_texture_path(char *path, t_game *game, int settings_type);
 
-// /*
-// Parse configuration section (before map starts)
-// Returns: map_start_line on success, -1 on error
-// */
-// int	parse_configuration_section(const char *file, t_game *game)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	int		line_num;
-// 	int		map_start_line;
-// 	int		len;
-
-// 	fprintf(stderr, "[DEBUG] Entering parse_configuration_section for file: %s\n", file);
-// 	fd = open(file, O_RDONLY);
-// 	if (fd < 0)
-// 	{
-// 		fprintf(stderr, "[DEBUG] Error: Cannot open file %s\n", file);
-// 		ft_fprintf(2, "Error: Cannot open file %s\n", file);
-// 		return (-1);
-// 	}
-// 	game->map.map_path = ft_strdup(file);
-// 	if (!game->map.map_path)
-// 		return (cleanup_and_return(fd, NULL, -1));
-// 	line_num = 0;
-// 	map_start_line = -1;
-// 	line = get_next_line(fd);
-// 	while ((line != NULL)
-// 	{
-// 		line = get_next_line(fd);
-// 		len = ft_strlen(line);
-// 		if (len > 0 && line[len - 1] == '\n')
-// 			line[len - 1] = '\0';
-// 		if (ft_strlen(line) == 0 || is_only_whitespace(line))
-// 		{
-// 			fprintf(stderr, "[DEBUG] Skipping blank/whitespace line %d\n", line_num);
-// 			free(line);
-// 			line_num++;
-// 			continue ;
-// 		}
-// 		fprintf(stderr, "[DEBUG] Parsing line %d: '%s'\n", line_num, line);
-// 		if (is_map_start_line(line))
-// 		{
-// 			fprintf(stderr, "[DEBUG] Detected map start at line %d: '%s'\n", line_num, line);
-// 			map_start_line = line_num;
-// 			free(line);
-// 			break ;
-// 		}
-// 		if (parse_config_settings(line, game) < 0)
-// 		{
-// 			fprintf(stderr, "[DEBUG] Error parsing config settings at line %d: '%s'\n", line_num, line);
-// 			return (cleanup_and_return(fd, line, -1));
-// 		}
-// 		free(line);
-// 		line_num++;
-// 	}
-// 	close(fd);
-// 	fprintf(stderr, "[DEBUG] Finished config parsing. Validating required config...\n");
-// 	if (validate_required_config(game) < 0)
-// 		return (-1);
-// 	fprintf(stderr, "[DEBUG] Exiting parse_configuration_section, map_start_line=%d\n", map_start_line);
-// 	return (map_start_line);
-// }
 
 /*
 Check if line contains only whitespace
@@ -148,7 +85,7 @@ int	parse_config_settings(char *line, t_game *game)
 }
 
 /*
-Get texture path with duplicate checking.
+Get texture path with duplicate checking
 */
 int	get_texture_path(char *line, t_game *game, int settings_type)
 {
@@ -176,6 +113,9 @@ int	get_texture_path(char *line, t_game *game, int settings_type)
 	return (0);
 }
 
+/*
+Check for duplicate texture paths
+*/
 int	check_duplicate_texture(char *path, t_game *game, int settings_type)
 {
 	if (settings_type == 1 && game->map.north_texture_path)
@@ -205,6 +145,9 @@ int	check_duplicate_texture(char *path, t_game *game, int settings_type)
 	return (0);
 }
 
+/*
+Set the texture path in the game struct
+*/
 void	set_texture_path(char *path, t_game *game, int settings_type)
 {
 	if (path && settings_type == 1)
@@ -282,9 +225,9 @@ int	validate_required_config(t_game *game)
 	return (0);
 }
 
-/**
- * Cleanup and return helper
- */
+/*
+Cleanup and return helper
+*/
 int	cleanup_and_return(int fd, char *line, int ret_val)
 {
 	if (line)

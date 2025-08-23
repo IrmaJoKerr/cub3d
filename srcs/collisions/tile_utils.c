@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 10:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 05:10:12 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 02:10:40 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Function prototypes
 */
 bool	is_valid_move(t_game *game, double x, double y);
-void	set_player_start_position(t_game *game, int tile_x, int tile_y);
+// void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
 Check if a world position is valid (not a wall, void, or out of bounds)
@@ -39,13 +39,13 @@ bool	is_valid_move(t_game *game, double x, double y)
 		|| tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W');
 }
 
-/*
-Set player position to the center of a specific tile
-*/
-void	set_player_start_position(t_game *game, int tile_x, int tile_y)
-{
-	game->curr_x = tile_x + 0.5;
-	game->curr_y = tile_y + 0.5;
-	game->map.player_x = game->curr_x;
-	game->map.player_y = game->curr_y;
-}
+// /*
+// Set player position to the center of a specific tile
+//  */
+// void	set_player_start_position(t_game *game, int tile_x, int tile_y)
+// {
+// 	game->curr_x = tile_x + 0.5;
+// 	game->curr_y = tile_y + 0.5;
+// 	game->map.player_x = game->curr_x;
+// 	game->map.player_y = game->curr_y;
+// }

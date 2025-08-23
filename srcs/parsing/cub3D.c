@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:29:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 05:13:49 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ Function prototypes
 */
 char	*get_map_path(char *map_file);
 int		check_valid_file_path(char *path);
-void	load_texture(t_game *game, t_image *tex, char *path);
+int	load_texture(t_game *game, t_image *tex, char *path);
 int		check_builtin_textures(t_game *game);
 void	init_game(t_game *game, const char *map_file);
 
+/*
+Check that all required builtin textures exist and load door textures
+*/
 int	check_builtin_textures(t_game *game)
 {
 	int		i;
@@ -48,9 +51,7 @@ int	check_builtin_textures(t_game *game)
 }
 
 /*
-Unified map path resolution supporting valid/invalid subfolders.
-If input starts with maps/valid/ or maps/invalid/, use as-is if exists.
-Otherwise, try maps/invalid/ then maps/valid/. Returns first found or error.
+Resolve the correct map path based on input and available files
 */
 char	*get_map_path(char *input)
 {
@@ -77,6 +78,9 @@ char	*get_map_path(char *input)
 	return (NULL);
 }
 
+/*
+Check if a file path is valid and accessible
+*/
 int	check_valid_file_path(char *path)
 {
 	int		fd;
@@ -90,7 +94,10 @@ int	check_valid_file_path(char *path)
 	return (1);
 }
 
-void	load_texture(t_game *game, t_image *tex, char *path)
+/*
+Load a texture from file and store it in the t_image struct
+*/
+int	load_texture(t_game *game, t_image *tex, char *path)
 {
 	int	width;
 	int	height;
@@ -99,19 +106,23 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 	if (!tex->img_ptr)
 	{
 		ft_fprintf(2, "Texture load failed: %s\n", path);
-		exit(1);
+		return (-1);
 	}
 	if (width != TEX_WIDTH || height != TEX_HEIGHT)
 	{
 		ft_fprintf(2, "Invalid texture size (%dx%d): %s\n", width, height,
 			path);
-		exit(1);
+		return (-1);
 	}
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
 			&tex->endian);
 	tex->transparent_color = 0xFF000000;
+	return (0);
 }
 
+/*
+Main entry point for the cub3D program
+*/
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -132,11 +143,17 @@ int	main(int argc, char **argv)
 }
 
 /*
-Initialises the game window. Mark for refactoring.
-Fixed critical logic error: parse_map returns -1 on failure, 1 on success.
+Initialises the game window and MLX system
 */
-void	init_mlx_sys(t_game *game)
+void	init_mlx_sys(t_game *game, const char *map_path)
 {
+	if (populate_map_array(map_path, game) < 0)
+	{
+		ft_fprintf(2, "Error: \n");
+		ft_fprintf(2, "Failed to populate map array.\n");
+		cleanup_later(game, map_path);
+		exit(EXIT_FAILURE);
+	}
 	ft_fprintf(1, "\nMAP VALIDATION COMPLETE\n");
 	ft_fprintf(1, "Starting MLX initialization\n");
 	game->mlx_ptr = mlx_init();
@@ -144,7 +161,7 @@ void	init_mlx_sys(t_game *game)
 	{
 		ft_fprintf(2, "Error: \n");
 		ft_fprintf(2, "Failed to initialize MiniLibX.\n");
-		cleanup_early(game);
+		cleanup_early(game, map_path);
 		exit(EXIT_FAILURE);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr, 1920, 1080, "cub3D");
@@ -152,30 +169,33 @@ void	init_mlx_sys(t_game *game)
 	{
 		ft_fprintf(2, "Error: \n");
 		ft_fprintf(2, "Failed to create a new window.\n");
-		cleanup_later(game);
+		cleanup_later(game, map_path);
 		exit(EXIT_FAILURE);
 	}
 }
 
+/*
+Initialises the game state and loads all required textures
+*/
 void	init_game(t_game *game, const char *map_file)
 {
-	if (parse_map_1(map_file, game) < 0)
+	if (parse_map_1(map_file, game) < 0 && parse_map_2(map_file, game) < 0)
 	{
-		cleanup_early(game);
+		ft_fprintf(2, "Error: Failed to parse map file.\n");
+		cleanup_early(game, map_file);
 		exit(EXIT_FAILURE);
 	}
-	init_mlx_sys(game);
-	load_texture(game, game->textures.north_wall, game->map.north_texture_path);
-	load_texture(game, game->textures.south_wall, game->map.south_texture_path);
-	load_texture(game, game->textures.east_wall, game->map.east_texture_path);
-	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
-	load_texture(game, game->textures.space, "textures/space/space.xpm");
-	usleep(5000);
-	// load_all_door_textures(game); // DEPRECATED
-	init_doors_from_map(game);
-	setup_minimap(game);
-	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
-	set_player_start_position(game, game->curr_x, game->curr_y);
+	init_mlx_sys(game, map_file);
+	if (load_textures(game) < 0)
+	{
+		cleanup_later(game, map_file);
+		exit(EXIT_FAILURE);
+	}
+	if (setup_minimap(game) < 0)
+	{
+		cleanup_later(game, map_file);
+		exit(EXIT_FAILURE);
+	}
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
 	if (!game->img.img_ptr)
 	{
@@ -184,4 +204,26 @@ void	init_game(t_game *game, const char *map_file)
 	}
 	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
 			&game->img.line_len, &game->img.endian);
+}
+
+int	load_textures(t_game *game)
+{
+	if (!check_builtin_textures(game))
+	{
+		ft_fprintf(2, "Error: Missing builtin textures.\n");
+		return (-1);
+	}
+	if (load_texture(game, game->textures.north_wall,
+			game->map.north_texture_path) < 0 || (load_texture(game,
+				game->textures.south_wall, game->map.south_texture_path) < 0)
+		|| (load_texture(game, game->textures.east_wall,
+				game->map.east_texture_path) < 0) || (load_texture(game,
+				game->textures.west_wall, game->map.west_texture_path) < 0)
+		|| (load_texture(game, game->textures.space, SPACE_TEXTURE) < 0))
+	{
+		ft_fprintf(2, "Error: Failed to load one or more textures.\n");
+		return (-1);
+	}
+	init_doors_from_map(game);
+	return (0);
 }

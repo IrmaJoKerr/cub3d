@@ -6,25 +6,25 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:34:42 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 17:04:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 01:52:04 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
 /*
-Function prototypes
+Function prototypes (in order)
 */
-int		close_window(t_game *game);
-void	cleanup_early(t_game *game);
+void	cleanup(t_game *game);
 void	cleanup_texture_paths(t_game *game);
 void	cleanup_map_array(t_game *game);
 void	cleanup_mlx_textures(t_game *game);
 void	cleanup_mlx_system(t_game *game);
 void	cleanup_minimap(t_game *game);
 void	cleanup_door_frames(t_game *game);
-void	cleanup_later(t_game *game);
-void	cleanup(t_game *game);
+int		close_window(t_game *game);
+void	cleanup_early(t_game *game, const char *map_path);
+void	cleanup_later(t_game *game, const char *map_path);
 
 /*
 Cleanup function to free memory and exit the program.
@@ -174,8 +174,9 @@ int	close_window(t_game *game)
 Cleanup if error before mlx initialization.
 Handle map array cleanup for validation failures.
 */
-void	cleanup_early(t_game *game)
+void	cleanup_early(t_game *game, const char *map_path)
 {
+	ft_safefree((void **)&map_path);
 	cleanup_texture_paths(game);
 	cleanup_map_array(game);
 	ft_safefree((void **)&game);
@@ -185,8 +186,9 @@ void	cleanup_early(t_game *game)
 /*
 Cleanup if error after mlx initialization.
 */
-void	cleanup_later(t_game *game)
+void	cleanup_later(t_game *game, const char *map_path)
 {
+	ft_safefree((void **)&map_path);
 	cleanup_mlx_textures(game);
 	cleanup_texture_paths(game);
 	cleanup_map_array(game);

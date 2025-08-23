@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 01:21:55 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,15 @@ int	is_valid_path(t_game *game, int y, int x)
 	fprintf(stderr, "DEBUG: Starting enhanced path validation from (%d,%d)\n", y, x);
 	fprintf(stderr, "DEBUG: Map dimensions: %dx%d\n", game->map.max_cols, game->map.max_rows);
 	fprintf(stderr, "DEBUG: Using local test_map for flood fill marking\n");
-	
-	// Allocate test_map locally
 	test_map = copy_map_array(game->map.map, game->map.max_rows);
 	if (!test_map)
 	{
 		ft_fprintf(2, "ERROR: Failed to allocate local test_map for flood fill validation\n");
 		return (0);
 	}
-	
 	result = flood_fill_validate(game, test_map, y, x);
 	fprintf(stderr, "DEBUG: Flood fill validation result: %d\n", result);
-	
-	// Clean up local test_map
 	ft_free_2d(test_map, game->map.max_rows);
-	
 	if (result)
 	{
 		ft_fprintf(1, "SUCCESS: Map validation passed\n");
@@ -75,41 +69,34 @@ int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 	else
 		map_char = '?';
 	fprintf(stderr, "DEBUG: Checking position (%d,%d), char='%c'\n", y, x, map_char);
-	
 	if (y < 0 || y >= game->map.max_rows || x < 0 || x >= game->map.max_cols)
 	{
 		fprintf(stderr, "DEBUG: Out of bounds at (%d,%d)\n", y, x);
 		return (0);
 	}
-	
 	if (test_map[y][x] == 'X')
 	{
 		fprintf(stderr, "DEBUG: Already visited (%d,%d)\n", y, x);
 		return (1);
 	}
-	
 	if (game->map.map[y][x] == '1' || game->map.map[y][x] == ' ')
 	{
 		fprintf(stderr, "DEBUG: Found wall/void at (%d,%d), char='%c'\n", y, x, game->map.map[y][x]);
 		return (1);
 	}
-	
 	if (!is_reachable_space(game->map.map[y][x]))
 	{
 		fprintf(stderr, "DEBUG: Invalid space '%c' at (%d,%d)\n", game->map.map[y][x], y, x);
 		return (0);
 	}
-	
 	test_map[y][x] = 'X';
 	fprintf(stderr, "DEBUG: Marked (%d,%d) as visited in test_map\n", y, x);
-	
 	if (y == 0 || y == game->map.max_rows - 1
 		|| x == 0 || x == game->map.max_cols - 1)
 	{
 		ft_fprintf(2, "Error: Reachable space at map edge (%d,%d)\n", y, x);
 		return (0);
 	}
-	
 	if (!flood_fill_validate(game, test_map, y - 1, x)
 		|| !flood_fill_validate(game, test_map, y + 1, x)
 		|| !flood_fill_validate(game, test_map, y, x - 1)

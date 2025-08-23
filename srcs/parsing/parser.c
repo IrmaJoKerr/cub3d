@@ -17,45 +17,12 @@ int exit_failure_parser(char *line, int fd);
 Function prototypes
 */
 int	parse_map_1(const char *file, t_game *game);
+int	parse_map_2(const char *file, t_game *game);
+int	exit_failure_parser(char *line, int fd);
 
 /*
-Main parsing and validation function implementing proper two-pass architecture:
-Pass 1: Parse configuration settings (textures, colors) until map starts
-Pass 2: Calculate map dimensions, allocate memory, and populate map
+Parse the first pass of the map file, finding config and map start
 */
-// int	parse_map(const char *file, t_game *game)
-// {
-// 	int	map_start_line;
-
-// 	fprintf(stderr, "[DEBUG] Entering parse_map for file: %s\n", file);
-// 	ft_fprintf(2, "Starting two-pass parsing for file: %s\n", file);
-// 	map_start_line = parse_configuration_section(file, game);
-// 	fprintf(stderr, "[DEBUG] parse_configuration_section returned: %d\n", map_start_line);
-// 	if (map_start_line < 0)
-// 	{
-// 		fprintf(stderr, "[DEBUG] Error: Failed to parse configuration section\n");
-// 		ft_fprintf(2, "Error: \n");
-// 		ft_fprintf(2, "Failed to parse configuration section\n");
-// 		ft_fprintf(2, "Failed to parse and validate the map.\n");
-// 		return (-1);
-// 	}
-// 	ft_fprintf(2, "Configuration parsed successfully.\nMap starts at line %d\n", map_start_line);
-// 	ft_fprintf(2, "Config parsed successfully.\nMap starts at line %d\n",
-// 		map_start_line);
-// 	fprintf(stderr, "[DEBUG] Calling parse_map_section at line %d\n", map_start_line);
-// 	if (parse_map_section(file, game, map_start_line) < 0)
-// 	{
-// 		fprintf(stderr, "[DEBUG] Error: Failed to parse map section\n");
-// 		ft_fprintf(2, "Error: \n");
-// 		ft_fprintf(2, "Failed to parse map section\n");
-// 		ft_fprintf(2, "Failed to parse and validate the map.\n");
-// 		return (-1);
-// 	}
-// 	fprintf(stderr, "[DEBUG] Two-pass parsing completed successfully\n");
-// 	ft_fprintf(2, "Two-pass parsing completed successfully\n");
-// 	return (1);
-// }
-
 int	parse_map_1(const char *file, t_game *game)
 {
 	int		fd;
@@ -81,7 +48,7 @@ int	parse_map_1(const char *file, t_game *game)
 		{
 			game->map.map_last_line = pos - 1;
 			ft_safefree((void **)&line);
-			break;
+			break ;
 		}
 	}
 	close(fd);
@@ -89,6 +56,9 @@ int	parse_map_1(const char *file, t_game *game)
 }
 
 
+/*
+Parse the second pass of the map file, populating map and player info
+*/
 int	parse_map_2(const char *file, t_game *game)
 {
 	int		fd;
@@ -114,11 +84,13 @@ int	parse_map_2(const char *file, t_game *game)
 	ft_fprintf(2, "Map scan complete: rows=%d, cols=%d, doors=%d, players=%d\n",
 		game->map.max_rows, game->map.max_cols, game->doorcount,
 		game->map.herocount);
-	find_player_position(game);
 	close(fd);
 	return (0);
 }
 
+/*
+Cleanup and exit on parser failure
+*/
 int	exit_failure_parser(char *line, int fd)
 {
 	ft_safefree((void **)&line);

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:44:39 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 05:09:40 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 /*
 Tile position calculation functions. In calculate_tile_position.c
 */
-void	init_mlx_sys(t_game *game);
+// void	init_mlx_sys(t_game *game, const char *map_path); // Remove duplicate, keep correct below
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
 double	tile_center_x(int tile_x);
@@ -61,20 +61,23 @@ void	init_game(t_game *game, const char *map_file);
 /*
 Implemented in cub3D.c:
 */
-void	init_mlx_sys(t_game *game);
+void	init_mlx_sys(t_game *game, const char *map_path);
 char	*get_map_path(char *input);
 int		check_valid_file_path(char *path);
-void	load_texture(t_game *game, t_image *tex, char *path);
+int	load_texture(t_game *game, t_image *tex, char *path);
+int	parse_map_2(const char *file, t_game *game);
+int	load_textures(t_game *game);
+
 int		load_door_texture(t_game *game, char *path, int i);
-void	set_player_start_position(t_game *game, int tile_x, int tile_y);
+// void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
 Cleanup functions a. In cleanup_a.c
 */
 void	cleanup(t_game *game);
 int		close_window(t_game *game);
-void	cleanup_early(t_game *game);
-void	cleanup_later(t_game *game);
+void	cleanup_early(t_game *game, const char *map_path);
+void	cleanup_later(t_game *game, const char *map_path);
 
 /*
 Cleanup functions b. In cleanup_b.c
@@ -155,15 +158,25 @@ char	*extract_color_values(const char *line, const char *identifier);
 int		validate_color_values(const char *values, int color[3]);
 
 /*
+Map population functions. In populate_map.c
+*/
+
+int	populate_map_array(const char *file, t_game *game);
+int	prepare_map_array(t_game *game);
+void	copy_line(char *dest, const char *src, int max_cols, int row);
+int	skip_to_map(int fd, int map_start_line);
+int	fill_map(int fd, t_game *game);
+
+/*
 Map parser functions. In map_parser.c
 */
-int		parse_map_section(const char *file, t_game *game, int map_start_line);
+// int		parse_map_section(const char *file, t_game *game, int map_start_line);
 int		calc_map_area(int fd, t_game *game, int i);
 int	validate_border_line(const char *line);
-int	populate_map_array(const char *file, t_game *game, int map_start_line);
+// int	populate_map_array(const char *file, t_game *game, int map_start_line); // Deprecated or unused
 void	count_player_chars(const char *line, t_game *game);
 int	validate_interior_line(const char *line);
-void	find_player_position(t_game *game);
+// void	find_player_position(t_game *game);
 int	final_map_validation(t_game *game);
 
 int	validate_map_line_chars(const char *line, t_game *game, int row, int *player_found);

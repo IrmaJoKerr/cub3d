@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 17:07:07 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 05:15:28 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 02:29:44 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /*
 Function prototypes
 */
-void	setup_minimap(t_game *game);
-void	load_minimap_tiles(t_game *game);
+int		setup_minimap(t_game *game);
+int		load_minimap_tiles(t_game *game);
 void	draw_minimap_border(t_game *game);
 void	draw_triangle_player_indicator(t_game *game, int center_x,
 			int center_y);
@@ -24,33 +24,36 @@ void	draw_triangle_player_indicator(t_game *game, int center_x,
 /*
 Set up the minimap images and data buffers.
 */
-void	setup_minimap(t_game *game)
+int	setup_minimap(t_game *game)
 {
 	if (!game || !game->mlx_ptr)
-		return ;
+		return (-1);
 	game->minimap.full_pixel_width = game->map.max_cols * 20;
 	game->minimap.full_pixel_height = game->map.max_rows * 20;
-	load_minimap_tiles(game);
+	if (load_minimap_tiles(game) == -1)
+		return (-1);
 	game->minimap.full_map_img = mlx_new_image(game->mlx_ptr,
 			game->minimap.full_pixel_width, game->minimap.full_pixel_height);
 	if (!game->minimap.full_map_img)
-		return ;
+		return (-1);
 	game->minimap.full_map_data = mlx_get_data_addr(game->minimap.full_map_img,
 			&game->minimap.full_map_bpp, &game->minimap.full_map_sl,
 			&game->minimap.full_map_endian);
 	generate_full_minimap(game);
 	game->minimap.minimap_img = mlx_new_image(game->mlx_ptr, 180, 180);
 	if (!game->minimap.minimap_img)
-		return ;
+		return (-1);
 	game->minimap.minimap_data = mlx_get_data_addr(game->minimap.minimap_img,
 			&game->minimap.minimap_bpp, &game->minimap.minimap_sl,
 			&game->minimap.minimap_endian);
+	usleep(1000);
+	return (0);
 }
 
 /*
 Load minimap tile images for wall, floor, and door.
 */
-void	load_minimap_tiles(t_game *game)
+int	load_minimap_tiles(t_game *game)
 {
 	int	tile_width;
 	int	tile_height;
@@ -58,24 +61,25 @@ void	load_minimap_tiles(t_game *game)
 	game->minimap.wall.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/wall.xpm", &tile_width, &tile_height);
 	if (!game->minimap.wall.img_ptr)
-		return ;
+		return (-1);
 	game->minimap.wall.addr = mlx_get_data_addr(game->minimap.wall.img_ptr,
 			&game->minimap.wall.bpp, &game->minimap.wall.line_len,
 			&game->minimap.wall.endian);
 	game->minimap.floor.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/floor.xpm", &tile_width, &tile_height);
 	if (!game->minimap.floor.img_ptr)
-		return ;
+		return (-1);
 	game->minimap.floor.addr = mlx_get_data_addr(game->minimap.floor.img_ptr,
 			&game->minimap.floor.bpp, &game->minimap.floor.line_len,
 			&game->minimap.floor.endian);
 	game->minimap.door.img_ptr = mlx_xpm_file_to_image(game->mlx_ptr,
 			"textures/minimap/door.xpm", &tile_width, &tile_height);
 	if (!game->minimap.door.img_ptr)
-		return ;
+		return (-1);
 	game->minimap.door.addr = mlx_get_data_addr(game->minimap.door.img_ptr,
 			&game->minimap.door.bpp, &game->minimap.door.line_len,
 			&game->minimap.door.endian);
+	return (0);
 }
 
 /*

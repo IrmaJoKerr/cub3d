@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:33:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 01:19:32 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	debug_print_map(t_game *game)
 	fprintf(stderr, "Player count: %d\n", game->map.herocount);
 	fprintf(stderr, "Start direction: %d\n", game->map.start_direction);
 	fprintf(stderr, "\nMap array contents:\n");
-	
 	y = 0;
 	while (y < game->map.max_rows)
 	{
@@ -46,7 +45,6 @@ void	debug_print_map(t_game *game)
 			fprintf(stderr, "Row %2d: [NULL]\n", y);
 		y++;
 	}
-	
 	fprintf(stderr, "=== END DEBUG MAP ===\n\n");
 }
 
