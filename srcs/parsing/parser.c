@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 08:18:21 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/17 16:21:40 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int	parse_map(const char *file, t_game *game)
 		ft_fprintf(2, "Failed to parse and validate the map.\n");
 		return (-1);
 	}
-	ft_fprintf(2, "Config parsed successfully.\nMap starts at line %d\n",
-		map_start_line);
+	ft_fprintf(2, "Configuration parsed successfully.\nMap starts at line %d\n", map_start_line);
 	if (parse_map_section(file, game, map_start_line) < 0)
 	{
 		ft_fprintf(2, "Error: \n");
