@@ -1,3 +1,4 @@
+int exit_failure_parser(char *line, int fd);
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:28:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:47:33 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +73,16 @@ int	parse_map_1(const char *file, t_game *game)
 		if (!in_map)
 		{
 			if (is_map_start_line(line, &in_map))
-				game->map_start = pos;
+				game->map.map_start_line = pos;
 			else if (parse_config_settings(line, game) < 0)
 				return (exit_failure_parser(line, fd));
 		}
 		if ((in_map) && is_only_whitespace(line))
-			((game->map_end = pos - 1) && ft_safefree(line) && break);
+		{
+			game->map.map_last_line = pos - 1;
+			ft_safefree((void **)&line);
+			break;
+		}
 	}
 	close(fd);
 	return (0);
@@ -94,7 +99,7 @@ int	parse_map_2(const char *file, t_game *game)
 	if (fd < 0)
 		return (-1);
 	i = 0;
-	while (i < game->map_start)
+	while (i < game->map.map_start_line)
 	{
 		line = get_next_line(fd);
 		if (line)

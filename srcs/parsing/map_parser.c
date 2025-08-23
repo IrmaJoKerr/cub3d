@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:28:35 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:48:30 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Function prototypes
 */
 int		calc_map_area(int fd, t_game *game, int i);
-int		validate_map_line_chars(const char *line);
+// int		validate_map_line_chars(const char *line); // obsolete
 int		validate_border_line(const char *line);
 int		populate_map_array(const char *file, t_game *game, int map_start_line);
 void	count_player_chars(const char *line, t_game *game);
@@ -35,11 +35,11 @@ int	calc_map_area(int fd, t_game *game, int i)
 	int		player_found;
 
 	player_found = 0;
-	while ((i <= map_end_line) && (line != NULL))
+	while ((i <= game->map.map_last_line) && (line != NULL))
 	{
 		line = get_next_line(fd);
-		if (ft_strlen(line) > game->map.max_cols)
-			game->map.max_cols = ft_strlen(line);
+		if ((int)ft_strlen(line) > game->map.max_cols)
+			game->map.max_cols = (int)ft_strlen(line);
 		if (!validate_map_line_chars(line, game, game->map.max_rows,
 				&player_found))
 		{
@@ -219,7 +219,6 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 			i++;
 		}
 		// Remaining positions keep their space values from memset (void padding)
-		count_player_chars(line, game);
 		if (map_row > 0 && map_row < game->map.max_rows - 1)
 		{
 			// Temporarily disable strict interior validation for irregular maps
@@ -293,7 +292,7 @@ int	validate_interior_line(const char *line)
 int	parse_map_section(const char *file, t_game *game, int map_start_line)
 {
 	// First: Calculate dimensions and validate characters
-	if (calculate_map_dimensions(file, game, map_start_line) < 0)
+	if (calc_map_area(open(file, O_RDONLY), game, map_start_line) < 0)
 		return (-1);
 	ft_fprintf(2, "Map dimensions: %dx%d\n", game->map.max_cols, game->map.max_rows);
 	// Second: Allocate and populate map array

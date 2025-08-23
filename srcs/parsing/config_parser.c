@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:29:19 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:37:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ Function prototypes
 */
 // int	parse_configuration_section(const char *file, t_game *game);
 int	is_only_whitespace(const char *line);
-int	is_map_start_line(const char *line);
+int	is_map_start_line(const char *line, int *in_map);
 int	parse_config_settings(char *line, t_game *game);
 int	get_texture_path(char *line, t_game *game, int settings_type);
 int	handle_color_settings(char *line, t_game *game, int settings_type);
 int	validate_required_config(t_game *game);
 int	cleanup_and_return(int fd, char *line, int ret_val);
+int	check_duplicate_texture(char *path, t_game *game, int settings_type);
+void	set_texture_path(char *path, t_game *game, int settings_type);
 
 // /*
 // Parse configuration section (before map starts)
@@ -134,7 +136,7 @@ Parse individual configuration settings with duplicate checking
 int	parse_config_settings(char *line, t_game *game)
 {
 	int	settings_type;
-	int result;
+	int	result;
 
 	result = 0;
 	settings_type = identify_settings_type(line);
@@ -174,33 +176,33 @@ int	get_texture_path(char *line, t_game *game, int settings_type)
 	return (0);
 }
 
-char	*check_duplicate_texture(char *path, t_game *game, int settings_type)
+int	check_duplicate_texture(char *path, t_game *game, int settings_type)
 {
 	if (settings_type == 1 && game->map.north_texture_path)
 	{
 		ft_fprintf(2, "Error: Duplicate NO settings\n");
 		free(path);
-		return (NULL);
+		return (-1);
 	}
 	if (settings_type == 2 && game->map.south_texture_path)
 	{
 		ft_fprintf(2, "Error: Duplicate SO settings\n");
 		free(path);
-		return (NULL);
+		return (-1);
 	}
 	if (settings_type == 3 && game->map.west_texture_path)
 	{
 		ft_fprintf(2, "Error: Duplicate WE settings\n");
 		free(path);
-		return (NULL);
+		return (-1);
 	}
 	if (settings_type == 4 && game->map.east_texture_path)
 	{
 		ft_fprintf(2, "Error: Duplicate EA settings\n");
 		free(path);
-		return (NULL);
+		return (-1);
 	}
-	return (path);
+	return (0);
 }
 
 void	set_texture_path(char *path, t_game *game, int settings_type)
@@ -230,9 +232,9 @@ int	handle_color_settings(char *line, t_game *game, int settings_type)
 		parse_floor_color(line, game);
 		return (0);
 	}
-	if ((settings_type == 6) && (game->map.ceiling_color[0] != -1))
+	if ((settings_type == 6) && (game->map.sky_color[0] != -1))
 	{
-		ft_fprintf(2, "Error: Duplicate F settings\n");
+		ft_fprintf(2, "Error: Duplicate C settings\n");
 		return (-1);
 	}
 	else

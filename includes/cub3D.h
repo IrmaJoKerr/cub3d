@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 00:28:54 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:44:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,14 +136,14 @@ int		parse_ceiling_color(char *line, t_game *game);
 /*
 Configuration parser functions. In config_parser.c
 */
-// int		parse_configuration_section(const char *file, t_game *game);
-int		is_only_whitespace(const char *line);
-int		is_map_start_line(const char *line);
-int		parse_config_settings(char *line, t_game *game);
-int		get_texture_path(char *line, t_game *game, int settings_type);
-int		handle_color_settings(char *line, t_game *game, int settings_type);
-int		validate_required_config(t_game *game);
-int		cleanup_and_return(int fd, char *line, int ret_val);
+// int	parse_configuration_section(const char *file, t_game *game);
+int	is_only_whitespace(const char *line);
+int	is_map_start_line(const char *line, int *in_map);
+int	parse_config_settings(char *line, t_game *game);
+int	get_texture_path(char *line, t_game *game, int settings_type);
+int	handle_color_settings(char *line, t_game *game, int settings_type);
+int	validate_required_config(t_game *game);
+int	cleanup_and_return(int fd, char *line, int ret_val);
 
 /*
 Parser helper functions. In parser_helpers.c
@@ -159,13 +159,14 @@ Map parser functions. In map_parser.c
 */
 int		parse_map_section(const char *file, t_game *game, int map_start_line);
 int		calc_map_area(int fd, t_game *game, int i);
-int		validate_map_line_chars(const char *line);
-int		validate_border_line(const char *line);
-int		populate_map_array(const char *file, t_game *game, int map_start_line);
+int	validate_border_line(const char *line);
+int	populate_map_array(const char *file, t_game *game, int map_start_line);
 void	count_player_chars(const char *line, t_game *game);
-int		validate_interior_line(const char *line);
+int	validate_interior_line(const char *line);
 void	find_player_position(t_game *game);
-int		final_map_validation(t_game *game);
+int	final_map_validation(t_game *game);
+
+int	validate_map_line_chars(const char *line, t_game *game, int row, int *player_found);
 
 /*
 Debug functions. In debug.c
