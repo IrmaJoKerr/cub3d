@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 12:53:49 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 17:48:40 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ Main functions. In cub3D.c
 void	init_game(t_game *game, const char *map_file);
 
 /*
-New prototypes (implemented in cub3D_utils.c)
+Implemented in cub3D.c:
 */
 void	init_mlx_sys(t_game *game);
 char	*get_map_path(char *input);
@@ -104,9 +104,12 @@ Map validation functions. In map_validation.c
 */
 int		is_valid_path(t_game *game, int y, int x);
 void	cleanup_texture_structures(t_game *game);
-int		check_builtin_textures(t_game *game);
-int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
-int		is_reachable_space(char c);
+// int	check_builtin_textures(void); // DEPRECATED
+// int	count_door_textures(void); // DEPRECATED
+// void	load_all_door_textures(t_game *game); // DEPRECATED
+int	flood_fill_validate(t_game *game, char **test_map, int y, int x);
+int	check_builtin_textures(t_game *game);
+int	is_reachable_space(char c);
 
 /*
 Tile coordinate utility functions. In tile_utils.c

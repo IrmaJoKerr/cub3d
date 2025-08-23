@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 17:41:59 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,12 @@ typedef struct s_map
 	char		*south_texture_path;
 	char		*east_texture_path;
 	char		*west_texture_path;
-	char		*sky_texture_path;
-	char		*floor_texture_path;
 	int			sky_color[3];
 	int			floor_color[3];
 	int			max_cols;
 	int			max_rows;
-	bool		map_first_wall;
-	bool		map_last_wall;
+	int			map_start_line;
+	int			map_last_line;
 	int			herocount;
 	double		player_x;
 	double		player_y;
@@ -104,7 +102,7 @@ typedef struct s_texture
 	void	*sky;
 	void	*floor;
 	t_image	**door_frames;
-	t_image	*current_door_frames;
+	// t_image	*current_door_frames; // DEPRECATED, may be needed later
 	int		door_frame_count;
 }	t_texture;
 

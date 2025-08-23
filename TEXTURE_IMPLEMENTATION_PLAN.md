@@ -137,7 +137,7 @@ void load_door_texture(t_game *game)
         exit(1);
     }
     
-    // Load single door texture for portcullis-style opening
+    // Load single door texture for portcullis-style openinga
     load_texture(game, game->textures.door, door_texture_path);
     
     printf("✅ Standard door texture loaded: %s\n", door_texture_path);

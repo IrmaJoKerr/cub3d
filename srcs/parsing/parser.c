@@ -6,11 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-<<<<<<< Updated upstream
-/*   Updated: 2025/08/17 16:21:40 by bleow            ###   ########.fr       */
-=======
-/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
->>>>>>> Stashed changes
+/*   Updated: 2025/08/23 16:17:52 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +38,10 @@ int	parse_map(const char *file, t_game *game)
 		ft_fprintf(2, "Failed to parse and validate the map.\n");
 		return (-1);
 	}
-<<<<<<< Updated upstream
 	ft_fprintf(2, "Configuration parsed successfully.\nMap starts at line %d\n", map_start_line);
-=======
 	ft_fprintf(2, "Config parsed successfully.\nMap starts at line %d\n",
 		map_start_line);
 	fprintf(stderr, "[DEBUG] Calling parse_map_section at line %d\n", map_start_line);
->>>>>>> Stashed changes
 	if (parse_map_section(file, game, map_start_line) < 0)
 	{
 		fprintf(stderr, "[DEBUG] Error: Failed to parse map section\n");

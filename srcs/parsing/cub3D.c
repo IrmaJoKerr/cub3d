@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 16:18:38 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 17:43:31 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,13 @@
 /*
 Function prototypes
 */
-char	*get_map_path(const char *map_file);
-int		check_valid_file_path(const char *path);
+char	*get_map_path(char *map_file);
+int		check_valid_file_path(char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
-int		count_door_textures(void);
-void	load_all_door_textures(t_game *game);
-void	cleanup_framebuffer(t_game *game);
+int		check_builtin_textures(t_game *game);
 void	init_game(t_game *game, const char *map_file);
 
-/*
-Build the full path to the map file.
-If the map_file contains a '/', use it as-is.
-Otherwise, prepend "maps/" to look in the maps subfolder.
-*/
-/*
-Old get_map_path logic commented out below for reference.
-// char	*get_map_path(const char *map_file)
-// {
-//     char	*full_path;
-//     full_path = NULL;
-//     if (ft_strncmp(map_file, "maps/", 5) == 0)
-//         full_path = ft_strdup(map_file);
-//     else
-//         full_path = ft_strjoin("maps/", map_file);
-//     if (!full_path)
-//     {
-//         ft_fprintf(2, "Error: \n");
-//         ft_fprintf(2, "Failed to allocate memory for map path.\n");
-//         return (NULL);
-//     }
-//     if (!check_valid_file_path(full_path))
-//     {
-//         free(full_path);
-//         return (NULL);
-//     }
-//     return (full_path);
-// }
-*/
-
-int	check_builtin_textures(void)
+int	check_builtin_textures(t_game *game)
 {
 	int		i;
 	char	path[256];
@@ -72,6 +40,8 @@ int	check_builtin_textures(void)
 		ft_strcat(path, ".xpm");
 		if (!check_valid_file_path(path))
 			return (0);
+		if (!load_door_texture(game, path, i))
+			return (0);
 		i++;
 	}
 	return (1);
@@ -82,7 +52,7 @@ Unified map path resolution supporting valid/invalid subfolders.
 If input starts with maps/valid/ or maps/invalid/, use as-is if exists.
 Otherwise, try maps/invalid/ then maps/valid/. Returns first found or error.
 */
-char	*get_map_path(const char *input)
+char	*get_map_path(char *input)
 {
 	char	*test_path;
 
@@ -97,17 +67,17 @@ char	*get_map_path(const char *input)
 		test_path = ft_strjoin("maps/invalid/", input);
 		if (check_valid_file_path(test_path))
 			return (test_path);
-		free(test_path);
+		ft_safefree((void **)&test_path);
 		test_path = ft_strjoin("maps/valid/", input);
 		if (check_valid_file_path(test_path))
 			return (test_path);
-		free(test_path);
+		ft_safefree((void **)&test_path);
 	}
 	ft_fprintf(2, "Error: Map file not found: %s\n", input);
 	return (NULL);
 }
 
-int	check_valid_file_path(const char *path)
+int	check_valid_file_path(char *path)
 {
 	int		fd;
 
@@ -140,61 +110,6 @@ void	load_texture(t_game *game, t_image *tex, char *path)
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len,
 			&tex->endian);
 	tex->transparent_color = 0xFF000000;
-}
-
-int	count_door_textures(void)
-{
-	int		count;
-	char	path[256];
-
-	count = 0;
-	while (count < MAX_DOOR_FRAMES)
-	{
-		sprintf(path, "textures/doors/door_%d.xpm", count);
-		if (!check_valid_file_path(path))
-			break ;
-		count++;
-	}
-	return (count);
-}
-
-void	load_all_door_textures(t_game *game)
-{
-	int		i;
-	char	path[256];
-	int		door_count;
-
-	door_count = count_door_textures();
-	if (door_count == 0)
-	{
-		ft_fprintf(2, "Error: No door textures found in textures/doors/\n");
-		exit(1);
-	}
-	ft_fprintf(1, "Loading %d door textures...\n", door_count);
-
-	i = 0;
-	while (i < door_count)
-	{
-		snprintf(path, sizeof(path), "textures/doors/door_%d.xpm", i);
-		game->textures.door_frames[i] = malloc(sizeof(t_image));
-		if (!game->textures.door_frames[i])
-		{
-			ft_fprintf(2, "Error: Failed to allocate door frame %d\n", i);
-			exit(1);
-		}
-		load_texture(game, game->textures.door_frames[i], path);
-		usleep(2000); // Small delay between door texture loads
-		i++;
-	}
-	game->textures.door_frame_count = door_count;
-	ft_fprintf(1, "✅ Loaded %d door animation frames\n", door_count);
-}
-
-void	cleanup_framebuffer(t_game *game)
-{
-	mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
-	game->img.img_ptr = NULL;
-	game->img.addr = NULL;
 }
 
 int	main(int argc, char **argv)
@@ -256,7 +171,7 @@ void	init_game(t_game *game, const char *map_file)
 	load_texture(game, game->textures.west_wall, game->map.west_texture_path);
 	load_texture(game, game->textures.space, "textures/space/space.xpm");
 	usleep(5000);
-	load_all_door_textures(game);
+	// load_all_door_textures(game); // DEPRECATED
 	init_doors_from_map(game);
 	setup_minimap(game);
 	printf("Player position: (%.2f, %.2f)\n", game->curr_x, game->curr_y);
@@ -268,5 +183,5 @@ void	init_game(t_game *game, const char *map_file)
 		exit(EXIT_FAILURE);
 	}
 	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
-									   &game->img.line_len, &game->img.endian);
+			&game->img.line_len, &game->img.endian);
 }

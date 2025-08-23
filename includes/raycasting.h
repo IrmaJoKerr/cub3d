@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:02:21 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 12:46:33 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 17:44:02 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
 # include "struct.h"
+# include "cub3D.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -63,6 +64,16 @@ void	update_doors(t_game *game);
 bool	check_tile_hit(t_ray *wall_ray, t_ray *door_ray, t_game *game,
 			bool *door_found);
 void	perform_dda_with_door(t_ray *wall_ray, t_ray *door_ray, t_game *game);
+
+/*
+Space floor rendering functions. In draw_space.c
+*/
+void	draw_space_pixel(t_game *game, t_ray *ray, int x, int y);
+void	calc_space_ray(t_game *game, t_ray *ray, int x, int y);
+void	prep_img_buffer(t_game *game, t_image *space_img);
+t_image	draw_space_buffer(t_game *game);
+void	draw_space_row(t_game *game, t_image *space_img, int y);
+void	show_space_buffer(t_game *game, t_image *space_img);
 
 /*
 Door utility functions. In door_utils.c

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 05:18:08 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 16:20:25 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ bool	count_doors_in_map(t_game *game, int *door_index);
 void	init_doors_from_map(t_game *game);
 int		get_door_id(t_game *game, int x, int y);
 t_image	*get_door_texture(t_game *game, int door_id);
-void	cleanup_door_frames(t_game *game);
 
-/*
-Count the number of doors in the map and allocate memory for them.
-*/
 bool	count_doors_in_map(t_game *game, int *door_index)
 {
 	int	x;
@@ -31,10 +27,10 @@ bool	count_doors_in_map(t_game *game, int *door_index)
 
 	*door_index = 0;
 	y = 0;
-	while (y < game->map.max_rows)
+	while (y < game->map.max_rows && game->map.map[y])
 	{
 		x = 0;
-		while (x < game->map.max_cols)
+		while (x < game->map.max_cols && game->map.map[y])
 		{
 			if (game->map.map[y][x] == DOOR)
 				(*door_index)++;
@@ -114,35 +110,4 @@ t_image	*get_door_texture(t_game *game, int door_id)
 	if (frame < 0 || frame >= game->textures.door_frame_count)
 		frame = 0;
 	return (game->textures.door_frames[frame]);
-}
-
-/*
-Clean up and free all door frame textures and door data.
-*/
-void	cleanup_door_frames(t_game *game)
-{
-	int	i;
-
-	if (game->textures.door_frames)
-	{
-		i = 0;
-		while (i < game->textures.door_frame_count)
-		{
-			if (game->textures.door_frames[i])
-			{
-				if (game->textures.door_frames[i]->img_ptr)
-					mlx_destroy_image(game->mlx_ptr,
-						game->textures.door_frames[i]->img_ptr);
-				free(game->textures.door_frames[i]);
-			}
-			i++;
-		}
-		free(game->textures.door_frames);
-		game->textures.door_frames = NULL;
-	}
-	if (game->doors)
-	{
-		free(game->doors);
-		game->doors = NULL;
-	}
 }
