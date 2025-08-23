@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 00:22:14 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 05:19:32 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 08:03:18 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ Initialize a ray for the given screen column.
 */
 void	init_ray(t_ray *ray, t_game *game, int x)
 {
-
 	ray->cam_x = 2.0 * x / MAX_WIDTH - 1.0;
 	ray->dir_x = cos(game->view_direction)
 		+ (sin(game->view_direction) * tan(FOV / 2)) * ray->cam_x;

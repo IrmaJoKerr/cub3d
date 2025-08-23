@@ -1,128 +1,66 @@
-Starting two-pass parsing for file: maps/valid/forbidden.cub
+Starting two-pass parsing for file: maps/valid/test_complete.cub
 Configuration parsed successfully.
 Map starts at line 8
-Map dimensions: 12x8
-Row 0: line_len=12, max_cols=12
-Row 1: line_len=12, max_cols=12
-Row 2: line_len=12, max_cols=12
-Row 3: line_len=12, max_cols=12
-Row 4: line_len=12, max_cols=12
-Row 5: line_len=12, max_cols=12
-Row 6: line_len=12, max_cols=12
-Row 7: line_len=12, max_cols=12
+Map dimensions: 4x4
+Row 0: line_len=4, max_cols=4
+Row 1: line_len=4, max_cols=4
+Row 2: line_len=4, max_cols=4
+Row 3: line_len=4, max_cols=4
 
 === DEBUG: MAP CONTENTS ===
-Map dimensions: 12x8
-Player position: (2.00, 4.00)
+Map dimensions: 4x4
+Player position: (2.00, 2.00)
 Player count: 1
 Start direction: 180
 
 Map array contents:
-Row  0: [111111111111]
-Row  1: [1         11]
-Row  2: [1          1]
-Row  3: [111111111111]
-Row  4: [10S000000001]
-Row  5: [111111111111]
-Row  6: [11         1]
-Row  7: [111111111111]
+Row  0: [1111]
+Row  1: [1001]
+Row  2: [10S1]
+Row  3: [1111]
 === END DEBUG MAP ===
 
-DEBUG: Starting enhanced path validation from (4,2)
-DEBUG: Map dimensions: 12x8
+DEBUG: Starting enhanced path validation from (2,2)
+DEBUG: Map dimensions: 4x4
 DEBUG: Using local test_map for flood fill marking
-DEBUG: Checking position (4,2), char='S'
-DEBUG: Marked (4,2) as visited in test_map
-DEBUG: Checking position (3,2), char='1'
-DEBUG: Found wall/void at (3,2), char='1'
-DEBUG: Checking position (5,2), char='1'
-DEBUG: Found wall/void at (5,2), char='1'
-DEBUG: Checking position (4,1), char='0'
-DEBUG: Marked (4,1) as visited in test_map
+DEBUG: Checking position (2,2), char='S'
+DEBUG: Marked (2,2) as visited in test_map
+DEBUG: Checking position (1,2), char='0'
+DEBUG: Marked (1,2) as visited in test_map
+DEBUG: Checking position (0,2), char='1'
+DEBUG: Found wall/void at (0,2), char='1'
+DEBUG: Checking position (2,2), char='S'
+DEBUG: Already visited (2,2)
+DEBUG: Checking position (1,1), char='0'
+DEBUG: Marked (1,1) as visited in test_map
+DEBUG: Checking position (0,1), char='1'
+DEBUG: Found wall/void at (0,1), char='1'
+DEBUG: Checking position (2,1), char='0'
+DEBUG: Marked (2,1) as visited in test_map
+DEBUG: Checking position (1,1), char='0'
+DEBUG: Already visited (1,1)
 DEBUG: Checking position (3,1), char='1'
 DEBUG: Found wall/void at (3,1), char='1'
-DEBUG: Checking position (5,1), char='1'
-DEBUG: Found wall/void at (5,1), char='1'
-DEBUG: Checking position (4,0), char='1'
-DEBUG: Found wall/void at (4,0), char='1'
-DEBUG: Checking position (4,2), char='S'
-DEBUG: Already visited (4,2)
-DEBUG: Successfully validated (4,1)
-DEBUG: Checking position (4,3), char='0'
-DEBUG: Marked (4,3) as visited in test_map
-DEBUG: Checking position (3,3), char='1'
-DEBUG: Found wall/void at (3,3), char='1'
-DEBUG: Checking position (5,3), char='1'
-DEBUG: Found wall/void at (5,3), char='1'
-DEBUG: Checking position (4,2), char='S'
-DEBUG: Already visited (4,2)
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Marked (4,4) as visited in test_map
-DEBUG: Checking position (3,4), char='1'
-DEBUG: Found wall/void at (3,4), char='1'
-DEBUG: Checking position (5,4), char='1'
-DEBUG: Found wall/void at (5,4), char='1'
-DEBUG: Checking position (4,3), char='0'
-DEBUG: Already visited (4,3)
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Marked (4,5) as visited in test_map
-DEBUG: Checking position (3,5), char='1'
-DEBUG: Found wall/void at (3,5), char='1'
-DEBUG: Checking position (5,5), char='1'
-DEBUG: Found wall/void at (5,5), char='1'
-DEBUG: Checking position (4,4), char='0'
-DEBUG: Already visited (4,4)
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Marked (4,6) as visited in test_map
-DEBUG: Checking position (3,6), char='1'
-DEBUG: Found wall/void at (3,6), char='1'
-DEBUG: Checking position (5,6), char='1'
-DEBUG: Found wall/void at (5,6), char='1'
-DEBUG: Checking position (4,5), char='0'
-DEBUG: Already visited (4,5)
-DEBUG: Checking position (4,7), char='0'
-DEBUG: Marked (4,7) as visited in test_map
-DEBUG: Checking position (3,7), char='1'
-DEBUG: Found wall/void at (3,7), char='1'
-DEBUG: Checking position (5,7), char='1'
-DEBUG: Found wall/void at (5,7), char='1'
-DEBUG: Checking position (4,6), char='0'
-DEBUG: Already visited (4,6)
-DEBUG: Checking position (4,8), char='0'
-DEBUG: Marked (4,8) as visited in test_map
-DEBUG: Checking position (3,8), char='1'
-DEBUG: Found wall/void at (3,8), char='1'
-DEBUG: Checking position (5,8), char='1'
-DEBUG: Found wall/void at (5,8), char='1'
-DEBUG: Checking position (4,7), char='0'
-DEBUG: Already visited (4,7)
-DEBUG: Checking position (4,9), char='0'
-DEBUG: Marked (4,9) as visited in test_map
-DEBUG: Checking position (3,9), char='1'
-DEBUG: Found wall/void at (3,9), char='1'
-DEBUG: Checking position (5,9), char='1'
-DEBUG: Found wall/void at (5,9), char='1'
-DEBUG: Checking position (4,8), char='0'
-DEBUG: Already visited (4,8)
-DEBUG: Checking position (4,10), char='0'
-DEBUG: Marked (4,10) as visited in test_map
-DEBUG: Checking position (3,10), char='1'
-DEBUG: Found wall/void at (3,10), char='1'
-DEBUG: Checking position (5,10), char='1'
-DEBUG: Found wall/void at (5,10), char='1'
-DEBUG: Checking position (4,9), char='0'
-DEBUG: Already visited (4,9)
-DEBUG: Checking position (4,11), char='1'
-DEBUG: Found wall/void at (4,11), char='1'
-DEBUG: Successfully validated (4,10)
-DEBUG: Successfully validated (4,9)
-DEBUG: Successfully validated (4,8)
-DEBUG: Successfully validated (4,7)
-DEBUG: Successfully validated (4,6)
-DEBUG: Successfully validated (4,5)
-DEBUG: Successfully validated (4,4)
-DEBUG: Successfully validated (4,3)
-DEBUG: Successfully validated (4,2)
+DEBUG: Checking position (2,0), char='1'
+DEBUG: Found wall/void at (2,0), char='1'
+DEBUG: Checking position (2,2), char='S'
+DEBUG: Already visited (2,2)
+DEBUG: Successfully validated (2,1)
+DEBUG: Checking position (1,0), char='1'
+DEBUG: Found wall/void at (1,0), char='1'
+DEBUG: Checking position (1,2), char='0'
+DEBUG: Already visited (1,2)
+DEBUG: Successfully validated (1,1)
+DEBUG: Checking position (1,3), char='1'
+DEBUG: Found wall/void at (1,3), char='1'
+DEBUG: Successfully validated (1,2)
+DEBUG: Checking position (3,2), char='1'
+DEBUG: Found wall/void at (3,2), char='1'
+DEBUG: Checking position (2,1), char='0'
+DEBUG: Already visited (2,1)
+DEBUG: Checking position (2,3), char='1'
+DEBUG: Found wall/void at (2,3), char='1'
+DEBUG: Successfully validated (2,2)
 DEBUG: Flood fill validation result: 1
 SUCCESS: Map validation passed
 All reachable areas are properly enclosed by walls
@@ -131,5 +69,3 @@ Two-pass parsing completed successfully
 
 MAP VALIDATION COMPLETE
 Starting MLX initialization
-Loading 8 door textures...
-✅ Loaded 8 door animation frames

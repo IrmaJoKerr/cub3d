@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 04:53:28 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 07:53:11 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+# include "struct.h"
+# include "raycasting.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -25,12 +27,13 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
-# include "struct.h"
-# include "raycasting.h"
+
+
 
 /*
 Tile position calculation functions. In calculate_tile_position.c
 */
+void	init_mlx_sys(t_game *game);
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
 double	tile_center_x(int tile_x);
@@ -55,11 +58,21 @@ double	clamp_elevation(double elevation);
 Main functions. In cub3D.c
 */
 void	init_game(t_game *game, const char *map_file);
-char	*get_map_path(const char *map_file);
-int		check_valid_file_path(const char *path);
+// Deprecated prototypes (replaced by cub3D_utils.c)
+// char	*get_map_path(const char *map_file);
+// int	check_valid_file_path(const char *path);
+// void	load_texture(t_game *game, t_image *tex, char *path);
+// void	load_all_door_textures(t_game *game);
+// int	count_door_textures(void);
+
+// New prototypes (implemented in cub3D_utils.c)
+void	init_mlx_sys(t_game *game);
+char	*get_map_path(char *input);
+int		check_valid_file_path(char *path);
 void	load_texture(t_game *game, t_image *tex, char *path);
-void	load_all_door_textures(t_game *game);
-int		count_door_textures(void);
+// DEPRECATION CANDIDATE: count_door_textures is replaced by load_door_texture
+// int	count_door_textures(void);
+int		load_door_texture(t_game *game, char *path, int i);
 void	set_player_start_position(t_game *game, int tile_x, int tile_y);
 
 /*
@@ -97,6 +110,8 @@ void	alloc_and_init_all(t_game **game);
 Map validation functions. In map_validation.c
 */
 int		is_valid_path(t_game *game, int y, int x);
+void	cleanup_texture_structures(t_game *game);
+int		check_builtin_textures(t_game *game);
 int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
 

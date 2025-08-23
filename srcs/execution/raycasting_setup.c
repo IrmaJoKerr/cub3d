@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 05:16:26 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 08:03:45 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ Render the full frame, including raycast, doors, and crosshair.
 */
 int	render_img(t_game *game)
 {
-
 	render_raycast(game);
 	update_doors(game);
 	draw_crosshair(game);
