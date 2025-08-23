@@ -1,0 +1,3079 @@
+
+[DEBUG] Entering parse_map for file: maps/invalid/color_invalid_rgb.cub
+Starting two-pass parsing for file: maps/invalid/color_invalid_rgb.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/color_invalid_rgb.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,-20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,-20'
+[DEBUG] parse_config_settings: line='F 20,20,-20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,-20'
+[DEBUG] parse_floor_color: extracted values='20,20,-20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: color out of range
+[DEBUG] parse_floor_color: validate_color_values result=-1, color={20,20,0}
+[DEBUG] Error parsing config settings at line 4: 'F 20,20,-20'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111245==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x740c28cfd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x59e295f1cbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x59e295f1d405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x59e295f1d602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x59e295f0b100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x59e295f123db in parse_map srcs/parsing/parser.c:31
+    #6 0x59e295f0caaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x59e295f0c773 in main srcs/parsing/cub3D.c:125
+    #8 0x740c2862a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x740c2862a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x59e295f09d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/color_invalid_rgb.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/color_missing_ceiling_rgb.cub
+Starting two-pass parsing for file: maps/invalid/color_missing_ceiling_rgb.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/color_missing_ceiling_rgb.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,'
+[DEBUG] is_map_start_line called for line: 'C 200,200,'
+[DEBUG] parse_config_settings: line='C 200,200,', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,'
+[DEBUG] parse_ceiling_color: extracted values='200,200,'
+[DEBUG] validate_color_values: num_count=2
+[DEBUG] validate_color_values: invalid number of color components
+[DEBUG] parse_ceiling_color: validate_color_values result=-1, color={0,0,0}
+[DEBUG] Error parsing config settings at line 5: 'C 200,200,'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111250==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7384576fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x61a7fc207bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x61a7fc208405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x61a7fc208602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x61a7fc1f6100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x61a7fc1fd3db in parse_map srcs/parsing/parser.c:31
+    #6 0x61a7fc1f7aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x61a7fc1f7773 in main srcs/parsing/cub3D.c:125
+    #8 0x73845722a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x73845722a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x61a7fc1f4d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/color_missing_ceiling_rgb.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/color_missing.cub
+Starting two-pass parsing for file: maps/invalid/color_missing.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/color_missing.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 6: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111255==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x72e2a5afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x6394cbc3dbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x6394cbc3e405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x6394cbc3e602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x6394cbc2c100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x6394cbc333db in parse_map srcs/parsing/parser.c:31
+    #6 0x6394cbc2daaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x6394cbc2d773 in main srcs/parsing/cub3D.c:125
+    #8 0x72e2a562a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x72e2a562a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x6394cbc2ad04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/color_missing.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/color_missing_floor_rgb.cub
+Starting two-pass parsing for file: maps/invalid/color_missing_floor_rgb.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/color_missing_floor_rgb.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20'
+[DEBUG] parse_config_settings: line='F 20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20'
+[DEBUG] parse_floor_color: extracted values='20,20'
+[DEBUG] validate_color_values: num_count=2
+[DEBUG] validate_color_values: invalid number of color components
+[DEBUG] parse_floor_color: validate_color_values result=-1, color={0,0,0}
+[DEBUG] Error parsing config settings at line 4: 'F 20,20'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111260==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x77ad1ecfd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5c3845365bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5c3845366405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5c3845366602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5c3845354100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5c384535b3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5c3845355aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5c3845355773 in main srcs/parsing/cub3D.c:125
+    #8 0x77ad1e62a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x77ad1e62a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5c3845352d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/color_missing_floor_rgb.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/color_none.cub
+Starting two-pass parsing for file: maps/invalid/color_none.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/color_none.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 4: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111265==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7bcf382fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x61d00eacebd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x61d00eacf405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x61d00eacf602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x61d00eabd100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x61d00eac43db in parse_map srcs/parsing/parser.c:31
+    #6 0x61d00eabeaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x61d00eabe773 in main srcs/parsing/cub3D.c:125
+    #8 0x7bcf37e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7bcf37e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x61d00eabbd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/color_none.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/empty.cub
+Starting two-pass parsing for file: maps/invalid/empty.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/empty.cub
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+==== maps/invalid/empty.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/file_letter_end.cub
+Starting two-pass parsing for file: maps/invalid/file_letter_end.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/file_letter_end.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111275==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x79baf34fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x638c08dd0bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x638c08dd1405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x638c08dd1602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x638c08dbf100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x638c08dc63db in parse_map srcs/parsing/parser.c:31
+    #6 0x638c08dc0aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x638c08dc0773 in main srcs/parsing/cub3D.c:125
+    #8 0x79baf302a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x79baf302a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x638c08dbdd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/file_letter_end.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/map_first.cub
+Starting two-pass parsing for file: maps/invalid/map_first.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/map_first.cub
+[DEBUG] Parsing line 0: '10001'
+[DEBUG] is_map_start_line called for line: '10001'
+[DEBUG] parse_config_settings: line='10001', settings_type=0
+[DEBUG] Invalid settings detected in line: '10001'
+Error: Invalid settings in line: 10001
+[DEBUG] Error parsing config settings at line 0: '10001'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111280==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7e16e6afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x584c158bebd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x584c158bf405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x584c158bf602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x584c158ad100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x584c158b43db in parse_map srcs/parsing/parser.c:31
+    #6 0x584c158aeaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x584c158ae773 in main srcs/parsing/cub3D.c:125
+    #8 0x7e16e642a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7e16e642a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x584c158abd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 7 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/map_first.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/map_middle.cub
+Starting two-pass parsing for file: maps/invalid/map_middle.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/map_middle.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 4: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111285==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x78c008afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x606341e53bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x606341e54405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x606341e54602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x606341e42100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x606341e493db in parse_map srcs/parsing/parser.c:31
+    #6 0x606341e43aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x606341e43773 in main srcs/parsing/cub3D.c:125
+    #8 0x78c00842a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x78c00842a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x606341e40d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/map_middle.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/map_missing.cub
+Starting two-pass parsing for file: maps/invalid/map_missing.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/map_missing.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==111290==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5dbc76e2fa32 bp 0x7ffebd8a58d0 sp 0x7ffebd8a58d0 T0)
+==111290==The signal is caused by a READ memory access.
+==111290==Hint: address points to the zero page.
+    #0 0x5dbc76e2fa32 in ft_strlen (/home/bleow/Coding/Core/cub3d/cub3D+0x1da32) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #1 0x5dbc76e1e123 in parse_configuration_section srcs/parsing/config_parser.c:56
+    #2 0x5dbc76e253db in parse_map srcs/parsing/parser.c:31
+    #3 0x5dbc76e1faaa in init_game srcs/parsing/cub3D.c:162
+    #4 0x5dbc76e1f773 in main srcs/parsing/cub3D.c:125
+    #5 0x701fddc2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #6 0x701fddc2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #7 0x5dbc76e1cd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/home/bleow/Coding/Core/cub3d/cub3D+0x1da32) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec) in ft_strlen
+==111290==ABORTING
+==== maps/invalid/map_missing.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/map_only.cub
+Starting two-pass parsing for file: maps/invalid/map_only.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/map_only.cub
+[DEBUG] Parsing line 0: '10001'
+[DEBUG] is_map_start_line called for line: '10001'
+[DEBUG] parse_config_settings: line='10001', settings_type=0
+[DEBUG] Invalid settings detected in line: '10001'
+Error: Invalid settings in line: 10001
+[DEBUG] Error parsing config settings at line 0: '10001'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111294==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 7 byte(s) in 1 object(s) allocated from:
+    #0 0x7333446fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x617b273b1bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x617b273b2405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x617b273b2602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x617b273a0100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x617b273a73db in parse_map srcs/parsing/parser.c:31
+    #6 0x617b273a1aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x617b273a1773 in main srcs/parsing/cub3D.c:125
+    #8 0x73334402a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x73334402a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x617b2739ed04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 7 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/map_only.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/map_too_small.cub
+Starting two-pass parsing for file: maps/invalid/map_too_small.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/map_too_small.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111'
+[DEBUG] is_map_start_line called for line: '111'
+[DEBUG] is_map_start_line returning 1 for line: '111'
+[DEBUG] Detected map start at line 7: '111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111299==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7509b30fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b6547cecbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b6547ced405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b6547ced602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b6547cdb100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b6547ce23db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b6547cdcaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b6547cdc773 in main srcs/parsing/cub3D.c:125
+    #8 0x7509b2c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7509b2c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b6547cd9d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/map_too_small.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/player_multiple.cub
+Starting two-pass parsing for file: maps/invalid/player_multiple.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/player_multiple.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111304==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7079d98fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x6451e8553bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x6451e8554405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x6451e8554602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x6451e8542100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x6451e85493db in parse_map srcs/parsing/parser.c:31
+    #6 0x6451e8543aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x6451e8543773 in main srcs/parsing/cub3D.c:125
+    #8 0x7079d922a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7079d922a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x6451e8540d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/player_multiple.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/player_none.cub
+Starting two-pass parsing for file: maps/invalid/player_none.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/player_none.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111309==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7d7564cfd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x636e9f6c8bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x636e9f6c9405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x636e9f6c9602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x636e9f6b7100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x636e9f6be3db in parse_map srcs/parsing/parser.c:31
+    #6 0x636e9f6b8aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x636e9f6b8773 in main srcs/parsing/cub3D.c:125
+    #8 0x7d756482a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7d756482a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x636e9f6b5d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/player_none.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/player_on_edge.cub
+Starting two-pass parsing for file: maps/invalid/player_on_edge.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/player_on_edge.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1S111'
+[DEBUG] is_map_start_line called for line: '1S111'
+[DEBUG] parse_config_settings: line='1S111', settings_type=0
+[DEBUG] Invalid settings detected in line: '1S111'
+Error: Invalid settings in line: 1S111
+[DEBUG] Error parsing config settings at line 7: '1S111'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111314==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x724f4f0fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x60c13abf5bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x60c13abf6405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x60c13abf6602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x60c13abe4100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x60c13abeb3db in parse_map srcs/parsing/parser.c:31
+    #6 0x60c13abe5aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x60c13abe5773 in main srcs/parsing/cub3D.c:125
+    #8 0x724f4ec2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x724f4ec2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x60c13abe2d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/player_on_edge.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/test_boundary_fail.cub
+Starting two-pass parsing for file: maps/invalid/test_boundary_fail.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/test_boundary_fail.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Parsing line 3: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 4: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: '1111111'
+[DEBUG] is_map_start_line called for line: '1111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111'
+[DEBUG] Detected map start at line 6: '1111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111319==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x70eb5d6fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x6394accfdbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x6394accfe405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x6394accfe602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x6394accec100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x6394accf33db in parse_map srcs/parsing/parser.c:31
+    #6 0x6394accedaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x6394acced773 in main srcs/parsing/cub3D.c:125
+    #8 0x70eb5d02a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x70eb5d02a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x6394accead04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/test_boundary_fail.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/test_empty_texture.cub
+Starting two-pass parsing for file: maps/invalid/test_empty_texture.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/test_empty_texture.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm  '
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm  '
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm  ', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111'
+[DEBUG] is_map_start_line called for line: '1111'
+[DEBUG] is_map_start_line returning 1 for line: '1111'
+[DEBUG] Detected map start at line 7: '1111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111336==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 5 byte(s) in 1 object(s) allocated from:
+    #0 0x791bf24fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x595cd0b80bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x595cd0b81405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x595cd0b81602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x595cd0b6f100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x595cd0b763db in parse_map srcs/parsing/parser.c:31
+    #6 0x595cd0b70aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x595cd0b70773 in main srcs/parsing/cub3D.c:125
+    #8 0x791bf202a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x791bf202a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x595cd0b6dd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 5 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/test_empty_texture.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/test_invalid_texture.cub
+Starting two-pass parsing for file: maps/invalid/test_invalid_texture.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/test_invalid_texture.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm  '
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm  '
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm  ', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111'
+[DEBUG] is_map_start_line called for line: '1111'
+[DEBUG] is_map_start_line returning 1 for line: '1111'
+[DEBUG] Detected map start at line 7: '1111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111341==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 35 byte(s) in 1 object(s) allocated from:
+    #0 0x7380e28fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x575227885bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x575227886405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x575227886602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x575227874100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x57522787b3db in parse_map srcs/parsing/parser.c:31
+    #6 0x575227875aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x575227875773 in main srcs/parsing/cub3D.c:125
+    #8 0x7380e242a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7380e242a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x575227872d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 35 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/test_invalid_texture.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_dir.cub
+Starting two-pass parsing for file: maps/invalid/textures_dir.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_dir.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/'
+[DEBUG] parse_config_settings: line='EA textures/test/', settings_type=4
+Error: Texture file must have .xpm extension: textures/test/
+Error: Invalid texture path for EA: textures/test/
+[DEBUG] Error parsing config settings at line 2: 'EA textures/test/'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111346==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7632e4cfd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5cf5884dcbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5cf5884dd405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5cf5884dd602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5cf5884cb100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5cf5884d23db in parse_map srcs/parsing/parser.c:31
+    #6 0x5cf5884ccaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5cf5884cc773 in main srcs/parsing/cub3D.c:125
+    #8 0x7632e482a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7632e482a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5cf5884c9d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_dir.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_duplicates.cub
+Starting two-pass parsing for file: maps/invalid/textures_duplicates.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_duplicates.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Parsing line 3: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Duplicate EA settings detected in get_texture_path
+Error: Duplicate EA settings
+[DEBUG] Error parsing config settings at line 3: 'EA textures/test/east.xpm'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111351==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7da304afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x60d880be4bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x60d880be5405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x60d880be5602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x60d880bd3100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x60d880bda3db in parse_map srcs/parsing/parser.c:31
+    #6 0x60d880bd4aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x60d880bd4773 in main srcs/parsing/cub3D.c:125
+    #8 0x7da30442a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7da30442a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x60d880bd1d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_duplicates.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_forbidden.cub
+Starting two-pass parsing for file: maps/invalid/textures_forbidden.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_forbidden.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111356==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7203a38fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x64122fc52bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x64122fc53405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x64122fc53602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x64122fc41100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x64122fc483db in parse_map srcs/parsing/parser.c:31
+    #6 0x64122fc42aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x64122fc42773 in main srcs/parsing/cub3D.c:125
+    #8 0x7203a322a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7203a322a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x64122fc3fd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 32 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_forbidden.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_invalid.cub
+Starting two-pass parsing for file: maps/invalid/textures_invalid.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_invalid.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/x'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/x'
+[DEBUG] parse_config_settings: line='WE textures/test/x', settings_type=3
+Error: Texture file must have .xpm extension: textures/test/x
+Error: Invalid texture path for WE: textures/test/x
+[DEBUG] Error parsing config settings at line 1: 'WE textures/test/x'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111361==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7f72784fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5a015c01cbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5a015c01d405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5a015c01d602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5a015c00b100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5a015c0123db in parse_map srcs/parsing/parser.c:31
+    #6 0x5a015c00caaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5a015c00c773 in main srcs/parsing/cub3D.c:125
+    #8 0x7f7277e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7f7277e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5a015c009d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_invalid.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_missing.cub
+Starting two-pass parsing for file: maps/invalid/textures_missing.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_missing.cub
+[DEBUG] Parsing line 0: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 1: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 2
+[DEBUG] Parsing line 3: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 4: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 6: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111366==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x73d11d8fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5964ff9d5bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5964ff9d6405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5964ff9d6602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5964ff9c4100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5964ff9cb3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5964ff9c5aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5964ff9c5773 in main srcs/parsing/cub3D.c:125
+    #8 0x73d11d22a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x73d11d22a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5964ff9c2d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_missing.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_none.cub
+Starting two-pass parsing for file: maps/invalid/textures_none.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_none.cub
+[DEBUG] Parsing line 0: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Parsing line 2: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 2: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111371==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x7854da0fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x563df939dbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x563df939e405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x563df939e602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x563df938c100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x563df93933db in parse_map srcs/parsing/parser.c:31
+    #6 0x563df938daaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x563df938d773 in main srcs/parsing/cub3D.c:125
+    #8 0x7854d9c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7854d9c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x563df938ad04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 12 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_none.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/textures_not_xpm.cub
+Starting two-pass parsing for file: maps/invalid/textures_not_xpm.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/textures_not_xpm.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111376==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x73bb094fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x555d981dfbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x555d981e0405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x555d981e0602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x555d981ce100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x555d981d53db in parse_map srcs/parsing/parser.c:31
+    #6 0x555d981cfaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x555d981cf773 in main srcs/parsing/cub3D.c:125
+    #8 0x73bb08e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x73bb08e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x555d981ccd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 24 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/textures_not_xpm.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/wall_hole_east.cub
+Starting two-pass parsing for file: maps/invalid/wall_hole_east.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/wall_hole_east.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111381==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x78b6730fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x63cc9ca8fbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x63cc9ca90405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x63cc9ca90602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x63cc9ca7e100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x63cc9ca853db in parse_map srcs/parsing/parser.c:31
+    #6 0x63cc9ca7faaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x63cc9ca7f773 in main srcs/parsing/cub3D.c:125
+    #8 0x78b672a2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x78b672a2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x63cc9ca7cd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/wall_hole_east.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/wall_hole_north.cub
+Starting two-pass parsing for file: maps/invalid/wall_hole_north.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/wall_hole_north.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11011'
+[DEBUG] is_map_start_line called for line: '11011'
+[DEBUG] parse_config_settings: line='11011', settings_type=0
+[DEBUG] Invalid settings detected in line: '11011'
+Error: Invalid settings in line: 11011
+[DEBUG] Error parsing config settings at line 7: '11011'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111391==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7714bc4fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x55d38e4c4bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x55d38e4c5405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x55d38e4c5602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x55d38e4b3100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x55d38e4ba3db in parse_map srcs/parsing/parser.c:31
+    #6 0x55d38e4b4aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x55d38e4b4773 in main srcs/parsing/cub3D.c:125
+    #8 0x7714bbe2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7714bbe2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x55d38e4b1d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/wall_hole_north.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/wall_hole_south.cub
+Starting two-pass parsing for file: maps/invalid/wall_hole_south.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/wall_hole_south.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111398==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x765231efd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x588228c16bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x588228c17405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x588228c17602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x588228c05100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x588228c0c3db in parse_map srcs/parsing/parser.c:31
+    #6 0x588228c06aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x588228c06773 in main srcs/parsing/cub3D.c:125
+    #8 0x76523182a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x76523182a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x588228c03d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/wall_hole_south.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/wall_hole_west.cub
+Starting two-pass parsing for file: maps/invalid/wall_hole_west.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/wall_hole_west.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111403==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7b4c326fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b66818b2bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b66818b3405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b66818b3602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b66818a1100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b66818a83db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b66818a2aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b66818a2773 in main srcs/parsing/cub3D.c:125
+    #8 0x7b4c3222a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7b4c3222a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b668189fd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/wall_hole_west.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/invalid/wall_none.cub
+Starting two-pass parsing for file: maps/invalid/wall_none.cub
+[DEBUG] Entering parse_configuration_section for file: maps/invalid/wall_none.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '00000'
+[DEBUG] is_map_start_line called for line: '00000'
+[DEBUG] parse_config_settings: line='00000', settings_type=0
+[DEBUG] Invalid settings detected in line: '00000'
+Error: Invalid settings in line: 00000
+[DEBUG] Error parsing config settings at line 7: '00000'
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111408==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7da2cdafd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5f33b39e5bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5f33b39e6405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5f33b39e6602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5f33b39d4100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5f33b39db3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5f33b39d5aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5f33b39d5773 in main srcs/parsing/cub3D.c:125
+    #8 0x7da2cd42a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7da2cd42a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5f33b39d2d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/invalid/wall_none.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/cheese_maze.cub
+Starting two-pass parsing for file: maps/valid/cheese_maze.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/cheese_maze.cub
+[DEBUG] Parsing line 0: 'SO textures/simonkraft/wet_sponge.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/simonkraft/wet_sponge.xpm'
+[DEBUG] parse_config_settings: line='SO textures/simonkraft/wet_sponge.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/simonkraft/wet_sponge.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/simonkraft/wet_sponge.xpm'
+[DEBUG] parse_config_settings: line='WE textures/simonkraft/wet_sponge.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/simonkraft/wet_sponge.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/simonkraft/wet_sponge.xpm'
+[DEBUG] parse_config_settings: line='EA textures/simonkraft/wet_sponge.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 164,169,20'
+[DEBUG] is_map_start_line called for line: 'F 164,169,20'
+[DEBUG] parse_config_settings: line='F 164,169,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 164,169,20'
+[DEBUG] parse_floor_color: extracted values='164,169,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={164,169,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={164,169,20}
+[DEBUG] parse_floor_color: assigned floor_color={164,169,20}
+[DEBUG] Parsing line 5: 'C 153,204,255'
+[DEBUG] is_map_start_line called for line: 'C 153,204,255'
+[DEBUG] parse_config_settings: line='C 153,204,255', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 153,204,255'
+[DEBUG] parse_ceiling_color: extracted values='153,204,255'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={153,204,255}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={153,204,255}
+[DEBUG] parse_ceiling_color: assigned sky_color={153,204,255}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111413==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 39 byte(s) in 1 object(s) allocated from:
+    #0 0x7d89cb4fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b0eef16ebd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b0eef16f405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b0eef16f602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b0eef15d100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b0eef1643db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b0eef15eaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b0eef15e773 in main srcs/parsing/cub3D.c:125
+    #8 0x7d89cb02a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7d89cb02a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b0eef15bd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 39 byte(s) leaked in 1 allocation(s).
+==== maps/valid/cheese_maze.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/creepy.cub
+Starting two-pass parsing for file: maps/valid/creepy.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/creepy.cub
+[DEBUG] Parsing line 0: 'EA textures/simonkraft/respawn_anchor_side2.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/simonkraft/respawn_anchor_side2.xpm'
+[DEBUG] parse_config_settings: line='EA textures/simonkraft/respawn_anchor_side2.xpm', settings_type=4
+[DEBUG] Parsing line 1: 'SO textures/simonkraft/respawn_anchor_side4.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/simonkraft/respawn_anchor_side4.xpm'
+[DEBUG] parse_config_settings: line='SO textures/simonkraft/respawn_anchor_side4.xpm', settings_type=2
+[DEBUG] Parsing line 2: 'WE textures/simonkraft/respawn_anchor_side3.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/simonkraft/respawn_anchor_side3.xpm'
+[DEBUG] parse_config_settings: line='WE textures/simonkraft/respawn_anchor_side3.xpm', settings_type=3
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'C 35,19,73'
+[DEBUG] is_map_start_line called for line: 'C 35,19,73'
+[DEBUG] parse_config_settings: line='C 35,19,73', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 35,19,73'
+[DEBUG] parse_ceiling_color: extracted values='35,19,73'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={35,19,73}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={35,19,73}
+[DEBUG] parse_ceiling_color: assigned sky_color={35,19,73}
+[DEBUG] Parsing line 5: 'F 15,6,40'
+[DEBUG] is_map_start_line called for line: 'F 15,6,40'
+[DEBUG] parse_config_settings: line='F 15,6,40', settings_type=5
+[DEBUG] parse_floor_color: line='F 15,6,40'
+[DEBUG] parse_floor_color: extracted values='15,6,40'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={15,6,40}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={15,6,40}
+[DEBUG] parse_floor_color: assigned floor_color={15,6,40}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111418==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 49 byte(s) in 1 object(s) allocated from:
+    #0 0x7ab97a2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57c64708fbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x57c647090405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x57c647090602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x57c64707e100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x57c6470853db in parse_map srcs/parsing/parser.c:31
+    #6 0x57c64707faaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x57c64707f773 in main srcs/parsing/cub3D.c:125
+    #8 0x7ab979c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7ab979c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x57c64707cd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 49 byte(s) leaked in 1 allocation(s).
+==== maps/valid/creepy.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/dungeon.cub
+Starting two-pass parsing for file: maps/valid/dungeon.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/dungeon.cub
+[DEBUG] Parsing line 0: 'C 99,99,99'
+[DEBUG] is_map_start_line called for line: 'C 99,99,99'
+[DEBUG] parse_config_settings: line='C 99,99,99', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 99,99,99'
+[DEBUG] parse_ceiling_color: extracted values='99,99,99'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={99,99,99}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={99,99,99}
+[DEBUG] parse_ceiling_color: assigned sky_color={99,99,99}
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Parsing line 2: 'NO textures/simonkraft/cobblestone.xpm'
+[DEBUG] is_map_start_line called for line: 'NO textures/simonkraft/cobblestone.xpm'
+[DEBUG] parse_config_settings: line='NO textures/simonkraft/cobblestone.xpm', settings_type=1
+[DEBUG] Parsing line 3: 'SO textures/simonkraft/cobblestone_01.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/simonkraft/cobblestone_01.xpm'
+[DEBUG] parse_config_settings: line='SO textures/simonkraft/cobblestone_01.xpm', settings_type=2
+[DEBUG] Parsing line 4: 'WE textures/simonkraft/mossy_cobblestone1.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/simonkraft/mossy_cobblestone1.xpm'
+[DEBUG] parse_config_settings: line='WE textures/simonkraft/mossy_cobblestone1.xpm', settings_type=3
+[DEBUG] Parsing line 5: 'EA textures/simonkraft/cobblestone_02.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/simonkraft/cobblestone_02.xpm'
+[DEBUG] parse_config_settings: line='EA textures/simonkraft/cobblestone_02.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111111111111111111'
+[DEBUG] is_map_start_line called for line: '1111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111111111111111'
+[DEBUG] Detected map start at line 7: '1111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing F (floor color) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111423==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 12 byte(s) in 1 object(s) allocated from:
+    #0 0x76c806efd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x630a4b43fbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x630a4b440405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x630a4b440602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x630a4b42e100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x630a4b4353db in parse_map srcs/parsing/parser.c:31
+    #6 0x630a4b42faaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x630a4b42f773 in main srcs/parsing/cub3D.c:125
+    #8 0x76c806a2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x76c806a2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x630a4b42cd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 12 byte(s) leaked in 1 allocation(s).
+==== maps/valid/dungeon.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/forbidden.cub
+Starting two-pass parsing for file: maps/valid/forbidden.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/forbidden.cub
+[DEBUG] Parsing line 0: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/purple_stone.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='WE textures/wolfenstein/red_brick.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 18,53,25'
+[DEBUG] is_map_start_line called for line: 'F 18,53,25'
+[DEBUG] parse_config_settings: line='F 18,53,25', settings_type=5
+[DEBUG] parse_floor_color: line='F 18,53,25'
+[DEBUG] parse_floor_color: extracted values='18,53,25'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={18,53,25}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={18,53,25}
+[DEBUG] parse_floor_color: assigned floor_color={18,53,25}
+[DEBUG] Parsing line 5: 'C 153,204,255'
+[DEBUG] is_map_start_line called for line: 'C 153,204,255'
+[DEBUG] parse_config_settings: line='C 153,204,255', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 153,204,255'
+[DEBUG] parse_ceiling_color: extracted values='153,204,255'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={153,204,255}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={153,204,255}
+[DEBUG] parse_ceiling_color: assigned sky_color={153,204,255}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111'
+[DEBUG] Detected map start at line 7: '111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111428==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x7007ef4fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x59f5fa14cbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x59f5fa14d405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x59f5fa14d602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x59f5fa13b100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x59f5fa1423db in parse_map srcs/parsing/parser.c:31
+    #6 0x59f5fa13caaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x59f5fa13c773 in main srcs/parsing/cub3D.c:125
+    #8 0x7007eee2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7007eee2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x59f5fa139d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
+==== maps/valid/forbidden.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/library.cub
+Starting two-pass parsing for file: maps/valid/library.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/library.cub
+[DEBUG] Parsing line 0: 'C 171,154,137'
+[DEBUG] is_map_start_line called for line: 'C 171,154,137'
+[DEBUG] parse_config_settings: line='C 171,154,137', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 171,154,137'
+[DEBUG] parse_ceiling_color: extracted values='171,154,137'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={171,154,137}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={171,154,137}
+[DEBUG] parse_ceiling_color: assigned sky_color={171,154,137}
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Parsing line 2: 'NO textures/simonkraft/bookshelf.xpm'
+[DEBUG] is_map_start_line called for line: 'NO textures/simonkraft/bookshelf.xpm'
+[DEBUG] parse_config_settings: line='NO textures/simonkraft/bookshelf.xpm', settings_type=1
+[DEBUG] Parsing line 3: 'SO textures/simonkraft/bookshelf_01.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/simonkraft/bookshelf_01.xpm'
+[DEBUG] parse_config_settings: line='SO textures/simonkraft/bookshelf_01.xpm', settings_type=2
+[DEBUG] Parsing line 4: 'WE textures/simonkraft/bookshelf_02.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/simonkraft/bookshelf_02.xpm'
+[DEBUG] parse_config_settings: line='WE textures/simonkraft/bookshelf_02.xpm', settings_type=3
+[DEBUG] Parsing line 5: 'EA textures/simonkraft/bookshelf_03.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/simonkraft/bookshelf_03.xpm'
+[DEBUG] parse_config_settings: line='EA textures/simonkraft/bookshelf_03.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111111111111111111'
+[DEBUG] is_map_start_line called for line: '1111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111111111111111'
+[DEBUG] Detected map start at line 7: '1111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing F (floor color) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111433==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 13 byte(s) in 1 object(s) allocated from:
+    #0 0x7693d9cfd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x58d77d5b6bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x58d77d5b7405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x58d77d5b7602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x58d77d5a5100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x58d77d5ac3db in parse_map srcs/parsing/parser.c:31
+    #6 0x58d77d5a6aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x58d77d5a6773 in main srcs/parsing/cub3D.c:125
+    #8 0x7693d982a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7693d982a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x58d77d5a3d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 13 byte(s) leaked in 1 allocation(s).
+==== maps/valid/library.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/matrix.cub
+Starting two-pass parsing for file: maps/valid/matrix.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/matrix.cub
+[DEBUG] Parsing line 0: 'SO textures/matrix.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/matrix.xpm'
+[DEBUG] parse_config_settings: line='SO textures/matrix.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/matrix.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/matrix.xpm'
+[DEBUG] parse_config_settings: line='WE textures/matrix.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/matrix.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/matrix.xpm'
+[DEBUG] parse_config_settings: line='EA textures/matrix.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 0,0,0'
+[DEBUG] is_map_start_line called for line: 'F 0,0,0'
+[DEBUG] parse_config_settings: line='F 0,0,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 0,0,0'
+[DEBUG] parse_floor_color: extracted values='0,0,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={0,0,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={0,0,0}
+[DEBUG] parse_floor_color: assigned floor_color={0,0,0}
+[DEBUG] Parsing line 5: 'C 0,0,0'
+[DEBUG] is_map_start_line called for line: 'C 0,0,0'
+[DEBUG] parse_config_settings: line='C 0,0,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 0,0,0'
+[DEBUG] parse_ceiling_color: extracted values='0,0,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={0,0,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={0,0,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={0,0,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111438==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 24 byte(s) in 1 object(s) allocated from:
+    #0 0x7c94ee2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5cfe947b7bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5cfe947b8405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5cfe947b8602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5cfe947a6100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5cfe947ad3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5cfe947a7aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5cfe947a7773 in main srcs/parsing/cub3D.c:125
+    #8 0x7c94ede2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7c94ede2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5cfe947a4d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 24 byte(s) leaked in 1 allocation(s).
+==== maps/valid/matrix.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/sad_face.cub
+Starting two-pass parsing for file: maps/valid/sad_face.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/sad_face.cub
+[DEBUG] Parsing line 0: 'SO textures/simonkraft/soul_soil_01.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/simonkraft/soul_soil_01.xpm'
+[DEBUG] parse_config_settings: line='SO textures/simonkraft/soul_soil_01.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/simonkraft/soul_soil.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/simonkraft/soul_soil.xpm'
+[DEBUG] parse_config_settings: line='WE textures/simonkraft/soul_soil.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/simonkraft/soul_sand.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/simonkraft/soul_sand.xpm'
+[DEBUG] parse_config_settings: line='EA textures/simonkraft/soul_sand.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'C 53,41,34'
+[DEBUG] is_map_start_line called for line: 'C 53,41,34'
+[DEBUG] parse_config_settings: line='C 53,41,34', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 53,41,34'
+[DEBUG] parse_ceiling_color: extracted values='53,41,34'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={53,41,34}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={53,41,34}
+[DEBUG] parse_ceiling_color: assigned sky_color={53,41,34}
+[DEBUG] Parsing line 5: 'F 45,33,27'
+[DEBUG] is_map_start_line called for line: 'F 45,33,27'
+[DEBUG] parse_config_settings: line='F 45,33,27', settings_type=5
+[DEBUG] parse_floor_color: line='F 45,33,27'
+[DEBUG] parse_floor_color: extracted values='45,33,27'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={45,33,27}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={45,33,27}
+[DEBUG] parse_floor_color: assigned floor_color={45,33,27}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111443==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 38 byte(s) in 1 object(s) allocated from:
+    #0 0x72d4ac0fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x609daf8a3bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x609daf8a4405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x609daf8a4602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x609daf892100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x609daf8993db in parse_map srcs/parsing/parser.c:31
+    #6 0x609daf893aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x609daf893773 in main srcs/parsing/cub3D.c:125
+    #8 0x72d4aba2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x72d4aba2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x609daf890d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 38 byte(s) leaked in 1 allocation(s).
+==== maps/valid/sad_face.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/square_map.cub
+Starting two-pass parsing for file: maps/valid/square_map.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/square_map.cub
+[DEBUG] Parsing line 0: 'NO      textures/wolfenstein/grey_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'NO      textures/wolfenstein/grey_stone.xpm'
+[DEBUG] parse_config_settings: line='NO      textures/wolfenstein/grey_stone.xpm', settings_type=1
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Skipping blank/whitespace line 2
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/red_brick.xpm', settings_type=2
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: 'F   69, 222, 199'
+[DEBUG] is_map_start_line called for line: 'F   69, 222, 199'
+[DEBUG] parse_config_settings: line='F   69, 222, 199', settings_type=5
+[DEBUG] parse_floor_color: line='F   69, 222, 199'
+[DEBUG] parse_floor_color: extracted values='69, 222, 199'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={69,222,199}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={69,222,199}
+[DEBUG] parse_floor_color: assigned floor_color={69,222,199}
+[DEBUG] Skipping blank/whitespace line 7
+[DEBUG] Parsing line 8: 'EA textures/wolfenstein/mossy.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/mossy.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/mossy.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 9
+[DEBUG] Skipping blank/whitespace line 10
+[DEBUG] Skipping blank/whitespace line 11
+[DEBUG] Parsing line 12: 'C 235, 198, 52'
+[DEBUG] is_map_start_line called for line: 'C 235, 198, 52'
+[DEBUG] parse_config_settings: line='C 235, 198, 52', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 235, 198, 52'
+[DEBUG] parse_ceiling_color: extracted values='235, 198, 52'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={235,198,52}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={235,198,52}
+[DEBUG] parse_ceiling_color: assigned sky_color={235,198,52}
+[DEBUG] Skipping blank/whitespace line 13
+[DEBUG] Parsing line 14: '111111111111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111111111111'
+[DEBUG] Detected map start at line 14: '111111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing WE (west texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111448==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 66 byte(s) in 1 object(s) allocated from:
+    #0 0x7916f90fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5fec6e9c4bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5fec6e9c5405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5fec6e9c5602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5fec6e9b3100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5fec6e9ba3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5fec6e9b4aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5fec6e9b4773 in main srcs/parsing/cub3D.c:125
+    #8 0x7916f8c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7916f8c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5fec6e9b1d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 66 byte(s) leaked in 1 allocation(s).
+==== maps/valid/square_map.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/subject_map.cub
+Starting two-pass parsing for file: maps/valid/subject_map.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/subject_map.cub
+[DEBUG] Parsing line 0: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/purple_stone.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='WE textures/wolfenstein/red_brick.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '        1111111111111111111111111'
+[DEBUG] is_map_start_line called for line: '        1111111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '        1111111111111111111111111'
+[DEBUG] Detected map start at line 7: '        1111111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111453==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x7e382e6fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x61816e986bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x61816e987405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x61816e987602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x61816e975100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x61816e97c3db in parse_map srcs/parsing/parser.c:31
+    #6 0x61816e976aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x61816e976773 in main srcs/parsing/cub3D.c:125
+    #8 0x7e382e22a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7e382e22a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x61816e973d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
+==== maps/valid/subject_map.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_boundary_valid.cub
+Starting two-pass parsing for file: maps/valid/test_boundary_valid.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_boundary_valid.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Parsing line 3: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 4: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: '1111111'
+[DEBUG] is_map_start_line called for line: '1111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111'
+[DEBUG] Detected map start at line 6: '1111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111458==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x771cb9efd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b20643bcbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b20643bd405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b20643bd602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b20643ab100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b20643b23db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b20643acaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b20643ac773 in main srcs/parsing/cub3D.c:125
+    #8 0x771cb982a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x771cb982a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b20643a9d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_boundary_valid.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_complete.cub
+Starting two-pass parsing for file: maps/valid/test_complete.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_complete.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm  '
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm  '
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm  ', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111'
+[DEBUG] is_map_start_line called for line: '1111'
+[DEBUG] is_map_start_line returning 1 for line: '1111'
+[DEBUG] Detected map start at line 7: '1111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111463==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x752b9b6fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x58139d61bbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x58139d61c405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x58139d61c602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x58139d60a100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x58139d6113db in parse_map srcs/parsing/parser.c:31
+    #6 0x58139d60baaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x58139d60b773 in main srcs/parsing/cub3D.c:125
+    #8 0x752b9b02a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x752b9b02a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x58139d608d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_complete.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_doors.cub
+Starting two-pass parsing for file: maps/valid/test_doors.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_doors.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm  '
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm  '
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm  ', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '        1111111111111111111111111'
+[DEBUG] is_map_start_line called for line: '        1111111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '        1111111111111111111111111'
+[DEBUG] Detected map start at line 7: '        1111111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111468==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7fb4f04fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x602754cbcbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x602754cbd405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x602754cbd602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x602754cab100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x602754cb23db in parse_map srcs/parsing/parser.c:31
+    #6 0x602754cacaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x602754cac773 in main srcs/parsing/cub3D.c:125
+    #8 0x7fb4efe2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7fb4efe2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x602754ca9d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_doors.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_doors_simple.cub
+Starting two-pass parsing for file: maps/valid/test_doors_simple.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_doors_simple.cub
+[DEBUG] Parsing line 0: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/red_brick.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/wolfenstein/grey_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/wolfenstein/grey_stone.xpm'
+[DEBUG] parse_config_settings: line='WE textures/wolfenstein/grey_stone.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 17,38,64'
+[DEBUG] is_map_start_line called for line: 'F 17,38,64'
+[DEBUG] parse_config_settings: line='F 17,38,64', settings_type=5
+[DEBUG] parse_floor_color: line='F 17,38,64'
+[DEBUG] parse_floor_color: extracted values='17,38,64'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={17,38,64}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={17,38,64}
+[DEBUG] parse_floor_color: assigned floor_color={17,38,64}
+[DEBUG] Parsing line 5: 'C 218,234,235'
+[DEBUG] is_map_start_line called for line: 'C 218,234,235'
+[DEBUG] parse_config_settings: line='C 218,234,235', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 218,234,235'
+[DEBUG] parse_ceiling_color: extracted values='218,234,235'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={218,234,235}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={218,234,235}
+[DEBUG] parse_ceiling_color: assigned sky_color={218,234,235}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111111111111111111111111'
+[DEBUG] is_map_start_line called for line: '1111111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111111111111111111111'
+[DEBUG] Detected map start at line 7: '1111111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111473==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 45 byte(s) in 1 object(s) allocated from:
+    #0 0x71334fefd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5e70c2bd4bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5e70c2bd5405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5e70c2bd5602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5e70c2bc3100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5e70c2bca3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5e70c2bc4aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5e70c2bc4773 in main srcs/parsing/cub3D.c:125
+    #8 0x71334f82a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x71334f82a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5e70c2bc1d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 45 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_doors_simple.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_final_validation.cub
+Starting two-pass parsing for file: maps/valid/test_final_validation.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_final_validation.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111111'
+[DEBUG] is_map_start_line called for line: '1111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111'
+[DEBUG] Detected map start at line 7: '1111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111478==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x77c0d16fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x579b11bd5bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x579b11bd6405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x579b11bd6602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x579b11bc4100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x579b11bcb3db in parse_map srcs/parsing/parser.c:31
+    #6 0x579b11bc5aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x579b11bc5773 in main srcs/parsing/cub3D.c:125
+    #8 0x77c0d122a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x77c0d122a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x579b11bc2d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_final_validation.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_map.cub
+Starting two-pass parsing for file: maps/valid/test_map.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_map.cub
+[DEBUG] Parsing line 0: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/purple_stone.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='WE textures/wolfenstein/red_brick.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 18,53,25'
+[DEBUG] is_map_start_line called for line: 'F 18,53,25'
+[DEBUG] parse_config_settings: line='F 18,53,25', settings_type=5
+[DEBUG] parse_floor_color: line='F 18,53,25'
+[DEBUG] parse_floor_color: extracted values='18,53,25'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={18,53,25}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={18,53,25}
+[DEBUG] parse_floor_color: assigned floor_color={18,53,25}
+[DEBUG] Parsing line 5: 'C 153,204,255'
+[DEBUG] is_map_start_line called for line: 'C 153,204,255'
+[DEBUG] parse_config_settings: line='C 153,204,255', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 153,204,255'
+[DEBUG] parse_ceiling_color: extracted values='153,204,255'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={153,204,255}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={153,204,255}
+[DEBUG] parse_ceiling_color: assigned sky_color={153,204,255}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111'
+[DEBUG] Detected map start at line 7: '111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111483==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x7437fd6fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x56b55380bbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x56b55380c405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x56b55380c602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x56b5537fa100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x56b5538013db in parse_map srcs/parsing/parser.c:31
+    #6 0x56b5537fbaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x56b5537fb773 in main srcs/parsing/cub3D.c:125
+    #8 0x7437fd22a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7437fd22a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x56b5537f8d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_map.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_map_hole.cub
+Starting two-pass parsing for file: maps/valid/test_map_hole.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_map_hole.cub
+[DEBUG] Parsing line 0: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/purple_stone.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/purple_stone.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='WE textures/wolfenstein/red_brick.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 18,53,25'
+[DEBUG] is_map_start_line called for line: 'F 18,53,25'
+[DEBUG] parse_config_settings: line='F 18,53,25', settings_type=5
+[DEBUG] parse_floor_color: line='F 18,53,25'
+[DEBUG] parse_floor_color: extracted values='18,53,25'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={18,53,25}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={18,53,25}
+[DEBUG] parse_floor_color: assigned floor_color={18,53,25}
+[DEBUG] Parsing line 5: 'C 153,204,255'
+[DEBUG] is_map_start_line called for line: 'C 153,204,255'
+[DEBUG] parse_config_settings: line='C 153,204,255', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 153,204,255'
+[DEBUG] parse_ceiling_color: extracted values='153,204,255'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={153,204,255}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={153,204,255}
+[DEBUG] parse_ceiling_color: assigned sky_color={153,204,255}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111'
+[DEBUG] Detected map start at line 7: '111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111488==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 40 byte(s) in 1 object(s) allocated from:
+    #0 0x78c8282fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x572f4bd89bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x572f4bd8a405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x572f4bd8a602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x572f4bd78100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x572f4bd7f3db in parse_map srcs/parsing/parser.c:31
+    #6 0x572f4bd79aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x572f4bd79773 in main srcs/parsing/cub3D.c:125
+    #8 0x78c827c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x78c827c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x572f4bd76d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 40 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_map_hole.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_pos_bottom.cub
+Starting two-pass parsing for file: maps/valid/test_pos_bottom.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_pos_bottom.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111'
+[DEBUG] is_map_start_line called for line: '111'
+[DEBUG] is_map_start_line returning 1 for line: '111'
+[DEBUG] Detected map start at line 7: '111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111493==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x75fb8e2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57111e236bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x57111e237405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x57111e237602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x57111e225100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x57111e22c3db in parse_map srcs/parsing/parser.c:31
+    #6 0x57111e226aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x57111e226773 in main srcs/parsing/cub3D.c:125
+    #8 0x75fb8dc2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x75fb8dc2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x57111e223d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_pos_bottom.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_pos_left.cub
+Starting two-pass parsing for file: maps/valid/test_pos_left.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_pos_left.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111498==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7d1e0f6fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b511505ebd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b511505f405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b511505f602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b511504d100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b51150543db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b511504eaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b511504e773 in main srcs/parsing/cub3D.c:125
+    #8 0x7d1e0f02a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7d1e0f02a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b511504bd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_pos_left.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_pos_right.cub
+Starting two-pass parsing for file: maps/valid/test_pos_right.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_pos_right.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111111111111111111111'
+[DEBUG] is_map_start_line called for line: '111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '111111111111111111111'
+[DEBUG] Detected map start at line 7: '111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111503==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7950fa8fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5820737e7bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5820737e8405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5820737e8602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5820737d6100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5820737dd3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5820737d7aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5820737d7773 in main srcs/parsing/cub3D.c:125
+    #8 0x7950fa22a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7950fa22a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5820737d4d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_pos_right.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_pos_top.cub
+Starting two-pass parsing for file: maps/valid/test_pos_top.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_pos_top.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '111'
+[DEBUG] is_map_start_line called for line: '111'
+[DEBUG] is_map_start_line returning 1 for line: '111'
+[DEBUG] Detected map start at line 7: '111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111509==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x7138c74fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5810f2218bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5810f2219405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5810f2219602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5810f2207100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5810f220e3db in parse_map srcs/parsing/parser.c:31
+    #6 0x5810f2208aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5810f2208773 in main srcs/parsing/cub3D.c:125
+    #8 0x7138c6e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7138c6e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5810f2205d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_pos_top.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_simple.cub
+Starting two-pass parsing for file: maps/valid/test_simple.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_simple.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 220,100,0'
+[DEBUG] is_map_start_line called for line: 'F 220,100,0'
+[DEBUG] parse_config_settings: line='F 220,100,0', settings_type=5
+[DEBUG] parse_floor_color: line='F 220,100,0'
+[DEBUG] parse_floor_color: extracted values='220,100,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={220,100,0}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={220,100,0}
+[DEBUG] parse_floor_color: assigned floor_color={220,100,0}
+[DEBUG] Parsing line 5: 'C 225,30,0'
+[DEBUG] is_map_start_line called for line: 'C 225,30,0'
+[DEBUG] parse_config_settings: line='C 225,30,0', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 225,30,0'
+[DEBUG] parse_ceiling_color: extracted values='225,30,0'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={225,30,0}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={225,30,0}
+[DEBUG] parse_ceiling_color: assigned sky_color={225,30,0}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '1111'
+[DEBUG] is_map_start_line called for line: '1111'
+[DEBUG] is_map_start_line returning 1 for line: '1111'
+[DEBUG] Detected map start at line 7: '1111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111514==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x77fb082fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x5b590adc0bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x5b590adc1405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x5b590adc1602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x5b590adaf100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x5b590adb63db in parse_map srcs/parsing/parser.c:31
+    #6 0x5b590adb0aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x5b590adb0773 in main srcs/parsing/cub3D.c:125
+    #8 0x77fb07c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x77fb07c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x5b590adadd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_simple.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_textures.cub
+Starting two-pass parsing for file: maps/valid/test_textures.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_textures.cub
+[DEBUG] Parsing line 0: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 1: 'WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: 'WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 2: 'EA textures/test/east.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/test/east.xpm'
+[DEBUG] parse_config_settings: line='EA textures/test/east.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'F 20,20,20'
+[DEBUG] is_map_start_line called for line: 'F 20,20,20'
+[DEBUG] parse_config_settings: line='F 20,20,20', settings_type=5
+[DEBUG] parse_floor_color: line='F 20,20,20'
+[DEBUG] parse_floor_color: extracted values='20,20,20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={20,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={20,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={20,20,20}
+[DEBUG] Parsing line 5: 'C 200,200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,200,200'
+[DEBUG] parse_config_settings: line='C 200,200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 7: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing NO (north texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111519==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 28 byte(s) in 1 object(s) allocated from:
+    #0 0x704a4c2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x559558f7fbd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x559558f80405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x559558f80602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x559558f6e100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x559558f753db in parse_map srcs/parsing/parser.c:31
+    #6 0x559558f6faaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x559558f6f773 in main srcs/parsing/cub3D.c:125
+    #8 0x704a4be2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x704a4be2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x559558f6cd04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 28 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_textures.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/test_whitespace.cub
+Starting two-pass parsing for file: maps/valid/test_whitespace.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/test_whitespace.cub
+[DEBUG] Skipping blank/whitespace line 0
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Skipping blank/whitespace line 2
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Skipping blank/whitespace line 4
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Skipping blank/whitespace line 6
+[DEBUG] Parsing line 7: 'NO textures/test/north.xpm'
+[DEBUG] is_map_start_line called for line: 'NO textures/test/north.xpm'
+[DEBUG] parse_config_settings: line='NO textures/test/north.xpm', settings_type=1
+[DEBUG] Skipping blank/whitespace line 8
+[DEBUG] Skipping blank/whitespace line 9
+[DEBUG] Skipping blank/whitespace line 10
+[DEBUG] Skipping blank/whitespace line 11
+[DEBUG] Skipping blank/whitespace line 12
+[DEBUG] Skipping blank/whitespace line 13
+[DEBUG] Skipping blank/whitespace line 14
+[DEBUG] Skipping blank/whitespace line 15
+[DEBUG] Parsing line 16: 'SO textures/test/south.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/test/south.xpm'
+[DEBUG] parse_config_settings: line='SO textures/test/south.xpm', settings_type=2
+[DEBUG] Parsing line 17: '                        WE textures/test/west.xpm'
+[DEBUG] is_map_start_line called for line: '                        WE textures/test/west.xpm'
+[DEBUG] parse_config_settings: line='                        WE textures/test/west.xpm', settings_type=3
+[DEBUG] Parsing line 18: '        EA textures/test/east.xpm            '
+[DEBUG] is_map_start_line called for line: '        EA textures/test/east.xpm            '
+[DEBUG] parse_config_settings: line='        EA textures/test/east.xpm            ', settings_type=4
+[DEBUG] Skipping blank/whitespace line 19
+[DEBUG] Parsing line 20: '        F 20,           20,             20'
+[DEBUG] is_map_start_line called for line: '        F 20,           20,             20'
+[DEBUG] parse_config_settings: line='        F 20,           20,             20', settings_type=5
+[DEBUG] parse_floor_color: line='        F 20,           20,             20'
+[DEBUG] parse_floor_color: extracted values='F 20,           20,             20'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={0,20,20}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={0,20,20}
+[DEBUG] parse_floor_color: assigned floor_color={0,20,20}
+[DEBUG] Parsing line 21: 'C 200,          200,200'
+[DEBUG] is_map_start_line called for line: 'C 200,          200,200'
+[DEBUG] parse_config_settings: line='C 200,          200,200', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 200,          200,200'
+[DEBUG] parse_ceiling_color: extracted values='200,          200,200'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={200,200,200}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={200,200,200}
+[DEBUG] parse_ceiling_color: assigned sky_color={200,200,200}
+[DEBUG] Skipping blank/whitespace line 22
+[DEBUG] Parsing line 23: '11111'
+[DEBUG] is_map_start_line called for line: '11111'
+[DEBUG] is_map_start_line returning 1 for line: '11111'
+[DEBUG] Detected map start at line 23: '11111'
+[DEBUG] Finished config parsing. Validating required config...
+[DEBUG] Exiting parse_configuration_section, map_start_line=23
+[DEBUG] parse_configuration_section returned: 23
+Configuration parsed successfully.
+Map starts at line 23
+Config parsed successfully.
+Map starts at line 23
+[DEBUG] Calling parse_map_section at line 23
+[DEBUG] Entering calculate_map_dimensions for file: maps/valid/test_whitespace.cub, map_start_line: 23
+[DEBUG] Parsing map line 0: 'C 200,          200,200
+'
+[DEBUG] Invalid character in map line: 'C 200,          200,200'
+Error: Invalid character in map line: C 200,          200,200
+[DEBUG] Error: Failed to parse map section
+Error: 
+Failed to parse map section
+Failed to parse and validate the map.
+
+=================================================================
+==111524==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x772c628fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x58a29bcb1bd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x58a29bcb2405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x58a29bcb2602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x58a29bca0100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x58a29bca73db in parse_map srcs/parsing/parser.c:31
+    #6 0x58a29bca1aaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x58a29bca1773 in main srcs/parsing/cub3D.c:125
+    #8 0x772c6222a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x772c6222a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x58a29bc9ed04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 2 byte(s) leaked in 1 allocation(s).
+==== maps/valid/test_whitespace.cub (exit code: 1) ====
+[DEBUG] Entering parse_map for file: maps/valid/works.cub
+Starting two-pass parsing for file: maps/valid/works.cub
+[DEBUG] Entering parse_configuration_section for file: maps/valid/works.cub
+[DEBUG] Parsing line 0: 'NO      textures/wolfenstein/purple_stone.xpm'
+[DEBUG] is_map_start_line called for line: 'NO      textures/wolfenstein/purple_stone.xpm'
+[DEBUG] parse_config_settings: line='NO      textures/wolfenstein/purple_stone.xpm', settings_type=1
+[DEBUG] Skipping blank/whitespace line 1
+[DEBUG] Skipping blank/whitespace line 2
+[DEBUG] Skipping blank/whitespace line 3
+[DEBUG] Parsing line 4: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] is_map_start_line called for line: 'SO textures/wolfenstein/red_brick.xpm'
+[DEBUG] parse_config_settings: line='SO textures/wolfenstein/red_brick.xpm', settings_type=2
+[DEBUG] Skipping blank/whitespace line 5
+[DEBUG] Parsing line 6: 'F      17,    38,     64'
+[DEBUG] is_map_start_line called for line: 'F      17,    38,     64'
+[DEBUG] parse_config_settings: line='F      17,    38,     64', settings_type=5
+[DEBUG] parse_floor_color: line='F      17,    38,     64'
+[DEBUG] parse_floor_color: extracted values='17,    38,     64'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={17,38,64}
+[DEBUG] parse_floor_color: validate_color_values result=0, color={17,38,64}
+[DEBUG] parse_floor_color: assigned floor_color={17,38,64}
+[DEBUG] Skipping blank/whitespace line 7
+[DEBUG] Parsing line 8: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] is_map_start_line called for line: 'EA textures/wolfenstein/wood.xpm'
+[DEBUG] parse_config_settings: line='EA textures/wolfenstein/wood.xpm', settings_type=4
+[DEBUG] Skipping blank/whitespace line 9
+[DEBUG] Skipping blank/whitespace line 10
+[DEBUG] Skipping blank/whitespace line 11
+[DEBUG] Parsing line 12: 'C 218, 234, 235'
+[DEBUG] is_map_start_line called for line: 'C 218, 234, 235'
+[DEBUG] parse_config_settings: line='C 218, 234, 235', settings_type=6
+[DEBUG] parse_ceiling_color: line='C 218, 234, 235'
+[DEBUG] parse_ceiling_color: extracted values='218, 234, 235'
+[DEBUG] validate_color_values: num_count=3
+[DEBUG] validate_color_values: parsed color={218,234,235}
+[DEBUG] parse_ceiling_color: validate_color_values result=0, color={218,234,235}
+[DEBUG] parse_ceiling_color: assigned sky_color={218,234,235}
+[DEBUG] Skipping blank/whitespace line 13
+[DEBUG] Parsing line 14: '1111111111111111111111111'
+[DEBUG] is_map_start_line called for line: '1111111111111111111111111'
+[DEBUG] is_map_start_line returning 1 for line: '1111111111111111111111111'
+[DEBUG] Detected map start at line 14: '1111111111111111111111111'
+[DEBUG] Finished config parsing. Validating required config...
+Error: Missing WE (west texture) settings
+[DEBUG] parse_configuration_section returned: -1
+[DEBUG] Error: Failed to parse configuration section
+Error: 
+Failed to parse configuration section
+Failed to parse and validate the map.
+
+=================================================================
+==111529==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 70 byte(s) in 1 object(s) allocated from:
+    #0 0x7fcdfd2fd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x6155ab10abd3 in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1dbd3) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #2 0x6155ab10b405 in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e405) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #3 0x6155ab10b602 in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1e602) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+    #4 0x6155ab0f9100 in parse_configuration_section srcs/parsing/config_parser.c:52
+    #5 0x6155ab1003db in parse_map srcs/parsing/parser.c:31
+    #6 0x6155ab0faaaa in init_game srcs/parsing/cub3D.c:162
+    #7 0x6155ab0fa773 in main srcs/parsing/cub3D.c:125
+    #8 0x7fcdfce2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7fcdfce2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x6155ab0f7d04 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xad04) (BuildId: 9282261a42c2c6482666b44a1aed7863471118ec)
+
+SUMMARY: AddressSanitizer: 70 byte(s) leaked in 1 allocation(s).
+==== maps/valid/works.cub (exit code: 1) ====

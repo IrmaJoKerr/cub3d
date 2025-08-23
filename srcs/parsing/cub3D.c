@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 17:43:31 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:29:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,7 @@ void	init_mlx_sys(t_game *game)
 
 void	init_game(t_game *game, const char *map_file)
 {
-	if (parse_map(map_file, game) < 0)
+	if (parse_map_1(map_file, game) < 0)
 	{
 		cleanup_early(game);
 		exit(EXIT_FAILURE);

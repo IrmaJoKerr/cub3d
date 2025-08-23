@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 16:45:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:31:43 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 19:10:48 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	identify_settings_type(const char *line)
 		return (5);
 	if (ft_strncmp(line + i, "C ", 2) == 0)
 		return (6);
-	return (0);
+	else
+		return (0);
 }
 
 char	*extract_texture_path(const char *line, const char *identifier)

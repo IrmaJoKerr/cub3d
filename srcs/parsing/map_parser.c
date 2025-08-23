@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 15:02:10 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:28:35 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 Function prototypes
 */
-int		calculate_map_dimensions(const char *file, t_game *game, int map_start_line);
+int		calc_map_area(int fd, t_game *game, int i);
 int		validate_map_line_chars(const char *line);
 int		validate_border_line(const char *line);
 int		populate_map_array(const char *file, t_game *game, int map_start_line);
@@ -25,91 +25,67 @@ int		parse_map_section(const char *file, t_game *game, int map_start_line);
 void	find_player_position(t_game *game);
 int		final_map_validation(t_game *game);
 
-/**
- * Calculate map dimensions and validate map characters
- * Starting from map_start_line, read until EOF
- */
-int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
+/*
+Calculate map dimensions and validate map characters
+Starting from map_start_line, read until EOF
+*/
+int	calc_map_area(int fd, t_game *game, int i)
 {
-	int		fd;
 	char	*line;
-	int		line_num;
-	int		map_rows;
-	int		max_cols;
-	int		len;
+	int		player_found;
 
-	fprintf(stderr, "[DEBUG] Entering calculate_map_dimensions for file: %s, map_start_line: %d\n", file, map_start_line);
-	fd = open(file, O_RDONLY);
-	if (fd < 0)
-	{
-		fprintf(stderr, "[DEBUG] Error: Cannot open file %s\n", file);
-		return (-1);
-	}
-	line_num = 0;
-	map_rows = 0;
-	max_cols = 0;
-	while (line_num < map_start_line)
+	player_found = 0;
+	while ((i <= map_end_line) && (line != NULL))
 	{
 		line = get_next_line(fd);
-		if (line)
-			free(line);
-		line_num++;
-	}
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		fprintf(stderr, "[DEBUG] Parsing map line %d: '%s'\n", map_rows, line);
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-		len = ft_strlen(line);
-		if (len == 0)
+		if (ft_strlen(line) > game->map.max_cols)
+			game->map.max_cols = ft_strlen(line);
+		if (!validate_map_line_chars(line, game, game->map.max_rows,
+				&player_found))
 		{
-			fprintf(stderr, "[DEBUG] Skipping blank map line %d\n", map_rows);
 			free(line);
-			continue ;
-		}
-		if (!validate_map_line_chars(line))
-		{
-			fprintf(stderr, "[DEBUG] Invalid character in map line: '%s'\n", line);
-			ft_fprintf(2, "Error: Invalid character in map line: %s\n", line);
-			free(line);
-			close(fd);
 			return (-1);
 		}
-		if (len > max_cols)
-			max_cols = len;
-		map_rows++;
-		if (map_rows == 1)
+		free(line);
+		game->map.max_rows++;
+		i++;
+	}
+	if (game->map.herocount != 1)
+		return (-1);
+	while (line != NULL)
+	{
+		line = get_next_line(fd);
+		if (!is_only_whitespace(line))
 		{
-			if (!validate_border_line(line))
-			{
-				fprintf(stderr, "[DEBUG] First map line failed border validation: '%s'\n", line);
-				ft_fprintf(2, "Error: \n");
-				ft_fprintf(2, "line must contain only walls and spaces\n");
-				free(line);
-				close(fd);
-				return (-1);
-			}
-			// game->map.map_first_wall = true;    // OBSOLETE FIELD
+			free(line);
+			return (-1);
 		}
 		free(line);
 	}
-	close(fd);
-	game->map.max_rows = map_rows;
-	game->map.max_cols = max_cols;
-	if (map_rows < 3)
-	{
-		ft_fprintf(2, "Error: Map must have at least 3 rows\n");
-		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] Exiting calculate_map_dimensions. map_rows=%d, max_cols=%d\n", map_rows, max_cols);
 	return (0);
+}
+
+/*
+Set hero/player start position and direction
+*/
+void	set_hero_start(t_game *game, char dir)
+{
+	if (dir == 'N')
+		game->map.start_direction = N;
+	else if (dir == 'E')
+		game->map.start_direction = E;
+	else if (dir == 'S')
+		game->map.start_direction = S;
+	else if (dir == 'W')
+		game->map.start_direction = W;
 }
 
 /**
  * Validate map line contains only valid characters
  */
-int	validate_map_line_chars(const char *line)
+
+int	validate_map_line_chars(const char *line, t_game *game, int row,
+		int *player_found)
 {
 	int	i;
 
@@ -117,15 +93,28 @@ int	validate_map_line_chars(const char *line)
 	while (line[i])
 	{
 		if (!ft_strchr(VALID_CHARS " ", line[i]))
-			return (0);
+			return (-1);
+		if (line[i] == 'D')
+			game->doorcount++;
+		if (ft_strchr("NSEW", line[i]))
+		{
+			game->map.herocount++;
+			if (!(*player_found))
+			{
+				game->map.player_x = i;
+				game->map.player_y = row;
+				set_hero_start(game, line[i]);
+				*player_found = 1;
+			}
+		}
 		i++;
 	}
-	return (1);
+	return (0);
 }
 
-/**
- * Validate border line (first/last) contains only 1's and spaces
- */
+/*
+Validate border line (first/last) contains only 1's and spaces
+*/
 int	validate_border_line(const char *line)
 {
 	int	i;
@@ -144,9 +133,9 @@ int	validate_border_line(const char *line)
 	return (has_wall);
 }
 
-/**
- * Allocate and populate 2D map array
- */
+/*
+Allocate and populate 2D map array
+*/
 int	populate_map_array(const char *file, t_game *game, int map_start_line)
 {
 	int		fd;
@@ -267,21 +256,22 @@ int	populate_map_array(const char *file, t_game *game, int map_start_line)
 	return (0);
 }
 
-/**
- * Count player characters in line
+/*
+ * DEPRECATED: Count player characters in line
+ * Logic now handled in validate_map_line_chars()
  */
-void	count_player_chars(const char *line, t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (ft_strchr("NSEW", line[i]))
-			game->map.herocount++;
-		i++;
-	}
-}
+// void	count_player_chars(const char *line, t_game *game)
+// {
+//     int	i;
+//
+//     i = 0;
+//     while (line[i])
+//     {
+//         if (ft_strchr("NSEW", line[i]))
+//             game->map.herocount++;
+//         i++;
+//     }
+// }
 
 /*
 Validate interior line starts and ends with walls

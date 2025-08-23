@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 17:48:40 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 00:28:54 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,18 +129,18 @@ int		check_valid_texture_path(const char *path);
 /*
 Parser functions. In parser.c
 */
-int		parse_map(const char *file, t_game *game);
+int		parse_map_1(const char *file, t_game *game);
 int		parse_floor_color(char *line, t_game *game);
 int		parse_ceiling_color(char *line, t_game *game);
 
 /*
 Configuration parser functions. In config_parser.c
 */
-int		parse_configuration_section(const char *file, t_game *game);
+// int		parse_configuration_section(const char *file, t_game *game);
 int		is_only_whitespace(const char *line);
 int		is_map_start_line(const char *line);
 int		parse_config_settings(char *line, t_game *game);
-int		handle_texture_settings(char *line, t_game *game, int settings_type);
+int		get_texture_path(char *line, t_game *game, int settings_type);
 int		handle_color_settings(char *line, t_game *game, int settings_type);
 int		validate_required_config(t_game *game);
 int		cleanup_and_return(int fd, char *line, int ret_val);
@@ -158,8 +158,7 @@ int		validate_color_values(const char *values, int color[3]);
 Map parser functions. In map_parser.c
 */
 int		parse_map_section(const char *file, t_game *game, int map_start_line);
-int		calculate_map_dimensions(const char *file, t_game *game,
-			int map_start_line);
+int		calc_map_area(int fd, t_game *game, int i);
 int		validate_map_line_chars(const char *line);
 int		validate_border_line(const char *line);
 int		populate_map_array(const char *file, t_game *game, int map_start_line);
