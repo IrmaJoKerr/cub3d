@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:19:21 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 11:05:19 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 12:30:54 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ int	handle_rotation_keys(int keycode, t_game *game)
 	{
 		game->view_elevation += 10;
 		game->view_elevation = clamp_elevation(game->view_elevation);
+		calc_midline(game);
 		fprintf(stdout, "Up Arrow: Looking up (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}
@@ -149,6 +150,7 @@ int	handle_rotation_keys(int keycode, t_game *game)
 	{
 		game->view_elevation -= 10;
 		game->view_elevation = clamp_elevation(game->view_elevation);
+		calc_midline(game);
 		fprintf(stdout, "Down Arrow: Looking down (elevation: %.3f radians)\n", game->view_elevation);
 		return (1);
 	}
@@ -226,6 +228,7 @@ int handle_mouse_move(int x, int y, t_game *game)
 		game->view_direction = normalize_angle(game->view_direction);
 		game->view_elevation -= delta_y * MOUSE_SENSITIVITY * 180;
 		game->view_elevation = clamp_elevation(game->view_elevation);
+		calc_midline(game);
 		mlx_mouse_move(game->mlx_ptr, game->win_ptr, center_x, center_y);
 	}
 	mlx_mouse_hide(game->mlx_ptr, game->win_ptr);

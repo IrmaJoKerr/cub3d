@@ -6,7 +6,11 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
+<<<<<<< Updated upstream
 /*   Updated: 2025/08/17 11:20:04 by bleow            ###   ########.fr       */
+=======
+/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
+>>>>>>> Stashed changes
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +42,13 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 	int		max_cols;
 	int		len;
 
+	fprintf(stderr, "[DEBUG] Entering calculate_map_dimensions for file: %s, map_start_line: %d\n", file, map_start_line);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
+	{
+		fprintf(stderr, "[DEBUG] Error: Cannot open file %s\n", file);
 		return (-1);
+	}
 	line_num = 0;
 	map_rows = 0;
 	max_cols = 0;
@@ -53,17 +61,20 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 	}
 	while ((line = get_next_line(fd)) != NULL)
 	{
+		fprintf(stderr, "[DEBUG] Parsing map line %d: '%s'\n", map_rows, line);
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
 			line[len - 1] = '\0';
 		len = ft_strlen(line);
 		if (len == 0)
 		{
+			fprintf(stderr, "[DEBUG] Skipping blank map line %d\n", map_rows);
 			free(line);
 			continue ;
 		}
 		if (!validate_map_line_chars(line))
 		{
+			fprintf(stderr, "[DEBUG] Invalid character in map line: '%s'\n", line);
 			ft_fprintf(2, "Error: Invalid character in map line: %s\n", line);
 			free(line);
 			close(fd);
@@ -76,6 +87,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 		{
 			if (!validate_border_line(line))
 			{
+				fprintf(stderr, "[DEBUG] First map line failed border validation: '%s'\n", line);
 				ft_fprintf(2, "Error: \n");
 				ft_fprintf(2, "line must contain only walls and spaces\n");
 				free(line);
@@ -94,6 +106,7 @@ int	calculate_map_dimensions(const char *file, t_game *game, int map_start_line)
 		ft_fprintf(2, "Error: Map must have at least 3 rows\n");
 		return (-1);
 	}
+	fprintf(stderr, "[DEBUG] Exiting calculate_map_dimensions. map_rows=%d, max_cols=%d\n", map_rows, max_cols);
 	return (0);
 }
 

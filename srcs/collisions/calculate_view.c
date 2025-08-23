@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 11:09:06 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 11:14:12 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 12:16:11 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ Function prototypes
 */
 double	normalize_angle(double angle);
 double	clamp_elevation(double elevation);
+void	calc_midline(t_game *game);
 
 /*
 Normalize angle to 0-2π range
@@ -40,4 +41,12 @@ double	clamp_elevation(double elevation)
 	if (elevation < -289)
 		return (-289);
 	return (elevation);
+}
+
+/*
+Calculates and updates the midline in the game struct based on view elevation
+*/
+void	calc_midline(t_game *game)
+{
+	game->midline = (int)(MAX_HEIGHT / 2 + game->view_elevation);
 }

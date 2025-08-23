@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 14:00:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ void	alloc_and_init_all(t_game **game)
 		(*game)->map.floor_color[i] = -1;
 		i++;
 	}
+	(*game)->map.north_texture_path = NULL;
+	(*game)->map.south_texture_path = NULL;
+	(*game)->map.east_texture_path = NULL;
+	(*game)->map.west_texture_path = NULL;
+	(*game)->map.sky_texture_path = NULL;
+	(*game)->map.floor_texture_path = NULL;
+	(*game)->map.map_path = NULL;
 	(*game)->map.start_direction = N;
 	(*game)->textures.north_wall = ft_calloc(1, sizeof(t_image));
 	(*game)->textures.south_wall = ft_calloc(1, sizeof(t_image));

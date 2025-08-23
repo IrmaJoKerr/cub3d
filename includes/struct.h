@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 04:24:30 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,8 @@ typedef struct s_mini
 	t_image	space;
 	int		full_pixel_width;
 	int		full_pixel_height;
-		int		x;
-		int		y;
+	int		x;
+	int		y;
 }	t_mini;
 
 typedef struct s_game
@@ -137,13 +137,14 @@ typedef struct s_game
 	t_texture	textures;
 	t_map		map;
 	t_image		img;
-	t_door		*doors;
 	t_mini		minimap;
 	int			doorcount;
+	t_door		*doors;
 	double		curr_x;
 	double		curr_y;
 	double		view_elevation;
 	double		view_direction;
+	int			midline;
 }	t_game;
 
 typedef struct s_ray

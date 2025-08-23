@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 12:03:44 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 12:16:31 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 13:09:00 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ int	parse_floor_color(char *line, t_game *game)
 	int		color[3];
 	int		result;
 
+	fprintf(stderr, "[DEBUG] parse_floor_color: line='%s'\n", line);
 	values = extract_color_values(line, "F");
+	fprintf(stderr, "[DEBUG] parse_floor_color: extracted values='%s'\n", values ? values : "NULL");
 	result = validate_color_values(values, color);
+	fprintf(stderr, "[DEBUG] parse_floor_color: validate_color_values result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
 	if (result == 0)
 	{
 		game->map.floor_color[0] = color[0];
 		game->map.floor_color[1] = color[1];
 		game->map.floor_color[2] = color[2];
+		fprintf(stderr, "[DEBUG] parse_floor_color: assigned floor_color={%d,%d,%d}\n", color[0], color[1], color[2]);
 	}
 	if (values)
 		free(values);
@@ -52,13 +56,17 @@ int	parse_ceiling_color(char *line, t_game *game)
 	int		color[3];
 	int		result;
 
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: line='%s'\n", line);
 	values = extract_color_values(line, "C");
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: extracted values='%s'\n", values ? values : "NULL");
 	result = validate_color_values(values, color);
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: validate_color_values result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
 	if (result == 0)
 	{
 		game->map.sky_color[0] = color[0];
 		game->map.sky_color[1] = color[1];
 		game->map.sky_color[2] = color[2];
+		fprintf(stderr, "[DEBUG] parse_ceiling_color: assigned sky_color={%d,%d,%d}\n", color[0], color[1], color[2]);
 	}
 	if (values)
 		free(values);
@@ -117,24 +125,37 @@ int	validate_color_values(const char *values, int color[3])
 	int		num_count;
 
 	if (!values)
+	{
+		fprintf(stderr, "[DEBUG] validate_color_values: NULL values string\n");
 		return (-1);
+	}
 	numbers = ft_split(values, ',');
 	if (!numbers)
+	{
+		fprintf(stderr, "[DEBUG] validate_color_values: ft_split failed\n");
 		return (-1);
+	}
 	num_count = ft_arrlen(numbers);
+	fprintf(stderr, "[DEBUG] validate_color_values: num_count=%d\n", num_count);
 	if (num_count != 3)
 	{
+		fprintf(stderr, "[DEBUG] validate_color_values: invalid number of color components\n");
 		ft_free_2d(numbers, num_count);
 		return (-1);
 	}
 	converted_colors = ft_atoiarr_errcln(numbers, num_count);
 	if (!converted_colors)
+	{
+		fprintf(stderr, "[DEBUG] validate_color_values: ft_atoiarr_errcln failed\n");
 		return (-1);
+	}
 	if (chk_color_range(converted_colors, color) != 0)
 	{
+		fprintf(stderr, "[DEBUG] validate_color_values: color out of range\n");
 		free(converted_colors);
 		return (-1);
 	}
+	fprintf(stderr, "[DEBUG] validate_color_values: parsed color={%d,%d,%d}\n", color[0], color[1], color[2]);
 	free(converted_colors);
 	return (0);
 }

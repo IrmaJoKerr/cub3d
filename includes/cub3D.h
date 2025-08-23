@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 08:11:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 12:53:49 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ Angle and elevation calculation functions. In calculate_view.c
 */
 double	normalize_angle(double angle);
 double	clamp_elevation(double elevation);
+void	calc_midline(t_game *game);
 
 /*
 Main functions. In cub3D.c

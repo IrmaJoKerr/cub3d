@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 01:03:54 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 08:03:45 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 12:22:31 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 /*
 Function prototypes
 */
-void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color,
-			int midline);
+void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color);
 void	fill_sky_and_floor(t_game *game);
 void	render_raycast(t_game *game);
 void	draw_crosshair(t_game *game);
@@ -26,8 +25,7 @@ int		render_img(t_game *game);
 /*
 Draw the sky and floor colors for the entire screen.
 */
-void	draw_sky_and_floor(t_game *game, int sky_color,
-	int floor_color, int midline)
+void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color)
 {
 	int	y;
 	int	x;
@@ -38,7 +36,7 @@ void	draw_sky_and_floor(t_game *game, int sky_color,
 		x = 0;
 		while (x < MAX_WIDTH)
 		{
-			if (y < midline)
+			if (y < game->midline)
 				put_pixel(&game->img, x, y, sky_color);
 			else
 				put_pixel(&game->img, x, y, floor_color);
@@ -55,18 +53,12 @@ void	fill_sky_and_floor(t_game *game)
 {
 	int	sky_color;
 	int	floor_color;
-	int	midline;
 
 	sky_color = (game->map.sky_color[0] << 16)
 		| (game->map.sky_color[1] << 8) | game->map.sky_color[2];
 	floor_color = (game->map.floor_color[0] << 16)
 		| (game->map.floor_color[1] << 8) | game->map.floor_color[2];
-	midline = MAX_HEIGHT / 2 + game->view_elevation;
-	if (midline < 0)
-		midline = 0;
-	if (midline > MAX_HEIGHT)
-		midline = MAX_HEIGHT;
-	draw_sky_and_floor(game, sky_color, floor_color, midline);
+	draw_sky_and_floor(game, sky_color, floor_color);
 }
 
 /*

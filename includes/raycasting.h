@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:02:21 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/23 04:38:08 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 12:46:33 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@
 /*
 Raycasting setup functions. In raycasting_setup.c
 */
-void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color,
-			int midline);
+void	draw_sky_and_floor(t_game *game, int sky_color, int floor_color);
 void	fill_sky_and_floor(t_game *game);
 void	render_raycast(t_game *game);
 void	draw_crosshair(t_game *game);

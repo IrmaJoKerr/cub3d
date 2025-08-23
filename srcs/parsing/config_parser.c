@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 16:15:54 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 13:05:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ int	parse_configuration_section(const char *file, t_game *game)
 	int		map_start_line;
 	int		len;
 
+	fprintf(stderr, "[DEBUG] Entering parse_configuration_section for file: %s\n", file);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
+		fprintf(stderr, "[DEBUG] Error: Cannot open file %s\n", file);
 		ft_fprintf(2, "Error: Cannot open file %s\n", file);
 		return (-1);
 	}
@@ -54,24 +56,32 @@ int	parse_configuration_section(const char *file, t_game *game)
 			line[len - 1] = '\0';
 		if (ft_strlen(line) == 0 || is_only_whitespace(line))
 		{
+			fprintf(stderr, "[DEBUG] Skipping blank/whitespace line %d\n", line_num);
 			free(line);
 			line_num++;
 			continue ;
 		}
+		fprintf(stderr, "[DEBUG] Parsing line %d: '%s'\n", line_num, line);
 		if (is_map_start_line(line))
 		{
+			fprintf(stderr, "[DEBUG] Detected map start at line %d: '%s'\n", line_num, line);
 			map_start_line = line_num;
 			free(line);
 			break ;
 		}
 		if (parse_config_settings(line, game) < 0)
+		{
+			fprintf(stderr, "[DEBUG] Error parsing config settings at line %d: '%s'\n", line_num, line);
 			return (cleanup_and_return(fd, line, -1));
+		}
 		free(line);
 		line_num++;
 	}
 	close(fd);
+	fprintf(stderr, "[DEBUG] Finished config parsing. Validating required config...\n");
 	if (validate_required_config(game) < 0)
 		return (-1);
+	fprintf(stderr, "[DEBUG] Exiting parse_configuration_section, map_start_line=%d\n", map_start_line);
 	return (map_start_line);
 }
 
@@ -102,6 +112,7 @@ int	is_map_start_line(const char *line)
 
 	i = 0;
 	has_wall = 0;
+	fprintf(stderr, "[DEBUG] is_map_start_line called for line: '%s'\n", line);
 	while (line[i])
 	{
 		if (line[i] == '1')
@@ -110,6 +121,7 @@ int	is_map_start_line(const char *line)
 			return (0);
 		i++;
 	}
+	fprintf(stderr, "[DEBUG] is_map_start_line returning %d for line: '%s'\n", has_wall, line);
 	return (has_wall);
 }
 
@@ -121,8 +133,10 @@ int	parse_config_settings(char *line, t_game *game)
 	int	settings_type;
 
 	settings_type = identify_settings_type(line);
+	fprintf(stderr, "[DEBUG] parse_config_settings: line='%s', settings_type=%d\n", line, settings_type);
 	if (settings_type == 0)
 	{
+		fprintf(stderr, "[DEBUG] Invalid settings detected in line: '%s'\n", line);
 		ft_fprintf(2, "Error: Invalid settings in line: %s\n", line);
 		return (-1);
 	}
@@ -166,6 +180,7 @@ int	handle_texture_settings(char *line, t_game *game, int settings_type)
 	}
 	if (*target_path != NULL)
 	{
+		fprintf(stderr, "[DEBUG] Duplicate %s settings detected in handle_texture_settings\n", identifier);
 		ft_fprintf(2, "Error: Duplicate %s settings\n", identifier);
 		return (-1);
 	}

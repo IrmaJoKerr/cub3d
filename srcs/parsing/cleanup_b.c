@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/17 10:40:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/23 13:40:00 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,6 @@ void	cleanup_texture_paths(t_game *game)
 		ft_safefree((void **)&game->map.east_texture_path);
 	if (game->map.west_texture_path)
 		ft_safefree((void **)&game->map.west_texture_path);
-	// if (game->map.sky_texture_path)          // OBSOLETE FIELD
-	//	ft_safefree((void **)&game->map.sky_texture_path);
-	// if (game->map.floor_texture_path)        // OBSOLETE FIELD
-	//	ft_safefree((void **)&game->map.floor_texture_path);
 	if (game->map.map_path)
 		ft_safefree((void **)&game->map.map_path);
 }
