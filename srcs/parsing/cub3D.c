@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:46:35 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,13 @@ int	check_builtin_textures(t_game *game)
 		ft_strcat(path, num);
 		free(num);
 		ft_strcat(path, ".xpm");
-		fprintf(stderr, "[DEBUG] Constructed path: %s\n", path);
 		if (!check_valid_file_path(path))
 		{
-			fprintf(stderr, "[ERROR] Invalid path: %s\n", path);
 			cleanup_door_frames(game);
 			return (0);
 		}
 		if (!load_door_texture(game, path, i))
 		{
-			fprintf(stderr, "[ERROR] Failed to load door texture: %s\n", path);
 			cleanup_door_frames(game);
 			return (0);
 		}
@@ -83,7 +80,6 @@ char	*get_map_path(char *input)
 			return (test_path);
 		ft_safefree((void **)&test_path);
 	}
-	fprintf(stderr, "Error: Map file not found: %s\n", input);
 	return (NULL);
 }
 
@@ -116,7 +112,6 @@ static t_image	*allocate_texture(void)
 		perror("Error: Failed to allocate memory for texture structure\n");
 		exit(EXIT_FAILURE);
 	}
-	fprintf(stderr, "[DEBUG] Allocated memory for texture at address: %p\n", (void *)texture);
 	return (texture);
 }
 
@@ -128,53 +123,23 @@ int	load_texture(t_game *game, t_image *tex, char *path)
 	int	width;
 	int	height;
 
-	fprintf(stderr, "[DEBUG] load_texture: Entering with path='%s'\n", path ? path : "NULL");
 	if (!game)
-	{
-		fprintf(stderr, "[ERROR] Game struct is NULL\n");
 		return (-1);
-	}
 	if (!tex)
-	{
-		fprintf(stderr, "[DEBUG] Texture struct is NULL. Allocating memory.\n");
 		tex = allocate_texture();
-	}
 	if (!path || ft_strlen(path) == 0)
-	{
-		fprintf(stderr, "[ERROR] Invalid path: %s\n", path ? path : "NULL");
 		return (-1);
-	}
 	if (!game->mlx_ptr)
-	{
-		fprintf(stderr, "[ERROR] mlx_ptr is NULL\n");
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] mlx_ptr address: %p\n", (void *)game->mlx_ptr);
-	fprintf(stderr, "[DEBUG] Texture struct address: %p\n", (void *)tex);
-	fprintf(stderr, "[DEBUG] Path: %s\n", path);
-	fprintf(stderr, "[DEBUG] Loading texture using mlx_xpm_file_to_image\n");
 	tex->img_ptr = mlx_xpm_file_to_image(game->mlx_ptr, path, &width, &height);
 	if (!tex->img_ptr)
-	{
-		fprintf(stderr, "[ERROR] Texture load failed: %s\n", path);
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] Texture loaded successfully. Dimensions: %dx%d\n", width, height);
 	if (width != TEX_WIDTH || height != TEX_HEIGHT)
-	{
-		fprintf(stderr, "[ERROR] Invalid texture size (%dx%d): %s\n", width, height, path);
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] Getting texture data address\n");
 	tex->addr = mlx_get_data_addr(tex->img_ptr, &tex->bpp, &tex->line_len, &tex->endian);
 	if (!tex->addr)
-	{
-		fprintf(stderr, "[ERROR] Failed to retrieve texture data address\n");
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] Texture data address retrieved successfully\n");
 	tex->transparent_color = 0xFF000000;
-	fprintf(stderr, "[DEBUG] Texture loaded and initialized successfully\n");
 	return (0);
 }
 
@@ -193,13 +158,11 @@ int	main(int argc, char **argv)
 	alloc_and_init_all(&game);
 	if (parse_map_1(map_path, game) < 0)
 	{
-		fprintf(stderr, "Error: Failed to parse map file.\n");
 		cleanup_early(game, map_path);
 		exit(EXIT_FAILURE);
 	}
 	if (parse_map_2(map_path, game) < 0)
 	{
-		fprintf(stderr, "Error: Failed to parse map file.\n");
 		cleanup_early(game, map_path);
 		exit(EXIT_FAILURE);
 	}
@@ -217,29 +180,20 @@ Initialises the game window and MLX system
 */
 void	init_mlx_sys(t_game *game, const char *map_path)
 {
-	fprintf(stdout, "\nMAP VALIDATION COMPLETE\n");
-	fprintf(stdout, "Starting MLX initialization\n");
 	game->mlx_ptr = mlx_init();
 	if (!game->mlx_ptr)
 	{
-		fprintf(stderr, "Error: \n");
-		fprintf(stderr, "Failed to initialize MiniLibX.\n");
 		cleanup_early(game, map_path);
 		exit(EXIT_FAILURE);
 	}
 	game->win_ptr = mlx_new_window(game->mlx_ptr, 1920, 1080, "cub3D");
 	if (!game->win_ptr)
 	{
-		fprintf(stderr, "Error: \n");
-		fprintf(stderr, "Failed to create a new window.\n");
 		cleanup_later(game, map_path);
 		exit(EXIT_FAILURE);
 	}
-	usleep(1000);
 	if (populate_map_array(map_path, game) < 0)
 	{
-		fprintf(stderr, "Error: \n");
-		fprintf(stderr, "Failed to populate map array.\n");
 		cleanup_later(game, map_path);
 		exit(EXIT_FAILURE);
 	}
@@ -264,34 +218,23 @@ void	init_game(t_game *game, const char *map_file)
 	game->img.img_ptr = mlx_new_image(game->mlx_ptr, MAX_WIDTH, MAX_HEIGHT);
 	if (!game->img.img_ptr)
 	{
-		fprintf(stderr, "Error: mlx_new_image failed\n");
 		exit(EXIT_FAILURE);
 	}
-	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp,
-			&game->img.line_len, &game->img.endian);
+	game->img.addr = mlx_get_data_addr(game->img.img_ptr, &game->img.bpp, &game->img.line_len, &game->img.endian);
 }
 
 int	load_textures(t_game *game)
 {
-	fprintf(stderr, "[DEBUG] load_textures: Checking builtin textures\n");
 	if (!check_builtin_textures(game))
-	{
-		fprintf(stderr, "Error: Missing builtin textures.\n");
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] load_textures: Loading north_wall texture: %s\n", game->map.north_texture_path);
 	if (load_texture(game, game->textures.north_wall, game->map.north_texture_path) < 0)
 		return (-1);
-	fprintf(stderr, "[DEBUG] load_textures: Loading south_wall texture: %s\n", game->map.south_texture_path);
 	if (load_texture(game, game->textures.south_wall, game->map.south_texture_path) < 0)
 		return (-1);
-	fprintf(stderr, "[DEBUG] load_textures: Loading east_wall texture: %s\n", game->map.east_texture_path);
 	if (load_texture(game, game->textures.east_wall, game->map.east_texture_path) < 0)
 		return (-1);
-	fprintf(stderr, "[DEBUG] load_textures: Loading west_wall texture: %s\n", game->map.west_texture_path);
 	if (load_texture(game, game->textures.west_wall, game->map.west_texture_path) < 0)
 		return (-1);
-	fprintf(stderr, "[DEBUG] load_textures: Loading space texture: %s\n", SPACE_TEXTURE);
 	if (load_texture(game, game->textures.space, SPACE_TEXTURE) < 0)
 		return (-1);
 	init_doors_from_map(game);

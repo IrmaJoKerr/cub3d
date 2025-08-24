@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,26 @@ int	calc_map_area(int fd, t_game *game, int i)
 
 	player_found = 0;
 	line = NULL;
-	while ((i <= game->map.map_last_line))
+	while ((i < game->map.map_last_line))
 	{
 		line = get_next_line(fd);
-		fprintf(stderr, "[DEBUG] get_next_line called. Line: '%s'\n", line);
 		if (!line) break;
-		fprintf(stderr, "[DEBUG][calc_map_area] Line: %s\n", line ? line : "(null)");
-		fprintf(stderr, "[DEBUG] Processing map line: %s\n", line);
 		if ((int)ft_strlen(line) > game->map.max_cols)
 		{
-			fprintf(stderr, "[DEBUG][calc_map_area] max_cols changed from %d to %ld\n", game->map.max_cols, ft_strlen(line));
 			game->map.max_cols = (int)ft_strlen(line);
 		}
 		if (validate_map_line_chars(line, game, game->map.max_rows, &player_found) < 0)
 		{
-			fprintf(stderr, "[DEBUG][calc_map_area] validate_map_line_chars failed\n");
 			free(line);
 			return (-1);
 		}
 		free(line);
 		game->map.max_rows++;
-		fprintf(stderr, "[DEBUG][calc_map_area] map_rows incremented to %d\n", game->map.max_rows);
 		i++;
 	}
 	if (game->map.herocount != 1)
 	{
-		fprintf(stderr, "[DEBUG][calc_map_area] herocount invalid: %d\n", game->map.herocount);
 		return (-1);
-	}
-	line = get_next_line(fd);
-	fprintf(stderr, "[DEBUG] get_next_line called. Line: '%s'\n", line);
-	while (line != NULL)
-	{
-		if (!is_only_whitespace(line))
-		{
-			fprintf(stderr, "[DEBUG][calc_map_area] Non-whitespace after map end\n");
-			free(line);
-			return (-1);
-		}
-		free(line);
-		line = get_next_line(fd);
-		fprintf(stderr, "[DEBUG] get_next_line called. Line: '%s'\n", line);
 	}
 	return (0);
 }
@@ -122,38 +101,31 @@ int	validate_map_line_chars(const char *line, t_game *game, int row,
 	mutable_line = ft_strdup(line);
 	if (!mutable_line)
 	{
-		fprintf(stderr, "[validate_map_line_chars] Memory allocation failed\n");
 		return (-1);
 	}
 	strip_newline(mutable_line);
-	fprintf(stderr, "[validate_map_line_chars] Validating line: '%s' at row %d\n", mutable_line, row);
-	fprintf(stderr, "[validate_map_line_chars] VALID_CHARS: '%s'\n", VALID_CHARS);
 
 	i = 0;
 	while (mutable_line[i])
 	{
 		if (!ft_strchr(VALID_CHARS " ", mutable_line[i]))
 		{
-			fprintf(stderr, "[validate_map_line_chars] Invalid char '%c' at row %d, col %d\n", mutable_line[i], row, i);
 			free(mutable_line);
 			return (-1);
 		}
 		if (mutable_line[i] == 'D')
 		{
 			game->doorcount++;
-			fprintf(stderr, "[validate_map_line_chars] doorcount incremented to %d\n", game->doorcount);
 		}
 		if (ft_strchr("NSEW", mutable_line[i]))
 		{
 			game->map.herocount++;
-			fprintf(stderr, "[validate_map_line_chars] herocount incremented to %d\n", game->map.herocount);
 			if (!(*player_found))
 			{
 				game->map.player_x = i;
 				game->map.player_y = row;
 				set_hero_start(game, mutable_line[i]);
 				*player_found = 1;
-				fprintf(stderr, "[validate_map_line_chars] player found at (%d,%d) direction '%c'\n", i, row, mutable_line[i]);
 			}
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:46:35 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ Initializes all members of t_texture to safe defaults.
 */
 void	init_texture_struct(t_texture *texture)
 {
-	fprintf(stderr, "[DEBUG] Initializing texture struct\n");
 	texture->north_wall = NULL;
 	texture->south_wall = NULL;
 	texture->east_wall = NULL;
@@ -86,7 +85,6 @@ void	init_texture_struct(t_texture *texture)
 		exit(EXIT_FAILURE);
 	}
 	texture->door_frame_count = 0;
-	fprintf(stderr, "[DEBUG] Texture struct initialized successfully\n");
 }
 
 void	init_ray_struct(t_ray *ray)

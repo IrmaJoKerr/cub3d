@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 03:09:02 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,6 @@ void	copy_line(char *dest, const char *src, int max_cols, int row)
 
 	i = 0;
 	line_len = ft_strlen(src);
-	fprintf(stderr, "Row %d: line_len=%d, max_cols=%d\n", row, line_len, max_cols);
 	while (i < line_len && i < max_cols)
 	{
 		dest[i] = src[i];
@@ -209,16 +208,13 @@ int	prepare_map_array(t_game *game)
 	game->map.map = (char **)malloc(sizeof(char *) * (game->map.max_rows + 1));
 	if (!game->map.map)
 	{
-		fprintf(stderr, "Error: Failed to allocate memory for map rows\n");
 		return (-1);
 	}
 	while (i < game->map.max_rows)
 	{
-		fprintf(stderr, "[DEBUG] Allocating memory for map row %d\n", i);
 		game->map.map[i] = (char *)malloc(game->map.max_cols + 1);
 		if (!game->map.map[i])
 		{
-			fprintf(stderr, "Error: Failed to allocate memory for map row %d\n", i);
 			while (--i >= 0) // Free previously allocated rows
 				free(game->map.map[i]);
 			free(game->map.map);
