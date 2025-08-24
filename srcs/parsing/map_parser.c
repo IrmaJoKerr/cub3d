@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 05:14:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 05:30:46 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	validate_map_line_chars(const char *line, t_game *game, int row,
 			game->map.herocount++;
 			if (!(*player_found))
 			{
-				game->map.player_x = i;
-				game->map.player_y = row;
+				game->map.player_x = (i + 1);
+				game->map.player_y = (row + 1);
 				set_hero_start(game, line[i]);
 				*player_found = 1;
 			}
