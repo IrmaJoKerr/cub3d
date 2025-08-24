@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 01:21:55 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	is_valid_path(t_game *game, int y, int x)
 	test_map = copy_map_array(game->map.map, game->map.max_rows);
 	if (!test_map)
 	{
-		ft_fprintf(2, "ERROR: Failed to allocate local test_map for flood fill validation\n");
+		fprintf(stderr, "ERROR: Failed to allocate local test_map for flood fill validation\n");
 		return (0);
 	}
 	result = flood_fill_validate(game, test_map, y, x);
@@ -44,13 +44,13 @@ int	is_valid_path(t_game *game, int y, int x)
 	ft_free_2d(test_map, game->map.max_rows);
 	if (result)
 	{
-		ft_fprintf(1, "SUCCESS: Map validation passed\n");
-		ft_fprintf(1, "All reachable areas are properly enclosed by walls\n");
+		fprintf(stdout, "SUCCESS: Map validation passed\n");
+		fprintf(stdout, "All reachable areas are properly enclosed by walls\n");
 	}
 	else
 	{
-		ft_fprintf(2, "FAILURE: Map validation failed\n");
-		ft_fprintf(2, "Player can reach map edges\n");
+		fprintf(stderr, "FAILURE: Map validation failed\n");
+		fprintf(stderr, "Player can reach map edges\n");
 	}
 	return (result);
 }
@@ -94,7 +94,7 @@ int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 	if (y == 0 || y == game->map.max_rows - 1
 		|| x == 0 || x == game->map.max_cols - 1)
 	{
-		ft_fprintf(2, "Error: Reachable space at map edge (%d,%d)\n", y, x);
+		fprintf(stderr, "Error: Reachable space at map edge (%d,%d)\n", y, x);
 		return (0);
 	}
 	if (!flood_fill_validate(game, test_map, y - 1, x)
@@ -116,4 +116,26 @@ int	is_reachable_space(char c)
 {
 	return (c == '0' || c == 'D' || c == 'N' || c == 'S' || c == 'E'
 		|| c == 'W');
+}
+
+/*
+Additional debug function to validate the entire map line by line.
+Logs detailed information about each line's validation result.
+*/
+void	validate_map_lines(t_game *game)
+{
+	int	line;
+	int	result;
+
+	line = 0;
+	while (line < game->map.max_rows)
+	{
+		fprintf(stderr, "[DEBUG] Validating map line: %s\n", game->map.map[line]);
+		result = is_valid_path(game, line, 0);
+		if (result)
+			fprintf(stderr, "[DEBUG] Map line %d is valid\n", line);
+		else
+			fprintf(stderr, "[DEBUG] Map line %d is invalid\n", line);
+		line++;
+	}
 }

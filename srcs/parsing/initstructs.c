@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 17:41:57 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 17:46:35 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	alloc_and_init_all(t_game **game)
 	}
 	init_map_struct(&(*game)->map);
 	init_texture_struct(&(*game)->textures);
-	(*game)->map.start_direction = N;
 	while (i < 3)
 	{
 		(*game)->map.sky_color[i] = -1;
@@ -57,8 +56,8 @@ void	init_map_struct(t_map *map)
 	map->south_texture_path = NULL;
 	map->east_texture_path = NULL;
 	map->west_texture_path = NULL;
-	map->max_cols = -1;
-	map->max_rows = -1;
+	map->max_cols = 0;
+	map->max_rows = 0;
 	map->map_start_line = 0;
 	map->map_last_line = 0;
 	map->herocount = 0;
@@ -72,6 +71,7 @@ Initializes all members of t_texture to safe defaults.
 */
 void	init_texture_struct(t_texture *texture)
 {
+	fprintf(stderr, "[DEBUG] Initializing texture struct\n");
 	texture->north_wall = NULL;
 	texture->south_wall = NULL;
 	texture->east_wall = NULL;
@@ -79,9 +79,14 @@ void	init_texture_struct(t_texture *texture)
 	texture->space = NULL;
 	texture->sky = NULL;
 	texture->floor = NULL;
-	texture->door_frames = NULL;
-	// texture->current_door_frames = NULL; // DEPRECATED, may be needed later
+	texture->door_frames = ft_calloc(MAX_DOOR_FRAMES, sizeof(t_image *));
+	if (!texture->door_frames)
+	{
+		perror("Error: Failed to allocate memory for door_frames.\n");
+		exit(EXIT_FAILURE);
+	}
 	texture->door_frame_count = 0;
+	fprintf(stderr, "[DEBUG] Texture struct initialized successfully\n");
 }
 
 void	init_ray_struct(t_ray *ray)

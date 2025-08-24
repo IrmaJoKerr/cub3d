@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:33:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 01:19:32 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	debug_print_map(t_game *game)
 		y++;
 	}
 	fprintf(stderr, "=== END DEBUG MAP ===\n\n");
+	debug_print_map(game);
 }
 

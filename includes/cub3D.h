@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 05:09:40 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ int	validate_interior_line(const char *line);
 int	final_map_validation(t_game *game);
 
 int	validate_map_line_chars(const char *line, t_game *game, int row, int *player_found);
+int		strip_newline(char *line);
 
 /*
 Debug functions. In debug.c

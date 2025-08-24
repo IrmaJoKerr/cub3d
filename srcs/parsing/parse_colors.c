@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/17 12:03:44 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/23 13:09:00 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 17:46:35 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,21 @@ int	parse_floor_color(char *line, t_game *game)
 	int		color[3];
 	int		result;
 
-	fprintf(stderr, "[DEBUG] parse_floor_color: line='%s'\n", line);
+	fprintf(stderr, "[DEBUG] parse_floor_color: Entering with line='%s'\n", line);
 	values = extract_color_values(line, "F");
-	fprintf(stderr, "[DEBUG] parse_floor_color: extracted values='%s'\n", values ? values : "NULL");
+	fprintf(stderr, "[DEBUG] parse_floor_color: Extracted values='%s'\n", values ? values : "NULL");
 	result = validate_color_values(values, color);
-	fprintf(stderr, "[DEBUG] parse_floor_color: validate_color_values result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
+	fprintf(stderr, "[DEBUG] parse_floor_color: Validation result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
 	if (result == 0)
 	{
 		game->map.floor_color[0] = color[0];
 		game->map.floor_color[1] = color[1];
 		game->map.floor_color[2] = color[2];
-		fprintf(stderr, "[DEBUG] parse_floor_color: assigned floor_color={%d,%d,%d}\n", color[0], color[1], color[2]);
+		fprintf(stderr, "[DEBUG] parse_floor_color: Assigned floor_color={%d,%d,%d}\n", color[0], color[1], color[2]);
 	}
 	if (values)
 		free(values);
+	fprintf(stderr, "[DEBUG] parse_floor_color: Exiting with result=%d\n", result);
 	return (result);
 }
 
@@ -56,20 +57,21 @@ int	parse_ceiling_color(char *line, t_game *game)
 	int		color[3];
 	int		result;
 
-	fprintf(stderr, "[DEBUG] parse_ceiling_color: line='%s'\n", line);
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: Entering with line='%s'\n", line);
 	values = extract_color_values(line, "C");
-	fprintf(stderr, "[DEBUG] parse_ceiling_color: extracted values='%s'\n", values ? values : "NULL");
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: Extracted values='%s'\n", values ? values : "NULL");
 	result = validate_color_values(values, color);
-	fprintf(stderr, "[DEBUG] parse_ceiling_color: validate_color_values result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: Validation result=%d, color={%d,%d,%d}\n", result, color[0], color[1], color[2]);
 	if (result == 0)
 	{
 		game->map.sky_color[0] = color[0];
 		game->map.sky_color[1] = color[1];
 		game->map.sky_color[2] = color[2];
-		fprintf(stderr, "[DEBUG] parse_ceiling_color: assigned sky_color={%d,%d,%d}\n", color[0], color[1], color[2]);
+		fprintf(stderr, "[DEBUG] parse_ceiling_color: Assigned sky_color={%d,%d,%d}\n", color[0], color[1], color[2]);
 	}
 	if (values)
 		free(values);
+	fprintf(stderr, "[DEBUG] parse_ceiling_color: Exiting with result=%d\n", result);
 	return (result);
 }
 
