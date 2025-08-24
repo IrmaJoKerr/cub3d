@@ -1,9 +1,7 @@
-[DEBUG] Player found at map file line 3, column 7.
-[DEBUG] Setting player_x to 8.0 and player_y to 4.0.
 [DEBUG] Starting populate_map_array
-[DEBUG] Allocating memory for map array. Rows: 11, Cols: 16
+[DEBUG] Allocating memory for map array. Rows: 14, Cols: 16
 [DEBUG] Map array allocated successfully.
-[DEBUG] Skipping Line 1: 111111000NO textures/simonkraft/respawn_anchor_side0.xpm
+[DEBUG] Skipping Line 1: NO textures/simonkraft/respawn_anchor_side0.xpm
 
 [DEBUG] Skipping Line 2: EA textures/simonkraft/respawn_anchor_side2.xpm
 
@@ -17,49 +15,87 @@
 
 [DEBUG] Skipping Line 7: F 15,6,40
 
-[DEBUG] Skipping Line 8: 
-
 [DEBUG] Finished skipping to map start line.
-[DEBUG] Reading map line 0: 111111000111111
 
-[DEBUG] Reading map line 1: 111110000011111
+=== DEBUG: MAP CONTENTS ===
+Map dimensions: 16x14
+Player position: (0.00, 0.00)
+Player count: 1
+Start direction: 0
 
-[DEBUG] Reading map line 2: 1111000N0001111
+Map array contents:
+Row  0: [111111111111111]
+Row  1: [111111000111111]
+Row  2: [111110000011111]
+Row  3: [1111000N0001111]
+Row  4: [111000000D00111]
+Row  5: [110000000000011]
+Row  6: [100001111100001]
+Row  7: [110000111000011]
+Row  8: [111000010000111]
+Row  9: [111100000001111]
+Row 10: [111110000011111]
+Row 11: [111111000111111]
+Row 12: [111111111111111]
+Row 13: [NULL]
+=== END DEBUG MAP ===
 
-[DEBUG] Reading map line 3: 111000000D00111
+[DEBUG] Setting player start position: (7.50, 3.50), direction: N
+[DEBUG] Player settings: player_x=7.00, player_y=3.00, curr_x=7.50, curr_y=3.50, start_direction=0, view_direction=4.71
+[DEBUG] Player position set to: (7.00, 3.00)
 
-[DEBUG] Reading map line 4: 110000000000011
-
-[DEBUG] Reading map line 5: 100001111100001
-
-[DEBUG] Reading map line 6: 110000111000011
-
-[DEBUG] Reading map line 7: 111000010000111
-
-[DEBUG] Reading map line 8: 111100000001111
-
-[DEBUG] Reading map line 9: 111110000011111
-
-[DEBUG] Reading map line 10: 111111000111111
-
-[DEBUG] Reading map line 11: 111111111111111
-
-AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==18361==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5d4439a667f1 bp 0x7ffed8de0c50 sp 0x7ffed8de0c50 T0)
-==18361==The signal is caused by a WRITE memory access.
-==18361==Hint: address points to the zero page.
-    #0 0x5d4439a667f1 in ft_strlcpy (/home/bleow/Coding/Core/cub3d/cub3D+0x1e7f1) (BuildId: a4d15a8a76829366c4d9c0505436dadff0f244af)
-    #1 0x5d4439a5b7b4 in fill_map srcs/parsing/populate_map.c:180
-    #2 0x5d4439a5c331 in populate_map_array srcs/parsing/populate_map.c:268
-    #3 0x5d4439a55596 in init_mlx_sys srcs/parsing/cub3D.c:190
-    #4 0x5d4439a555e6 in init_game srcs/parsing/cub3D.c:202
-    #5 0x5d4439a552fa in main srcs/parsing/cub3D.c:164
-    #6 0x7067b362a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-    #7 0x7067b362a28a in __libc_start_main_impl ../csu/libc-start.c:360
-    #8 0x5d4439a52ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: a4d15a8a76829366c4d9c0505436dadff0f244af)
+==42113==ERROR: LeakSanitizer: detected memory leaks
 
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (/home/bleow/Coding/Core/cub3d/cub3D+0x1e7f1) (BuildId: a4d15a8a76829366c4d9c0505436dadff0f244af) in ft_strlcpy
-==18361==ABORTING
+Direct leak of 32 byte(s) in 1 object(s) allocated from:
+    #0 0x7b9925afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57f90e247ecb in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1eecb) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #2 0x57f90e235d5d in allocate_texture srcs/parsing/cub3D.c:109
+    #3 0x57f90e235e60 in load_texture srcs/parsing/cub3D.c:129
+    #4 0x57f90e2368b7 in load_textures srcs/parsing/cub3D.c:227
+    #5 0x57f90e2366ae in init_game srcs/parsing/cub3D.c:205
+    #6 0x57f90e2362fa in main srcs/parsing/cub3D.c:164
+    #7 0x7b992542a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #8 0x7b992542a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #9 0x57f90e233ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+
+Direct leak of 17 byte(s) in 1 object(s) allocated from:
+    #0 0x7b9925afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57f90e23d3fc in prepare_map_array srcs/parsing/populate_map.c:208
+    #2 0x57f90e23d8a2 in populate_map_array srcs/parsing/populate_map.c:238
+    #3 0x57f90e236596 in init_mlx_sys srcs/parsing/cub3D.c:190
+    #4 0x57f90e2366a2 in init_game srcs/parsing/cub3D.c:204
+    #5 0x57f90e2362fa in main srcs/parsing/cub3D.c:164
+    #6 0x7b992542a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x7b992542a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x57f90e233ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7b9925afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57f90e247ecb in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1eecb) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #2 0x57f90e2486fd in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1f6fd) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #3 0x57f90e2488fa in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1f8fa) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #4 0x57f90e23cb16 in skip_to_map srcs/parsing/populate_map.c:136
+    #5 0x57f90e23d8fb in populate_map_array srcs/parsing/populate_map.c:240
+    #6 0x57f90e236596 in init_mlx_sys srcs/parsing/cub3D.c:190
+    #7 0x57f90e2366a2 in init_game srcs/parsing/cub3D.c:204
+    #8 0x57f90e2362fa in main srcs/parsing/cub3D.c:164
+    #9 0x7b992542a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #10 0x7b992542a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #11 0x57f90e233ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+
+Direct leak of 2 byte(s) in 1 object(s) allocated from:
+    #0 0x7b9925afd9c7 in malloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:69
+    #1 0x57f90e247ecb in ft_calloc (/home/bleow/Coding/Core/cub3d/cub3D+0x1eecb) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #2 0x57f90e2486fd in ft_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1f6fd) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #3 0x57f90e2488fa in get_next_line (/home/bleow/Coding/Core/cub3d/cub3D+0x1f8fa) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+    #4 0x57f90e23bd07 in validate_lines_after_map srcs/parsing/parser.c:98
+    #5 0x57f90e23bbac in parse_map_2 srcs/parsing/parser.c:82
+    #6 0x57f90e23c286 in parser srcs/parsing/parser.c:190
+    #7 0x57f90e236279 in main srcs/parsing/cub3D.c:159
+    #8 0x7b992542a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #9 0x7b992542a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #10 0x57f90e233ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 8a1a77b64c883b7f4f1fdbf2e9de4b2c5d86bebe)
+
+SUMMARY: AddressSanitizer: 53 byte(s) leaked in 4 allocation(s).
 Test failed with exit code 1.

@@ -6,11 +6,13 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 05:07:51 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 07:43:34 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+#include <unistd.h>
+#include <stdio.h>
 
 /*
 Function prototypes
@@ -23,6 +25,7 @@ void	detect_map_start_line(const char *line, int *in_map,
 int		detect_map_end_line(const char *line, int *in_map,
 			int *map_last_line, int pos);
 int		parser(const char *file, t_game *game);
+int		validate_lines_after_map(int fd);
 
 /*
 Parse the first pass of the map file, finding config and map start
@@ -50,7 +53,8 @@ int	parse_map_1(int fd, t_game *game)
 		line = get_next_line(fd);
 		pos++;
 	}
-	ft_safefree((void **)&line);
+	if (line)
+		ft_safefree((void **)&line);
 	close (fd);
 	return (0);
 }
@@ -73,7 +77,44 @@ int	parse_map_2(int fd, t_game *game)
 	}
 	if (calc_map_area(fd, game, i) < 0)
 		return (-1);
-	close (fd);
+	if (game->map.herocount != 1)
+	{
+		ft_fprintf(2, "Error: Map must have exactly one player (found %d)\n",
+			game->map.herocount);
+		return (-1);
+	}
+	if (validate_lines_after_map(fd) < 0)
+		return (-1);
+	close(fd);
+	return (0);
+}
+
+int	validate_lines_after_map(int fd)
+{
+	char	*line;
+	int		i;
+
+	line = get_next_line(fd);
+	i = 0;
+	while (line && i < 2)
+	{
+		ft_safefree((void **)&line);
+		line = get_next_line(fd);
+		i++;
+	}
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		if (!is_only_whitespace(line))
+		{
+			ft_safefree((void **)&line);
+			return (-1);
+		}
+		ft_safefree((void **)&line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		ft_safefree((void **)&line);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 05:03:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 07:29:14 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,9 @@ int		validate_border_line(const char *line);
 // int	populate_map_array(const char *file, t_game *game, int map_start_line); // Deprecated or unused
 void	count_player_chars(const char *line, t_game *game);
 int		validate_interior_line(const char *line);
-// void	find_player_position(t_game *game);
+void	find_player_position(t_game *game);
 int		final_map_validation(t_game *game);
-int		validate_map_line_chars(const char *line, t_game *game, int row, int *player_found);
+int		validate_map_line_chars(const char *line, t_game *game, int *player_found);
 int		strip_newline(char *line);
 
 /*

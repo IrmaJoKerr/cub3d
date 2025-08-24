@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 05:30:46 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 07:42:01 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	calc_map_area(int fd, t_game *game, int i)
 
 	player_found = 0;
 	line = NULL;
+	game->map.max_rows = ((game->map.map_last_line - game->map.map_start_line)
+			+ 2);
 	while ((i < (game->map.map_last_line - 1)))
 	{
 		line = get_next_line(fd);
@@ -42,18 +44,16 @@ int	calc_map_area(int fd, t_game *game, int i)
 			break ;
 		if ((int)ft_strlen(line) > game->map.max_cols)
 			game->map.max_cols = (int)ft_strlen(line);
-		if (validate_map_line_chars(line, game, game->map.max_rows,
-				&player_found) < 0)
+		if (validate_map_line_chars(line, game, &player_found) < 0)
 		{
 			ft_safefree((void **)&line);
 			return (-1);
 		}
 		ft_safefree((void **)&line);
-		game->map.max_rows++;
 		i++;
 	}
-	if (game->map.herocount != 1)
-		return (-1);
+	if (line)
+		ft_safefree((void **)&line);
 	return (0);
 }
 
@@ -65,6 +65,7 @@ void	set_hero_start(t_game *game, char dir)
 	game->curr_x = game->map.player_x + 0.5;
 	game->curr_y = game->map.player_y + 0.5;
 	game->view_elevation = 0.0;
+	fprintf(stderr, "[DEBUG] Setting player start position: (%.2f, %.2f), direction: %c\n", game->curr_x, game->curr_y, dir);
 	if (dir == 'N')
 	{
 		game->map.start_direction = N;
@@ -90,8 +91,7 @@ void	set_hero_start(t_game *game, char dir)
 /*
 Validate map line contains only valid characters
 */
-int	validate_map_line_chars(const char *line, t_game *game, int row,
-		int *player_found)
+int	validate_map_line_chars(const char *line, t_game *game, int *player_found)
 {
 	int		i;
 
@@ -106,12 +106,7 @@ int	validate_map_line_chars(const char *line, t_game *game, int row,
 		{
 			game->map.herocount++;
 			if (!(*player_found))
-			{
-				game->map.player_x = (i + 1);
-				game->map.player_y = (row + 1);
-				set_hero_start(game, line[i]);
 				*player_found = 1;
-			}
 		}
 		i++;
 	}
@@ -189,41 +184,32 @@ int	validate_interior_line(const char *line)
 // 	return (0);
 // }
 
-// /*
-// Find player starting position
-// */
-// void	find_player_position(t_game *game)
-// {
-// 	int	y;
-// 	int	x;
+/*
+Find player starting position
+*/
+void	find_player_position(t_game *game)
+{
+	int		y;
+	int		x;
 
-// 	y = 0;
-// 	while (y < game->map.max_rows)
-// 	{
-// 		x = 0;
-// 		while (x < (int)ft_strlen(game->map.map[y]))
-// 		{
-// 			if (ft_strchr("NSEW", game->map.map[y][x]))
-// 			{
-// 				game->map.player_x = x;
-// 				game->map.player_y = y;
-// 				game->curr_x = x;
-// 				game->curr_y = y;
-// 				if (game->map.map[y][x] == 'N')
-// 					game->map.start_direction = N;
-// 				else if (game->map.map[y][x] == 'E')
-// 					game->map.start_direction = E;
-// 				else if (game->map.map[y][x] == 'S')
-// 					game->map.start_direction = S;
-// 				else if (game->map.map[y][x] == 'W')
-// 					game->map.start_direction = W;
-// 				return ;
-// 			}
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// }
+	y = 0;
+	while (y < game->map.max_rows)
+	{
+		x = 0;
+		while (x < (int)ft_strlen(game->map.map[y]))
+		{
+			if (ft_strchr("NSEW", game->map.map[y][x]))
+			{
+				game->map.player_x = x;
+				game->map.player_y = y;
+				set_hero_start(game, game->map.map[y][x]);
+				return ;
+			}
+			x++;
+		}
+		y++;
+	}
+}
 
 /*
 Final map validation

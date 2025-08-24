@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 04:17:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 07:37:46 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,8 @@ void	init_mlx_sys(t_game *game, const char *map_path)
 		cleanup_later(game, map_path);
 		exit(EXIT_FAILURE);
 	}
+	find_player_position(game);
+	fprintf(stderr, "[DEBUG] Player position set to: (%.2f, %.2f)\n", game->map.player_x, game->map.player_y);
 }
 
 /*
