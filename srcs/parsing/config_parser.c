@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 04:28:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 04:31:20 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 Function prototypes (in order)
 */
 int		is_only_whitespace(const char *line);
-int		is_map_start_line(const char *line, int *in_map);
 int		parse_config_settings(char *line, t_game *game);
 int		get_texture_path(char *line, t_game *game, int settings_type);
 int		handle_color_settings(char *line, t_game *game, int settings_type);
@@ -43,38 +42,6 @@ int	is_only_whitespace(const char *line)
 		i++;
 	}
 	return (1);
-}
-
-/*
-Check if line represents the start of map (all 1's and spaces)
-*/
-int	is_map_start_line(const char *line, int *in_map)
-{
-	int	i;
-	int	has_wall;
-
-	fprintf(stderr, "[DEBUG] Checking line for map start: '%s'\n", line);
-	i = 0;
-	has_wall = 0;
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] == '1')
-			has_wall = 1;
-		else if (line[i] != ' ')
-		{
-			fprintf(stderr, "[DEBUG] Line is not map start: invalid char '%c' at index %d\n", line[i], i);
-			return (0);
-		}
-		i++;
-	}
-	if (has_wall)
-	{
-		*in_map = 1;
-		fprintf(stderr, "[DEBUG] Line is map start\n");
-		return (1);
-	}
-	fprintf(stderr, "[DEBUG] Line is not map start: no walls found\n");
-	return (0);
 }
 
 /*

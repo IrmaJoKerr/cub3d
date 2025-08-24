@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 03:55:10 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 05:14:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,40 +33,27 @@ int	calc_map_area(int fd, t_game *game, int i)
 	char	*line;
 	int		player_found;
 
-	fprintf(stderr, "[DEBUG] Starting calc_map_area\n");
 	player_found = 0;
 	line = NULL;
 	while ((i < (game->map.map_last_line - 1)))
 	{
 		line = get_next_line(fd);
 		if (!line)
-		{
-			fprintf(stderr, "[DEBUG] Reached end of file or error at line %d\n", i);
 			break ;
-		}
-		fprintf(stderr, "[DEBUG] Processing line %d: %s\n", i, line);
 		if ((int)ft_strlen(line) > game->map.max_cols)
-		{
 			game->map.max_cols = (int)ft_strlen(line);
-			fprintf(stderr, "[DEBUG] Updated max_cols to %d\n", game->map.max_cols);
-		}
-		if (validate_map_line_chars(line, game, game->map.max_rows, &player_found) < 0)
+		if (validate_map_line_chars(line, game, game->map.max_rows,
+				&player_found) < 0)
 		{
-			fprintf(stderr, "[DEBUG] Validation failed for line %d\n", i);
-			free(line);
+			ft_safefree((void **)&line);
 			return (-1);
 		}
-		free(line);
+		ft_safefree((void **)&line);
 		game->map.max_rows++;
-		fprintf(stderr, "[DEBUG] Incremented max_rows to %d\n", game->map.max_rows);
 		i++;
 	}
 	if (game->map.herocount != 1)
-	{
-		fprintf(stderr, "[DEBUG] Invalid hero count: %d\n", game->map.herocount);
 		return (-1);
-	}
-	fprintf(stderr, "[DEBUG] Finished calc_map_area. max_rows: %d, max_cols: %d\n", game->map.max_rows, game->map.max_cols);
 	return (0);
 }
 
@@ -108,8 +95,6 @@ int	validate_map_line_chars(const char *line, t_game *game, int row,
 {
 	int		i;
 
-	fprintf(stderr, "[DEBUG] Starting validate_map_line_chars for row %d: %s\n", row, line);
-
 	i = 0;
 	while (line[i] && line[i] != '\n')
 	{
@@ -130,20 +115,20 @@ int	validate_map_line_chars(const char *line, t_game *game, int row,
 		}
 		i++;
 	}
-	fprintf(stderr, "[DEBUG] Exiting validate_map_line_chars for row %d. Hero count: %d, Door count: %d\n", row, game->map.herocount, game->doorcount);
-	fprintf(stderr, "[DEBUG] validate_map_line_chars succeeded for row %d\n", row);
 	return (0);
 }
 
-int strip_newline(char *line)
+int	strip_newline(char *line)
 {
-    int len = ft_strlen(line);
-    if (len > 0 && line[len - 1] == '\n')
-    {
-        line[len - 1] = '\0';
-        return (1);
-    }
-    return (0);
+	int	len;
+
+	len = (int)ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+	{
+		line[len - 1] = '\0';
+		return (1);
+	}
+	return (0);
 }
 
 /*
@@ -166,8 +151,6 @@ int	validate_border_line(const char *line)
 	}
 	return (has_wall);
 }
-
-
 
 /*
 Validate interior line starts and ends with walls
