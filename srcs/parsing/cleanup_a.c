@@ -177,6 +177,7 @@ Handle map array cleanup for validation failures.
 void	cleanup_early(t_game *game, const char *map_path)
 {
 	ft_safefree((void **)&map_path);
+	cleanup_mlx_textures(game);
 	cleanup_texture_paths(game);
 	cleanup_map_array(game);
 	ft_safefree((void **)&game);

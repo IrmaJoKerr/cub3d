@@ -93,7 +93,7 @@ int	parse_map_2(const char *file, t_game *game)
 		fprintf(stderr, "[DEBUG] parse_map_2: Failed to open file\n");
 		return (-1);
 	}
-	i = 0;
+	i = 1; // Initialize debug counter to 1
 	while (i < game->map.map_start_line)
 	{
 		line = get_next_line(fd);
