@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 22:47:38 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 04:28:11 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	is_map_start_line(const char *line, int *in_map)
 		else if (line[i] != ' ')
 		{
 			fprintf(stderr, "[DEBUG] Line is not map start: invalid char '%c' at index %d\n", line[i], i);
-			return 0;
+			return (0);
 		}
 		i++;
 	}
@@ -71,10 +71,10 @@ int	is_map_start_line(const char *line, int *in_map)
 	{
 		*in_map = 1;
 		fprintf(stderr, "[DEBUG] Line is map start\n");
-		return 1;
+		return (1);
 	}
 	fprintf(stderr, "[DEBUG] Line is not map start: no walls found\n");
-	return 0;
+	return (0);
 }
 
 /*

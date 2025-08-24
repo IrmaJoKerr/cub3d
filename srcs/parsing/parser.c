@@ -19,8 +19,9 @@ Function prototypes
 int	parse_map_1(const char *file, t_game *game);
 int	parse_map_2(const char *file, t_game *game);
 int	exit_failure_parser(char *line, int fd);
-int detect_map_start_line(const char *line, int *in_map, int *map_start_line, int pos);
+void detect_map_start_line(const char *line, int *in_map, int *map_start_line, int pos);
 int detect_map_end_line(const char *line, int *in_map, int *map_last_line, int pos);
+int parser(const char *file, t_game *game);
 
 /*
 Parse the first pass of the map file, finding config and map start
@@ -40,8 +41,8 @@ int	parse_map_1(const char *file, t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (detect_map_start_line(line, &in_map,
-				&game->map.map_start_line, pos))
+		if (game->map.map_start_line == -1 && in_map < 1)
+			detect_map_start_line(line, &in_map, &game->map.map_start_line, pos);
 		if (detect_map_end_line(line, &in_map, &game->map.map_last_line, pos))
 		{
 			ft_safefree((void **)&line);
@@ -96,21 +97,32 @@ int	exit_failure_parser(char *line, int fd)
 	return (-1);
 }
 
-int	detect_map_start_line(const char *line, int *in_map, int *map_start_line,
+void	detect_map_start_line(const char *line, int *in_map, int *map_start_line,
 	int pos)
 {
 	if (*map_start_line == -1 && is_map_start_line(line, in_map))
-	{
 		*map_start_line = pos;
+}
+
+int	detect_map_end_line(const char *line, int *in_map, int *map_last_line,
+	int pos)
+{
+	if (*in_map && is_only_whitespace(line))
+	{
+		*map_last_line = pos - 1;
 		return (1);
 	}
 	return (0);
 }
 
-int detect_map_end_line(const char *line, int *in_map, int *map_last_line, int pos) {
-    if (*in_map && is_only_whitespace(line)) {
-        *map_last_line = pos - 1;
-        return 1;
+int parser(const char *file, t_game *game) {
+    if (parse_map_1(file, game) < 0) {
+        cleanup_early(game, file);
+        return (-1);
     }
-    return 0;
+    if (parse_map_2(file, game) < 0) {
+        cleanup_early(game, file);
+        return (-1);
+    }
+    return (0);
 }

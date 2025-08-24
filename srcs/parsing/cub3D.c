@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 19:05:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 04:17:03 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,12 +156,7 @@ int	main(int argc, char **argv)
 	if (!map_path)
 		return (1);
 	alloc_and_init_all(&game);
-	if (parse_map_1(map_path, game) < 0)
-	{
-		cleanup_early(game, map_path);
-		exit(EXIT_FAILURE);
-	}
-	if (parse_map_2(map_path, game) < 0)
+	if (parser(map_path, game) < 0)
 	{
 		cleanup_early(game, map_path);
 		exit(EXIT_FAILURE);
