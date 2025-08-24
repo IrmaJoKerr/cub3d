@@ -19,6 +19,8 @@ Function prototypes
 int	parse_map_1(const char *file, t_game *game);
 int	parse_map_2(const char *file, t_game *game);
 int	exit_failure_parser(char *line, int fd);
+int detect_map_start_line(const char *line, int *in_map, int *map_start_line, int pos);
+int detect_map_end_line(const char *line, int *in_map, int *map_last_line, int pos);
 
 /*
 Parse the first pass of the map file, finding config and map start
@@ -26,28 +28,22 @@ Parse the first pass of the map file, finding config and map start
 int	parse_map_1(const char *file, t_game *game)
 {
 	int		fd;
-	char	*line;
 	int		in_map;
 	int		pos;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
-	{
 		return (-1);
-	}
 	in_map = 0;
 	pos = 1;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (game->map.map_start_line == -1)
+		if (detect_map_start_line(line, &in_map,
+				&game->map.map_start_line, pos))
+		if (detect_map_end_line(line, &in_map, &game->map.map_last_line, pos))
 		{
-			if (is_map_start_line(line, &in_map))
-				game->map.map_start_line = pos;
-		}
-		if (in_map && is_only_whitespace(line))
-		{
-			game->map.map_last_line = pos - 1;
 			ft_safefree((void **)&line);
 			break ;
 		}
@@ -55,8 +51,6 @@ int	parse_map_1(const char *file, t_game *game)
 		line = get_next_line(fd);
 		pos++;
 	}
-	if (game->map.map_start_line > 1)
-		game->map.map_start_line--;
 	ft_safefree((void **)&line);
 	close(fd);
 	return (0);
@@ -100,4 +94,23 @@ int	exit_failure_parser(char *line, int fd)
 	ft_safefree((void **)&line);
 	close(fd);
 	return (-1);
+}
+
+int	detect_map_start_line(const char *line, int *in_map, int *map_start_line,
+	int pos)
+{
+	if (*map_start_line == -1 && is_map_start_line(line, in_map))
+	{
+		*map_start_line = pos;
+		return (1);
+	}
+	return (0);
+}
+
+int detect_map_end_line(const char *line, int *in_map, int *map_last_line, int pos) {
+    if (*in_map && is_only_whitespace(line)) {
+        *map_last_line = pos - 1;
+        return 1;
+    }
+    return 0;
 }

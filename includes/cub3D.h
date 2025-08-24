@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 18:50:31 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 04:06:41 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,7 @@ Configuration parser functions. In config_parser.c
 // int	parse_configuration_section(const char *file, t_game *game);
 int	is_only_whitespace(const char *line);
 int	is_map_start_line(const char *line, int *in_map);
+int	detect_map_start_line(const char *line, int *in_map, int *map_start_line, int pos);
 int	parse_config_settings(char *line, t_game *game);
 int	get_texture_path(char *line, t_game *game, int settings_type);
 int	handle_color_settings(char *line, t_game *game, int settings_type);
