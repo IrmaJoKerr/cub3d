@@ -265,20 +265,20 @@
 
 AddressSanitizer:DEADLYSIGNAL
 =================================================================
-==5394==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5d195095b057 bp 0x7ffd09a7d630 sp 0x7ffd09a7d630 T0)
-==5394==The signal is caused by a WRITE memory access.
-==5394==Hint: address points to the zero page.
-    #0 0x5d195095b057 in ft_strlcpy (/home/bleow/Coding/Core/cub3d/cub3D+0x1f057) (BuildId: 85f34502036e50b78238c409138329310507c346)
-    #1 0x5d195095001a in fill_map srcs/parsing/populate_map.c:180
-    #2 0x5d1950950b97 in populate_map_array srcs/parsing/populate_map.c:268
-    #3 0x5d195094993b in init_mlx_sys srcs/parsing/cub3D.c:195
-    #4 0x5d195094998b in init_game srcs/parsing/cub3D.c:207
-    #5 0x5d195094969f in main srcs/parsing/cub3D.c:169
-    #6 0x7cfc81c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
-    #7 0x7cfc81c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
-    #8 0x5d1950946ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 85f34502036e50b78238c409138329310507c346)
+==6685==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5e2efb7c005b bp 0x7ffc142bd4c0 sp 0x7ffc142bd4c0 T0)
+==6685==The signal is caused by a WRITE memory access.
+==6685==Hint: address points to the zero page.
+    #0 0x5e2efb7c005b in ft_strlcpy (/home/bleow/Coding/Core/cub3d/cub3D+0x1f05b) (BuildId: 9f6182e2a4a46a5db9fd0f4c516d45dcc68b0f6a)
+    #1 0x5e2efb7b501e in fill_map srcs/parsing/populate_map.c:180
+    #2 0x5e2efb7b5b9b in populate_map_array srcs/parsing/populate_map.c:268
+    #3 0x5e2efb7ae93b in init_mlx_sys srcs/parsing/cub3D.c:195
+    #4 0x5e2efb7ae98b in init_game srcs/parsing/cub3D.c:207
+    #5 0x5e2efb7ae69f in main srcs/parsing/cub3D.c:169
+    #6 0x73c3c6e2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x73c3c6e2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x5e2efb7abce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 9f6182e2a4a46a5db9fd0f4c516d45dcc68b0f6a)
 
 AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (/home/bleow/Coding/Core/cub3d/cub3D+0x1f057) (BuildId: 85f34502036e50b78238c409138329310507c346) in ft_strlcpy
-==5394==ABORTING
+SUMMARY: AddressSanitizer: SEGV (/home/bleow/Coding/Core/cub3d/cub3D+0x1f05b) (BuildId: 9f6182e2a4a46a5db9fd0f4c516d45dcc68b0f6a) in ft_strlcpy
+==6685==ABORTING
 Test failed with exit code 1.

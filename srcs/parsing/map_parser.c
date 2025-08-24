@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 03:44:04 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 03:55:10 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,43 +106,30 @@ Validate map line contains only valid characters
 int	validate_map_line_chars(const char *line, t_game *game, int row,
 		int *player_found)
 {
-	char	*mutable_line;
 	int		i;
 
 	fprintf(stderr, "[DEBUG] Starting validate_map_line_chars for row %d: %s\n", row, line);
-	mutable_line = ft_strdup(line);
-	if (!mutable_line)
-	{
-		return (-1);
-	}
-	strip_newline(mutable_line);
 
 	i = 0;
-	while (mutable_line[i])
+	while (line[i] && line[i] != '\n')
 	{
-		if (!ft_strchr(VALID_CHARS " ", mutable_line[i]))
-		{
-			free(mutable_line);
+		if (!ft_strchr(VALID_CHARS " ", line[i]))
 			return (-1);
-		}
-		if (mutable_line[i] == 'D')
-		{
+		if (line[i] == 'D')
 			game->doorcount++;
-		}
-		if (ft_strchr("NSEW", mutable_line[i]))
+		if (ft_strchr("NSEW", line[i]))
 		{
 			game->map.herocount++;
 			if (!(*player_found))
 			{
 				game->map.player_x = i;
 				game->map.player_y = row;
-				set_hero_start(game, mutable_line[i]);
+				set_hero_start(game, line[i]);
 				*player_found = 1;
 			}
 		}
 		i++;
 	}
-	free(mutable_line);
 	fprintf(stderr, "[DEBUG] Exiting validate_map_line_chars for row %d. Hero count: %d, Door count: %d\n", row, game->map.herocount, game->doorcount);
 	fprintf(stderr, "[DEBUG] validate_map_line_chars succeeded for row %d\n", row);
 	return (0);
