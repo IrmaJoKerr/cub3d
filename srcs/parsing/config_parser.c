@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 22:47:38 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	is_map_start_line(const char *line, int *in_map)
 	int	i;
 	int	has_wall;
 
+	fprintf(stderr, "[DEBUG] Checking line for map start: '%s'\n", line);
 	i = 0;
 	has_wall = 0;
 	while (line[i] && line[i] != '\n')
@@ -60,14 +61,19 @@ int	is_map_start_line(const char *line, int *in_map)
 		if (line[i] == '1')
 			has_wall = 1;
 		else if (line[i] != ' ')
+		{
+			fprintf(stderr, "[DEBUG] Line is not map start: invalid char '%c' at index %d\n", line[i], i);
 			return 0;
+		}
 		i++;
 	}
 	if (has_wall)
 	{
 		*in_map = 1;
+		fprintf(stderr, "[DEBUG] Line is map start\n");
 		return 1;
 	}
+	fprintf(stderr, "[DEBUG] Line is not map start: no walls found\n");
 	return 0;
 }
 
@@ -79,6 +85,7 @@ int	parse_config_settings(char *line, t_game *game)
 	int	settings_type;
 	int	result;
 
+	fprintf(stderr, "[DEBUG] Parsing config settings: %s\n", line); // Debug print for input line
 	result = 0;
 	settings_type = identify_settings_type(line);
 	if (settings_type >= 1 && settings_type <= 4)
@@ -91,6 +98,7 @@ int	parse_config_settings(char *line, t_game *game)
 		int ret = handle_color_settings(line, game, settings_type);
 		result = ret;
 	}
+	fprintf(stderr, "[DEBUG] Config settings parsed with result: %d\n", result); // Debug print for result
 	return (result);
 }
 
@@ -130,6 +138,7 @@ Check for duplicate texture paths
 */
 int	check_duplicate_texture(char *path, t_game *game, int settings_type)
 {
+	(void)path; // Mark the parameter as unused to suppress the warning
 	if ((settings_type == 1 && game->map.north_texture_path) ||
 		(settings_type == 2 && game->map.south_texture_path) ||
 		(settings_type == 3 && game->map.west_texture_path) ||

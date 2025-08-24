@@ -1,0 +1,284 @@
+[DEBUG] Line 1: NO textures/simonkraft/respawn_anchor_side0.xpm
+[DEBUG] Current line number: 1, in_map: 0
+[DEBUG] Processing line 1: 'NO textures/simonkraft/respawn_anchor_side0.xpm
+'
+[DEBUG] Checking line for map start: 'NO textures/simonkraft/respawn_anchor_side0.xpm
+'
+[DEBUG] Line is not map start: invalid char 'N' at index 0
+[DEBUG] Line 1 is not the start of the map
+[DEBUG] Line 2: EA textures/simonkraft/respawn_anchor_side2.xpm
+[DEBUG] Current line number: 2, in_map: 0
+[DEBUG] Processing line 2: 'EA textures/simonkraft/respawn_anchor_side2.xpm
+'
+[DEBUG] Checking line for map start: 'EA textures/simonkraft/respawn_anchor_side2.xpm
+'
+[DEBUG] Line is not map start: invalid char 'E' at index 0
+[DEBUG] Line 2 is not the start of the map
+[DEBUG] Line 3: SO textures/simonkraft/respawn_anchor_side4.xpm
+[DEBUG] Current line number: 3, in_map: 0
+[DEBUG] Processing line 3: 'SO textures/simonkraft/respawn_anchor_side4.xpm
+'
+[DEBUG] Checking line for map start: 'SO textures/simonkraft/respawn_anchor_side4.xpm
+'
+[DEBUG] Line is not map start: invalid char 'S' at index 0
+[DEBUG] Line 3 is not the start of the map
+[DEBUG] Line 4: WE textures/simonkraft/respawn_anchor_side3.xpm
+[DEBUG] Current line number: 4, in_map: 0
+[DEBUG] Processing line 4: 'WE textures/simonkraft/respawn_anchor_side3.xpm
+'
+[DEBUG] Checking line for map start: 'WE textures/simonkraft/respawn_anchor_side3.xpm
+'
+[DEBUG] Line is not map start: invalid char 'W' at index 0
+[DEBUG] Line 4 is not the start of the map
+[DEBUG] Line 5: 
+[DEBUG] Current line number: 5, in_map: 0
+[DEBUG] Processing line 5: '
+'
+[DEBUG] Checking line for map start: '
+'
+[DEBUG] Line is not map start: no walls found
+[DEBUG] Line 5 is not the start of the map
+[DEBUG] Line 6: C 35,19,73
+[DEBUG] Current line number: 6, in_map: 0
+[DEBUG] Processing line 6: 'C 35,19,73
+'
+[DEBUG] Checking line for map start: 'C 35,19,73
+'
+[DEBUG] Line is not map start: invalid char 'C' at index 0
+[DEBUG] Line 6 is not the start of the map
+[DEBUG] Line 7: F 15,6,40
+[DEBUG] Current line number: 7, in_map: 0
+[DEBUG] Processing line 7: 'F 15,6,40
+'
+[DEBUG] Checking line for map start: 'F 15,6,40
+'
+[DEBUG] Line is not map start: invalid char 'F' at index 0
+[DEBUG] Line 7 is not the start of the map
+[DEBUG] Line 8: 
+[DEBUG] Current line number: 8, in_map: 0
+[DEBUG] Processing line 8: '
+'
+[DEBUG] Checking line for map start: '
+'
+[DEBUG] Line is not map start: no walls found
+[DEBUG] Line 8 is not the start of the map
+[DEBUG] Line 9: 111111111111111
+[DEBUG] Current line number: 9, in_map: 0
+[DEBUG] Processing line 9: '111111111111111
+'
+[DEBUG] Checking line for map start: '111111111111111
+'
+[DEBUG] Line is map start
+[DEBUG] Map start identified at line 9
+[DEBUG] Line 10: 111111000111111
+[DEBUG] Current line number: 10, in_map: 1
+[DEBUG] Processing line 10: '111111000111111
+'
+[DEBUG] Line 11: 111110000011111
+[DEBUG] Current line number: 11, in_map: 1
+[DEBUG] Processing line 11: '111110000011111
+'
+[DEBUG] Line 12: 1111000N0001111
+[DEBUG] Current line number: 12, in_map: 1
+[DEBUG] Processing line 12: '1111000N0001111
+'
+[DEBUG] Line 13: 111000000D00111
+[DEBUG] Current line number: 13, in_map: 1
+[DEBUG] Processing line 13: '111000000D00111
+'
+[DEBUG] Line 14: 110000000000011
+[DEBUG] Current line number: 14, in_map: 1
+[DEBUG] Processing line 14: '110000000000011
+'
+[DEBUG] Line 15: 100001111100001
+[DEBUG] Current line number: 15, in_map: 1
+[DEBUG] Processing line 15: '100001111100001
+'
+[DEBUG] Line 16: 110000111000011
+[DEBUG] Current line number: 16, in_map: 1
+[DEBUG] Processing line 16: '110000111000011
+'
+[DEBUG] Line 17: 111000010000111
+[DEBUG] Current line number: 17, in_map: 1
+[DEBUG] Processing line 17: '111000010000111
+'
+[DEBUG] Line 18: 111100000001111
+[DEBUG] Current line number: 18, in_map: 1
+[DEBUG] Processing line 18: '111100000001111
+'
+[DEBUG] Line 19: 111110000011111
+[DEBUG] Current line number: 19, in_map: 1
+[DEBUG] Processing line 19: '111110000011111
+'
+[DEBUG] Line 20: 111111000111111
+[DEBUG] Current line number: 20, in_map: 1
+[DEBUG] Processing line 20: '111111000111111
+'
+[DEBUG] Line 21: 111111111111111
+[DEBUG] Current line number: 21, in_map: 1
+[DEBUG] Processing line 21: '111111111111111
+'
+[DEBUG] Line 22: 
+[DEBUG] Current line number: 22, in_map: 1
+[DEBUG] Processing line 22: '
+'
+[DEBUG] parse_map_1 succeeded. Map start line: 8, Map last line: 21
+[DEBUG] Starting parse_map_2. Map start line: 8
+[DEBUG] Skipping Line 1: NO textures/simonkraft/respawn_anchor_side0.xpm
+[DEBUG] Skipping Line 2: EA textures/simonkraft/respawn_anchor_side2.xpm
+[DEBUG] Skipping Line 3: SO textures/simonkraft/respawn_anchor_side4.xpm
+[DEBUG] Skipping Line 4: WE textures/simonkraft/respawn_anchor_side3.xpm
+[DEBUG] Skipping Line 5: 
+[DEBUG] Skipping Line 6: C 35,19,73
+[DEBUG] Skipping Line 7: F 15,6,40
+[DEBUG] Starting calc_map_area
+[DEBUG] Processing line 8: 
+
+[DEBUG] Updated max_cols to 1
+[DEBUG] Starting validate_map_line_chars for row 0: 
+
+[DEBUG] Exiting validate_map_line_chars for row 0. Hero count: 0, Door count: 0
+[DEBUG] validate_map_line_chars succeeded for row 0
+[DEBUG] Incremented max_rows to 1
+[DEBUG] Processing line 9: 111111111111111
+
+[DEBUG] Updated max_cols to 16
+[DEBUG] Starting validate_map_line_chars for row 1: 111111111111111
+
+[DEBUG] Exiting validate_map_line_chars for row 1. Hero count: 0, Door count: 0
+[DEBUG] validate_map_line_chars succeeded for row 1
+[DEBUG] Incremented max_rows to 2
+[DEBUG] Processing line 10: 111111000111111
+
+[DEBUG] Starting validate_map_line_chars for row 2: 111111000111111
+
+[DEBUG] Exiting validate_map_line_chars for row 2. Hero count: 0, Door count: 0
+[DEBUG] validate_map_line_chars succeeded for row 2
+[DEBUG] Incremented max_rows to 3
+[DEBUG] Processing line 11: 111110000011111
+
+[DEBUG] Starting validate_map_line_chars for row 3: 111110000011111
+
+[DEBUG] Exiting validate_map_line_chars for row 3. Hero count: 0, Door count: 0
+[DEBUG] validate_map_line_chars succeeded for row 3
+[DEBUG] Incremented max_rows to 4
+[DEBUG] Processing line 12: 1111000N0001111
+
+[DEBUG] Starting validate_map_line_chars for row 4: 1111000N0001111
+
+[DEBUG] Exiting validate_map_line_chars for row 4. Hero count: 1, Door count: 0
+[DEBUG] validate_map_line_chars succeeded for row 4
+[DEBUG] Incremented max_rows to 5
+[DEBUG] Processing line 13: 111000000D00111
+
+[DEBUG] Starting validate_map_line_chars for row 5: 111000000D00111
+
+[DEBUG] Exiting validate_map_line_chars for row 5. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 5
+[DEBUG] Incremented max_rows to 6
+[DEBUG] Processing line 14: 110000000000011
+
+[DEBUG] Starting validate_map_line_chars for row 6: 110000000000011
+
+[DEBUG] Exiting validate_map_line_chars for row 6. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 6
+[DEBUG] Incremented max_rows to 7
+[DEBUG] Processing line 15: 100001111100001
+
+[DEBUG] Starting validate_map_line_chars for row 7: 100001111100001
+
+[DEBUG] Exiting validate_map_line_chars for row 7. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 7
+[DEBUG] Incremented max_rows to 8
+[DEBUG] Processing line 16: 110000111000011
+
+[DEBUG] Starting validate_map_line_chars for row 8: 110000111000011
+
+[DEBUG] Exiting validate_map_line_chars for row 8. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 8
+[DEBUG] Incremented max_rows to 9
+[DEBUG] Processing line 17: 111000010000111
+
+[DEBUG] Starting validate_map_line_chars for row 9: 111000010000111
+
+[DEBUG] Exiting validate_map_line_chars for row 9. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 9
+[DEBUG] Incremented max_rows to 10
+[DEBUG] Processing line 18: 111100000001111
+
+[DEBUG] Starting validate_map_line_chars for row 10: 111100000001111
+
+[DEBUG] Exiting validate_map_line_chars for row 10. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 10
+[DEBUG] Incremented max_rows to 11
+[DEBUG] Processing line 19: 111110000011111
+
+[DEBUG] Starting validate_map_line_chars for row 11: 111110000011111
+
+[DEBUG] Exiting validate_map_line_chars for row 11. Hero count: 1, Door count: 1
+[DEBUG] validate_map_line_chars succeeded for row 11
+[DEBUG] Incremented max_rows to 12
+[DEBUG] Finished calc_map_area. max_rows: 12, max_cols: 16
+[DEBUG] Starting populate_map_array
+[DEBUG] Allocating memory for map array. Rows: 12, Cols: 16
+[DEBUG] Map array allocated successfully.
+[DEBUG] Skipping Line 1: 111111000NO textures/simonkraft/respawn_anchor_side0.xpm
+
+[DEBUG] Skipping Line 2: EA textures/simonkraft/respawn_anchor_side2.xpm
+
+[DEBUG] Skipping Line 3: SO textures/simonkraft/respawn_anchor_side4.xpm
+
+[DEBUG] Skipping Line 4: WE textures/simonkraft/respawn_anchor_side3.xpm
+
+[DEBUG] Skipping Line 5: 
+
+[DEBUG] Skipping Line 6: C 35,19,73
+
+[DEBUG] Skipping Line 7: F 15,6,40
+
+[DEBUG] Finished skipping to map start line.
+[DEBUG] Reading map line 0: 111111111111111
+
+[DEBUG] Reading map line 1: 111111000111111
+
+[DEBUG] Reading map line 2: 111110000011111
+
+[DEBUG] Reading map line 3: 1111000N0001111
+
+[DEBUG] Reading map line 4: 111000000D00111
+
+[DEBUG] Reading map line 5: 110000000000011
+
+[DEBUG] Reading map line 6: 100001111100001
+
+[DEBUG] Reading map line 7: 110000111000011
+
+[DEBUG] Reading map line 8: 111000010000111
+
+[DEBUG] Reading map line 9: 111100000001111
+
+[DEBUG] Reading map line 10: 111110000011111
+
+[DEBUG] Reading map line 11: 111111000111111
+
+[DEBUG] Reading map line 12: 111111111111111
+
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==5394==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5d195095b057 bp 0x7ffd09a7d630 sp 0x7ffd09a7d630 T0)
+==5394==The signal is caused by a WRITE memory access.
+==5394==Hint: address points to the zero page.
+    #0 0x5d195095b057 in ft_strlcpy (/home/bleow/Coding/Core/cub3d/cub3D+0x1f057) (BuildId: 85f34502036e50b78238c409138329310507c346)
+    #1 0x5d195095001a in fill_map srcs/parsing/populate_map.c:180
+    #2 0x5d1950950b97 in populate_map_array srcs/parsing/populate_map.c:268
+    #3 0x5d195094993b in init_mlx_sys srcs/parsing/cub3D.c:195
+    #4 0x5d195094998b in init_game srcs/parsing/cub3D.c:207
+    #5 0x5d195094969f in main srcs/parsing/cub3D.c:169
+    #6 0x7cfc81c2a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x7cfc81c2a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x5d1950946ce4 in _start (/home/bleow/Coding/Core/cub3d/cub3D+0xace4) (BuildId: 85f34502036e50b78238c409138329310507c346)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/home/bleow/Coding/Core/cub3d/cub3D+0x1f057) (BuildId: 85f34502036e50b78238c409138329310507c346) in ft_strlcpy
+==5394==ABORTING
+Test failed with exit code 1.

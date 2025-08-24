@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 03:09:02 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/25 03:33:40 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,19 @@ int	skip_to_map(int fd, int map_start_line)
 	int		line_num;
 	char	*line;
 
-	line_num = 0;
+	line_num = 1; // Start line counter from 1 to match map_start_line expectations
+	line = get_next_line(fd);
 	while (line_num < map_start_line)
 	{
-		line = get_next_line(fd);
 		if (line)
+		{
+			fprintf(stderr, "[DEBUG] Skipping Line %d: %s\n", line_num, line); // Debug print for skipped lines
 			free(line);
+		}
 		line_num++;
+		line = get_next_line(fd);
 	}
+	fprintf(stderr, "[DEBUG] Finished skipping to map start line.\n");
 	return (0);
 }
 
@@ -139,6 +144,7 @@ Copies a line into the map row.
 */
 void	copy_line(char *dest, const char *src, int max_cols, int row)
 {
+	(void)row; // Mark the parameter as unused to suppress the warning
 	int	i;
 	int	line_len;
 
@@ -165,6 +171,7 @@ int	fill_map(int fd, t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
+		fprintf(stderr, "[DEBUG] Reading map line %d: %s\n", map_row, line);
 		line_length = ft_strlen(line);
 		if (line_length > 0 && line[line_length - 1] == '\n')
 		{
@@ -177,6 +184,7 @@ int	fill_map(int fd, t_game *game)
 	}
 	if (line)
 		ft_safefree((void **)&line);
+	fprintf(stderr, "[DEBUG] Finished populating map array.\n");
 	return (0);
 }
 
@@ -191,6 +199,7 @@ int	prepare_map_array(t_game *game)
 	// Free previously allocated memory for map if it exists
 	if (game->map.map)
 	{
+		fprintf(stderr, "[DEBUG] Freeing previously allocated map memory.\n");
 		i = 0;
 		while (i < game->map.max_rows)
 		{
@@ -204,10 +213,12 @@ int	prepare_map_array(t_game *game)
 
 	if (game->map.max_rows <= 0 || game->map.max_cols <= 0)
 		return (-1);
+	fprintf(stderr, "[DEBUG] Allocating memory for map array. Rows: %d, Cols: %d\n", game->map.max_rows, game->map.max_cols);
 	i = 0;
 	game->map.map = (char **)malloc(sizeof(char *) * (game->map.max_rows + 1));
 	if (!game->map.map)
 	{
+		fprintf(stderr, "[DEBUG] Failed to allocate memory for map array.\n");
 		return (-1);
 	}
 	while (i < game->map.max_rows)
@@ -215,6 +226,7 @@ int	prepare_map_array(t_game *game)
 		game->map.map[i] = (char *)malloc(game->map.max_cols + 1);
 		if (!game->map.map[i])
 		{
+			fprintf(stderr, "[DEBUG] Failed to allocate memory for map row %d.\n", i);
 			while (--i >= 0) // Free previously allocated rows
 				free(game->map.map[i]);
 			free(game->map.map);
@@ -226,6 +238,7 @@ int	prepare_map_array(t_game *game)
 		i++;
 	}
 	game->map.map[game->map.max_rows] = NULL;
+	fprintf(stderr, "[DEBUG] Map array allocated successfully.\n");
 	return (0);
 }
 
@@ -237,9 +250,13 @@ int	populate_map_array(const char *file, t_game *game)
 	int		fd;
 	int		map_row;
 
+	fprintf(stderr, "[DEBUG] Starting populate_map_array\n");
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
+	{
+		fprintf(stderr, "[DEBUG] Failed to open file: %s\n", file);
 		return (-1);
+	}
 	if (prepare_map_array(game) < 0)
 		return (-1);
 	if (skip_to_map(fd, game->map.map_start_line) < 0)
@@ -257,6 +274,7 @@ int	populate_map_array(const char *file, t_game *game)
 	}
 	game->map.map[map_row] = NULL;
 	close(fd);
+	debug_print_map(game);
 	return (0);
 }
 

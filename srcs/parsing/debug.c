@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 07:33:18 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:54:07 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 Function prototypes
 */
 void	debug_print_map(t_game *game);
+void debug_print_line(const char *line, int line_number);
 
 /**
  * Debug function to print the entire 2D map array
@@ -46,6 +47,13 @@ void	debug_print_map(t_game *game)
 		y++;
 	}
 	fprintf(stderr, "=== END DEBUG MAP ===\n\n");
-	debug_print_map(game);
+}
+
+void debug_print_line(const char *line, int line_number)
+{
+	if (line)
+		fprintf(stderr, "[DEBUG] Line %d: %s\n", line_number, line);
+	else
+		fprintf(stderr, "[DEBUG] Line %d: [NULL]\n", line_number);
 }
 

@@ -40,16 +40,19 @@ int	parse_map_1(const char *file, t_game *game)
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		if (!in_map)
+		fprintf(stderr, "[DEBUG] Line %d: %s", pos, line); // Debug print for each line read
+		fprintf(stderr, "[DEBUG] Current line number: %d, in_map: %d\n", pos, in_map);
+		fprintf(stderr, "[DEBUG] Processing line %d: '%s'\n", pos, line);
+		if (game->map.map_start_line == -1)
 		{
-			int was_map_start = in_map;
 			if (is_map_start_line(line, &in_map))
 			{
 				game->map.map_start_line = pos;
+				fprintf(stderr, "[DEBUG] Map start identified at line %d\n", pos);
 			}
-			else if (parse_config_settings(line, game) < 0)
+			else
 			{
-				return (exit_failure_parser(line, fd));
+				fprintf(stderr, "[DEBUG] Line %d is not the start of the map\n", pos);
 			}
 		}
 		if (in_map && is_only_whitespace(line))
@@ -62,8 +65,14 @@ int	parse_map_1(const char *file, t_game *game)
 		line = get_next_line(fd);
 		pos++;
 	}
+	// Adjust map_start_line to skip to the line before
+	if (game->map.map_start_line > 1)
+	{
+		game->map.map_start_line--;
+	}
 	ft_safefree((void **)&line);
 	close(fd);
+	fprintf(stderr, "[DEBUG] parse_map_1 succeeded. Map start line: %d, Map last line: %d\n", game->map.map_start_line, game->map.map_last_line);
 	return (0);
 }
 
@@ -83,11 +92,15 @@ int	parse_map_2(const char *file, t_game *game)
 		return (-1);
 	}
 	i = 1; // Initialize debug counter to 1
+	fprintf(stderr, "[DEBUG] Starting parse_map_2. Map start line: %d\n", game->map.map_start_line);
 	while (i < game->map.map_start_line)
 	{
 		line = get_next_line(fd);
 		if (line)
+		{
+			fprintf(stderr, "[DEBUG] Skipping Line %d: %s", i, line); // Debug print for skipped lines
 			ft_safefree((void **)&line);
+		}
 		i++;
 	}
 	if (calc_map_area(fd, game, i) < 0)
@@ -104,6 +117,7 @@ Cleanup and exit on parser failure
 */
 int	exit_failure_parser(char *line, int fd)
 {
+	fprintf(stderr, "[DEBUG] Exiting parser due to failure. Cleaning up resources.\n"); // Debug print for cleanup
 	ft_safefree((void **)&line);
 	close(fd);
 	return (-1);

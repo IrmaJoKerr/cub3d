@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 17:43:53 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:50:31 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,5 +196,7 @@ int		handle_window_close(t_game *game);
 int		handle_movement_keys(int keycode, t_game *game);
 int		handle_rotation_keys(int keycode, t_game *game);
 int		setup_event_hooks(t_game *game);
+
+# define DOOR 'D' // Define the character representing a door in the map
 
 #endif

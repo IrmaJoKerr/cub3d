@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 00:41:29 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 22:47:38 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	init_map_struct(t_map *map)
 	map->west_texture_path = NULL;
 	map->max_cols = 0;
 	map->max_rows = 0;
-	map->map_start_line = 0;
-	map->map_last_line = 0;
+	map->map_start_line = -1;
+	map->map_last_line = -1;
 	map->herocount = 0;
 	map->player_x = 0;
 	map->player_y = 0;

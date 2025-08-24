@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 14:30:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/24 18:22:24 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/24 18:47:37 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@ bool	count_doors_in_map(t_game *game, int *door_index)
 	int	y;
 
 	*door_index = 0;
+	fprintf(stderr, "[DEBUG] Counting doors in map.\n");
+	fprintf(stderr, "[DEBUG] Map contents:\n");
+	y = 0;
+	while (y < game->map.max_rows && game->map.map[y])
+	{
+		fprintf(stderr, "[DEBUG] Row %d: %s\n", y, game->map.map[y]);
+		y++;
+	}
+	fprintf(stderr, "[DEBUG] Finished printing map contents.\n");
 	y = 0;
 	while (y < game->map.max_rows && game->map.map[y])
 	{
@@ -35,17 +44,21 @@ bool	count_doors_in_map(t_game *game, int *door_index)
 			if (game->map.map[y][x] == DOOR)
 			{
 				(*door_index)++;
+				fprintf(stderr, "[DEBUG] Found door at (%d, %d).\n", x, y);
 			}
 			x++;
 		}
 		y++;
 	}
+	fprintf(stderr, "[DEBUG] Total doors counted: %d\n", *door_index);
 	game->doorcount = *door_index;
 	game->doors = malloc(sizeof(t_door) * game->doorcount);
 	if (!game->doors)
 	{
+		fprintf(stderr, "[DEBUG] Failed to allocate memory for doors array.\n");
 		return (false);
 	}
+	fprintf(stderr, "[DEBUG] Memory allocated for doors array.\n");
 	*door_index = 0;
 	return (true);
 }
@@ -59,10 +72,13 @@ void	init_doors_from_map(t_game *game)
 	int	y;
 	int	door_index;
 
+	fprintf(stderr, "[DEBUG] Initializing doors from map.\n");
 	if (!count_doors_in_map(game, &door_index))
 	{
+		fprintf(stderr, "[DEBUG] Failed to count doors or allocate memory.\n");
 		return ;
 	}
+	fprintf(stderr, "[DEBUG] Total doors found: %d\n", game->doorcount);
 	y = 0;
 	while (y < game->map.max_rows)
 	{
@@ -71,6 +87,7 @@ void	init_doors_from_map(t_game *game)
 		{
 			if (game->map.map[y][x] == DOOR)
 			{
+				fprintf(stderr, "[DEBUG] Initializing door at (%d, %d).\n", x, y);
 				game->doors[door_index].x = x;
 				game->doors[door_index].y = y;
 				game->doors[door_index].state = DOOR_CLOSED;
@@ -82,6 +99,7 @@ void	init_doors_from_map(t_game *game)
 		}
 		y++;
 	}
+	fprintf(stderr, "[DEBUG] Door initialization complete.\n");
 }
 
 /*
