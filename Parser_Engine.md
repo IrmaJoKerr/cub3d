@@ -93,7 +93,7 @@ The program reads your `.cub` file in two steps:
 │ Check if Map    │
 │ Start Line      │
 │ (contains 1|0|  │
-│  N|S|E|W|H|V)   │
+│  N|S|E|W|D)     │
 └────────┬────────┘
          │
          ▼ NO
@@ -105,7 +105,7 @@ The program reads your `.cub` file in two steps:
 │ • F (floor)     │
 │ • R (resolution)│
 │ • SK (sky)      │
-│ • HD/VD (doors) │
+│ • D (door)      │
 └────────┬────────┘
          │
          ▼ YES (Map Start)
@@ -208,23 +208,23 @@ The program uses a smart way to check if the player can escape the map. It's lik
 
 2. **File Problems** (`get_map_path`, `check_valid_file_path`)
    - Can't find the file or can't open it
-   - **What happens**: Returns NULL, cleans up, then exits
+   - **What happens**: Returns NULL, calls `cleanup_early`, then exits
 
 3. **Memory Problems** (`alloc_and_init_all`)
    - Computer runs out of memory
-   - **What happens**: Shows error message, exits program
+   - **What happens**: Shows error message, calls `cleanup_early`, exits program
 
-4. **Settings Problems** (`parse_configuration_section`)
+4. **Settings Problems** (`config_parser.c`, `parse_settings.c`, `parse_texture.c`, `parse_colors.c`)
    - Missing wall textures or wrong color values
-   - **What happens**: `cleanup_and_return(fd, line, -1)`
+   - **What happens**: Calls `cleanup_early`, then exits
 
-5. **Map Layout Problems** (`calculate_map_dimensions`)
+5. **Map Layout Problems** (`map_parser.c`, `populate_map.c`)
    - Map too small or has invalid characters
-   - **What happens**: Closes file, returns -1
+   - **What happens**: Calls `cleanup_early`, then exits
 
-6. **Map Content Problems** (`final_map_validation`)
+6. **Map Content Problems** (`map_validation.c`, `final_map_validation`)
    - No player, too many players, or player can escape
-   - **What happens**: Shows error message, returns -1
+   - **What happens**: Shows error message, calls `cleanup_later`, then exits
 
 7. **Unexpected Problems** (during file reading)
    - Can't allocate memory for lines or map
@@ -255,14 +255,19 @@ Normal Exit   → cleanup()       → • Everything
 
 ```c
 typedef struct s_game {
-    void        *mlx_ptr;          // Graphics system
-    void        *win_ptr;          // Game window
-    t_texture   textures;          // All wall/floor pictures
-    t_map       map;               // Map info and layout
-    int         doorcount;         // How many doors
-    double      curr_x, curr_y;    // Where player is now
-    double      view_elevation;    // Camera up/down angle
-    double      view_direction;    // Which way player faces
+   void        *mlx_ptr;          // Graphics system
+   void        *win_ptr;          // Game window
+   t_texture   textures;          // All wall/floor/door textures
+   t_map       map;               // Map info and layout
+   t_image     img;               // Main image buffer
+   t_mini      minimap;           // Minimap data
+   int         doorcount;         // How many doors
+   t_door      *doors;            // Array of doors and their states
+   double      curr_x;            // Player current X position
+   double      curr_y;            // Player current Y position
+   double      view_elevation;    // Camera up/down angle
+   double      view_direction;    // Which way player faces
+   int         midline;           // Screen midline for rendering
 } t_game;
 ```
 
@@ -270,82 +275,44 @@ typedef struct s_game {
 
 ```c
 typedef struct s_map {
-    char        **map;             // The actual map layout
-    char        **test_map;        // Copy for testing
-    char        *map_path;         // Where the file is
-    char        *north_texture_path;  // North wall picture path
-    char        *south_texture_path;  // South wall picture path
-    char        *east_texture_path;   // East wall picture path
-    char        *west_texture_path;   // West wall picture path
-    char        *sky_texture_path;    // Sky/ceiling picture path
-    char        *floor_texture_path;  // Floor picture path
-    char        *hdoor_texture_path;  // Horizontal door picture path
-    char        *vdoor_texture_path;  // Vertical door picture path
-    int         resolution[2];     // Screen size [width, height]
-    int         sky_color[3];      // Sky color [red, green, blue]
-    int         floor_color[3];    // Floor color [red, green, blue]
-    int         max_cols;          // Maximum columns in map
-    int         max_rows;          // Maximum rows in map
-    bool        map_first_wall;    // First row wall check
-    bool        map_last_wall;     // Last row wall check
-    int         herocount;         // Number of players found
-    double      player_x;          // Player starting X position
-    double      player_y;          // Player starting Y position
-    t_direction start_direction;   // Which way player faces
+   char        **map;             // The actual map layout
+   char        *map_path;         // Where the file is
+   char        *north_texture_path;  // North wall picture path
+   char        *south_texture_path;  // South wall picture path
+   char        *east_texture_path;   // East wall picture path
+   char        *west_texture_path;   // West wall picture path
+   int         sky_color[3];      // Sky color [red, green, blue]
+   int         floor_color[3];    // Floor color [red, green,
+                                  //  blue]
+   int         max_cols;          // Maximum columns in map
+   int         max_rows;          // Maximum rows in map
+   int         map_start_line;    // First line of map in file
+   int         map_last_line;     // Last line of map in file
+   int         herocount;         // Number of players found
+   double      player_x;          // Player starting X position
+   double      player_y;          // Player starting Y position
+   t_direction start_direction;   // Which way player faces
 } t_map;
 ```
-
-## Rules for Your Map File
-
-### What Settings You Need
-
-- **Must have**: North, South, East, West wall pictures
-- **Optional**: Screen size (defaults to 1920x1080)
-- **Optional**: Sky and floor pictures or colors
-- **Optional**: Door pictures (horizontal and vertical)
 
 ### Map Rules
 
 1. **Basic Structure**:
    - At least 3 rows tall
-   - Can be rectangular or weird shapes
-   - Top row must be only walls and empty spaces
-   - Inside must be completely surrounded by walls
+   - Can be rectangular or irregular shapes
+   - Top and bottom row must be only walls (`1`)
+   - All outer boundaries (leftmost and rightmost columns) 
+     must be walls (`1`)
+   - Interior must be fully enclosed by walls
 
 2. **Characters You Can Use**:
    - `1`: Wall (blocks player)
    - `0`: Floor (player can walk here)
    - `N,S,E,W`: Where player starts and which way they face
-   - `H`: Horizontal door
-   - `V`: Vertical door
-   - ` `: Empty space
+   - `D`: Door
+   - ` `: Empty space (blocks player. Is shown as a lava tile)
 
 3. **Player Rules**:
    - Must have exactly one player
    - Player must be in an area they can actually reach
    - Player must not be able to "escape" to the edge of the map
-
-## Debug and Testing Features
-
-### What You'll See in the Output
-
-- Step-by-step progress as it reads your file
-- Map size calculations
-- Each character as it builds the map
-- The "flood fill" test running
-- Memory usage tracking
-
-### Special Debug Markers
-
-- Map uses `'9'` characters to mark empty spots 
-- Flood-fill test uses `'X'` to mark where it's been
-- Clear error messages that tell you exactly what went wrong
-
-## What Could Be Added Later
-
-1. **Door Animation**: Make doors open and close with multiple pictures
-2. **Texture Loading**: Actually load the wall pictures into graphics memory  
-3. **Better Map Checking**: Handle more complex map shapes
-
-
-*This guide explains how the map file reader works, from when you start the program until it finishes checking your map.*

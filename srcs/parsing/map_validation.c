@@ -6,50 +6,45 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/28 21:59:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
+/*
+Function prototypes
+*/
 int		is_valid_path(t_game *game, int y, int x);
+char	**copy_map_array(char **source_map, int rows);
 int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
 int		is_reachable_space(char c);
+int		validate_map_boundaries(char **map, int rows);
 
 /*
 Path validation using flood fill algorithm.
 Ensures the entire reachable area is properly enclosed by walls.
 Returns 1 if valid (enclosed playable area), 0 if invalid (map leakage).
-Uses test_map for marking visited tiles - much more efficient than separate allocation.
+Uses test_map for marking visited tiles
 */
 int	is_valid_path(t_game *game, int y, int x)
 {
 	char	**test_map;
 	int		result;
 
-	fprintf(stderr, "DEBUG: Starting enhanced path validation from (%d,%d)\n", y, x);
-	fprintf(stderr, "DEBUG: Map dimensions: %dx%d\n", game->map.max_cols, game->map.max_rows);
-	fprintf(stderr, "DEBUG: Using local test_map for flood fill marking\n");
-	
-	// Allocate test_map locally
 	test_map = copy_map_array(game->map.map, game->map.max_rows);
 	if (!test_map)
+		return (0);
+	if (validate_map_boundaries(test_map, game->map.max_rows) == 0)
 	{
-		ft_fprintf(2, "ERROR: Failed to allocate local test_map for flood fill validation\n");
+		ft_fprintf(2, "Error: Map boundaries must be enclosed by '1' or ' '\n");
+		ft_free_2d(test_map, game->map.max_rows);
 		return (0);
 	}
-	
 	result = flood_fill_validate(game, test_map, y, x);
-	fprintf(stderr, "DEBUG: Flood fill validation result: %d\n", result);
-	
-	// Clean up local test_map
 	ft_free_2d(test_map, game->map.max_rows);
-	
 	if (result)
-	{
-		ft_fprintf(1, "SUCCESS: Map validation passed\n");
-		ft_fprintf(1, "All reachable areas are properly enclosed by walls\n");
-	}
+		ft_fprintf(2, "All reachable areas are enclosed by walls\n");
 	else
 	{
 		ft_fprintf(2, "FAILURE: Map validation failed\n");
@@ -59,63 +54,65 @@ int	is_valid_path(t_game *game, int y, int x)
 }
 
 /*
+Create a deep copy of a 2D map array for validation.
+*/
+char	**copy_map_array(char **source_map, int rows)
+{
+	char	**copy;
+	int		i;
+
+	if (!source_map || rows <= 0)
+	{
+		ft_fprintf(2, "Copy_map_array: invalid source_map or rows\n");
+		return (NULL);
+	}
+	copy = (char **)malloc(sizeof(char *) * (rows));
+	if (!copy)
+		return (NULL);
+	i = 0;
+	while (i < rows && source_map[i])
+	{
+		copy[i] = ft_strdup(source_map[i]);
+		if (!copy[i])
+		{
+			ft_free_2d(copy, i);
+			return (NULL);
+		}
+		i++;
+	}
+	return (copy);
+}
+
+/*
 Flood fill algorithm with boundary validation using test_map for marking.
 Recursively marks reachable spaces and validates enclosure.
 Uses 'X' character in test_map to mark visited tiles.
 */
 int	flood_fill_validate(t_game *game, char **test_map, int y, int x)
 {
-	char	map_char;
-
-	if (y >= 0 && y < game->map.max_rows && x >= 0 && x < game->map.max_cols)
-		map_char = game->map.map[y][x];
-	else
-		map_char = '?';
-	fprintf(stderr, "DEBUG: Checking position (%d,%d), char='%c'\n", y, x, map_char);
-	
 	if (y < 0 || y >= game->map.max_rows || x < 0 || x >= game->map.max_cols)
 	{
-		fprintf(stderr, "DEBUG: Out of bounds at (%d,%d)\n", y, x);
+		ft_fprintf(2, "flood_fill_validate: out of bounds at (%d, %d)\n", y, x);
 		return (0);
 	}
-	
 	if (test_map[y][x] == 'X')
-	{
-		fprintf(stderr, "DEBUG: Already visited (%d,%d)\n", y, x);
 		return (1);
-	}
-	
-	if (game->map.map[y][x] == '1')
-	{
-		fprintf(stderr, "DEBUG: Found wall at (%d,%d)\n", y, x);
+	if (game->map.map[y][x] == '1' || game->map.map[y][x] == ' ')
 		return (1);
-	}
-	
 	if (!is_reachable_space(game->map.map[y][x]))
-	{
-		fprintf(stderr, "DEBUG: Invalid space '%c' at (%d,%d)\n", game->map.map[y][x], y, x);
 		return (0);
-	}
-	
 	test_map[y][x] = 'X';
-	fprintf(stderr, "DEBUG: Marked (%d,%d) as visited in test_map\n", y, x);
-	
-	if (y == 0 || y == game->map.max_rows - 1
-		|| x == 0 || x == game->map.max_cols - 1)
+	if (y == 0 || y == game->map.max_rows - 1 || x == 0
+		|| x == game->map.max_cols - 1)
 	{
 		ft_fprintf(2, "Error: Reachable space at map edge (%d,%d)\n", y, x);
 		return (0);
 	}
-	
-	if (!flood_fill_validate(game, test_map, y - 1, x)
-		|| !flood_fill_validate(game, test_map, y + 1, x)
-		|| !flood_fill_validate(game, test_map, y, x - 1)
-		|| !flood_fill_validate(game, test_map, y, x + 1))
-	{
-		fprintf(stderr, "DEBUG: Validation failed from (%d,%d)\n", y, x);
+	if ((!flood_fill_validate(game, test_map, y - 1, x))
+		|| (!flood_fill_validate(game, test_map, y + 1, x))
+		|| (!flood_fill_validate(game, test_map, y, x - 1))
+		|| (!flood_fill_validate(game, test_map, y, x + 1)))
 		return (0);
-	}
-	fprintf(stderr, "DEBUG: Successfully validated (%d,%d)\n", y, x);
 	return (1);
 }
 
@@ -126,4 +123,27 @@ int	is_reachable_space(char c)
 {
 	return (c == '0' || c == 'D' || c == 'N' || c == 'S' || c == 'E'
 		|| c == 'W');
+}
+
+/*
+Controller function to validate map boundaries.
+*/
+int	validate_map_boundaries(char **map, int rows)
+{
+	int	r;
+	int	max_col;
+
+	max_col = get_max_col(map, rows);
+	if (!chk_top_boundary(map[0]))
+		return (0);
+	if (!chk_bottom_boundary(map[rows - 1]))
+		return (0);
+	r = 0;
+	while (r < rows)
+	{
+		if (!chk_row_boundary(map[r], max_col))
+			return (0);
+		r++;
+	}
+	return (1);
 }

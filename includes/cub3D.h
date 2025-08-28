@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 10:59:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 19:12:17 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/27 20:20:39 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "../minilibx-linux/mlx_int.h"
+# include "struct.h"
+# include "raycasting.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -25,144 +27,56 @@
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
 # include <stdbool.h>
-# include "struct.h"
-# include "raycasting.h"
+
+/*FUNCTIONS IN COLLISIONS FOLDER*/
 
 /*
-Main functions. In cub3D.c
-*/
-void	init_game(t_game *game, const char *map_file);
-char	*get_map_path(const char *map_file);
-int		check_valid_file_path(const char *path);
-void	load_texture(t_game *game, t_image *tex, char *path);
-void	load_all_door_textures(t_game *game);
-int		count_door_textures(void);
-
-/*
-Cleanup functions a. In cleanup_a.c
-*/
-void	cleanup(t_game *game);
-int		close_window(t_game *game);
-void	cleanup_early(t_game *game);
-void	cleanup_later(t_game *game);
-
-/*
-Cleanup functions b. In cleanup_b.c
-*/
-void	cleanup_texture_paths(t_game *game);
-void	cleanup_map_array(t_game *game);
-void	cleanup_mlx_textures(t_game *game);
-void	cleanup_mlx_system(t_game *game);
-void	cleanup_single_map(char ***map_ptr);
-
-/*
-Map utility functions. In map_utils.c
-*/
-char	**copy_map_array(char **source_map, int rows);
-void	cleanup_single_map(char ***map_ptr);
-
-/*
-Initialization functions. In initstructs.c
-*/
-void	init_game_st(t_game *game);
-void	init_texture_st(t_texture *texture);
-void	init_map_st(t_map *map);
-void	alloc_and_init_all(t_game **game);
-
-/*
-Map validation functions. In map_validation.c
-*/
-int		is_valid_path(t_game *game, int y, int x);
-int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
-int		is_reachable_space(char c);
-
-/*
-Movement and collision functions. In collisions/movehero.c
-*/
-int		is_collision(double player_x, double player_y, double obj_x,
-			double obj_y);
-
-/*
-Tile coordinate utility functions. In tile_utils.c
-*/
-int		get_tile_at_position(t_game *game, double x, double y);
-bool	is_valid_world_position(t_game *game, double x, double y);
-void	set_player_to_tile_center(t_game *game, int tile_x, int tile_y);
-double	get_tile_center_x(int tile_x);
-double	get_tile_center_y(int tile_y);
-
-/*
-Tile movement calculation functions. In collisions/tile_move.c
+Tile position calculation functions. In calculate_tile_position.c
 */
 int		world_to_tile_x(double x);
 int		world_to_tile_y(double y);
-double	tile_center_x(int tile_x);
-double	tile_center_y(int tile_y);
+bool	is_valid_move(t_game *game, double x, double y);
+
+/*
+Angle and elevation calculation functions. In calculate_view.c
+*/
+double	normalize_angle(double angle);
+double	clamp_elevation(double elevation);
+void	calc_midline(t_game *game);
+
+/*
+Tile movement calculation functions. In tile_move.c
+*/
 double	calc_move_dx(double view_direction, double speed, int forward);
 double	calc_move_dy(double view_direction, double speed, int forward);
 double	calc_strafe_dx(double view_direction, double speed, int right);
 double	calc_strafe_dy(double view_direction, double speed, int right);
-bool	is_within_map_bounds(t_game *game, double x, double y);
-double	calc_distance(double x1, double y1, double x2, double y2);
-double	normalize_angle(double angle);
-double	clamp_elevation(double elevation);
+
+/*FUNCTIONS IN HOOKS FOLDER*/
 
 /*
-Door animation utility functions. In door_utils.c
+Handlers for looking/rotation keys (arrow keys). In hooks_look.c
 */
-int		load_door_animation_frames(t_game *game, const char *hdoor_path, 
-			const char *vdoor_path);
-void	*get_door_frame(t_game *game, int frame_index);
-void	cleanup_door_frames(t_game *game);
+int		handle_rotation_keys(int keycode, t_game *game);
+int		press_left(t_game *game);
+int		press_right(t_game *game);
+int		press_up(t_game *game);
+int		press_down(t_game *game);
 
 /*
-Path parsing functions. In parse_path.c
+Mouse movement handling functions. In hooks_mouse.c
 */
-void	chk_args(int argc, char **argv);
+int		handle_mouse_move(int x, int y, t_game *game);
+void	mouse_delta_calc(int x, int y, t_game *game);
 
 /*
-Parser functions. In parser.c
+Handlers for movement keys WASD. In hooks_movement.c
 */
-int		parse_map(const char *file, t_game *game);
-
-/*
-Configuration parser functions. In config_parser.c
-*/
-int		parse_configuration_section(const char *file, t_game *game);
-int		is_only_whitespace(const char *line);
-int		is_map_start_line(const char *line);
-int		parse_config_settings(char *line, t_game *game);
-int		handle_texture_settings(char *line, t_game *game, int settings_type);
-int		handle_color_settings(char *line, t_game *game, int settings_type);
-int		validate_required_config(t_game *game);
-int		cleanup_and_return(int fd, char *line, int ret_val);
-
-/*
-Parser helper functions. In parser_helpers.c
-*/
-int		identify_settings_type(const char *line);
-char	*extract_texture_path(const char *line, const char *identifier);
-int		parse_color_settings(char *line, t_game *game, char settings);
-char	*extract_color_values(const char *line, const char *identifier);
-int		validate_color_values(const char *values, int color[3]);
-
-/*
-Map parser functions. In map_parser.c
-*/
-int		parse_map_section(const char *file, t_game *game, int map_start_line);
-int		calculate_map_dimensions(const char *file, t_game *game, int map_start_line);
-int		validate_map_line_chars(const char *line);
-int		validate_border_line(const char *line);
-int		populate_map_array(const char *file, t_game *game, int map_start_line);
-void	count_player_chars(const char *line, t_game *game);
-int		validate_interior_line(const char *line);
-void	find_player_position(t_game *game);
-int		final_map_validation(t_game *game);
-
-/*
-Debug functions. In debug.c
-*/
-void	debug_print_map(t_game *game);
+int		handle_movement_keys(int keycode, t_game *game);
+int		press_w(t_game *game);
+int		press_s(t_game *game);
+int		press_a(t_game *game);
+int		press_d(t_game *game);
 
 /*
 Key hook functions. In keyhooks_a.c
@@ -170,19 +84,143 @@ Key hook functions. In keyhooks_a.c
 int		handle_keypress(int keycode, t_game *game);
 int		handle_keyrelease(int keycode, t_game *game);
 int		handle_window_close(t_game *game);
-int		handle_movement_keys(int keycode, t_game *game);
-int		handle_rotation_keys(int keycode, t_game *game);
+int		handle_mouse_move(int x, int y, t_game *game);
 int		setup_event_hooks(t_game *game);
 
+/*FUNCTIONS IN PARSING FOLDER*/
+
 /*
-Minimap functions. In minimap.c
+Main functions. In cub3D.c
 */
-void	setup_minimap(t_game *game);
-void	load_minimap_tiles(t_game *game);
-void	generate_full_minimap(t_game *game);
-void	render_minimap(t_game *game);
-void	draw_minimap_border(t_game *game);
-void	draw_triangle_player_indicator(t_game *game, int triangle_x, int triangle_y);
+int		check_builtin_textures(t_game *game);
+int		main(int argc, char **argv);
+void	init_mlx_sys(t_game *game, const char *map_path);
+void	init_game(t_game *game, const char *map_file);
+
+/*
+Cleanup functions a. In cleanup_a.c
+*/
+void	cleanup(t_game *game);
+void	cleanup_texture_paths(t_game *game);
+void	cleanup_map_array(t_game *game);
+void	cleanup_wall_textures(t_game *game);
+void	cleanup_mlx_textures(t_game *game);
+
+/*
+Cleanup functions b. In cleanup_b.c
+*/
+void	cleanup_mlx_system(t_game *game);
 void	cleanup_minimap(t_game *game);
+void	cleanup_door_frames(t_game *game);
+void	cleanup_early(t_game *game, const char *map_path);
+void	cleanup_later(t_game *game, const char *map_path);
+
+/*
+Configuration parser functions. In config_parser.c
+*/
+int		is_only_whitespace(const char *line);
+int		parse_config_settings(char *line, t_game *game);
+int		handle_color_settings(char *line, t_game *game, int settings_type);
+int		validate_required_config(t_game *game);
+
+/*
+Initialization functions. In initstructs.c
+*/
+void	alloc_and_init_all(t_game **game);
+void	init_map_struct(t_map *map);
+void	init_texture_struct(t_texture *texture);
+void	init_minimap_struct(t_game *game, t_mini *minimap);
+
+/*
+Texture loading functions. In load_textures.c
+*/
+int		load_mlx_textures(t_game *game);
+int		load_texture(t_game *game, t_image *tex, char *path);
+int		load_wall_textures(t_game *game);
+int		load_door_texture(t_game *game, char *path, int i);
+
+/*
+Map parser functions. In map_parser.c
+*/
+int		validate_map_line_chars(const char *line, t_game *game,
+			int *player_found);
+void	set_player_start(t_game *game, char dir);
+void	find_player_position(t_game *game);
+
+/*
+Map validation utility functions. In map_validation_utils.c
+*/
+int		get_max_col(char **map, int rows);
+int		chk_top_boundary(char *row);
+int		chk_bottom_boundary(char *row);
+int		chk_row_boundary(char *row, int max_col);
+
+/*
+Map validation functions. In map_validation.c
+*/
+int		is_valid_path(t_game *game, int y, int x);
+char	**copy_map_array(char **source_map, int rows);
+int		flood_fill_validate(t_game *game, char **test_map, int y, int x);
+int		is_reachable_space(char c);
+int		validate_map_boundaries(char **map, int rows);
+
+/*
+Color extraction and parser functions. In parse_colors.c
+*/
+int		parse_floor_color(char *line, t_game *game);
+int		parse_ceiling_color(char *line, t_game *game);
+char	*extract_color_values(const char *line, const char *identifier);
+int		chk_color_range(int *converted_colors, int color[3]);
+int		validate_color_values(const char *values, int color[3]);
+
+/*
+Path parsing functions. In parse_path.c
+*/
+void	chk_args(int argc, char **argv);
+char	*get_map_path(char *input);
+int		validate_xmp_extension(const char *path);
+char	*build_door_path(int i);
+
+/*
+Parsing settings functions. In parse_settings.c
+*/
+int		identify_settings_type(const char *line);
+char	*extract_texture_path(const char *line, const char *identifier);
+
+/*
+Texture path parser functions. In parse_texture.c
+*/
+int		get_texture_path(char *line, t_game *game, int settings_type);
+int		check_duplicate_texture(t_game *game, int settings_type);
+void	set_texture_path(char *path, t_game *game, int settings_type);
+int		check_valid_texture_path(const char *path);
+
+/*
+Parser utility functions. In parser_utils.c
+*/
+int		open_map_file(const char *file);
+int		validate_lines_after_map(int fd);
+int		calc_map_area(int fd, t_game *game, int i);
+int		check_valid_file_path(char *path);
+
+/*
+Parser functions. In parser.c
+*/
+int		parser(const char *file, t_game *game);
+int		parse_map_1(int fd, t_game *game);
+int		parse_map_2(int fd, t_game *game);
+int		find_start_line(const char *line, int *in_map, int *map_start_line,
+			int pos);
+int		find_end_line(const char *line, int *in_map, int *map_last_line,
+			int pos);
+
+/*
+Map population functions. In populate_map.c
+*/
+int		populate_map_array(const char *file, t_game *game);
+int		prepare_map_array(t_game *game);
+int		skip_to_map(int fd, int map_start_line);
+int		fill_map(int fd, t_game *game);
+void	verify_print_map(t_game *game);
 
 #endif

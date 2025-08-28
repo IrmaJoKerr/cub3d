@@ -6,13 +6,15 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/12 19:46:16 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/27 16:33:06 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# define SPACE_TEXTURE "textures/space/space.xpm"
+# define DOORS_TEXTURE "textures/doors/"
 # define TILE_WALL '1'
 # define TILE_FLOOR '0'
 # define DOOR 'D'
@@ -31,8 +33,10 @@
 # define DOOR_ANIM_SPEED 0.1
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define MIN_TEX_WIDTH 20
+# define MIN_TEX_HEIGHT 20
 # define FOV 1.5533
-# define MOUSE_SENSITIVITY 0.002
+# define MOUSE_SENSITIVITY 0.0004
 /* 89 degrees in radians. For Norm compliance */
 
 typedef enum e_direction
@@ -68,14 +72,12 @@ typedef struct s_map
 	char		*south_texture_path;
 	char		*east_texture_path;
 	char		*west_texture_path;
-	char		*sky_texture_path;
-	char		*floor_texture_path;
 	int			sky_color[3];
 	int			floor_color[3];
 	int			max_cols;
 	int			max_rows;
-	bool		map_first_wall;
-	bool		map_last_wall;
+	int			map_start_line;
+	int			map_last_line;
 	int			herocount;
 	double		player_x;
 	double		player_y;
@@ -98,10 +100,8 @@ typedef struct s_texture
 	t_image	*south_wall;
 	t_image	*east_wall;
 	t_image	*west_wall;
-	void	*sky;
-	void	*floor;
+	t_image	*space;
 	t_image	**door_frames;
-	t_image	*current_door_frames;
 	int		door_frame_count;
 }	t_texture;
 
@@ -117,13 +117,14 @@ typedef struct s_mini
 	int		minimap_bpp;
 	int		minimap_sl;
 	int		minimap_endian;
-	t_image	wall;
-	t_image	floor;
-	t_image	door;
-	int		full_pixel_width;
-	int		full_pixel_height;
-	int		src_start_x;
-	int		src_start_y;
+	t_image	*wall;
+	t_image	*floor;
+	t_image	*door;
+	t_image	*space;
+	int		width;
+	int		height;
+	int		x;
+	int		y;
 }	t_mini;
 
 typedef struct s_game
@@ -133,13 +134,14 @@ typedef struct s_game
 	t_texture	textures;
 	t_map		map;
 	t_image		img;
-	t_door		*doors;
 	t_mini		minimap;
 	int			doorcount;
+	t_door		*doors;
 	double		curr_x;
 	double		curr_y;
 	double		view_elevation;
 	double		view_direction;
+	int			midline;
 }	t_game;
 
 typedef struct s_ray
@@ -148,6 +150,8 @@ typedef struct s_ray
 	double		dir_y;
 	int			map_x;
 	int			map_y;
+	double		world_x;
+	double		world_y;
 	int			step_x;
 	int			step_y;
 	double		delta_x;
@@ -164,5 +168,45 @@ typedef struct s_ray
 	int			tex_x;
 	double		cam_x;
 }	t_ray;
+
+typedef struct s_rayfloor
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	cam_x;
+	double	floor_distance;
+	double	world_x;
+	double	world_y;
+	int		map_x;
+	int		map_y;
+}	t_rayfloor;
+
+/*
+Represents a 2D point.
+*/
+typedef struct s_point
+{
+	int	x;
+	int	y;
+}	t_point;
+
+/*
+Represents the three vertices of our triangle.
+*/
+typedef struct s_triangle
+{
+	t_point	tip;
+	t_point	base_l;
+	t_point	base_r;
+}	t_triangle;
+
+/*
+Holds information needed for drawing pixels.
+*/
+typedef struct s_draw_info
+{
+	unsigned int	*pixels;
+	int				stride;
+}	t_draw_info;
 
 #endif

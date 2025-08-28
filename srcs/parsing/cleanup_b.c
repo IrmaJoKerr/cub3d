@@ -6,114 +6,38 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 08:40:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/12 18:25:03 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/27 16:27:56 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-// Function prototypes
-void	cleanup_texture_paths(t_game *game);
-void	cleanup_map_array(t_game *game);
-void	cleanup_mlx_textures(t_game *game);
+/*
+Function prototypes
+*/
 void	cleanup_mlx_system(t_game *game);
-
-/*
-Helper function to cleanup all texture paths.
-*/
-void	cleanup_texture_paths(t_game *game)
-{
-	if (game->map.north_texture_path)
-		ft_safefree((void **)&game->map.north_texture_path);
-	if (game->map.south_texture_path)
-		ft_safefree((void **)&game->map.south_texture_path);
-	if (game->map.east_texture_path)
-		ft_safefree((void **)&game->map.east_texture_path);
-	if (game->map.west_texture_path)
-		ft_safefree((void **)&game->map.west_texture_path);
-	if (game->map.sky_texture_path)
-		ft_safefree((void **)&game->map.sky_texture_path);
-	if (game->map.floor_texture_path)
-		ft_safefree((void **)&game->map.floor_texture_path);
-	if (game->map.map_path)
-		ft_safefree((void **)&game->map.map_path);
-}
-
-/*
-Helper function to cleanup map arrays.
-Direct approach for cleaning up game->map.map.
-Prevents double-free by explicitly setting pointers to NULL.
-*/
-void	cleanup_map_array(t_game *game)
-{
-	size_t	map_len;
-
-	// Cleanup main map
-	if (game->map.map)
-	{
-		map_len = ft_arrlen(game->map.map);
-		ft_free_2d(game->map.map, map_len);
-		game->map.map = NULL;
-	}
-}
-
-/*
-Helper function to cleanup MLX textures.
-*/
-void	cleanup_mlx_textures(t_game *game)
-{
-	if (game->mlx_ptr)
-	{
-		if (game->textures.north_wall && game->textures.north_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.north_wall->img_ptr);
-			free(game->textures.north_wall);
-			game->textures.north_wall = NULL;
-		}
-		if (game->textures.south_wall && game->textures.south_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.south_wall->img_ptr);
-			free(game->textures.south_wall);
-			game->textures.south_wall = NULL;
-		}
-		if (game->textures.east_wall && game->textures.east_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.east_wall->img_ptr);
-			free(game->textures.east_wall);
-			game->textures.east_wall = NULL;
-		}
-		if (game->textures.west_wall && game->textures.west_wall->img_ptr)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.west_wall->img_ptr);
-			free(game->textures.west_wall);
-			game->textures.west_wall = NULL;
-		}
-		if (game->textures.sky)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.sky);
-			game->textures.sky = NULL;
-		}
-		if (game->textures.floor)
-		{
-			mlx_destroy_image(game->mlx_ptr, game->textures.floor);
-			game->textures.floor = NULL;
-		}
-		
-		// Clean up unified door frames
-		cleanup_door_frames(game);
-	}
-}
+void	cleanup_minimap(t_game *game);
+void	cleanup_door_frames(t_game *game);
+void	cleanup_early(t_game *game, const char *map_path);
+void	cleanup_later(t_game *game, const char *map_path);
 
 /*
 Helper function to cleanup MLX system resources.
 */
 void	cleanup_mlx_system(t_game *game)
 {
+	if (game->img.img_ptr)
+	{
+		mlx_destroy_image(game->mlx_ptr, game->img.img_ptr);
+		game->img.img_ptr = NULL;
+	}
+	if (game->win_ptr)
+	{
+		mlx_destroy_window(game->mlx_ptr, game->win_ptr);
+		game->win_ptr = NULL;
+	}
 	if (game->mlx_ptr)
 	{
-		cleanup_minimap(game);
-		if (game->win_ptr)
-			mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 		mlx_destroy_display(game->mlx_ptr);
 		ft_safefree((void **)&game->mlx_ptr);
 	}
@@ -124,36 +48,118 @@ Helper function to cleanup minimap system resources.
 */
 void	cleanup_minimap(t_game *game)
 {
-	if (!game || !game->mlx_ptr)
-		return ;
-	if (game->minimap.wall.img_ptr)
+	if (game->minimap.wall && game->minimap.wall->img_ptr)
 	{
-		mlx_destroy_image(game->mlx_ptr, game->minimap.wall.img_ptr);
-		game->minimap.wall.img_ptr = NULL;
+		mlx_destroy_image(game->mlx_ptr, game->minimap.wall->img_ptr);
+		ft_safefree((void **)&game->minimap.wall);
 	}
-	if (game->minimap.floor.img_ptr)
+	if (game->minimap.floor && game->minimap.floor->img_ptr)
 	{
-		mlx_destroy_image(game->mlx_ptr, game->minimap.floor.img_ptr);
-		game->minimap.floor.img_ptr = NULL;
+		mlx_destroy_image(game->mlx_ptr, game->minimap.floor->img_ptr);
+		ft_safefree((void **)&game->minimap.floor);
 	}
-	if (game->minimap.door.img_ptr)
+	if (game->minimap.door && game->minimap.door->img_ptr)
 	{
-		mlx_destroy_image(game->mlx_ptr, game->minimap.door.img_ptr);
-		game->minimap.door.img_ptr = NULL;
+		mlx_destroy_image(game->mlx_ptr, game->minimap.door->img_ptr);
+		ft_safefree((void **)&game->minimap.door);
 	}
-	if (game->minimap.full_map_img)
+	if (game->minimap.space && game->minimap.space->img_ptr)
 	{
-		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
-		game->minimap.full_map_img = NULL;
+		mlx_destroy_image(game->mlx_ptr, game->minimap.space->img_ptr);
+		ft_safefree((void **)&game->minimap.space);
 	}
 	if (game->minimap.minimap_img)
-	{
 		mlx_destroy_image(game->mlx_ptr, game->minimap.minimap_img);
-		game->minimap.minimap_img = NULL;
+	if (game->minimap.full_map_img)
+		mlx_destroy_image(game->mlx_ptr, game->minimap.full_map_img);
+}
+
+/*
+Clean up and free all door frame textures and door data.
+*/
+void	cleanup_door_frames(t_game *game)
+{
+	int	i;
+
+	if (game->textures.door_frames)
+	{
+		i = 0;
+		while (i < game->textures.door_frame_count)
+		{
+			if (game->textures.door_frames[i])
+			{
+				if (game->textures.door_frames[i]->img_ptr)
+				{
+					mlx_destroy_image(game->mlx_ptr,
+						game->textures.door_frames[i]->img_ptr);
+					game->textures.door_frames[i]->img_ptr = NULL;
+				}
+				ft_safefree((void **)&game->textures.door_frames[i]);
+			}
+			i++;
+		}
+		ft_safefree((void **)&game->textures.door_frames);
 	}
-	game->minimap.full_map_data = NULL;
-	game->minimap.minimap_data = NULL;
-	game->minimap.full_pixel_width = 0;
-	game->minimap.full_pixel_height = 0;
-	ft_fprintf(1, "✅ Minimap system cleaned up\n");
+	if (game->doors)
+		ft_safefree((void **)&game->doors);
+}
+
+/*
+Cleanup if error before mlx initialization.
+Handle map array cleanup for validation failures.
+*/
+void	cleanup_early(t_game *game, const char *map_path)
+{
+	if (map_path)
+		ft_safefree((void **)&map_path);
+	if (game)
+	{
+		if (game->textures.north_wall)
+			ft_safefree((void **)&game->textures.north_wall);
+		if (game->textures.south_wall)
+			ft_safefree((void **)&game->textures.south_wall);
+		if (game->textures.east_wall)
+			ft_safefree((void **)&game->textures.east_wall);
+		if (game->textures.west_wall)
+			ft_safefree((void **)&game->textures.west_wall);
+		if (game->textures.space)
+			ft_safefree((void **)&game->textures.space);
+		if (game->textures.door_frames)
+			ft_safefree((void **)&game->textures.door_frames);
+		cleanup_mlx_textures(game);
+		cleanup_texture_paths(game);
+		cleanup_map_array(game);
+		cleanup_mlx_system(game);
+		ft_safefree((void **)&game);
+	}
+	exit(1);
+}
+
+/*
+Cleanup if error after mlx initialization.
+*/
+void	cleanup_later(t_game *game, const char *map_path)
+{
+	if (map_path)
+		ft_safefree((void **)&map_path);
+	if (game)
+	{
+		if (game->textures.north_wall)
+			ft_safefree((void **)&game->textures.north_wall);
+		if (game->textures.south_wall)
+			ft_safefree((void **)&game->textures.south_wall);
+		if (game->textures.east_wall)
+			ft_safefree((void **)&game->textures.east_wall);
+		if (game->textures.west_wall)
+			ft_safefree((void **)&game->textures.west_wall);
+		if (game->textures.space)
+			ft_safefree((void **)&game->textures.space);
+		cleanup_door_frames(game);
+		cleanup_mlx_textures(game);
+		cleanup_texture_paths(game);
+		cleanup_map_array(game);
+		cleanup_mlx_system(game);
+		ft_safefree((void **)&game);
+	}
+	exit(1);
 }
