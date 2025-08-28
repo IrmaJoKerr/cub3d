@@ -6,7 +6,7 @@
 #    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 12:29:47 by bleow             #+#    #+#              #
-#    Updated: 2025/08/28 21:57:17 by bleow            ###   ########.fr        #
+#    Updated: 2025/08/29 00:22:20 by bleow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ OBJS = $(PARSING_OBJS) $(HOOKS_OBJS) $(COLLISIONS_OBJS) $(EXECUTION_OBJS)
 
 CC = gcc
 RM = rm -f
-# CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
