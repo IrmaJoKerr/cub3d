@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 06:17:54 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 06:22:58 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:33:57 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,37 +37,6 @@ int	handle_rotation_keys(int keycode, t_game *game)
 		return (press_down(game));
 	return (0);
 }
-
-// int	handle_rotation_keys(int keycode, t_game *game)
-// {
-// 	if (keycode == XK_Left || keycode == 0xff51)
-// 	{
-// 		game->view_direction += ROTATE_SPEED;
-// 		game->view_direction = normalize_angle(game->view_direction);
-// 		return (1);
-// 	}
-// 	else if (keycode == XK_Right || keycode == 0xff53)
-// 	{
-// 		game->view_direction -= ROTATE_SPEED;
-// 		game->view_direction = normalize_angle(game->view_direction);
-// 		return (1);
-// 	}
-// 	else if (keycode == XK_Up || keycode == 0xff52)
-// 	{
-// 		game->view_elevation += 10;
-// 		game->view_elevation = clamp_elevation(game->view_elevation);
-// 		calc_midline(game);
-// 		return (1);
-// 	}
-// 	else if (keycode == XK_Down || keycode == 0xff54)
-// 	{
-// 		game->view_elevation -= 10;
-// 		game->view_elevation = clamp_elevation(game->view_elevation);
-// 		calc_midline(game);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
 
 /*
 Looks left (Left arrow key)

@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 04:00:09 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 04:05:04 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:28:31 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ int	load_mlx_textures(t_game *game)
 {
 	if (check_builtin_textures(game) == -1)
 	{
-		ft_fprintf(2, "Check_builtin_textures failed\n");
+		ft_fprintf(2, "Error: Check_builtin_textures failed\n");
 		return (-1);
 	}
 	if (load_wall_textures(game) < 0)
 	{
-		ft_fprintf(2, "Load_wall_textures failed\n");
+		ft_fprintf(2, "Error: Load_wall_textures failed\n");
 		return (-1);
 	}
 	if (load_texture(game, game->textures.space, SPACE_TEXTURE) < 0)
 	{
-		ft_fprintf(2, "Load_texture for space failed\n");
+		ft_fprintf(2, "Error: Load_texture for space failed\n");
 		return (-1);
 	}
 	usleep(1000);
@@ -56,7 +56,7 @@ int	load_texture(t_game *game, t_image *tex, char *path)
 		return (-1);
 	if (!tex)
 	{
-		ft_fprintf(2, "[DEBUG] Texture pointer is NULL\n");
+		ft_fprintf(2, "Error: Texture pointer is NULL\n");
 		return (-1);
 	}
 	if (!path || ft_strlen(path) == 0)
@@ -84,25 +84,25 @@ int	load_wall_textures(t_game *game)
 	if (load_texture(game, game->textures.north_wall,
 			game->map.north_texture_path) < 0)
 	{
-		ft_fprintf(2, "Load_texture for north_wall failed\n");
+		ft_fprintf(2, "Error: Load_texture for north_wall failed\n");
 		return (-1);
 	}
 	if (load_texture(game, game->textures.south_wall,
 			game->map.south_texture_path) < 0)
 	{
-		ft_fprintf(2, "Load_texture for south_wall failed\n");
+		ft_fprintf(2, "Error: Load_texture for south_wall failed\n");
 		return (-1);
 	}
 	if (load_texture(game, game->textures.east_wall,
 			game->map.east_texture_path) < 0)
 	{
-		ft_fprintf(2, "Load_texture for east_wall failed\n");
+		ft_fprintf(2, "Error: Load_texture for east_wall failed\n");
 		return (-1);
 	}
 	if (load_texture(game, game->textures.west_wall,
 			game->map.west_texture_path) < 0)
 	{
-		ft_fprintf(2, "Load_texture for west_wall failed\n");
+		ft_fprintf(2, "Error: Load_texture for west_wall failed\n");
 		return (-1);
 	}
 	return (0);

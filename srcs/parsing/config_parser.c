@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 07:32:02 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:29:06 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	handle_color_settings(char *line, t_game *game, int settings_type)
 	{
 		if (game->map.floor_color[0] != -1)
 		{
-			ft_fprintf(2, "Duplicate floor color detected\n");
+			ft_fprintf(2, "Error: Duplicate floor color detected\n");
 			return (-1);
 		}
 		return (parse_floor_color(line, game));
@@ -75,7 +75,7 @@ int	handle_color_settings(char *line, t_game *game, int settings_type)
 	{
 		if (game->map.sky_color[0] != -1)
 		{
-			ft_fprintf(2, "Duplicate sky color detected\n");
+			ft_fprintf(2, "Error: Duplicate sky color detected\n");
 			return (-1);
 		}
 		return (parse_ceiling_color(line, game));

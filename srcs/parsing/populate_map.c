@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 03:09:02 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 20:19:13 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:33:25 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	prepare_map_array(t_game *game)
 		game->map.map[i] = (char *)malloc(game->map.max_cols + 1);
 		if (!game->map.map[i])
 		{
-			ft_fprintf(2, "Failed to allocate memory for map row %d.\n", i);
+			ft_fprintf(2, "Error: Failed to alloc for map row %d.\n", i);
 			cleanup_map_array(game);
 			return (-1);
 		}
@@ -143,7 +143,7 @@ void	verify_print_map(t_game *game)
 
 	if (!game || !game->map.map)
 	{
-		ft_fprintf(2, "Map is NULL or not allocated\n");
+		ft_fprintf(2, "Error: Map is NULL or not allocated\n");
 		return ;
 	}
 	ft_fprintf(2, "\n=== MAP CONTENTS ===\n");

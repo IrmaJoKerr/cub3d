@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:29:37 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 20:13:11 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:29:17 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv)
 	map_path = get_map_path(argv[1]);
 	if (!map_path)
 	{
-		ft_fprintf(2, "Invalid or inaccessible map file path\n");
+		ft_fprintf(2, "Error: Invalid or inaccessible map file path\n");
 		return (1);
 	}
 	alloc_and_init_all(&game);

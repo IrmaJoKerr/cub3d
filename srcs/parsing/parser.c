@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 07:26:12 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 07:30:49 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:32:51 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	parser(const char *file, t_game *game)
 		return (-1);
 	if ((parse_map_1(fd, game) < 0) || (validate_required_config(game) < 0))
 	{
-		ft_fprintf(2, "Parse_map_1 failed\n");
+		ft_fprintf(2, "Error: Parse_map_1 failed\n");
 		close(fd);
 		return (-1);
 	}
@@ -45,7 +45,7 @@ int	parser(const char *file, t_game *game)
 		return (-1);
 	if (parse_map_2(fd, game) < 0)
 	{
-		ft_fprintf(2, "Parse_map_2 failed\n");
+		ft_fprintf(2, "Error: Parse_map_2 failed\n");
 		close(fd);
 		return (-1);
 	}
@@ -140,7 +140,7 @@ int	find_start_line(const char *line, int *in_map, int *map_start_line, int pos)
 	{
 		*in_map = 1;
 		*map_start_line = pos;
-		ft_fprintf(2, "[DEBUG] Map start detected at line %d\n", pos);
+		ft_fprintf(2, "Map start detected at line %d\n", pos);
 		return (1);
 	}
 	return (0);

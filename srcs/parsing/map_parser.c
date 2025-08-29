@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 06:00:00 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 19:23:42 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:30:19 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	validate_map_line_chars(const char *line, t_game *game, int *player_found)
 	{
 		if (!ft_strchr(VALID_CHARS " ", line[i]))
 		{
-			ft_fprintf(2, "Invalid char '%c' found at index %d\n", line[i], i);
+			ft_fprintf(2, "Error: Invalid char '%c' at index %d\n", line[i], i);
 			return (-1);
 		}
 		if (line[i] == 'D')

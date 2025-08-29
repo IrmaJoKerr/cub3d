@@ -6,7 +6,7 @@
 #    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 12:29:47 by bleow             #+#    #+#              #
-#    Updated: 2025/08/29 16:52:31 by bleow            ###   ########.fr        #
+#    Updated: 2025/08/29 17:35:09 by bleow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ HOOKS_SRCS = \
 	$(SRC_DIR)/hooks/hooks_look.c \
 	$(SRC_DIR)/hooks/hooks_mouse.c \
 	$(SRC_DIR)/hooks/hooks_movement.c \
-	$(SRC_DIR)/hooks/keyhooks_a.c \
-	$(SRC_DIR)/hooks/keyhooks_b.c
+	$(SRC_DIR)/hooks/keyhooks_a.c
 
 PARSING_SRCS = \
 	$(SRC_DIR)/parsing/cleanup_a.c \

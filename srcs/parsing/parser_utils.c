@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 18:49:53 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/27 19:25:05 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:32:27 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	open_map_file(const char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_fprintf(2, "Error opening file: %s\n", file);
+		ft_fprintf(2, "Error: failed to open file: %s\n", file);
 		return (-1);
 	}
 	return (fd);
@@ -52,7 +52,7 @@ int	validate_lines_after_map(int fd)
 		if (i >= 2 && !is_only_whitespace(line))
 		{
 			ft_safefree((void **)&line);
-			ft_fprintf(2, "Invalid line after map detected\n");
+			ft_fprintf(2, "Error: Invalid line after map detected\n");
 			return (-1);
 		}
 		ft_safefree((void **)&line);

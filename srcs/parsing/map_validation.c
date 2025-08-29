@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 05:55:10 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/28 21:59:39 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:30:51 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	is_valid_path(t_game *game, int y, int x)
 	else
 	{
 		ft_fprintf(2, "FAILURE: Map validation failed\n");
-		ft_fprintf(2, "Player can reach map edges\n");
+		ft_fprintf(2, "Error: Player can reach map edges\n");
 	}
 	return (result);
 }

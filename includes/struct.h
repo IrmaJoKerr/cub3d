@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 00:03:11 by wjun-kea          #+#    #+#             */
-/*   Updated: 2025/08/27 16:33:06 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:37:58 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 # define TEX_HEIGHT 64
 # define MIN_TEX_WIDTH 20
 # define MIN_TEX_HEIGHT 20
-# define FOV 1.5533
 # define MOUSE_SENSITIVITY 0.0004
+# define FOV 1.5533
 /* 89 degrees in radians. For Norm compliance */
 
 typedef enum e_direction

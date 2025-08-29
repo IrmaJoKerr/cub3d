@@ -6,7 +6,7 @@
 /*   By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 19:23:13 by bleow             #+#    #+#             */
-/*   Updated: 2025/08/25 19:27:57 by bleow            ###   ########.fr       */
+/*   Updated: 2025/08/29 17:31:55 by bleow            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	check_duplicate_texture(t_game *game, int settings_type)
 		|| (settings_type == 3 && game->map.west_texture_path)
 		|| (settings_type == 4 && game->map.east_texture_path))
 	{
-		ft_fprintf(2, "Duplicate texture detected for settings type: %d\n",
+		ft_fprintf(2, "Error: Duplicate texture detected, type: %d\n",
 			settings_type);
 		return (-1);
 	}
