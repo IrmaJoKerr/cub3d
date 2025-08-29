@@ -6,7 +6,7 @@
 #    By: bleow <bleow@student.42kl.edu.my>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 12:29:47 by bleow             #+#    #+#              #
-#    Updated: 2025/08/29 03:31:15 by bleow            ###   ########.fr        #
+#    Updated: 2025/08/29 15:56:51 by bleow            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBX)
 	$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) $(LIBFT) \
- 		-L$(LIBX_DIR) -l:libmlx_Linux.a -lXext -lX11 -lm -o $(NAME)
+		-L$(LIBX_DIR) -l:libmlx_Linux.a -lXext -lX11 -lm -o $(NAME)
 	@echo "$(NAME) has been created."
 
 $(OBJ_DIR)/parsing/%.o: $(SRC_DIR)/parsing/%.c
